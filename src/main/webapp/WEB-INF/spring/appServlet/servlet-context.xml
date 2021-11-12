@@ -34,5 +34,11 @@
 		<!-- 파일당 최대 허용 크기 -->
 	</beans:bean>
 	
+	<!-- 스마트 에디터 리소스 경로설정 -->
+	<resources location="/resources/smarteditor2/" mapping="/resources/smarteditor2/**"/>
+	
+	
+	
+	
 	<!-- 인터셉터 -->
 </beans:beans>
