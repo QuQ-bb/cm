@@ -9,6 +9,8 @@
 <body>
 <h1>
 	Hello world!  
+	첫번째 연동 테스트(성훈)
+	김진
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
