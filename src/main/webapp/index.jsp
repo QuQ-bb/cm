@@ -9,8 +9,9 @@
 <body>
 
 
-<a href="home">home.home</a>							<br>
-<a href="goodsuploadform">goods_upload_form.goods</a>	<br>
+<a href="home">home</a>							<br>
+<a href="goodsuploadform">goodsuploadform</a>	<br>
+<a href="sellergoodslist">sellergoodslist</a>	<br>
 
 
 

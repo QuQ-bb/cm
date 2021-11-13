@@ -16,14 +16,18 @@
 
 	<div id="goodsuploadform">
 
-		<form method="post" action="" enctype="multipart/form-data">
+		<form method="post" action="<%=request.getContextPath() %>/goodsupload" enctype="multipart/form-data">
 			<input type="hidden">
 			<!-- 판매자명 가져가기 -->
 			<table border="1" width="1200">
 
 				<tr>
 					<th>카테고리 선택</th>
-					<td></td>
+					<td><input type="text" id="cate_code" name="cate_code"></td>
+				</tr>
+				<tr>
+					<th>상품 판매자</th>
+					<td><input type="text" id="gds_seller" name="gds_seller"></td>
 				</tr>
 				<tr>
 					<th>상품명</th>
@@ -31,11 +35,11 @@
 				</tr>
 				<tr>
 					<th>썸네일</th>
-					<td><input type="text" id="" name=""></td>
+					<td><input type="text" id="gds_thumbnail" name="gds_thumbnail"></td>
 				</tr>
 				<tr>
 					<th>단위 가격</th>
-					<td><input type="text" id="" name=""></td>
+					<td><input type="text" id="gds_price" name="gds_price"></td>
 				</tr>
 				<tr>
 					<th>상세설명</th>
@@ -44,19 +48,19 @@
 				</tr>
 				<tr>
 					<th>옵션</th>
-					<td><input type="text" id="" name=""></td>
+					<td><input type="text" id="gds_option" name="gds_option"></td>
 				</tr>
 				<tr>
 					<th>배송 정보</th>
-					<td><input type="text" id="" name=""></td>
+					<td><input type="text" id="deltem_num" name="deltem_num"></td>
 				</tr>
 				<tr>
 					<th>재고</th>
-					<td><input type="text" id="" name=""></td>
+					<td><input type="text" id="gds_count" name="gds_count"></td>
 				</tr>
 				<tr>
 					<th>교환 환불 기준</th>
-					<td><textarea></textarea></td>
+					<td><textarea id="gds_ears" name="gds_ears"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center"><input type="submit"

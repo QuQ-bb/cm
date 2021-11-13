@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="goodsMapper">
+	<!-- 상품 등록 -->
+	<insert id="goods_insert" parameterType="goods">
+		insert into goods
+		(gds_num, cate_code, gds_seller, gds_name, gds_thumbnail, gds_date,
+		gds_price, gds_detail, gds_option, deltem_num, gds_count,
+		gds_ears, gds_readcount, gds_sellcount, gds_viewyn, gds_delyn)
+		values
+		(#{gds_num}, #{cate_code}, #{gds_seller}, #{gds_name}, #{gds_thumbnail}, SYSDATE(),
+		#{gds_price}, #{gds_detail}, #{gds_option}, #{deltem_num}, #{gds_count}, 
+		#{gds_ears}, 0, 0, 'Y', 'Y')
+	</insert>
+	
+</mapper>
+	
