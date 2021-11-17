@@ -30,6 +30,11 @@
 		limit #{pageIndex}, 10
 	</select>
 	
+	<!-- 판매자별 상품 리스트 출력 -->
+	<select id="goods_detail" resultType="goods" parameterType="int">
+		select * from goods where gds_num=#{gds_num}
+	</select>
+	
 	<!--  -->
 </mapper>
 	

@@ -19,13 +19,13 @@ import com.myshop.cm.util.Pager;
 public class GoodsService {
 	
 	@Autowired
-	private SellerDAO SellerDAO;
+	private SellerDAO sellerDAO;
 	private Pager pager;
 	
 	// 상품 등록
 	public void insert(GoodsVO goods) throws Exception{
 		
-		SellerDAO.insertGoods(goods);
+		sellerDAO.insertGoods(goods);
 	}
 
 	// 판매자별 상품목록
@@ -42,10 +42,10 @@ public class GoodsService {
 		int pageIndex = (page-1)*10;
 		
 		// 총 리스트 수를 받아옴
-		int listcount = SellerDAO.getListCount();
+		int listcount = sellerDAO.getListCount();
 		
 		// 페이지 번호(page)를 DAO 클래스에 전달한다.
-		sellergoodslist = SellerDAO.getSellerGoodsList(pageIndex);	// 리스트를 받아옴
+		sellergoodslist = sellerDAO.getSellerGoodsList(pageIndex);	// 리스트를 받아옴
 		
 		// 총 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 0.95를 더해서 올림처리
@@ -68,6 +68,13 @@ public class GoodsService {
 		resultMap.put("sellergoodslist", sellergoodslist);
 
 		return resultMap;
+	}
+
+	// 판매자 상품 구매자페이지로 보기
+	public GoodsVO goodsdetail(int gds_num) throws Exception{
+		GoodsVO goods = sellerDAO.getGoodsContent(gds_num);
+		
+		return goods;
 	}
 
 }

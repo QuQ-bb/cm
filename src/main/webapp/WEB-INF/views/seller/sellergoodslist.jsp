@@ -55,7 +55,7 @@
 				<td>
 					<div>
 						<!-- 썸네일 출력 부분 -->
-						<img src="">	
+						<img src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${sgl.gds_thumbnail}" height="100" width="100" />	
 						<!-- 제목 출력 부분 -->	
 						<a href="">
 							${sgl.gds_name}
@@ -84,6 +84,7 @@
 				</td>
 				<td>
 					<div align="center"><input type="button" value="수정"></div>
+					<div align="center"><input type="button" value="구매자 페이지에서 보기" onclick="location='goodsdetail?page=${page}&gds_num=${sgl.gds_num}'"></div>
 					<div align="center"><input type="button" value="삭제"></div>
 				</td>
 			</tr>
