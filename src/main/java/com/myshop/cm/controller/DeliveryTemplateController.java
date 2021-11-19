@@ -1,5 +1,6 @@
 package com.myshop.cm.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +25,14 @@ public class DeliveryTemplateController {
 	@Autowired
 	private DeliveryTemplateService deliveryTemplateService;
 	
-	// 배송사 카테고리 구해오기
+	// 배송 템플릿 작성 폼으로 이동
 	@RequestMapping(value = "/sellerdeliverytemplate")
 	public ModelAndView sellerdeliverytemplate(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
+		// 배송 카테고리 목록 불러오기
 		Map<String, Object> getdeliverycatelist = deliveryCategoryService.getDeliveryCateList(request, response);
 		
+		// 경로 설정
 		ModelAndView deliverytemplateM = new ModelAndView("seller/sellerdeliverytemplate");
 
 		deliverytemplateM.addAllObjects(getdeliverycatelist);
@@ -37,8 +40,10 @@ public class DeliveryTemplateController {
 		return deliverytemplateM;
 	}
 	
+	// 배송 템플릿 작성하기
 	@RequestMapping(value = "/deliverytemplateupload", method = RequestMethod.POST)
-	public String deliverytemplateupload(@RequestParam("del_info") String del_info, DeliveryTemplateVO deliverytemplate) throws Exception{
+	public String deliverytemplateupload(@RequestParam(value = "del_info", required = false) String del_info, DeliveryTemplateVO deliverytemplate) 
+			throws Exception{
 		System.out.println("controller");
 		
 		String[] delinfoarr = del_info.split(",");
@@ -72,5 +77,26 @@ public class DeliveryTemplateController {
 
 		return "/";
 	}
-
+	
+	// 상품 업로드 양식에서 배송 템플릿 상세정보 구해오기
+	@RequestMapping(value = "/deltemload", method = RequestMethod.POST)
+	public ModelAndView deltemload(@RequestParam("deltem_num") int deltem_num, HttpServletRequest request, 
+			HttpServletResponse response) throws Exception {
+		ModelAndView deltemloadM = new ModelAndView("seller/loaddeliverytemplate");
+		if(deltem_num >= 1) {
+			DeliveryTemplateVO gettemplate = deliveryTemplateService.getTemplate(deltem_num);
+			
+			// 배송 템플릿 목록 구해오기
+			List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList();
+			
+			deltemloadM.addObject("deltemlist", deltemlist);
+			deltemloadM.addObject("gettemplate", gettemplate);
+		}
+		// 배송 카테고리 목록 불러오기
+		Map<String, Object> getdeliverycatelist = deliveryCategoryService.getDeliveryCateList(request, response);
+		
+		deltemloadM.addAllObjects(getdeliverycatelist);
+		
+		return deltemloadM;
+	}
 }

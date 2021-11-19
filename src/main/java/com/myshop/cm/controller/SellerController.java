@@ -2,6 +2,7 @@ package com.myshop.cm.controller;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
 import java.util.UUID;
@@ -18,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myshop.cm.model.DeliveryTemplateVO;
 import com.myshop.cm.model.GoodsVO;
+import com.myshop.cm.service.DeliveryCategoryService;
+import com.myshop.cm.service.DeliveryTemplateService;
 import com.myshop.cm.service.GoodsService;
 
 @Controller
@@ -26,21 +30,44 @@ public class SellerController {
 
 	@Autowired
 	private GoodsService goodsService;
+	@Autowired
+	private DeliveryTemplateService deliveryTemplateService;
+	@Autowired
+	private DeliveryCategoryService deliveryCategoryService;
 
 	// 상품 등록 폼으로 이동
 	@RequestMapping(value = "/goodsuploadform")
-	public String goodsuploadform() {
+	public ModelAndView goodsuploadform(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception{
 		System.out.println("goodsuploadform");
-		return "seller/goodsuploadform";
+		
+		// 배송 카테고리 목록 불러오기
+		Map<String, Object> getdeliverycatelist = deliveryCategoryService.getDeliveryCateList(request, response);
+		
+		// 배송 템플릿 목록 구해오기
+		List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList();
+		
+		// 경로 설정
+		ModelAndView goodsuploadformM = new ModelAndView("seller/goodsuploadform");
+		goodsuploadformM.addAllObjects(getdeliverycatelist);
+		goodsuploadformM.addObject("deltemlist", deltemlist);
+		
+		
+		return goodsuploadformM;
 	}
 
 	// 상품 등록
 	@RequestMapping(value = "/goodsupload", method = RequestMethod.POST)
 	public String goodsupload(@RequestParam(value = "gds_thumbnail1", required = false) MultipartFile mf,
 			@RequestParam(value = "optioncom", required = false) String optioncom,
-			@RequestParam(value = "optioncount", required = false) String optioncount, GoodsVO goods,
+			@RequestParam(value = "optioncount", required = false) String optioncount, 
+			@RequestParam(value = "del_info", required = false) String del_info, 
+			DeliveryTemplateVO deliverytemplate, GoodsVO goods,
 			HttpServletRequest request, Model model) throws Exception {
 		System.out.println("goodsupload");
+		
+		
+		// 옵션을 작성한 경우
 		if (optioncom != null) {
 			String[] optioncomarr = optioncom.split(",");
 			String[] optioncountarr = optioncount.split(",");
@@ -57,8 +84,8 @@ public class SellerController {
 			goods.setGds_option(gds_option);
 		}
 
+		// 썸네일 저장
 		if (mf != null) {
-			// 썸네일 저장
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid + mf.getOriginalFilename();
 			int size = (int) mf.getSize();
@@ -94,7 +121,19 @@ public class SellerController {
 			goods.setGds_thumbnail(filename);
 		}
 		goodsService.insert(goods);// 저장 메소드 호출
-
+		
+		// 배송템플릿을 작성한 경우
+		if(del_info != null) {
+			
+			String[] delinfoarr = del_info.split(",");
+			for(int i=0; i<2; i++) {
+				System.out.println(i+","+delinfoarr[i]);
+			}
+			deliverytemplate.setDel_code(Integer.parseInt(delinfoarr[0]));
+			deliverytemplate.setDel_name(delinfoarr[1]);
+			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
+		}
+		
 		return "redirect:/sellergoodslist";
 	}
 
@@ -128,21 +167,23 @@ public class SellerController {
 		return goodsdetailM;
 	}
 
-	// 옵션 비비기
+	// 옵션 조합하기
 	@RequestMapping(value = "/optioncom")
 	public String optioncom(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("optioncom");
 		String option1 = request.getParameter("option1");
 		String option2 = request.getParameter("option2");
-		if (option2 == "") { // 옵션을 1개만 입력한 경우
+		// 옵션을 1개만 입력한 경우
+		if (option2 == "") {
 			String[] optioncom = option1.split(",");
 			model.addAttribute("optioncom", optioncom);
-		} else { // 옵션을 2개 입력한 경우
+		// 옵션을 2개 입력한 경우
+		} else { 
 			String[] op1arr = option1.split(",");
 			String[] op2arr = option2.split(",");
 			String[] optioncom = new String[op1arr.length * op2arr.length];
 			int k = 0;
-
+			// 옵션섞기
 			for (int i = 0; i < op1arr.length; i++) {
 				for (int j = 0; j < op2arr.length; j++) {
 					optioncom[k] = op1arr[i] + "-" + op2arr[j];
