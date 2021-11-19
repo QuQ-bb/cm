@@ -160,7 +160,7 @@
 		//주소확인
 		if(address.val() == ''){
 			inval_Arr[5] = false;
-			alert('주소를 확인하세요.');
+			alert('[우편번호 찾기버튼]을 눌러 주소를 확인하세요.');
 			$("#deladd_add1").focus();
 			return false;
 		}else inval_Arr[5] = true;
@@ -239,7 +239,6 @@
 	</script>
 </head>
 
-
 <body>
 
 	<article class="container">
@@ -285,7 +284,7 @@
 				<div class="form-group">
 					<input class="form-control" style="width: 40%; display: inline;"
 						placeholder="우편번호" name="deladd_post" id="deladd_post"
-						type="text" readonly="readonly">
+						type="text">
 					<button type="button" class="btn btn-default"
 						onclick="openDaumPostcode()">
 						<i class="fa fa-search"></i> 우편번호 찾기

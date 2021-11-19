@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sellerMapper">
+
+	<!-- 판매자 전환 신청 -->
+	<insert id="register" parameterType="seller">
+		insert into seller
+		(sel_num, mem_num, sel_bnum, sel_name, sel_ceo, sel_mobnum,
+		sel_post, sel_add, sel_tel, sel_bank, sel_accholder, sel_acc, sel_yn, seling_filename)
+		values
+		(#{sel_num}, #{mem_num}, #{sel_bnum}, #{sel_name}, #{sel_ceo}, #{sel_mobnum},
+		#{sel_post}, #{sel_add}, #{sel_tel}, #{sel_bank},
+		#{sel_accholder},#{sel_acc}, 'Y', #{seling_filename})
+	</insert>
+</mapper>

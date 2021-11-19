@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="memberns">
+
+	<!-- 회원가입 회원저장  -->
+	<!-- member테이블 -->
+	<insert id="joinm" parameterType="member">
+	insert into member
+	(mem_num, mem_id, mem_pass, mem_name, mem_email,
+	mem_phone, mem_date, mem_grade, mem_delyn) 
+	values
+	(#{mem_num}, #{mem_id},#{mem_pass},#{mem_name},#{mem_email},
+	#{mem_phone}, SYSDATE(), 1,'Y')
+	</insert>
+	
+	<!-- 주소지테이블 -->
+	<insert id="join" parameterType="deliveryadd">
+	insert into deliveryaddress
+	(deladd_num, mem_num, deladd_post,
+	 deladd_add1, deladd_add2, deladd_mainadd) 
+	 values 
+	 (#{deladd_num}, #{mem_num}, #{deladd_post}, 
+	 #{deladd_add1}, #{deladd_add2}, #{deladd_mainadd})
+	</insert>
+	
+	<!-- id값으로 mem_num불러오기 -->
+	<select id="selectNum" parameterType="member" resultType="int">
+	select mem_num from member where mem_id=#{mem_id}
+	</select>
+	
+	<!-- member/delivery mem_num 연결 -->
+	
+
+	
+	<!-- 로그인 저장 인증 -->
+	<select id ="login_check" parameterType="String" resultType="member">
+	select * from member where mem_id=#{mem_id} and mem_grade=1 and mem_delyn='y'
+	</select>
+	
+	<!-- 회원 수정 -->
+	
+	<!-- 회원 삭제 -->
+	
+	</mapper>
