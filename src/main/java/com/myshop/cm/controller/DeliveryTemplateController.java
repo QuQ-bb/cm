@@ -54,26 +54,6 @@ public class DeliveryTemplateController {
 		deliverytemplate.setDel_code(Integer.parseInt(delinfoarr[0]));
 		deliverytemplate.setDel_name(delinfoarr[1]);
 		
-		// 배송카테고리에서 배송수단 번호로 배송수단명 가져오기
-		// DeliveryCategoryVO getDelname = deliveryCategoryService.getDelName(del_code);
-		// System.out.println(getDelname);
-		
-		// 배송템플릿의 배송수단명에 카테고리에서 가져온 값 넣기
-		// deliverytemplate.setDel_name(getDelname);
-
-//		System.out.println(deliverytemplate.getDeltem_num());
-//		System.out.println(deliverytemplate.getDeltem_name());
-//		System.out.println(deliverytemplate.getSel_num());
-//		System.out.println(deliverytemplate.getDel_code());
-//		System.out.println(deliverytemplate.getDel_name());
-//		System.out.println(deliverytemplate.getDeltem_delfee());
-//		System.out.println(deliverytemplate.getDeltem_redelfee());
-//		System.out.println(deliverytemplate.getDeltem_exdelfee());
-//		System.out.println(deliverytemplate.getDeltem_freedel());
-//		System.out.println(deliverytemplate.getDeltem_repost());
-//		System.out.println(deliverytemplate.getDeltem_readd1());
-//		System.out.println(deliverytemplate.getDeltem_readd2());
-		
 		deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
 
 		return "redirect:sellerdeliverytemplatelist";

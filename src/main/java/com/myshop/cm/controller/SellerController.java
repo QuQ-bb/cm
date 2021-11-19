@@ -52,21 +52,21 @@ public class SellerController {
 		goodsuploadformM.addAllObjects(getdeliverycatelist);
 		goodsuploadformM.addObject("deltemlist", deltemlist);
 		
-		
 		return goodsuploadformM;
 	}
 
 	// 상품 등록
 	@RequestMapping(value = "/goodsupload", method = RequestMethod.POST)
-	public String goodsupload(@RequestParam(value = "gds_thumbnail1", required = false) MultipartFile mf,
+	public String goodsupload(
+			@RequestParam(value = "gds_thumbnail1", required = false) MultipartFile mf,
 			@RequestParam(value = "optioncom", required = false) String optioncom,
-			@RequestParam(value = "optioncount", required = false) String optioncount, 
-			@RequestParam(value = "del_info", required = false) String del_info, 
+			@RequestParam(value = "optioncount", required = false) String optioncount,
+			@RequestParam(value = "del_info", required = false) String del_info,
 			DeliveryTemplateVO deliverytemplate, GoodsVO goods,
 			HttpServletRequest request, Model model) throws Exception {
 		System.out.println("goodsupload");
-		
-		
+		System.out.println(optioncount);
+		System.out.println(optioncom);
 		// 옵션을 작성한 경우
 		if (optioncom != null) {
 			String[] optioncomarr = optioncom.split(",");

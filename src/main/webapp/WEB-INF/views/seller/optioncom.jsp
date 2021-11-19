@@ -36,7 +36,7 @@
 			</tr>
 			<c:forEach var="optioncom" items="${optioncom}">
 				<tr>
-					<td><input type="text" id="optioncom" name="optioncom" value="${optioncom}" disabled="disabled"></td>
+					<td><input type="text" id="optioncom" name="optioncom" value="${optioncom}" readonly></td>
 					<td><input type="text" id="optioncount" name="optioncount"></td>
 				</tr>
 			</c:forEach>
