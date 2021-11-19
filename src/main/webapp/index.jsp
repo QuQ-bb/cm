@@ -9,10 +9,11 @@
 <body>
 
 
-<a href="home">home</a>							<br>
-<a href="goodsuploadform">goodsuploadform</a>	<br>
-<a href="sellergoodslist">sellergoodslist</a>	<br>
-<a href="sellerdeliverytemplate">sellerdeliverytemplate</a>	<br>
+<a href="home">home</a>										<br>
+<a href="goodsuploadform">판매자 상품 업로드 폼</a>					<br>
+<a href="sellergoodslist">판매자 상품 리스트</a>					<br>
+<a href="sellerdeliverytemplate">판매자 배송 템플릿 작성</a>			<br>
+<a href="sellerdeliverytemplatelist">판매자 배송템플릿 리스트</a>	<br>
 
 
 

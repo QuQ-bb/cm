@@ -12,7 +12,7 @@
 	
 	<!-- 배송 템플릿 리스트 가져오기 -->
 	<select id="select_template_list" resultType="DeliveryTemplate">
-		select * from deliverytemplate order by deltem_num*1
+		select * from deliverytemplate order by deltem_num*1 desc
 	</select>
 	
 	<!-- 배송 템플릿 불러오기 -->
@@ -20,15 +20,44 @@
 		select * from deliverytemplate where deltem_num=#{deltem_num}
 	</select>
 	
+	<!-- 배송 템플릿 총 갯수 -->
+	<select id="select_template_count" resultType="int">
+		select count(*) from deliverytemplate
+	</select>
+	
 	<!-- 베송 템플릿 저장하기 -->
 	<insert id="insert_template" parameterType="DeliveryTemplate">
-	insert into deliverytemplate
-	(deltem_num, deltem_name, sel_num, del_code, del_name, deltem_delfee, deltem_redelfee, 
-	deltem_exdelfee, deltem_freedel, deltem_repost, deltem_readd1, deltem_readd2)
-	values
-	(#{deltem_num}, #{deltem_name}, #{sel_num}, #{del_code}, #{del_name}, #{deltem_delfee}, #{deltem_redelfee},
-	#{deltem_exdelfee}, #{deltem_freedel}, #{deltem_repost}, #{deltem_readd1}, #{deltem_readd2})
+		insert into deliverytemplate
+		(deltem_num, deltem_name, sel_num, del_code, del_name, deltem_delfee, deltem_redelfee, 
+		deltem_exdelfee, deltem_freedel, deltem_repost, deltem_readd1, deltem_readd2)
+		values
+		(#{deltem_num}, #{deltem_name}, #{sel_num}, #{del_code}, #{del_name}, #{deltem_delfee}, #{deltem_redelfee},
+		#{deltem_exdelfee}, #{deltem_freedel}, #{deltem_repost}, #{deltem_readd1}, #{deltem_readd2})
 	</insert>
+	
+	<update id="update_template" parameterType="DeliveryTemplate">
+		UPDATE deliverytemplate
+		SET
+		deltem_name = #{deltem_name},
+		sel_num = #{sel_num},
+		del_code = #{del_code}, 
+		del_name = #{del_name}, 
+		deltem_delfee = #{deltem_delfee}, 
+		deltem_redelfee = #{deltem_redelfee}, 
+		deltem_exdelfee = #{deltem_exdelfee}, 
+		deltem_freedel = #{deltem_freedel}, 
+		deltem_repost = #{deltem_repost},
+		deltem_readd1 = #{deltem_readd1}, 
+		deltem_readd2 = #{deltem_readd2}
+		where 
+		deltem_num=#{deltem_num}
+	</update>
+	
+	<delete id="delete_template" parameterType="int">
+		delete from deliverytemplate
+        where
+        deltem_num=#{deltem_num}
+	</delete>
 	
 	<!-- <select id="get_delivery_name" resultType="DeliveryCategory">
 		select del_name from deliverycategory where del_code=#{del_code}

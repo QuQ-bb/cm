@@ -21,15 +21,38 @@ public class DeliveryTemplateDAO {
 		System.out.println("DAO");
 		sqlSession.insert("deliveryMapper.insert_template", deliverytemplate);
 	}
-
-	public List<DeliveryTemplateVO> getTemplateList() {
+	
+	// 배송템플릿 리스트 구해오기
+	@Transactional
+	public List<DeliveryTemplateVO> getTemplateList() throws Exception{
 		List<DeliveryTemplateVO> list = sqlSession.selectList("deliveryMapper.select_template_list");
 		
 		return list;
 	}
 
-	public DeliveryTemplateVO getTemplate(int deltem_num) {
+	// 배송템플릿 상세정보 구해오기
+	@Transactional
+	public DeliveryTemplateVO getTemplate(int deltem_num) throws Exception{
 		return (DeliveryTemplateVO) sqlSession.selectOne("deliveryMapper.select_template", deltem_num);
+	}
+
+	// 배송템플릿 개수 구해오기
+	@Transactional
+	public int getTemplateCount() throws Exception{
+		return sqlSession.selectOne("deliveryMapper.select_template_count");
+	}
+
+	// 배송템플릿 수정하기
+	@Transactional
+	public void editdeltem(DeliveryTemplateVO deliverytemplate) throws Exception{
+		sqlSession.update("deliveryMapper.update_template", deliverytemplate);
+		
+	}
+	// 배송템플릿 삭제하기
+	@Transactional
+	public void deletedelitem(int deltem_num) {
+		sqlSession.delete("deliveryMapper.delete_template", deltem_num);
+		
 	}
 
 }

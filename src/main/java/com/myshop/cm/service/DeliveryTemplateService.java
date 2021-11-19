@@ -21,17 +21,35 @@ public class DeliveryTemplateService {
 		
 	}
 
-	public List<DeliveryTemplateVO> getTemplateList() {
+	// 배송템플릿 리스트 불러오기
+	public List<DeliveryTemplateVO> getTemplateList() throws Exception{
 		List<DeliveryTemplateVO> list = deliverytemplateDAO.getTemplateList();
 		return list;
 	}
 
-	public DeliveryTemplateVO getTemplate(int deltem_num) {
+	// 배송템플릿 상세정보 불러오기
+	public DeliveryTemplateVO getTemplate(int deltem_num) throws Exception{
 		DeliveryTemplateVO gettemplate = deliverytemplateDAO.getTemplate(deltem_num);
 		return gettemplate;
 	}
+
+	// 배송템플릿 개수 구하기
+	public int gettemplatecount() throws Exception{
+		int gettemplatecount = deliverytemplateDAO.getTemplateCount();
+		return gettemplatecount;
+	}
+
+	// 배송템플릿 수정하기
+	public void editdeltem(DeliveryTemplateVO deliverytemplate) throws Exception{
+		deliverytemplateDAO.editdeltem(deliverytemplate);
+	}
+
+	// 배송템플릿 삭제하기
+	public void deletedelitem(int deltem_num) {
+		deliverytemplateDAO.deletedelitem(deltem_num);
+	}
 	
-	// 배송 템플릿 불러오기
+
 	
 
 }
