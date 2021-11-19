@@ -52,59 +52,44 @@
 				<tr>
 					<th>옵션</th>
 					<td>
-						  
-						
 						<script type="text/javascript">
 						     function add_item(){
-						          // pre_set 에 있는 내용을 
-						          var option1 = $("#option1").val();
-						          var option1arr = option1.split(",");
-						          
-						          var option2 = $("#option2").val();
-						          var option2arr = option2.split(",");
-						          
-						          var optioncom = new Array();
-						          var k = 0;
-						          for(var i=0; i<option1arr.length; i++){
-						        	  for(var j=0; j<option2arr.length; j++){
-						        		  optioncom[k] = [option1arr[i]+","+option2arr[j]];
-						        		  //alert("optioncom["+k+"] = "+optioncom[k]);
-						        		  k++;
-						        	  }
-						          }
-						         //  $("div#field").html(optioncom);
-						          $.ajax({
-						        	    url : '/optioncom', // 요청 할 주소
-						        	   // async: true, // false 일 경우 동기 요청으로 변경
-						        	    type : 'post', // GET, PUT
-						        	    data : json.stringify{
-						        	    	"optioncom" : optioncom, // 전송할 데이터
-						        	    },
-						        	    //dataType : 'text',
-						        	    success : function(data) {
-						        	    	alert("되냐?");
-						        	    	$('#field').html(data);
-						        	    }, // 요청 완료 시
-						        	    error :function(xhr,status,error){
-											console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-											alert("되겠냐?"+xhr.status);
-										}
-						        	});
-						          
-						        /*  $.post('${path}/optioncom', optioncom, function(data) {
-										$('#field').html(data);
-					
-						          }); */
-						        
+						    	 if($("#option1").val()!=""){
+						    		// pre_set 에 있는 내용을 
+							          var option1 = $("#option1").val();
+							          var option2 = $("#option2").val();
+							          
+							          $.ajax({
+							        	    url : '/optioncom', // 요청 할 주소
+							        	   // async: true, // false 일 경우 동기 요청으로 변경
+							        	    type : 'post', // GET, PUT
+							        	    dataType : 'text',
+							        	    data : {
+							        	    	"option1" : option1,
+							        	    	"option2" : option2,
+							        	    },
+							        	    success : function(data) {
+							        	    	$('#field').html(data);
+							        	    }, // 요청 완료 시
+							        	    error :function(xhr,status,error){
+												console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+												alert(xhr.status);
+											}
+							        	});
+						    	 }else{
+						    		 alert("옵션값을 입력해 주세요.");
+						    		 return false;
+						    	 }
 						     }
 						</script>
 						    	
 						<div id="pre_set">
 							옵션1 : <input type="text" name="size" id="option1" style="width:150px">
 							옵션2 : <input type="text" name="color" id="option2" style="width:150px">
+							<input type="button" value="추가 " onclick="add_item()">
 						</div>
 						
-						<input type="button" value="추가 " onclick="add_item()">
+						
 						<div id="field"></div>
 					</td>
 				</tr>
@@ -121,8 +106,8 @@
 					<td><textarea id="gds_ears" name="gds_ears" rows="20" cols="100"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center"><input type="submit"
-						id="uploadbutton" name="uploadbutton" value="업로드 하기"></td>
+					<td colspan="2" align="center">
+					<input type="submit" id="uploadbutton" name="uploadbutton" value="업로드 하기"></td>
 				</tr>
 
 			</table>

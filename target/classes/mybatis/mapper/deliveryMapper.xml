@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="deliveryMapper">
+
+	<!-- 판매자별 상품 리스트 출력 -->
+	<select id="delivery_cate_list" resultType="DeliveryCategory">
+		select * from deliverycategory order by del_code*1
+	</select>
+	
+	<insert id="insert_template" parameterType="DeliveryTemplate">
+	insert into deliverytemplate
+	(deltem_num, deltem_name, sel_num, del_code, del_name, deltem_delfee, deltem_redelfee, 
+	deltem_exdelfee, deltem_freedel, deltem_repost, deltem_readd1, deltem_readd2)
+	values
+	(#{deltem_num}, #{deltem_name}, #{sel_num}, #{del_code}, #{del_name}, #{deltem_delfee}, #{deltem_redelfee},
+	#{deltem_exdelfee}, #{deltem_freedel}, #{deltem_repost}, #{deltem_readd1}, #{deltem_readd2})
+	</insert>
+	
+	<!-- <select id="get_delivery_name" resultType="DeliveryCategory">
+		select del_name from deliverycategory where del_code=#{del_code}
+	</select> -->
+	
+</mapper>
+	

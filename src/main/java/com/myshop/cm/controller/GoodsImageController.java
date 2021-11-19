@@ -22,6 +22,7 @@ public class GoodsImageController {
 	// 싱글파일 업로드 (HTML5 이전)
 	@RequestMapping(value = "/singleImageUploader")
 	public String singleImageUploader(HttpServletRequest request, HttpServletResponse response, GoodsImageVO editor) {
+		System.out.println("GoodsImageController singleImageUploader");
 		String return1 = request.getParameter("callback");
 		String return2 = "?callback_func=" + request.getParameter("callback_func");
 		String return3 = "";
@@ -77,6 +78,7 @@ public class GoodsImageController {
 	// HTML5 다중파일 업로드
 	@RequestMapping(value = "/multiImageUploader")
 	public void multiImageUploader(HttpServletRequest request, HttpServletResponse response) {
+		System.out.println("GoodsImageController multiImageUploader");
 		try {
 			// 파일정보
 			String sFileInfo = "";

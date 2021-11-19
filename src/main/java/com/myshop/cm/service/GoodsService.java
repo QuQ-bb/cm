@@ -13,14 +13,12 @@ import org.springframework.stereotype.Service;
 
 import com.myshop.cm.dao.SellerDAO;
 import com.myshop.cm.model.GoodsVO;
-import com.myshop.cm.util.Pager;
 
 @Service
 public class GoodsService {
 	
 	@Autowired
 	private SellerDAO sellerDAO;
-	private Pager pager;
 	
 	// 상품 등록
 	public void insert(GoodsVO goods) throws Exception{

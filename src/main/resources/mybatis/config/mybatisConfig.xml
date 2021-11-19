@@ -8,6 +8,8 @@
  		<typeAlias type="java.lang.Integer" alias="Integer"/>
  		<typeAlias type="java.lang.String" alias="String"/>
  		<typeAlias type="com.myshop.cm.model.GoodsVO" alias="goods"/>
+ 		<typeAlias type="com.myshop.cm.model.DeliveryCategoryVO" alias="DeliveryCategory"/>
+ 		<typeAlias type="com.myshop.cm.model.DeliveryTemplateVO" alias="DeliveryTemplate"/>
  	</typeAliases>
  </configuration>
  

@@ -12,6 +12,7 @@
 <a href="home">home</a>							<br>
 <a href="goodsuploadform">goodsuploadform</a>	<br>
 <a href="sellergoodslist">sellergoodslist</a>	<br>
+<a href="sellerdeliverytemplate">sellerdeliverytemplate</a>	<br>
 
 
 
