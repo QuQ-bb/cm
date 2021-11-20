@@ -12,79 +12,10 @@
 <!-- SmartEditor 텍스트 편집기 -->
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
-<script>
-//우편번호, 주소 Daum API
-function openDaumPostcode() {
-	new daum.Postcode({
-		oncomplete : function(data) {				
-			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-			// 우편번호와 주소 정보를 해당 필드에 넣고, 커서를 상세주소 필드로 이동한다.
-			document.getElementById('deltem_repost').value = data.zonecode;
-			document.getElementById('deltem_readd1').value = data.address;				
-		}
-	}).open();
-}
-
-// 옵션 Ajax
-function add_item(){
-	// 옵션을 입력하였을 경우
-	 if($("#option1").val()!=""){
-         var option1 = $("#option1").val();
-         var option2 = $("#option2").val();
-         
-         $.ajax({
-       	    url : '/optioncom', // 요청 할 주소
-       	   // async: true, // false 일 경우 동기 요청으로 변경
-       	    type : 'post', // GET, PUT
-       	    dataType : 'text',
-       	    data : {
-       	    	"option1" : option1,
-       	    	"option2" : option2,
-       	    },
-       	    success : function(data) {
-       	    	$('#field').html(data);
-       	    }, // 요청 완료 시
-       	    error :function(xhr,status,error){
-					console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-					alert(xhr.status);
-				}
-       	});
-     // 옵션을 입력하지 않았을 경우
-	 }else{
-		 alert("옵션값을 입력해 주세요.");
-		 return false;
-	 }
-}
-// 배송템플릿 자동완성 
-function deltemLoad() {
-	if($("#deltem_num  option:selected").val() != null){
-		var deltem_num = $("#deltem_num  option:selected").val();
-		alert(deltem_num);
-	//	$.post('/deltemload', deltem_num, function(data) {
-	//		$('#deltemdiv').html(data);
-	//		frm.replytext.value = '';
-	//	});
-		 $.ajax({
-	    	    url : '/deltemload', // 요청 할 주소
-	    	   // async: true, // false 일 경우 동기 요청으로 변경
-	    	    type : 'post', // GET, PUT
-	    	    dataType : 'text',
-	    	    data : {
-	    	    	"deltem_num" : deltem_num,
-	    	    },
-	    	    success : function(data) {
-	    	    	$('#deltemdiv').html(data);
-	    	    }, // 요청 완료 시
-	    	    error :function(xhr,status,error){
-						console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-						alert(xhr.status);
-					}
-	    	});
-	}
-}
-
-
-</script>
+<!-- 우편번호 API, 배송템플릿 유효성검사 -->
+<script src="<%=request.getContextPath()%>/resources/js/sellerjs/sellerdeliverytemplate.js"></script>
+<!-- Ajax 및 상품업로드 유효성검사 -->
+<script src="<%=request.getContextPath()%>/resources/js/sellerjs/goodsuploadform.js"></script>
 
 
 
@@ -96,13 +27,13 @@ function deltemLoad() {
 
 	<div id="goodsuploadform">
 
-		<form method="post" action="<%=request.getContextPath()%>/goodsupload" enctype="multipart/form-data">
+		<form method="post" action="<%=request.getContextPath()%>/goodsupload" enctype="multipart/form-data" onsubmit="return goodsupload_check()">
 			<input type="hidden">
 			<!-- 판매자명 가져가기 -->
-			<table border="1" width="1200">
+			<table border="1" width="1400">
 
 				<tr>
-					<th>카테고리 선택</th>
+					<th width="100">카테고리 선택</th>
 					<td><input type="text" id="cate_code" name="cate_code"></td>
 				</tr>
 				<tr>
@@ -114,7 +45,7 @@ function deltemLoad() {
 					<td><input type="text" id="gds_name" name="gds_name"></td>
 				</tr>
 				<tr>
-					<th>썸네일</th>
+					<th>대표이미지</th>
 					<td><input type="file" id="gds_thumbnail1" name="gds_thumbnail1"></td>
 				</tr>
 				<tr>
@@ -124,7 +55,7 @@ function deltemLoad() {
 				<tr>
 					<th>상세설명</th>
 					<td width=900><textarea id="gds_detail" name="gds_detail"
-							rows="20" cols="100"></textarea></td>
+							rows="100" cols="150"></textarea></td>
 				</tr>
 				<tr>
 					<th>옵션</th>
@@ -144,10 +75,10 @@ function deltemLoad() {
 					<td><input type="text" id="gds_count" name="gds_count"></td>
 				</tr>
 				<tr>
-					<th>배송 템플릿</th>
+					<th>배송 정보</th>
 					<td>
 						<select id="deltem_num" name="deltem_num" onchange="deltemLoad()">
-								<option value="0">배송 템플릿</option>
+								<option value="-1">배송 템플릿</option>
 							<c:forEach var="dtlist" items="${deltemlist}">
 								<option value="${dtlist.deltem_num}">${dtlist.deltem_name}</option>
 							</c:forEach>
@@ -161,7 +92,7 @@ function deltemLoad() {
 				</tr>
 				<tr>
 					<th>교환 환불 기준</th>
-					<td><textarea id="gds_ears" name="gds_ears" rows="20" cols="100"></textarea></td>
+					<td><textarea id="gds_ears" name="gds_ears" rows="20" cols="150"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
@@ -172,7 +103,7 @@ function deltemLoad() {
 		</form>
 
 	</div>
-	<!-- 스마트에디터   -->
+	<!-- 스마트에디터    -->
 	<script>
 	$(function(){
 	    //전역변수선언
@@ -199,6 +130,7 @@ function deltemLoad() {
 						//id가 gds_content인 textarea에 스마트 에디터의 내용을 전달
 						editor_object.getById["gds_detail"].exec(
 								"UPDATE_CONTENTS_FIELD", []);
+						
 						//폼 submit
 						$("#form").submit();
 					})

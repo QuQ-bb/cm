@@ -63,16 +63,16 @@
 					</div>
 				</td>
 				<td >
-					<div>${sgl.gds_price}</div>
+					<div><fmt:formatNumber value="${sgl.gds_price}" pattern="#,###원" /></div>
 				</td>
 				<td>
-					<div>${sgl.gds_count}</div>
+					<div><fmt:formatNumber value="${sgl.gds_count}" pattern="#,###개" /></div>
 				</td>
 				<td>
-					<div><fmt:formatDate value="${sgl.gds_date}" pattern="yyyy-MM-dd"/></div>
+					<div><fmt:formatDate value="${sgl.gds_date}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
 				</td>
 				<td>
-					<div>${sgl.gds_readcount} / ${sgl.gds_sellcount}</div>
+					<div><fmt:formatNumber value="${sgl.gds_readcount}" pattern="#,###" /> / <fmt:formatNumber value="${sgl.gds_sellcount}" pattern="#,###" /></div>
 				</td>
 				<td>
 					<c:if test="${sgl.gds_viewyn eq 'y' || sgl.gds_viewyn eq 'Y'}">
@@ -96,7 +96,7 @@
 			</c:if>
 			
 			<c:if test="${page > 1 }">
-				<a href="board_list.nhn?page=${page-1}">[이전]</a>&nbsp;
+				<a href="sellergoodslist?page=${page-1}">[이전]</a>&nbsp;
 			</c:if>			
 
 			<c:forEach var="a" begin="${startpage}" end="${endpage}">
@@ -104,7 +104,7 @@
 					[${a}]
 				</c:if>
 				<c:if test="${a != page }">
-					<a href="board_list.nhn?page=${a}">[${a}]</a>&nbsp;
+					<a href="sellergoodslist?page=${a}">[${a}]</a>&nbsp;
 				</c:if>
 			</c:forEach>			
 			
@@ -112,7 +112,7 @@
 				[다음] 
 			</c:if>
 			<c:if test="${page < maxpage }">
-				<a href="board_list.nhn?page=${page+1}">[다음]</a>
+				<a href="sellergoodslist?page=${page+1}">[다음]</a>
 			</c:if>			
 		</div>
 

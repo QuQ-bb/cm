@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,10 +41,10 @@
 				<c:set var="num" value="${num-1}"/>	 
 				<td>${deltemlist.deltem_name }</td>
 				<td>${deltemlist.del_name }</td>
-				<td>${deltemlist.deltem_delfee }</td>
-				<td>${deltemlist.deltem_redelfee }</td>
-				<td>${deltemlist.deltem_exdelfee }</td>
-				<td>${deltemlist.deltem_freedel }</td>
+				<td><fmt:formatNumber value="${deltemlist.deltem_delfee }" pattern="#,###원" /></td>
+				<td><fmt:formatNumber value="${deltemlist.deltem_redelfee }" pattern="#,###원" /></td>
+				<td><fmt:formatNumber value="${deltemlist.deltem_exdelfee }" pattern="#,###원" /></td>
+				<td><fmt:formatNumber value="${deltemlist.deltem_freedel }" pattern="#,###원" /></td>
 				<td>${deltemlist.deltem_repost }</td>
 				<td>${deltemlist.deltem_readd1 }</td>
 				<td>${deltemlist.deltem_readd2 }</td>

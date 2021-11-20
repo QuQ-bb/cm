@@ -8,26 +8,15 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-//우편번호, 주소 Daum API
-function openDaumPostcode() {
-	new daum.Postcode({
-		oncomplete : function(data) {				
-			// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-			// 우편번호와 주소 정보를 해당 필드에 넣고, 커서를 상세주소 필드로 이동한다.
-			document.getElementById('deltem_repost').value = data.zonecode;
-			document.getElementById('deltem_readd1').value = data.address;				
-		}
-	}).open();
-}
-</script>
+<!-- 우편번호 API, 배송템플릿 유효성검사 -->
+<script src="<%=request.getContextPath()%>/resources/js/sellerjs/sellerdeliverytemplate.js"></script>
 </head>
 <body>
 	<br>
-	<form method="post" action="<%=request.getContextPath()%>/deliverytemplateupload">
+	<form method="post" action="<%=request.getContextPath()%>/deliverytemplateupload" onSubmit="return template_check()">
 		<table>
 			<tr>
-				<th>배송 탬플릿 명</th>
+				<th>배송 템플릿 명</th>
 				<td><input type="text" id="deltem_name" name="deltem_name"></td>
 			</tr>
 			<tr>
