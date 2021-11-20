@@ -76,9 +76,9 @@
 			async : true,
 			type : 'POST',
 			data : mem_id,//mem_id라는 이름으로 mem_id라는 데이터를 @WebServlet("/idsearch.do")에 보내겠다
-			url : 'member/member_id',
-			dateType: 'json',
-			contentType: "application/json; charset=UTF-8",
+			url : 'member/member_idCheck',
+/* 			dateType: 'json',
+			contentType: "application/json; charset=UTF-8", */
 			success : function(data){ 
 			
 		if(result == 1 ){ 
@@ -102,7 +102,9 @@
 			$("#usercheck").attr("disabled", true);
 			} 
 		}
-	}
+	},
+			error:function(e){
+		  		alert("data error"+e);
 		  }); //ajax///
 		}//else if
 	
@@ -184,7 +186,7 @@
 			console.log('true');
 			$('#id_check').text('');
 		} else { console.log('false');
-		$('#id_check').text('5~20자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
+		$('#id_check').text('4~12자의 영문 소문자, 숫자와 특수기호(_),(-)만 사용 가능합니다.');
 		$('#id_check').css('color', 'red');
 		}
 	});
@@ -250,10 +252,14 @@
 		<div class="col-sm-6 col-md-offset-3">
 			<form action="/join_ok" method="post" role="form"
 				id="usercheck" name="member">
-				<div class="form-group">
 					<label for="mem_id">아이디</label>
-					 <input type="text" class="form-control" id="mem_id" name="mem_id" placeholder="ID">
-					 <div class="check_font" id="id_check"></div>
+				<div class="form-group">
+					 <input type="text" class="form-control" style="width: 83%; display: inline;"
+					  id="mem_id" name="mem_id" placeholder="ID">
+					<button type="button" class="btn btn-default" id="idcheck">
+						<i class="fa fa-search"></i> 중복체크
+					</button>
+					  <div class="check_font" id="id_check"></div>
 				</div>
 				<div class="form-group">
 					<label for="mem_pass">비밀번호</label>
@@ -283,8 +289,7 @@
 
 				<div class="form-group">
 					<input class="form-control" style="width: 40%; display: inline;"
-						placeholder="우편번호" name="deladd_post" id="deladd_post"
-						type="text">
+						placeholder="우편번호" name="deladd_post" id="deladd_post" type="text">
 					<button type="button" class="btn btn-default"
 						onclick="openDaumPostcode()">
 						<i class="fa fa-search"></i> 우편번호 찾기

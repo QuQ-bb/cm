@@ -78,6 +78,11 @@
 			$("#sel_acc").val("").focus();
 			return false;
 		}
+		if($.trim($("#seling_filename1").val())==""){
+			alert("사업자등록증을 파일로 넣어주세요.");
+			$("#seling_filename1").val("").focus();
+			return false;
+		}
 	}
 </script>
 </head>
@@ -104,7 +109,7 @@
     </div>
     <div class="form-group">
     <label for="sel_mobnum">통신판매업번호</label>
-      <input type="text" class="form-control" id="sel_mobnum" name="sel_mobnum" placeholder="통신판매업번호(' - '없이 번호만 입력해주세요)" >
+      <input type="text" class="form-control" id="sel_mobnum" name="sel_mobnum" placeholder="통신판매업번호(' - '없이 입력해주세요)" >
     </div>
     
     <label for="sel_tel">사업장 주소</label>
@@ -141,7 +146,7 @@
     </div>
     
     <div class="form-group">
-    <label for="seling_filename1">파일첨부</label>
+    <label for="seling_filename1">파일첨부 [사업자 등록증]</label>
       <input type="file" class="form-control" id="seling_filename1" name="seling_filename1">
     </div>
     

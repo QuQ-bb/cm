@@ -22,7 +22,7 @@ public class MemberController {
 	private MemberService memberService;
 	
 	//id유효성 검사 ajax부분 
-	@RequestMapping(value="", method=RequestMethod.POST)
+	@RequestMapping(value="/member_idCheck", method=RequestMethod.POST)
 	public String member_idcheck(@RequestParam("") String mem_id, Model model) throws Exception{
 		
 		System.out.println("mem_id:" +mem_id);
@@ -30,7 +30,7 @@ public class MemberController {
 		int result = memberService.memberIdCheck(mem_id);
 		model.addAttribute("result", result);
 		
-		return "";
+		return "member/idCheckResult";
 	}
 	
 	//회원가입 폼
