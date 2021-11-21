@@ -2,7 +2,6 @@ package com.myshop.cm.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.MemberVO;
@@ -23,35 +21,17 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	//이용약관 동의 폼
-	@RequestMapping("/step1")
-	public String step1() throws Exception {
-		return "member/step1";
-	}
-
-	
-	
-	
 	//id유효성 검사 ajax부분 
-	/*
-	 * @RequestMapping(value="/member_idCheck", method=RequestMethod.POST) public
-	 * String member_idcheck(@RequestParam("") String mem_id, Model model) throws
-	 * Exception{
-	 * 
-	 * System.out.println("mem_id:" +mem_id);
-	 * 
-	 * int result = memberService.memberIdCheck(mem_id);
-	 * model.addAttribute("result", result);
-	 * 
-	 * return "member/idCheckResult";
-	} */
-	@RequestMapping(value="/idCheck", method= RequestMethod.POST)
-	@ResponseBody
-	public int idCheck(@RequestParam("mem_id") String mem_id) {
-		System.out.println("id유효성 컨트롤러");
-			return memberService.memberIdCheck(mem_id);
+	@RequestMapping(value="/member_idCheck", method=RequestMethod.POST)
+	public String member_idcheck(@RequestParam("") String mem_id, Model model) throws Exception{
+		
+		System.out.println("mem_id:" +mem_id);
+		
+		int result = memberService.memberIdCheck(mem_id);
+		model.addAttribute("result", result);
+		
+		return "member/idCheckResult";
 	}
-	
 	
 	//회원가입 폼
 	@RequestMapping(value = "/member_join")
@@ -124,8 +104,5 @@ public class MemberController {
 		
 		return "./member/member_logout";
 	}
-	
-	//회원정보 수정 폼
-	
 
 }

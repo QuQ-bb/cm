@@ -14,17 +14,9 @@ public class MemberService {
 	private MemberDAO memberDao;
 	
 	//ID유효성 검사
-	/*
-	 * public int memberIdCheck(String mem_id) throws Exception { return
-	 * memberDao.memberIdCheck(mem_id); }
-	 */
-	public int memberIdCheck(String mem_id) {
-		System.out.println("id유효성 서비스");
+	public int memberIdCheck(String mem_id) throws Exception {
 		return memberDao.memberIdCheck(mem_id);
 	}
-	
-	
-	
 	//회원가입 member저장
 	public void insertMember(MemberVO member) throws Exception {
 		 memberDao.insertMember(member);
@@ -42,7 +34,6 @@ public class MemberService {
 		int mem = memberDao.selectMemNum(member);
 		return mem;
 	}
-
 	
 	//회원 수정
 	
