@@ -19,6 +19,12 @@ public class StoreController {
 	@Inject
 	private StoreService storeService;
 	
+	//상품 선택
+	@GetMapping("storeSelect")
+	public void storeSelect(GoodsVO goodsVO, Model model) throws Exception {
+		System.out.println("StoreSelect 들어왔냐");
+	}
+	
 	//상품 목록
 	@GetMapping("storeList")
 	public void storeList(GoodsVO goodsVO, Model model) throws Exception {
