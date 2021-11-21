@@ -9,6 +9,9 @@
 	<!-- <select	 id="login_check" parameterType="String" resultType="member">
 	select * from member where mem_id = #{mem_id}
 	</select> -->
+	<select id="idCheck" resultType="integer">
+		select count(*) from member where mem_id = #{mem_id}
+	</select>
 	
 	
 	<!-- 회원가입 회원저장  -->
