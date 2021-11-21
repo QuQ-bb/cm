@@ -5,5 +5,13 @@
 
 <mapper namespace="qnaMapper">
 
+	<select id="qnaList" parameterType="Pager" resultType="QnaVO">
+		select *
+		from qna
+		order by qna_ref desc, qna_step asc LIMIT #{startRow}, #{perPage}
+	</select>
 
+	<select id="qnaCount" resultType="Integer">
+		select count(qna_ref) from qna
+	</select>
 </mapper>
