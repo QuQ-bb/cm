@@ -15,14 +15,16 @@ public class MemberDAO {
 	private SqlSession sqlSession;
 	
 	//id 유효성검사
-	@Transactional
-	public int memberIdCheck(String mem_id) throws Exception {
-		
-		int result =-1;	//사용 가능 id
-		MemberVO mv = (MemberVO) sqlSession.selectOne("memberns.login_check", mem_id);
-		if(mv != null)
-			result = 1;	//중복 id
-		return result;
+	/*
+	 * @Transactional public int memberIdCheck(String mem_id) throws Exception {
+	 * 
+	 * int result =-1; //사용 가능 id MemberVO mv = (MemberVO)
+	 * sqlSession.selectOne("memberns.login_check", mem_id); if(mv != null) result =
+	 * 1; //중복 id return result; }
+	 */
+	public int memberIdCheck(String mem_id) {
+		System.out.println("id유효성 dao");
+		return sqlSession.selectOne("idCheck", mem_id);
 	}
 	//회원가입 저장
 	@Transactional
@@ -42,6 +44,7 @@ public class MemberDAO {
 	public MemberVO loginCheck(String mem_id) throws Exception {
 		return (MemberVO) sqlSession.selectOne("login_check", mem_id);
 	}
+
 
 
 
