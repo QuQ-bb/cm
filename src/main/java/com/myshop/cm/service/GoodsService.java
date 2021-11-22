@@ -75,4 +75,8 @@ public class GoodsService {
 		return goods;
 	}
 
+	public void update(GoodsVO goods) throws Exception{
+		sellerDAO.updateGoods(goods);
+	}
+
 }

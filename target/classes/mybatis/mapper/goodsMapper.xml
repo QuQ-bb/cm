@@ -35,6 +35,20 @@
 		select * from goods where gds_num=#{gds_num}
 	</select>
 	
-	<!--  -->
+	<!-- 상품 수정하기 -->
+	<update id="goods_update" parameterType="goods">
+		UPDATE goods
+		SET
+		cate_code = #{cate_code},
+		gds_name = #{gds_name},
+		gds_price = #{gds_price},
+		gds_detail = #{gds_detail},
+		gds_option = #{gds_option},
+		gds_count = #{gds_count},
+		gds_thumbnail = #{gds_thumbnail},
+		deltem_num = #{deltem_num},
+		gds_ears = #{gds_ears}
+		WHERE gds_num = #{gds_num}
+	</update>
 </mapper>
 	

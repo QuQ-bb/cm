@@ -44,4 +44,8 @@ public class SellerDAO {
 		return (GoodsVO) sqlSession.selectOne("goodsMapper.goods_detail", gds_num);
 	}
 
+	public void updateGoods(GoodsVO goods) {
+		sqlSession.update("goodsMapper.goods_update", goods);
+	}
+
 }

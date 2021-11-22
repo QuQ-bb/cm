@@ -17,8 +17,6 @@
 <!-- Ajax 및 상품업로드 유효성검사 -->
 <script src="<%=request.getContextPath()%>/resources/js/sellerjs/goodsuploadform.js"></script>
 
-
-
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 
@@ -46,8 +44,11 @@
 				</tr>
 				<tr>
 					<th>대표이미지</th>
-					<td><input type="file" id="gds_thumbnail1" name="gds_thumbnail1"></td>
+					<td> <img style="width: 400px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+					     <input style="display: block;" type="file" id="gds_thumbnail1" name="gds_thumbnail1">
+					</td>
 				</tr>
+				
 				<tr>
 					<th>단위 가격</th>
 					<td><input type="text" id="gds_price" name="gds_price"></td>
@@ -136,6 +137,9 @@
 					})
 		})
 	</script>
+	<!-- 대표이미지 미리보기 -->
+	<script src="<%=request.getContextPath()%>/resources/js/sellerjs/previewimage.js"></script>
+	
 
 
 </body>
