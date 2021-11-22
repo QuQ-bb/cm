@@ -267,10 +267,7 @@
 				name="member">
 				<label for="mem_id">아이디</label>
 				<div class="form-group">
-					<input type="text" class="form-control"
-						style="width: 83%; display: inline;" id="mem_id" name="mem_id"
-						placeholder="ID">
-					<div class="check_font" id="id_check"></div>
+					<input type="text" class="form-control" id="mem_id" name="mem_id" placeholder="ID">
 				</div>
 				<div class="form-group">
 					<label for="mem_pass">비밀번호</label> <input type="password"

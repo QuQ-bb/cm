@@ -249,7 +249,9 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scri
 	$("#agreeAll").click(function() {
 		if($("#agreeAll").is(":checked")) $("input[name=agree]").prop("checked", true);
 		else $("input[name=agree]").prop("checked", false);
+		
 	});
+		
 
 	$("input[name=agree]").click(function() {
 		var total = $("input[name=agree]").length;
