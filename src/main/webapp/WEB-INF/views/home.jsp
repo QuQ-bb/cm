@@ -12,7 +12,9 @@
 	첫번째 연동 테스트(성훈)
 	김진
 </h1>
-
+<script>
+	location.href="adminmain";
+</script>
 <P>  The time on the server is ${serverTime}. </P>
 </body>
 </html>

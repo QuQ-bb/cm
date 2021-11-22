@@ -19,7 +19,7 @@
 	<filter-mapping>
 		<filter-name>CharacterEncodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter>
+	</filter-mapping>
 
 	<!-- Error 설정 -->
 	<error-page>
