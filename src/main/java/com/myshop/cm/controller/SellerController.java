@@ -403,5 +403,25 @@ public class SellerController {
 		
 		return "redirect:/sellergoodslist?page="+page;
 	}
+	
+	// 상품 비공개 전환
+	@RequestMapping(value = "/goodshide")
+	public String goodshide(@RequestParam(value = "page") String page,
+							@RequestParam(value = "gds_num") int gds_num) throws Exception{
+		
+		goodsService.goodshide(gds_num);
+		
+		return "redirect:/sellergoodslist?page="+page;
+	}
+	
+	// 상품 공개 전환
+	@RequestMapping(value = "/goodsview")
+	public String goodsview(@RequestParam(value = "page") String page,
+							@RequestParam(value = "gds_num") int gds_num) throws Exception{
+		
+		goodsService.goodsview(gds_num);
+		
+		return "redirect:/sellergoodslist?page="+page;
+	}
 
 }

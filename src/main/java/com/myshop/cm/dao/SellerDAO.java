@@ -52,4 +52,13 @@ public class SellerDAO {
 		sqlSession.delete("goodsMapper.goods_delete", gds_num);
 	}
 
+	public void goodshide(int gds_num) {
+		sqlSession.update("goodsMapper.goods_update_viewn", gds_num);
+	}
+
+	public void goodsview(int gds_num) {
+		sqlSession.update("goodsMapper.goods_update_viewy", gds_num);
+		
+	}
+
 }

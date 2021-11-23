@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품목록</title>
+<script src="<%=request.getContextPath()%>/resources/js/sellerjs/sellergoodslistjs.js"></script>
 </head>
 <body>
 	<div id="goodslist_div">
@@ -76,15 +77,17 @@
 				</td>
 				<td>
 					<c:if test="${sgl.gds_viewyn eq 'y' || sgl.gds_viewyn eq 'Y'}">
-						판매중
+						<div align = "center">판매중</div>
+						<div align="center"><input type="button" value="판매중지" onclick="location='goodshide?page=${page}&gds_num=${sgl.gds_num}'"></div>
 					</c:if>
 					<c:if test="${sgl.gds_viewyn eq 'n' || sgl.gds_viewyn eq 'N'}">
-						판매중지
+						<div align = "center">판매 중지</div>
+						<div align="center"><input type="button" value="판매중으로 전환" onclick="location='goodsview?page=${page}&gds_num=${sgl.gds_num}'"></div>
 					</c:if>
 				</td>
 				<td>
 					<div align="center"><input type="button" value="구매자 페이지에서 보기" onclick="location='goodsdetail?page=${page}&gds_num=${sgl.gds_num}'"></div>
-					<div align="center"><input type="button" value="삭제" onclick="location='goodsdelete?page=${page}&gds_num=${sgl.gds_num}'"></div>
+					<div align="center"><input type="button" value="삭제" onclick="del(${page},${sgl.gds_num})"></div>
 				</td>
 			</tr>
 			</c:forEach>

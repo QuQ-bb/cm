@@ -55,5 +55,21 @@
 	<delete id="goods_delete" parameterType="int">
 		delete from goods where gds_num=#{gds_num}
 	</delete>
+	
+	<!-- 판매중지 -->
+	<update id="goods_update_viewn" parameterType="int">
+		update goods
+		set
+		gds_viewyn = 'n'
+		where gds_num = #{gds_num}
+	</update>
+	
+	<!-- 판매중으로 전환 -->
+	<update id="goods_update_viewy" parameterType="int">
+		update goods
+		set
+		gds_viewyn = 'y'
+		where gds_num = #{gds_num}
+	</update>
 </mapper>
 	

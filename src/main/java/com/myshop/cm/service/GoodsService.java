@@ -81,6 +81,14 @@ public class GoodsService {
 
 	public void deletegoods(int gds_num) {
 		sellerDAO.deleteGoods(gds_num);
+	}
+
+	public void goodshide(int gds_num) {
+		sellerDAO.goodshide(gds_num);
+	}
+
+	public void goodsview(int gds_num) {
+		sellerDAO.goodsview(gds_num);
 		
 	}
 
