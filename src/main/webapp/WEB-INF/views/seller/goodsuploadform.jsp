@@ -126,16 +126,15 @@
 					});
 
 			//업로드버튼 클릭이벤트
-			$("#uploadbutton").click(
-					function() {
-						//id가 gds_content인 textarea에 스마트 에디터의 내용을 전달
-						editor_object.getById["gds_detail"].exec(
-								"UPDATE_CONTENTS_FIELD", []);
-						
-						//폼 submit
-						$("#form").submit();
-					})
-		})
+			$("#uploadbutton").click(function() {
+					//id가 gds_content인 textarea에 스마트 에디터의 내용을 전달
+					editor_object.getById["gds_detail"].exec(
+							"UPDATE_CONTENTS_FIELD", []);
+					
+					//폼 submit
+					$("#form").submit();
+			})
+	})
 	</script>
 	<!-- 대표이미지 미리보기 -->
 	<script src="<%=request.getContextPath()%>/resources/js/sellerjs/previewimage.js"></script>

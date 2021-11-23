@@ -48,4 +48,8 @@ public class SellerDAO {
 		sqlSession.update("goodsMapper.goods_update", goods);
 	}
 
+	public void deleteGoods(int gds_num) {
+		sqlSession.delete("goodsMapper.goods_delete", gds_num);
+	}
+
 }

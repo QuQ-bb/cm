@@ -50,5 +50,10 @@
 		gds_ears = #{gds_ears}
 		WHERE gds_num = #{gds_num}
 	</update>
+	
+	<!-- 상품 삭제하기 -->
+	<delete id="goods_delete" parameterType="int">
+		delete from goods where gds_num=#{gds_num}
+	</delete>
 </mapper>
 	

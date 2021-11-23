@@ -84,7 +84,7 @@
 				</td>
 				<td>
 					<div align="center"><input type="button" value="구매자 페이지에서 보기" onclick="location='goodsdetail?page=${page}&gds_num=${sgl.gds_num}'"></div>
-					<div align="center"><input type="button" value="삭제"></div>
+					<div align="center"><input type="button" value="삭제" onclick="location='goodsdelete?page=${page}&gds_num=${sgl.gds_num}'"></div>
 				</td>
 			</tr>
 			</c:forEach>

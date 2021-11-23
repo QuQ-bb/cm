@@ -79,4 +79,9 @@ public class GoodsService {
 		sellerDAO.updateGoods(goods);
 	}
 
+	public void deletegoods(int gds_num) {
+		sellerDAO.deleteGoods(gds_num);
+		
+	}
+
 }

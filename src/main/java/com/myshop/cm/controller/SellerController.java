@@ -345,6 +345,61 @@ public class SellerController {
 			deliverytemplate.setDel_name(delinfoarr[1]);
 			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
 		}
+		return "redirect:/sellergoodslist?page="+page;
+	} 
+	
+	// 상품 삭제하기
+	@RequestMapping(value = "goodsdelete")
+	public String goodsdelete(@RequestParam(value = "gds_num") int gds_num,
+							  @RequestParam(value = "page") String page,
+							  HttpServletRequest request) throws Exception{
+		// 삭제버튼을 누른 상품 정보 불러오기
+		GoodsVO goods = goodsService.goodsdetail(gds_num);
+		
+		// 본문 이미지 경로, 이름 불러오기
+		String gds_detail = goods.getGds_detail();
+		
+		// 이미지 경로,이름을 받을 배열 추가
+		String[] gds_detailarr = new String[10];
+		int[] gds_detailIndex = new int[10];
+		
+		// 배열에 본문이미지 경로이름 넣고 삭제하기
+		for(int i=0; i<10; i++) {
+			int index = 0;
+			 if(i == 0){
+				 index = gds_detail.indexOf("resource");
+			 }else {
+				 index = gds_detail.indexOf("resource", gds_detailIndex[i-1]+81);
+				 // 이미지가 더이상없으면 for문 나가기(index에 -1이 들어가게되면 오류발생)
+				 if(index < 0) {
+					 break;
+				 }
+			 }
+			 gds_detailIndex[i] = index;
+			 String gds_detailfile = gds_detail.substring(gds_detailIndex[i], gds_detailIndex[i]+81);
+			 gds_detailarr[i] = request.getRealPath(gds_detailfile);
+			 System.out.println(gds_detailIndex[i]);
+			 System.out.println(gds_detailarr[i]);
+			 
+			 // 본문 이미지파일 삭제
+	    	 File detailfile = new File(gds_detailarr[i]);
+	    	 System.out.println(detailfile.exists());
+			 if(detailfile.exists() == true){
+				 detailfile.delete();
+		     }
+		}
+		
+		// 썸네일 이미지 삭제
+		String thumbnailfilepath = request.getRealPath("resources/image/thumbnailimage/");
+		String thumbnailfilename = goods.getGds_thumbnail();
+		File thumbnailfile = new File(thumbnailfilepath+thumbnailfilename);
+		System.out.println(thumbnailfile.exists());
+		if(thumbnailfile.exists() == true){
+			thumbnailfile.delete();
+        }
+		
+		// DB 에서 goods데이터 삭제
+		goodsService.deletegoods(gds_num);
 		
 		return "redirect:/sellergoodslist?page="+page;
 	}
