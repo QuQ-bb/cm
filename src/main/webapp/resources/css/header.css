@@ -1,0 +1,222 @@
+/* 해더에서 top으로 변경 예정 */
+@charset "UTF-8";
+
+header  {
+  margin: auto; /* header의 양쪽 여백(margin)을 동등하게 맞춤 -> 수평가운데정렬 */
+  /* margin-left: 200px; */
+  width: 1500px;
+  height: 215px;
+  display: flex;
+  align-items: center; /* 하위 요소들 수직 가운데정렬 */
+  position: relative;
+}
+
+fieldset {
+  border: none; /* 기본 border 없애기(이 코드를 지우고 기본 border를 확인해보세요) */
+}
+.visually-hidden {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+.links {
+  /* 링크들을 상단 우측에 위치시킵니다. */
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+.links .link_text {		/* 링크, 글자크기 조정 */
+  font-size: 15px;
+  margin-left: 5px;
+  color: #000;
+  text-decoration: none;
+}
+.img_logo {	/* 로고이미지 파일 조정 */
+  margin-left: 400px;
+  width: 220px;
+  height: 65px;
+}
+.search_box {	/* 검색창 바깥틀 */
+  width: 520px;
+  height: 50px;
+  border: 2px solid #6e58fe;
+  display: flex;
+  align-items: center;
+}
+.search_box input {
+  flex: 9; /* search-box내부에서 9만큼의 크기를 차지(비율) */
+  height: 46px;
+  padding-left: 12px;
+  padding-right: 12px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
+.search_box button {
+  flex: 1; /* search-box내부에서 1만큼의 크기를 차지(비율) */
+  height: 46px;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: #6e58fe;
+  color: #ffffff;
+}
+/* nav */
+header > nav {	/* 헤더 네비 간격 조정 */
+  width: 100%;
+  height: 45px;
+  position: absolute;
+  bottom: 0;
+}
+.nav_items {	/* 네비 바 자체 조정 */
+  list_style:none;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  border-top: 1px solid #f1f3f6;
+}
+
+.nav_items ul > li {
+  display: inline-block;
+  margin-left: 8px;
+  
+}
+
+.shopping-cart{		/* 장바구니 크기 컬러 단독 설정 */
+	color: #6e58fe;
+	font-size: 24px;
+}
+
+.nav_items ul > li > a {	/* 네비바 상단 글자 크기 색 조정 */
+  text-decoration: none;
+  cursor: pointer;
+  color: #000;
+}
+
+.main1 {		/* 카테고리 관련 설정 */
+    width: 600px;
+    height: 100%;
+}
+
+
+
+.main1>li {		/* 서브 매뉴 위치 크기 글자 관련 */
+    float: left;
+    width: 25%;
+    line-height: 50px;
+    text-align: center;
+    position: relative;
+}
+
+
+
+.main1>li:hover .main2 {	/* 서브 매뉴 중간 마우스온 상태일때 나오는 박스 위치   */
+    left: 0;
+}
+
+
+
+.main1>li a {		/* 마우스 온 했을때 보여지는 형태 */
+    display: block;
+}
+
+
+
+.main1>li a:hover {		/* 마우스 온 할때 보여지는 블록 설정 */
+    background: #6e58fe;
+    color: #fff;
+    font-weight: bold;
+}
+
+
+
+.main2 {			/* 서브 매뉴 중간 부분 박스 크기 색 설정 */
+    position: absolute;
+    top: 50px;
+    left: -9999px;
+    background: #ffffff;
+    width: 120%;
+    line-height:20px;
+}
+
+
+
+.main2>li {			/* 서매중 다음 마지막 서브 매뉴 나오는 포지션 형태 설정 */
+    position: relative;
+}
+
+
+
+.main2>li:hover .main3 {	/* 서매중 다음 마지막 서브 매뉴 나오는 포지션 위치설정 */
+    left: 100%;
+}
+
+
+
+.main2>li a, .main3>li a { /* 서매중 다음 마지막 서브 매뉴 박스는 크기및 추가  설정 */
+    border-radius: 5px;
+    margin: 15px;
+    
+}
+
+
+
+.main3 {		/* 마지막 서브 매뉴 박스 크기 색 조절 */
+    position: absolute;
+    top: 0;
+    left: -99999px;
+    background: #ffffff;
+    width: 180px;
+    text-align: center;
+    /*left: 100%;*/
+    /*display: none;*/
+}
+
+
+
+.main3>li a:hover {	/* 마서매 글자 마우스 온일때 설정 */
+	font-weight: bold;
+    color: #fff;
+}
+
+.main4 {		/* 마지막 서브 매뉴 박스 크기 색 조절 */
+    position: absolute;
+    top: 0;
+    left: -99999px;
+    background: #ffffff;
+    width: 180px;
+    text-align: center;
+}
+.main4>li a:hover {
+    display: block;
+    font-weight: bold;
+    color: #fff;
+
+}
+
+.main3>li {			/* 서매중 다음 마지막 서브 매뉴 나오는 포지션 형태 설정 */
+    position: relative;
+}
+
+
+
+.main3>li:hover .main4 {	/* 서매중 다음 마지막 서브 매뉴 나오는 포지션 위치설정 */
+    left: 100%;
+}
+
+
+
+.main3>li a, .main4>li a { /* 서매중 다음 마지막 서브 매뉴 박스는 크기및 추가  설정 */
+    border-radius: 5px;
+    margin: 15px;
+}
