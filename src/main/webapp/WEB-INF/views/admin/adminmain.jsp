@@ -15,7 +15,7 @@
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand">관리자페이지</a>
+      <a class="navbar-brand" href="/adminmain">관리자페이지</a>
     </div>
     <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">주문<span class="caret"></span></a>
@@ -27,8 +27,8 @@
        <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">상품 카테고리<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="admin/catelist">카테고리 조회</a></li>
-          <li><a href="admin/addcategory">카테고리 등록</a></li>
+          <li><a href="/catelist">카테고리 조회</a></li>
+          <li><a href="/addcategory">카테고리 등록</a></li>
         </ul>
       </li>
     </ul>
@@ -36,8 +36,8 @@
       <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">공지사항<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="admin/noticelist">공지 목록</a></li>
-          <li><a href="admin/noticeform">공지 등록</a></li>
+          <li><a href="/noticelist">공지 목록</a></li>
+          <li><a href="/noticeform">공지 등록</a></li>
         </ul>
       </li>
     </ul>

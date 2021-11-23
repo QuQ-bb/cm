@@ -15,7 +15,7 @@ public class NoticeController {
 	@Autowired
 	NoticeService noticeservice;
 	// 공지 리스트
-	@RequestMapping("admin/noticelist")
+	@RequestMapping(value = "/noticelist")
 	private String noticelist(NoticeVO noticeVO , Model model) throws Exception{
 		System.out.println("공지컨트롤러진입");
 		
@@ -27,7 +27,7 @@ public class NoticeController {
 		return "admin/noticelist";
 	}
 	// 공지 등록폼
-	@RequestMapping("admin/noticeform")
+	@RequestMapping(value = "/noticeform")
 	private String noticeform(NoticeVO noticeVO , Model model) throws Exception{
 		System.out.println("공지등록폼컨트롤러");
 		
@@ -38,14 +38,14 @@ public class NoticeController {
 		return "admin/noticeform";	
 	}
 	// 공지 등록
-	@RequestMapping("admin/insertnotice")
+	@RequestMapping(value = "/insertnotice")
 	private String insertnotice(NoticeVO noticeVO , Model model) throws Exception{
 		System.out.println("notice컨트롤러");
 		
 		int noticeInsert = noticeservice.NoticeInsert(noticeVO);
 		model.addAttribute("noticeInsert", noticeInsert);
 		
-		System.out.println("norice컨트롤러2");
+		System.out.println("notice컨트롤러2");
 		return "admin/noticeform";
 	}
 }

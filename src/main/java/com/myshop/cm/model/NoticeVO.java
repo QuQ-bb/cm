@@ -1,16 +1,15 @@
 package com.myshop.cm.model;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 public class NoticeVO {
 	private int ntc_num;
 	private String ntc_sort;
 	private String ntc_title;
 	private String ntc_content;
-	private Date ntc_date;
+	private Timestamp ntc_date;
 	private String ntc_check;
 	private String ntc_delyn;
-	
 	public int getNtc_num() {
 		return ntc_num;
 	}
@@ -35,10 +34,10 @@ public class NoticeVO {
 	public void setNtc_content(String ntc_content) {
 		this.ntc_content = ntc_content;
 	}
-	public Date getNtc_date() {
+	public Timestamp getNtc_date() {
 		return ntc_date;
 	}
-	public void setNtc_date(Date ntc_date) {
+	public void setNtc_date(Timestamp ntc_date) {
 		this.ntc_date = ntc_date;
 	}
 	public String getNtc_check() {
@@ -53,5 +52,5 @@ public class NoticeVO {
 	public void setNtc_delyn(String ntc_delyn) {
 		this.ntc_delyn = ntc_delyn;
 	}
-	
+		
 }
