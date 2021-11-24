@@ -11,24 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myshop.cm.dao.SellerDAO;
-import com.myshop.cm.model.GoodsVO;
+import com.myshop.cm.dao.CalculateDAO;
+import com.myshop.cm.model.CalculateVO;
 
 @Service
-public class GoodsService {
+public class CalculateService {
 	
 	@Autowired
-	private SellerDAO sellerDAO;
-	
-	// 상품 등록
-	public void insert(GoodsVO goods) throws Exception{
-		
-		sellerDAO.insertGoods(goods);
-	}
+	private CalculateDAO calculateDAO;
 
-	// 판매자별 상품목록
-	public Map<String, Object> sellergoodslist(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		List<GoodsVO> sellergoodslist = new ArrayList<GoodsVO>();
+	// 판매자 정산 리스트
+	public Map<String, Object> calculatelist(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		List<CalculateVO> calculatelist = new ArrayList<CalculateVO>();
 		
 		int page = 1;
 		int limit = 10;	// 한 화면에 출력할 상품 수
@@ -40,10 +34,10 @@ public class GoodsService {
 		int pageIndex = (page-1)*10;
 		
 		// 총 리스트 수를 받아옴
-		int listcount = sellerDAO.getListCount();
+		int listcount = calculateDAO.getCalculListCount();
 		
 		// 페이지 번호(page)를 DAO 클래스에 전달한다.
-		sellergoodslist = sellerDAO.getSellerGoodsList(pageIndex);	// 리스트를 받아옴
+		calculatelist = calculateDAO.getCalculateList(pageIndex);	// 리스트를 받아옴
 		
 		// 총 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 0.95를 더해서 올림처리
@@ -63,36 +57,15 @@ public class GoodsService {
 		resultMap.put("endpage", endpage);
 		resultMap.put("maxpage", maxpage);
 		resultMap.put("listcount", listcount);
-		resultMap.put("sellergoodslist", sellergoodslist);
+		resultMap.put("calculatelist", calculatelist);
 
 		return resultMap;
 	}
 
-	// 판매자 상품 구매자페이지로 보기
-	public GoodsVO goodsdetail(int gds_num) throws Exception{
-		GoodsVO goods = sellerDAO.getGoodsContent(gds_num);
-		
-		return goods;
-	}
-
-	// 상품 수정
-	public void update(GoodsVO goods) throws Exception{
-		sellerDAO.updateGoods(goods);
-	}
-
-	// 상품 삭제
-	public void deletegoods(int gds_num) {
-		sellerDAO.deleteGoods(gds_num);
-	}
-
-	// 상품 정지
-	public void goodshide(int gds_num) {
-		sellerDAO.goodshide(gds_num);
-	}
-
-	// 상품 노출
-	public void goodsview(int gds_num) {
-		sellerDAO.goodsview(gds_num);
+	// 판매자 정산 상세내역 보기
+	public CalculateVO getCalculDetail(int clcln_num) throws Exception{
+		CalculateVO calculateVO = calculateDAO.getCalculDetail(clcln_num);
+		return calculateVO;
 	}
 
 }

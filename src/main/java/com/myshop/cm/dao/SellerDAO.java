@@ -18,14 +18,14 @@ public class SellerDAO {
 	// 상품 등록
 	@Transactional
 	public void insertGoods(GoodsVO goods) throws Exception {
-		sqlSession.insert("goodsMapper.goods_insert", goods);
+		sqlSession.insert("sellerMapper.goods_insert", goods);
 	}
 
 	// 상품 목록 총 개수
 	@Transactional
 	public int getListCount() throws Exception{
 		int count = 0;
-		count = ((Integer)sqlSession.selectOne("goodsMapper.seller_goods_count")).intValue();
+		count = ((Integer)sqlSession.selectOne("sellerMapper.seller_goods_count")).intValue();
 		
 		return count;
 	}
@@ -33,32 +33,35 @@ public class SellerDAO {
 	// 판매자 상품 리스트
 	@Transactional
 	public List<GoodsVO> getSellerGoodsList(int pageIndex) throws Exception{
-		List<GoodsVO> list = sqlSession.selectList("goodsMapper.seller_goods_list", pageIndex);
+		List<GoodsVO> list = sqlSession.selectList("sellerMapper.seller_goods_list", pageIndex);
 		
 		return list;
 	}
 	
-	// 판매자 상품 디테일
+	// 판매자 상품 상세정보
 	@Transactional
 	public GoodsVO getGoodsContent(int gds_num) throws Exception{
-		return (GoodsVO) sqlSession.selectOne("goodsMapper.goods_detail", gds_num);
+		return (GoodsVO) sqlSession.selectOne("sellerMapper.goods_detail", gds_num);
 	}
 
+	// 상품 수정
 	public void updateGoods(GoodsVO goods) {
-		sqlSession.update("goodsMapper.goods_update", goods);
+		sqlSession.update("sellerMapper.goods_update", goods);
 	}
 
+	// 상품 삭제
 	public void deleteGoods(int gds_num) {
-		sqlSession.delete("goodsMapper.goods_delete", gds_num);
+		sqlSession.delete("sellerMapper.goods_delete", gds_num);
 	}
 
+	// 상품 정지
 	public void goodshide(int gds_num) {
-		sqlSession.update("goodsMapper.goods_update_viewn", gds_num);
+		sqlSession.update("sellerMapper.goods_update_viewn", gds_num);
 	}
 
+	// 상품 노출
 	public void goodsview(int gds_num) {
-		sqlSession.update("goodsMapper.goods_update_viewy", gds_num);
-		
+		sqlSession.update("sellerMapper.goods_update_viewy", gds_num);
 	}
 
 }

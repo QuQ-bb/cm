@@ -5,7 +5,9 @@ import java.util.List;
 
 public class GoodsVO {
 	private int gds_num;
-	private int cate_code;
+	private int lcate_code;
+	private int mcate_code;
+	private int scate_code;
 	private String gds_seller;
 	private String gds_name;
 	private int gds_price;
@@ -21,10 +23,9 @@ public class GoodsVO {
 	private String gds_ears;
 	private String gds_viewyn;
 	private String gds_delyn;
-	
+
 	// 옵션을 받기위한 VO
 	private List<String> optioncom;
-	
 
 	public List<String> getOptioncom() {
 		return optioncom;
@@ -42,12 +43,28 @@ public class GoodsVO {
 		this.gds_num = gds_num;
 	}
 
-	public int getCate_code() {
-		return cate_code;
+	public int getLcate_code() {
+		return lcate_code;
 	}
 
-	public void setCate_code(int cate_code) {
-		this.cate_code = cate_code;
+	public void setLcate_code(int lcate_code) {
+		this.lcate_code = lcate_code;
+	}
+
+	public int getMcate_code() {
+		return mcate_code;
+	}
+
+	public void setMcate_code(int mcate_code) {
+		this.mcate_code = mcate_code;
+	}
+
+	public int getScate_code() {
+		return scate_code;
+	}
+
+	public void setScate_code(int scate_code) {
+		this.scate_code = scate_code;
 	}
 
 	public String getGds_seller() {

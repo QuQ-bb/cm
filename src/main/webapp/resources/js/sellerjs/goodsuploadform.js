@@ -59,11 +59,17 @@ function goodsupload_check(){
 	// 스마트 에디터 유효성검사
 	var gds_detail = $("#gds_detail").val();
 	
-	if ($.trim($("#cate_code").val()) == "") {
-		alert("카테고리를 선택해 주세요");
-		$("#cate_code").val("").focus();
+	if ($.trim($("#lcate_code").val()) == "") {
+		alert("대분류를 선택해 주세요");
+		$("#lcate_code").val("").focus();
 		return false;
 	}
+	if ($.trim($("#mcate_code").val()) == "") {
+		alert("중분류를 선택해 주세요");
+		$("#mcate_code").val("").focus();
+		return false;
+	}
+
 	if ($.trim($("#gds_name").val()) == "") {
 		alert("상품명을 입력해 주세요");
 		$("#gds_name").val("").focus();

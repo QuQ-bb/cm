@@ -19,11 +19,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myshop.cm.model.CalculateVO;
 import com.myshop.cm.model.DeliveryTemplateVO;
 import com.myshop.cm.model.GoodsVO;
+import com.myshop.cm.model.OrderVO;
+import com.myshop.cm.service.CalculateService;
 import com.myshop.cm.service.DeliveryCategoryService;
 import com.myshop.cm.service.DeliveryTemplateService;
 import com.myshop.cm.service.GoodsService;
+import com.myshop.cm.service.OrderService;
 
 @Controller
 public class SellerController {
@@ -34,6 +38,10 @@ public class SellerController {
 	private DeliveryTemplateService deliveryTemplateService;
 	@Autowired
 	private DeliveryCategoryService deliveryCategoryService;
+	@Autowired
+	private CalculateService calculateService;
+	@Autowired
+	private OrderService orderservice;
 
 	// 상품 등록 폼으로 이동
 	@RequestMapping(value = "/goodsuploadform")
@@ -150,7 +158,7 @@ public class SellerController {
 		return sellergoodslistM;
 	}
 
-	// 판매자 상품 구매자페이지로 보기
+	// 판매자 상품 페이지로 보기
 	@RequestMapping(value = "/goodsdetail")
 	public ModelAndView goodsdetail(@RequestParam("gds_num") int gds_num, @RequestParam("page") String page,
 			HttpServletResponse response) throws Exception {
@@ -423,5 +431,54 @@ public class SellerController {
 		
 		return "redirect:/sellergoodslist?page="+page;
 	}
+	
+	// 판매자 정산내역 리스트
+	@RequestMapping(value = "/sellercalculatelist")
+	public ModelAndView sellercalculatelist(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		Map<String, Object> calculatelist = calculateService.calculatelist(request, response);
+		
+		ModelAndView calculatelistM = new ModelAndView("seller/sellercalculatelist");
+		
+		calculatelistM.addAllObjects(calculatelist);
+
+		return calculatelistM;
+	}
+	
+	// 판매자 정산내역 상세페이지
+	@RequestMapping(value = "/showcalculdetail")
+	public ModelAndView showcalculdetail(@RequestParam("clcln_num") int clcln_num, Model model) throws Exception {
+		
+		// calcul_num으로 정산정보 불러오기
+		CalculateVO calculate = calculateService.getCalculDetail(clcln_num);
+		
+		
+		// 정산정보의 ord_num으로 주문정보 불러오기
+		OrderVO order = orderservice.getOrderDetail(calculate.getOrd_num());
+		
+		
+		// 정산정보의 gds_num으로 상품정보 불러오기
+		GoodsVO goods = goodsService.goodsdetail(calculate.getGds_num());
+		
+		ModelAndView showcalculdetailM = new ModelAndView("seller/calculdetail");
+		
+		
+		showcalculdetailM.addObject("calculate", calculate);
+		showcalculdetailM.addObject("order", order);
+		showcalculdetailM.addObject("goods", goods);
+		
+		
+		return showcalculdetailM;
+	}
+	
+//	
+//	// 판매자 정산내역 상세페이지
+//	@RequestMapping(value = "/showcalculdetail")
+//	public ModelAndView showcalculdetail(CalculateVO calculate, HttpServletRequest request, 
+//			HttpServletResponse response) throws Exception {
+//		
+//		ModelAndView calculdetailM = new ModelAndView("seller/calculdetail");
+//		
+//		return calculdetailM;
+//	}
 }

@@ -31,7 +31,11 @@
 			<table border="1" width="1400">
 				<tr>
 					<th width="100">카테고리 선택</th>
-					<td><input type="text" id="cate_code" name="cate_code" value="${goods.cate_code}"></td>
+					<td>
+						<input type="text" id="lcate_code" name="lcate_code" value="${goods.lcate_code}">
+						<input type="text" id="mcate_code" name="mcate_code" value="${goods.mcate_code}">
+						<input type="text" id="scate_code" name="scate_code" value="${goods.scate_code}">
+					</td>
 				</tr>
 				<tr>
 					<th>상품 판매자</th>

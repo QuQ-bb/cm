@@ -92,7 +92,7 @@
 			</tr>
 			</c:forEach>
 		</table>
-				<div id="bbslist_paging">			
+		<div id="bbslist_paging">			
 			<c:if test="${page <=1 }">
 				[이전]&nbsp;
 			</c:if>

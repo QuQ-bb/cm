@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>상품 상세페이지</title>
-<<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <!-- SmartEditor 텍스트 편집기 -->
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/resources/smarteditor2/js/HuskyEZCreator.js"
@@ -17,10 +17,13 @@
 
 	<div id="goodsdetail">
 			<table border="1" width="1200">
-
 				<tr>
-					<th>카테고리 선택</th>
-					<td>${goods.cate_code}</td>
+					<th>카테고리</th>
+					<td>
+						${goods.lcate_code}
+						${goods.mcate_code}
+						${goods.scate_code}
+					</td>
 				</tr>
 				<tr>
 					<th>상품 판매자</th>

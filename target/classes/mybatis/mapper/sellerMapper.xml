@@ -3,15 +3,15 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="goodsMapper">
+<mapper namespace="sellerMapper">
 	<!-- 상품 등록 -->
 	<insert id="goods_insert" parameterType="goods">
 		insert into goods
-		(cate_code, gds_seller, gds_name, gds_thumbnail, gds_date,
+		(lcate_code, mcate_code, scate_code, gds_seller, gds_name, gds_thumbnail, gds_date,
 		gds_price, gds_detail, gds_option, deltem_num, gds_count,
 		gds_ears, gds_readcount, gds_sellcount, gds_viewyn, gds_delyn)
 		values
-		(#{cate_code}, #{gds_seller}, #{gds_name}, #{gds_thumbnail}, now(),
+		(#{lcate_code}, #{mcate_code}, #{scate_code}, #{gds_seller}, #{gds_name}, #{gds_thumbnail}, now(),
 		#{gds_price}, #{gds_detail}, #{gds_option}, #{deltem_num}, #{gds_count}, 
 		#{gds_ears}, 0, 0, 'Y', 'Y')
 	</insert>
@@ -39,7 +39,9 @@
 	<update id="goods_update" parameterType="goods">
 		UPDATE goods
 		SET
-		cate_code = #{cate_code},
+		lcate_code = #{lcate_code},
+		mcate_code = #{mcate_code},
+		scate_code = #{scate_code},
 		gds_name = #{gds_name},
 		gds_price = #{gds_price},
 		gds_detail = #{gds_detail},
@@ -71,5 +73,6 @@
 		gds_viewyn = 'y'
 		where gds_num = #{gds_num}
 	</update>
+	
 </mapper>
 	

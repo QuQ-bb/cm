@@ -6,17 +6,17 @@
 <mapper namespace="deliveryMapper">
 
 	<!-- 배송수단 카테고리 추가하기 -->
-	<select id="delivery_cate_list" resultType="DeliveryCategory">
+	<select id="delivery_cate_list" resultType="deliveryCategory">
 		select * from deliverycategory order by del_code*1
 	</select>
 	
 	<!-- 배송 템플릿 리스트 가져오기 -->
-	<select id="select_template_list" resultType="DeliveryTemplate">
+	<select id="select_template_list" resultType="deliveryTemplate">
 		select * from deliverytemplate order by deltem_num*1 desc
 	</select>
 	
 	<!-- 배송 템플릿 불러오기 -->
-	<select id="select_template" resultType="DeliveryTemplate">
+	<select id="select_template" resultType="deliveryTemplate">
 		select * from deliverytemplate where deltem_num=#{deltem_num}
 	</select>
 	
@@ -26,7 +26,7 @@
 	</select>
 	
 	<!-- 베송 템플릿 저장하기 -->
-	<insert id="insert_template" parameterType="DeliveryTemplate">
+	<insert id="insert_template" parameterType="deliveryTemplate">
 		insert into deliverytemplate
 		(deltem_num, deltem_name, sel_num, del_code, del_name, deltem_delfee, deltem_redelfee, 
 		deltem_exdelfee, deltem_freedel, deltem_repost, deltem_readd1, deltem_readd2)
@@ -35,7 +35,8 @@
 		#{deltem_exdelfee}, #{deltem_freedel}, #{deltem_repost}, #{deltem_readd1}, #{deltem_readd2})
 	</insert>
 	
-	<update id="update_template" parameterType="DeliveryTemplate">
+	<!-- 배송템플릿 수정하기 -->
+	<update id="update_template" parameterType="deliveryTemplate">
 		UPDATE deliverytemplate
 		SET
 		deltem_name = #{deltem_name},
@@ -53,6 +54,7 @@
 		deltem_num=#{deltem_num}
 	</update>
 	
+	<!-- 배송템플릿 삭제하기 -->
 	<delete id="delete_template" parameterType="int">
 		delete from deliverytemplate
         where
