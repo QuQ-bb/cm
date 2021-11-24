@@ -149,7 +149,7 @@ footer .inner_footer .company .list_sns {
 }
 
 
-#myBtn {
+#mytopBtn {
   display: none;
   position: fixed;
   bottom: 20px;
@@ -165,6 +165,6 @@ footer .inner_footer .company .list_sns {
   border-radius: 4px;
 }
 
-#myBtn:hover {
+#mytopBtn:hover {
   background-color: #007fff;
 }

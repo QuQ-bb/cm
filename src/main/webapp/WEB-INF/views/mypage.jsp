@@ -12,8 +12,8 @@ body {
   font-family: "Lato", sans-serif;
 }
 
-.sidenav {
-  width: 180px;
+.mypagesidenav {
+  width: 250px;
   position: fixed;
   z-index: 1;
   top: 300px;
@@ -24,7 +24,7 @@ body {
   text-align: center;
 }
 
-.sidenav a {
+.mypagesidenav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
@@ -32,30 +32,33 @@ body {
   display: block;
 }
 
-.sidenav a:hover {
+.mypagesidenav a:hover {
   color: #064579;
 }
 
 .main {
-  margin-left: 200px; /* Same width as the sidebar + left position in px */
-  margin-right: 200px; 
+  margin-left: 300px; /* Same width as the sidebar + left position in px */
+  margin-right: 300px; 
   font-size: 28px; /* Increased text to enable scrolling */
   padding: 0px 10px;
 }
 
 @media screen and (max-height: 450px) {
-  .sidenav {padding-top: 15px;}
-  .sidenav a {font-size: 18px;}
+  .mypagesidenav {padding-top: 15px;}
+  .mypagesidenav a {font-size: 18px;}
 }
 </style>
 </head>
 <body>
 <%@ include file="layout/header.jsp" %>    
-<div class="sidenav">
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#clients">Clients</a>
-  <a href="#contact">Contact</a>
+<div class="mypagesidenav">
+  <h2>마이페이지</h2>
+  <a href="#about">주문관리</a>
+  <a href="#services">배송지관리</a>
+  <a href="#clients">취소 교환 반품 내역</a>
+  <a href="#contact">내정보수정</a>
+  <a href="#contact">후기문의QNA</a>
+  <a href="#contact">판메자신청</a>
 </div>
 
 <div class="main">

@@ -80,11 +80,11 @@
 		</div>
 	</footer>
 
-<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+<button onclick="topFunction()" id="mytopBtn" title="Go to top">Top</button>
 
 <script>
 //Get the button
-var mybutton = document.getElementById("myBtn");
+var mybutton = document.getElementById("mytopBtn");
 
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
