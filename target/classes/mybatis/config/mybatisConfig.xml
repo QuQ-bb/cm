@@ -7,7 +7,9 @@
  	<typeAliases>
  		<typeAlias type="java.lang.Integer" alias="Integer"/>
  		<typeAlias type="java.lang.String" alias="String"/>
- 		<typeAlias type="com.myshop.cm.model.CategoryVO" alias="category"/>
+ 		<typeAlias type="com.myshop.cm.model.LcateVO" alias="lcate"/>
+ 		<typeAlias type="com.myshop.cm.model.McateVO" alias="mcate"/>
+ 		<typeAlias type="com.myshop.cm.model.ScateVO" alias="scate"/>
  		<typeAlias type="com.myshop.cm.model.FaqVO" alias="faq"/>
  		<typeAlias type="com.myshop.cm.model.NoticeVO" alias="notice"/>
  	</typeAliases>

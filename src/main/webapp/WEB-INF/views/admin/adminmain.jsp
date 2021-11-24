@@ -27,8 +27,10 @@
        <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">상품 카테고리<span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="/catelist">카테고리 조회</a></li>
-          <li><a href="/addcategory">카테고리 등록</a></li>
+          <li><a href="/lcatelist">대분류 조회</a></li>
+          <li><a href="/mcatelist">중분류 조회</a></li>
+          <li><a href="/scatelist">소분류 조회</a></li>
+          
         </ul>
       </li>
     </ul>

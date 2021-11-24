@@ -8,23 +8,57 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.myshop.cm.model.LcateVO;
+import com.myshop.cm.model.McateVO;
+import com.myshop.cm.model.ScateVO;
 import com.myshop.cm.service.CategoryService;
 @Controller
 public class CategoryController {
 	@Autowired
 	CategoryService categoryservice;
 	// 카테고리 리스트(대)
-	@RequestMapping(value = "/catelist")
+	@RequestMapping(value = "/lcatelist")
 	private String lcatelist(LcateVO lcateVo , Model model) throws Exception{
-		System.out.println("컨트롤러 진입");
+		System.out.println("대컨트롤러 진입");
 		
-		List<LcateVO> lcatelist = categoryservice.lcatelist(lcateVo);
-							//key, 	   value
-		model.addAttribute("lcatelist",lcatelist);
-		System.out.println("컨트롤러진입2");
+		List<LcateVO> lcatelist = categoryservice.lcatelist(lcateVo);		
 		
-		return "admin/catelist";
+		System.out.println("대컨트롤러진입2");
+							 //key, 	   value
+		model.addAttribute("lcatelist" , lcatelist);
+		
+		System.out.println("대컨트롤러진입3");
+		
+		return "admin/lcatelist";
 	}
+	// 카테고리 리스트(중)
+	@RequestMapping(value = "/mcatelist")
+	private String mcatelist(McateVO mcateVO , Model model) throws Exception{
+		System.out.println("중컨트롤러 진입");
+		
+		List<McateVO> mcatelist = categoryservice.mcatelist(mcateVO);
+		
+		System.out.println("중컨트롤러진입2");
+		model.addAttribute("mcatelist" , mcatelist); 
+		
+		System.out.println("중컨트롤러진입3");
+		
+		return "admin/mcatelist";
+	}
+	// 카테고리 리스트(소)
+	@RequestMapping(value = "/scatelist")
+	private String scatelist(ScateVO scateVO , Model model) throws Exception{
+		System.out.println("소컨트롤러 진입");
+		
+		List<ScateVO> scatelist = categoryservice.scatelist(scateVO);
+		
+		System.out.println("소컨트롤러진입2");
+		model.addAttribute("scatelist" , scatelist);
+		
+		System.out.println("소컨트롤러진입3");
+		
+		return "admin/scatelist";
+	}
+	
 	// 카테고리 등록폼
 	@RequestMapping(value = "/addcategory")
 	private String addcategory(LcateVO lcateVO , Model model) throws Exception{
