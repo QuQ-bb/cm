@@ -9,7 +9,7 @@
 	<!-- <select	 id="login_check" parameterType="String" resultType="member">
 	select * from member where mem_id = #{mem_id}
 	</select> -->
-	<select id="idCheck" resultType="integer">
+	<select id="idCheck" parameterType="member" resultType="int" >
 		select count(*) from member where mem_id = #{mem_id}
 	</select>
 	
@@ -35,22 +35,40 @@
 	 #{deladd_add1}, #{deladd_add2}, #{deladd_mainadd})
 	</insert>
 	
-	<!-- id값으로 mem_num불러오기 -->
+	<!-- id값으로 mem_num불러오기 (member/delivery mem_num 연결) -->
 	<select id="selectNum" parameterType="member" resultType="int">
 	select mem_num from member where mem_id=#{mem_id}
 	</select>
 	
-	<!-- member/delivery mem_num 연결 -->
-	
-
-	
 	<!-- 로그인 저장 인증 -->
 	<select id ="login_check" parameterType="String" resultType="member">
-	select * from member where mem_id=#{mem_id} and mem_grade=1 and mem_delyn='y'
+	select * from member where mem_id=#{mem_id} and mem_grade=1 and mem_delyn='Y'
+	</select>
+	
+	<!-- 아이디 찾기 -->
+	<select id="findId" parameterType="String" resultType="member">
+	select * from member where mem_name=#{mem_name} and mem_delyn='Y'
+	</select>
+	
+	<!-- 비밀번호 찾기 -->
+	<select id="findPass" parameterType="member" resultType="member">
+	select * from member where mem_id=#{mem_id} and mem_email= #{mem_email} and mem_delyn='Y'
 	</select>
 	
 	<!-- 회원 수정 -->
+	<update id="update" parameterType="member">
+	update member set mem_pass=#{mem_pass}, mem_name=#{mem_name}, mem_email=#{mem_email},
+	mem_phone=#{mem_phone} where mem_id=#{mem_id}
+	</update>
 	
 	<!-- 회원 삭제 -->
+	<update	id="delete" parameterType="member">
+	update member set mem_delyn='N' where mem_id=#{mem_id}
+	</update>
+		
+	<!-- 로그인한 회원의 정보 구해오기 -->
+	<select id="select_memeber_info" parameterType="String" resultType="member">
+	select * from member where mem_id=#{mem_id}
+	</select>
 	
 	</mapper>

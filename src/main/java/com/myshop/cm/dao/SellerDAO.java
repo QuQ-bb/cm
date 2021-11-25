@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.SellerVO;
 
 @Repository
@@ -19,5 +20,9 @@ public class SellerDAO {
 		sqlSession.insert("register", seller);
 		System.out.println("dao");
 	}
+	public MemberVO getMember(MemberVO member) {
+		return sqlSession.selectOne("sellerMapper.selectMemNum", member);
+	}
+
 
 }

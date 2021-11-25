@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.swing.plaf.multi.MultiFileChooserUI;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.SellerVO;
+import com.myshop.cm.service.MemberService;
 import com.myshop.cm.service.SellerService;
 
 @Controller
@@ -36,8 +38,9 @@ public class SellerController {
 	//판매자 전환 신청 저장
 	@RequestMapping(value="/sellerchange_ok", method=RequestMethod.POST)
 	public String sellerchange_ok(@RequestParam(value = "seling_filename1") MultipartFile mf, 
-			HttpServletRequest request, SellerVO seller, Model model) throws Exception{
+			HttpServletRequest request,HttpSession session, SellerVO seller,MemberVO member, Model model) throws Exception{
 		
+
 		if (mf != null) {
 	         //첨부파일 저장
 	         UUID uuid = UUID.randomUUID();
@@ -79,8 +82,21 @@ public class SellerController {
 	         System.out.println(path);
 	      }
 		
+		// 현제 세션에 있는(로그인 한 member의 정보) mem_num값 가져오기
+		MemberVO loginmember = (MemberVO)session.getAttribute("member");
+		int mem_num = loginmember.getMem_num();
+		
+		seller.setMem_num(mem_num);
+		
 		sellerService.registerSeller(seller);
 		System.out.println("컨트롤러");
+		
+		//mem_num불러오기
+		MemberVO vo = sellerService.getMember(member);
+		session.setAttribute("vo", vo);
+	
+		
+		
 		
 		return "redirect:sellerChange_end"; 
 	}

@@ -1,11 +1,14 @@
 package com.myshop.cm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myshop.cm.dao.MemberDAO;
 import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.MemberVO;
+import com.myshop.cm.model.SellerVO;
 
 @Service
 public class MemberService {
@@ -22,9 +25,6 @@ public class MemberService {
 		System.out.println("id유효성 서비스");
 		return memberDao.memberIdCheck(mem_id);
 	}
-	
-	
-	
 	//회원가입 member저장
 	public void insertMember(MemberVO member) throws Exception {
 		 memberDao.insertMember(member);
@@ -42,11 +42,30 @@ public class MemberService {
 		int mem = memberDao.selectMemNum(member);
 		return mem;
 	}
-
-	
+	//아이디 찾기 
+	public MemberVO idFind(String mem_name) throws Exception{
+		return memberDao.idFind(mem_name);
+	}
+	//비밀번호 찾기
+	public MemberVO passFind(MemberVO member) throws Exception {
+		System.out.println("비밀번호 찾기서비스");
+		return memberDao.passFind(member);
+	}
 	//회원 수정
-	
+	public void memberUpdate(MemberVO member) {
+		memberDao.memberUpdate(member);
+		System.out.println("수정폼 서비스");
+	}
 	
 	//회원 삭제
+	public void deleteMember(MemberVO delmv) throws Exception{
+		memberDao.deleteMember(delmv);
+		System.out.println("탈퇴 서비스");
+	}
+	public MemberVO getMemberInfo(String mem_id) throws Exception{
+		MemberVO member = memberDao.getMemberInfo(mem_id);
+		return member;
+	}
+
 	
 }

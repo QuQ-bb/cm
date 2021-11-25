@@ -16,4 +16,10 @@
 		#{sel_post}, #{sel_add}, #{sel_tel}, #{sel_bank},
 		#{sel_accholder},#{sel_acc}, 'Y', #{seling_filename})
 	</insert>
+	
+	<!-- mem_num 가져오기 -->
+	<select id="selectMemNum" parameterType="seller" resultType="member">
+	select mem_num from member where mem_id=#{mem_id}
+	</select>
+	
 </mapper>

@@ -13,21 +13,6 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-<!-- 다음 우편주소api -->
-<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script>
-	//우편번호, 주소 Daum API
-	function openDaumPostcode() {
-		new daum.Postcode({
-			oncomplete : function(data) {
-				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
-				// 우편번호와 주소 정보를 해당 필드에 넣고, 커서를 상세주소 필드로 이동한다.
-				document.getElementById('deladd_post').value = data.zonecode;
-				document.getElementById('deladd_add1').value = data.address;
-			}
-		}).open();
-	}
-</script>
 <script type="text/javascript">
 	
 	
@@ -92,8 +77,6 @@
 			} 
 		}
 	},
-			error:function(e){
-		  		alert("data error"+e);
 		  }); //ajax///
 		}//else if
 	
@@ -164,7 +147,7 @@
 			   }
 			}
 		if(validAll == true){ // 유효성 모두 통과
-			alert('Cmarket 가족이 되어주셔 감사합니다.');
+			alert('정보수정이 완료되었습니다.');
 		} else{
 			alert('정보를 다시 확인하세요.')
 			}
@@ -213,7 +196,7 @@
 		if (mailJ.test($(this).val())) {
 			$("#email_check").text('');
 		} else {
-			$('#email_check').text('이메일 양식을 확인해주세요.');
+			$('#email_check').text('이메일 양식을 확인해주세요.  (Ex.cmarket@naver.com)');
 			$('#email_check').css('color', 'red');
 		}
 	});
@@ -227,14 +210,7 @@
 		}
 	});
 });
-	/* // 동의 모두선택 / 해제
-	const agreeChkAll = document.querySelector('input[name=agree_all]');
-	    agreeChkAll.addEventListener('change', (e) => {
-	    let agreeChk = document.querySelectorAll('input[name=agree]');
-	    for(let i = 0; i < agreeChk.length; i++){
-	      agreeChk[i].checked = e.target.checked;
-	    }
-	}); */
+
 	</script>
 </head>
 
@@ -244,16 +220,17 @@
 		<div class="page-header">
 			<div class="col-md-6 col-md-offset-3">
 				<div align=center>
-					<h2>회원가입</h2>
+					<h2>회원정보 수정</h2>
 				</div>
 			</div>
 		</div>
 		<div class="col-sm-6 col-md-offset-3">
-			<form action="/join_ok" method="post" role="form" id="usercheck"
+			<form action="/update_ok" method="post" role="form" id="usercheck"
 				name="member">
 				<label for="mem_id">아이디</label>
 				<div class="form-group">
-					<input type="text" class="form-control" id="mem_id" name="mem_id" placeholder="ID">
+					<input type="text" class="form-control" id="mem_id" name="mem_id" 
+						   value="${upmv.mem_id}" readonly="readonly">
 				</div>
 				<div class="form-group">
 					<label for="mem_pass">비밀번호</label> <input type="password"
@@ -270,23 +247,23 @@
 				<div class="form-group">
 					<label for="mem_name">이름</label>
 					<input type="text" class="form-control" id="mem_name" name="mem_name"
-						placeholder="Name">
+						placeholder="Name" value="${upmv.mem_name}">
 					<div class="check_font" id="name_check"></div>
 				</div>
 				<div class="form-group">
-					<label for="mem_email">이메일 주소 (Ex.cmarket@naver.com)</label> <input
+					<label for="mem_email">이메일 주소</label> <input
 						type="email" class="form-control" id="mem_email" name="mem_email"
-						placeholder="E-mail">
+						placeholder="E-mail" value="${upmv.mem_email}">
 					<div class="check_font" id="email_check"></div>
 				</div>
 				<div class="form-group">
 					<label for="mem_phone">휴대폰 번호('-'없이 번호만 입력해주세요)</label> <input
 						type="tel" class="form-control" id="mem_phone" name="mem_phone"
-						placeholder="Phone Number">
+						placeholder="Phone Number" value="${upmv.mem_phone}">
 					<div class="check_font" id="phone_check"></div>
 				</div>
 				<div class="form-group text-center">
-					<button type="submit" class="btn btn-primary">회원정보수정</button>
+					<button type="submit" class="btn btn-primary">정보수정</button>
 				</div>
 			</form>
 		</div>

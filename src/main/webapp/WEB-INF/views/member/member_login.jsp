@@ -43,7 +43,7 @@
     </div>
     	<div class="form-group">
       	<input type="checkbox">&nbsp;ID기억하기
-      	<a href="" > 아이디 찾기</a> | <a href="">비밀번호 찾기</a>
+      	<a href="" > 아이디 찾기</a> | <a href="member_passFind">비밀번호 찾기</a>
     	</div>
       <div class="form-group">
     <input type="submit" class="btn btn-default form-control" value="로그인">

@@ -62,7 +62,8 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scri
 
 		
 	//아이디 중복확인
-	$("#mem_id").blur(function(e) {
+
+	$("#mem_id").blur(function() {
 		var mem_id=$('#mem_id').val();
 
 		if($('#mem_id').val()==''){ 
@@ -79,44 +80,44 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scri
 		 $.ajax({
 			async : true,
 			type : 'POST',
-			data : mem_id,//mem_id라는 이름으로 mem_id라는 데이터를 @WebServlet("/idsearch.do")에 보내겠다
-			url : '${pageContext.request.contextPath}/idCheck?mem_id='+mem_id,
+			data : {
+				"mem_id" : mem_id,//mem_id라는 이름으로 mem_id라는 데이터를 @WebServlet("/idsearch.do")에 보내겠다
+			},
+			url : '/idCheck',
 /* 			dateType: 'json',
 			contentType: "application/json; charset=UTF-8", */
 			success : function(data){ 
-			
-		if(result == 1 ){ 
-		  $('#id_check').text('중복된 아이디 입니다.');
-		  	$('#id_check').css('color', 'red');
-		  	$("#usercheck").attr("disabled", true);
-		}else{
-			if(idJ.test(mem_id)){
-			$('#id_check').text('사용가능한 아이디 입니다.');
-			$('#id_check').css('color', 'blue');
-			$("#usercheck").attr("disabled", false);
-		 }
-		 else if(mem_id==''){
-			$('#id_check').text('아이디를 입력해주세요.');
-				$('#id_check').css('color', 'red');
-				$("#usercheck").attr("disabled", true);
-			}
-		 else{
-			$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
-			$('#id_check').css('color', 'red');
-			$("#usercheck").attr("disabled", true);
-			} 
-		}
-	},
+				if(data == 1 ){ 
+				  $('#id_check').text('중복된 아이디 입니다.');
+				  	$('#id_check').css('color', 'red');
+				  	$("#usercheck").attr("disabled", true);
+				}else{
+					if(idJ.test(mem_id)){
+					$('#id_check').text('사용가능한 아이디 입니다.');
+					$('#id_check').css('color', 'blue');
+					$("#usercheck").attr("disabled", false);
+				 }
+				 else if(mem_id==''){
+					$('#id_check').text('아이디를 입력해주세요.');
+						$('#id_check').css('color', 'red');
+						$("#usercheck").attr("disabled", true);
+					}
+				 else{
+					$('#id_check').text("아이디는 소문자와 숫자 4~12자리만 가능합니다.");
+					$('#id_check').css('color', 'red');
+					$("#usercheck").attr("disabled", true);
+					} 
+				}
+			},
 			error:function(e){
 				console.log("실패");
 			}
 	
 		  }); //ajax///
 		}//else if
-	
-});//blur
-	
-	var inval_Arr = new Array(6).fill(false)
+	});//blur
+
+	var inval_Arr = new Array(7).fill(false)
 		//id 정규식
 	$('form').on('submit',function(){
 		if (idJ.test($('#mem_id').val())) {
@@ -171,7 +172,18 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scri
 			alert('[우편번호 찾기버튼]을 눌러 주소를 확인하세요.');
 			$("#deladd_add1").focus();
 			return false;
-		}else inval_Arr[5] = true;
+		}else {
+			inval_Arr[5] = true;
+		}
+		//이용약관 동의 모두체크
+		if (!$("input:checked[id='agreeAll']").is(":checked")){
+			inval_Arr[6] = false;
+			alert("모든 약관에 동의 해주세요.");
+			$("#agreeAll").focus();
+			return false;
+		}else{
+			inval_Arr[6] = true;
+		}
 		
 		//전체 유효성 검사
 		var validAll = true;
@@ -280,12 +292,7 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scri
 				name="member">
 				<label for="mem_id">아이디</label>
 				<div class="form-group">
-					<input type="text" class="form-control"
-						style="width: 83%; display: inline;" id="mem_id" name="mem_id"
-						placeholder="ID">
-					<button type="button" class="btn btn-default" id="idcheck">
-						<i class="fa fa-search"></i> 중복체크
-					</button>
+					<input type="text" class="form-control" id="mem_id" name="mem_id" placeholder="ID">
 					<div class="check_font" id="id_check"></div>
 				</div>
 				<div class="form-group">
