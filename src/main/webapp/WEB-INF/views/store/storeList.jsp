@@ -87,16 +87,17 @@
 							<div class="list_goods">
 								<div class="inner_listgoods">
 									<ul class="list">
+									<c:forEach items="${lists}" var="list">
 										<li>
 											<div class="item">
 												<div class="thumb">
-													<a class="img" style="background: url('../resources/images/storeList/1637508189827l0.jpg') center center no-repeat;"></a>
+													<a class="img" style="background: url('../resources/images/goodsimage/${list.gds_thumbnail}') center center no-repeat;"></a>
 													<div class="exp_area">
 														<div class="util_bx">
 															<a class="btn_category_product_cart">
 																<span class="blind">장바구니</span>
 															</a>
-															<a class="btn_category_product_buy" id="btn_buy${list.store_num}">
+															<a class="btn_category_product_buy" id="btn_buy${list.gds_num}">
 																<span class="blind">바로구매</span>
 															</a>
 															<a class="btn_category_product_heart">
@@ -106,15 +107,18 @@
 													</div>
 												</div>
 												<a class="info">
-													<span class="name">상추&깻잎 간편쌈 120g</span>
+													<span class="name">${list.gds_name}</span>
 													<span class="cost">
-														<span class="price">5490</span>
+														<span class="price">
+															<fmt:formatNumber value="${list.gds_price}" pattern="###,###,###" />원
+														</span>
 													</span>
-													<span class="desc">상추와 깻잎을 한번에!</span>
+													<!-- <span class="desc">상추와 깻잎을 한번에!</span> -->
 													<span class="tag"></span>
 												</a>	
 											</div>
 										</li>
+									</c:forEach>	
 									</ul>
 								</div>
 							</div>

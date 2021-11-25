@@ -7,13 +7,6 @@
 	<title>Home</title>
 </head>
 <body>
-<h1>
-	Hello world!  
-	첫번째 연동 테스트(성훈)
-	김진
-	집가자
-</h1>
-
-<P>  The time on the server is ${serverTime}. </P>
+<input type="text" name="cate_kind" value="l" onclick="location.href='store/storeList?cate_kind=l&cate_code=1000'">
 </body>
 </html>

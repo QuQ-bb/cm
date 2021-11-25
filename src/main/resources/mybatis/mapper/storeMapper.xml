@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="storeMapper">
+	<sql id="cateKind">
+		<choose>
+			<when test='cate_kind == "l"'>
+				where lcate_code=#{cate_code} and
+			</when>
+			<when test='cate_kind == "m"'>
+				where mcate_code=#{cate_code} and
+			</when>
+			<when test='cate_kind == "s"'>
+				where scate_code=#{cate_code} and
+			</when>
+			<otherwise>
+				where
+			</otherwise>
+		</choose>
+	</sql>
+
+	<select id="storeList" resultType="GoodsVO" parameterType="Pager">
+		select gds_num, lcate_code, mcate_code, scate_code, gds_name, gds_price, gds_thumbnail, gds_viewyn from goods
+		<include refid="cateKind"></include> gds_viewyn='y'
+		order by gds_num desc
+	</select>
+</mapper>
