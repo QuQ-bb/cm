@@ -11,368 +11,141 @@
 <link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/resources/css/store/storeList.css" rel="stylesheet"></head>
 <body>
-<!-- header -->
-<header>
-	<c:import url="../layout/header.jsp" />
-</header>
-<!-- section -->
-<section>
-<form id="frm" method="post" action="../pay/marketPay">
-	<div id="container">
-		<div id="content">
-			<!-- 상단이미지 -->
-			<div class="store_top"></div>
-			<div class="product_wrap">
-				<div class="product_inner">
-					<!-- 메뉴바 -->
-					<div class="product_index">
-						<div class="bg_fixedIndex">
-							<ul class="tab_mallmenu">
-								<li class="current" data-menuid="cgv_tab1" id="1">
-									<span>카테고리1</span>
-								</li>
-								<li data-menuid="cgv_tab2" id="2">
-									<span>카테고리2</span>
-								</li>
-								<li data-menuid="cgv_tab3" id="3">
-									<span>카테고리3</span>
-								</li>
-								<li data-menuid="cgv_tab4" id="4">
-									<span>카테고리4</span>
-								</li>
-								<li data-menuid="cgv_tab5" id="5">
-									<span>카테고리5</span>
-								</li>
-								<li data-menuid="cgv_tab6" id="6">
-									<span>카테고리6</span>
-								</li>
-							</ul>
+	<div id="wrap">
+		<div id="container">
+			<c:import url="../layout/header.jsp" />
+			<div id="main">
+				<div id="content">
+					<div class="page_article">
+						<!-- 카테고리 목록 -->
+						<div id="lnbMenu" class="lnb_menu">
+							<div class="inner_lnb">
+								<h3 class="tit">채소</h3>
+								<ul class="list on">
+									<li data-start="124" data-end="188">
+										<a class="on">전체보기</a>
+									</li>
+									<li data-start="316" data-end="368">
+										<a class>친환경</a>
+									</li>
+									<li data-start="435" data-end="548">
+										<a class>고구마·감자·당근</a>
+									</li>
+									<li data-start="603" data-end="728">
+										<a class>시금치·쌈채소·나물</a>
+									</li>
+									<li data-start="748" data-end="908">
+										<a class>브로콜리·파프리카·양배추</a>
+									</li>
+								</ul>
+							</div>
 						</div>
-					</div>
-<!-- ------------------------------------------------------------------ -->
-					<div class="bg_white"></div>
-					<!-- 품목 -->
-					<div class="tab_content">
-						<!-- 패키지 -->
-						<div id="cgv_tab1" class="menuTab current">
-							<ul class="product_molist">
-								<%-- <c:import url="../common/store_result.jsp"></c:import> --%>
-							</ul>
-						</div>
-<!-- --------------------------------------------- -->
-						<div id="cgv_tab2" class="menuTab">
-							<ul class="product_molist product_molist2"></ul>
-						</div>
-<!-- --------------------------------------------- -->
-						<div id="cgv_tab3" class="menuTab">
-							<ul class="product_molist product_molist3"></ul>
-						</div>
-<!-- --------------------------------------------- -->
-						<div id="cgv_tab4" class="menuTab">
-							<ul class="product_molist product_molist4"></ul>
-						</div>
-<!-- --------------------------------------------- -->
-						<div id="cgv_tab5" class="menuTab">
-							<ul class="product_molist product_molist5"></ul>
-						</div>
-<!-- --------------------------------------------- -->
-						<div id="cgv_tab6" class="menuTab">
-							<ul class="product_molist product_molist6"></ul>
-						</div>
-<!-- --------------------------------------------- -->
-					</div>
-					
-					<button id="myCart">Cart</button>
-					<script type="text/javascript">
-					 	$('#myCart').click(function() {
-							$.ajax({
-								url: "cartLoginCheck",
-								type: "POST",
-								//async: false,
-								success: function(data) {
-									//alert(data);
-									if(data == 0){
-										var confirm_val = confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?");
-										if(confirm_val){
-											location.href = "../member/memberLogin";
-											//이동후에 로그인하면 다시 원래 페이지로 돌아오는 방법이 없을까?
-										}
-									}else {
-										location.href = "./cartList";
-									}
-								}
-							});
-						});
-					</script>
-					
-					<button id="goTop">Top</button>
-				<script type="text/javascript">
-					$('#goTop').click(function() {
-						$('html, body').animate({scrollTop : 0}, 400);
-						return false;
-					});
-				</script>
-					
-				</div>
-			</div>
-		</div>
-	</div>
-	
-<!-- modal -->
-	<div class="confirmLayer">
-		<div class="confirm_wrap">
-			<div class="header">
-				<h3>장바구니 담기</h3>
-				<div class="close">
-					<img alt="닫기" src="../resources/images/store/close-line_white.png">
-				</div>
-			</div>
-			<div class="content">
-				<p>장바구니에 상품이 정상적으로 담겼습니다.</p>
-			</div>
-			<div class="footer">
-				<a href="cartList" class="btn_cartList">장바구니 이동</a>
-				<button class="btn_remove">쇼핑 계속하기</button>
-			</div>
-		</div>
-	</div>
-</form>	
-</section>
-<!-- footer -->
-<footer>
-
-</footer>
-
-<script type="text/javascript">
-////스크롤 이벤트
-	$(window).scroll(function() {
-		if($(window).scrollTop() > 730){
-			$('.product_index').addClass("sticky");
-		}else {
-			$('.product_index').removeClass("sticky");
-		}
-		if($(window).scrollTop() > 50){
-			$('#myCart').fadeIn();
-			$('#goTop').fadeIn();
-		}else {
-			$('#myCart').fadeOut();
-			$('#goTop').fadeOut();
-		}
-	});
-////모달 창 띄우기(장바구니)
-	function modal() {
-		$('.confirmLayer').css("display", "block");
-		
-		$('.close').click(function() {
-			$('.confirmLayer').css("display", "none");
-		});
-		
-		$('.btn_remove').click(function() {
-			$('.confirmLayer').css("display", "none");
-		});
-		
-		$(document).click(function(event) {
-			$('.confirmLayer').css("display", "none");
-		});
-	}
-/////* 클릭하면 메뉴 탭 및 내용 전환 */////////////
-	$('ul.tab_mallmenu li').click(function() {
-		var activeTab = $(this).attr('data-menuid');
-		
-		$('ul.tab_mallmenu li').removeClass('current');
-		$('.menuTab').removeClass('current');
-		$(this).addClass('current');
-		$('#'+activeTab).addClass('current');
-		
-		/* 클릭하면 해당 메뉴의 내용 불러오기 */
-		var store_package = $('ul.tab_mallmenu li.current').attr('id');
-		//alert(store_package);
-		var tempScrollTop = $(window).scrollTop();
-		
-		$.ajax({
-			type: "GET",
-			url: "storeList2",
-			async: false,
-			data: {
-				store_package:store_package
-			},
-			success: function(data) {
-				//console.log(data);
-				$(window).scrollTop(tempScrollTop);
-				//alert('.product_molist'+activeTab);
-				//$('.product_molist'+store_package).empty();
-				$('.product_molist'+store_package).html(data);
-				
-				
-			//////장바구니 버튼 클릭했을 때/////////////////
-				$('.btn_category_product_cart').click(function() {
-					var store_num = $(this).parent().find("input").val();
-					//alert(store_num);
-					var cart_amount = 1;
-					
-					$.ajax({
-						url: "cartSelect",
-						type: "POST",
-						//async: false,
-						data: { store_num : store_num },
-						success: function(data) {
-							//alert(data.result);
-							//동일 상품 존재 O - Update
-							if(data.result == 1){
-								//alert(data.cart_num);
-								
-								var confirm_val = confirm("장바구니에 동일한 상품이 존재합니다.\n수량을 변경하시겠습니까?");
-								
-								if(confirm_val){
-									var cart_num = data.cart_num;
-									cart_amount = cart_amount + data.cart_amount;
-									//alert(cart_amount);
-									
-									$.ajax({
-										url: "cartUpdate",
-										type: "POST",
-										//async: false,
-										data: {
-											cart_amount: cart_amount,
-											cart_num: cart_num
-										},
-										success: function(result) {
-											//alert(result);
-											if(result == 1){
-												modal();
-											}else {
-												alert("수량 변경 실패");
-											}
-										},
-										error: function() {
-											alert("에러");
-										}
-									});
-								}
-							//동일 상품 존재 X - Insert
-							}else if(data.result == 2){
-								$.ajax({
-									url: "cartInsert",
-									type: "POST",
-									//async: false,
-									data: {
-										store_num: store_num,
-										cart_amount: cart_amount
-									},
-									success: function(result2) {
-										if(result2 == 1){
-											modal();
-										}else {
-											alert("카트 등록 실패");
-										}	
-									},
-									error: function() {
-										alert("에러");
-									}
-								});
-							//로그인 X
-							}else{
-								var confirm_val = confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?");
-								if(confirm_val){
-									location.href = "../member/memberLogin";
-									//이동후에 로그인하면 다시 원래 페이지로 돌아오는 방법이 없을까?
-								}
-							}
-						},
-						error: function() {
-							alert("에러");
-						}
-					});
-				});
-			}
-		});
-		/****************************************************************/
-	});
-//////장바구니 버튼 클릭했을 때/////////////////
-	$('.btn_category_product_cart').click(function() {
-		var store_num = $(this).parent().find('input[class="input_num"]').val();
-		//alert(store_num);
-		var cart_amount = 1;
-		
-		$.ajax({
-			url: "cartSelect",
-			type: "POST",
-			//async: false,
-			data: { store_num : store_num },
-			success: function(data) {
-				//alert(data.result);
-				//동일 상품 존재 O - Update
-				if(data.result == 1){
-					//alert(data.cart_num);
-					
-					var confirm_val = confirm("장바구니에 동일한 상품이 존재합니다.\n수량을 변경하시겠습니까?");
-					
-					if(confirm_val){
-						var cart_num = data.cart_num;
-						cart_amount = cart_amount + data.cart_amount;
-						//alert(cart_amount);
 						
-						$.ajax({
-							url: "cartUpdate",
-							type: "POST",
-							//async: false,
-							data: {
-								cart_amount: cart_amount,
-								cart_num: cart_num
-							},
-							success: function(result) {
-								//alert(result);
-								if(result == 1){
-									modal();
-								}else {
-									alert("수량 변경 실패");
-								}
-							},
-							error: function() {
-								alert("에러");
-							}
-						});
-					}
-				//동일 상품 존재 X - Insert
-				}else if(data.result == 2){
-					$.ajax({
-						url: "cartInsert",
-						type: "POST",
-						//async: false,
-						data: {
-							store_num: store_num,
-							cart_amount: cart_amount
-						},
-						success: function(result2) {
-							if(result2 == 1){
-								modal();
-							}else {
-								alert("카트 등록 실패");
-							}	
-						},
-						error: function() {
-							alert("에러");
-						}
-					});
-				//로그인 X
-				}else{
-					var confirm_val = confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?");
-					if(confirm_val){
-						location.href = "../member/memberLogin";
-						//이동후에 로그인하면 다시 원래 페이지로 돌아오는 방법이 없을까?
-					}
-				}
-			},
-			error: function() {
-				alert("에러");
-			}
-		});
-	});
-/////////////////////////////
-//바로 구매 클릭했을 때
-$('.btn_category_product_buy').click(function name() {
-	$('#frm').submit();
-});
-</script>
+						<!-- 상품 리스트 -->
+						<div id="goodsList" class="page_section section_goodslist">
+							<div class="list_ability">
+								<div class="sort_menu">
+									<div>
+										<p class="count">
+											<span class="inner_count"> 총 467개 </span>
+										</p>
+										<div class="select_type">
+											<a class="name_select">추천순</a>
+											<ul class="list">
+												<li class>
+													<a class="on">추천순</a>
+													<div class="recommend">
+														<div id="layerRecommend" class="layer_recommend">
+															<p class="desc">
+																"검색어 적합성과 소비자 인기도(판매량, 판매금액,"
+																<br>
+																" 조회수 등)를 종합적으로 고려한 순서입니다."
+															</p>
+														</div>
+													</div>
+												</li>
+												<li class>
+													<a class>신상품순</a>
+												</li>
+												<li class>
+													<a class>판매량순</a>
+												</li>
+												<li class>
+													<a class>혜택순</a>
+												</li>
+												<li class>
+													<a class>낮은 가격순</a>
+												</li>
+												<li class>
+													<a class>높은 가격순</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="list_goods">
+								<div class="inner_listgoods">
+									<ul class="list">
+										<li>
+											<div class="item">
+												<div class="thumb">
+													<a class="img" style="background: url('../resources/images/storeList/1637508189827l0.jpg') center center no-repeat;"></a>
+													<div class="exp_area">
+														<div class="util_bx">
+															<a class="btn_category_product_cart">
+																<span class="blind">장바구니</span>
+															</a>
+															<a class="btn_category_product_buy" id="btn_buy${list.store_num}">
+																<span class="blind">바로구매</span>
+															</a>
+															<a class="btn_category_product_heart">
+																<span class="blind">찜하기</span>
+															</a>
+														</div>	
+													</div>
+												</div>
+												<a class="info">
+													<span class="name">상추&깻잎 간편쌈 120g</span>
+													<span class="cost">
+														<span class="price">5490</span>
+													</span>
+													<span class="desc">상추와 깻잎을 한번에!</span>
+													<span class="tag"></span>
+												</a>	
+											</div>
+										</li>
+									</ul>
+								</div>
+							</div>
+							<div class="layout-pagination">
+								<div class="pagediv">
+									<a href="" class="layout-pagination-button layout-pagination-first-page">맨 처음 페이지로 가기</a>
+									<a href="" class="layout-pagination-button layout-pagination-prev-page">이전 페이지로 가기</a>
+									<span>
+										<strong class="layout-pagination-button layout-pagination-number active">1</strong>
+									</span>
+									<span>
+										<a class="layout-pagination-button layout-pagination-number">2</a>
+									</span>
+									<span>
+										<a class="layout-pagination-button layout-pagination-number">3</a>
+									</span>
+									<span>
+										<a class="layout-pagination-button layout-pagination-number">4</a>
+									</span>
+									<span>
+										<a class="layout-pagination-button layout-pagination-number">5</a>
+									</span>
+									<a href="" class="layout-pagination-button layout-pagination-next-page">다음 페이지로 가기</a>
+									<a href="" class="layout-pagination-button layout-pagination-last-page">맨 끝 페이지로 가기</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
 </html>
