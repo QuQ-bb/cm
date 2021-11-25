@@ -1,7 +1,9 @@
 package com.myshop.cm.controller;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.StringTokenizer;
@@ -22,11 +24,13 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myshop.cm.model.CalculateVO;
 import com.myshop.cm.model.DeliveryTemplateVO;
 import com.myshop.cm.model.GoodsVO;
+import com.myshop.cm.model.OptionVO;
 import com.myshop.cm.model.OrderVO;
 import com.myshop.cm.service.CalculateService;
 import com.myshop.cm.service.DeliveryCategoryService;
 import com.myshop.cm.service.DeliveryTemplateService;
 import com.myshop.cm.service.GoodsService;
+import com.myshop.cm.service.OptionService;
 import com.myshop.cm.service.OrderService;
 
 @Controller
@@ -41,7 +45,9 @@ public class SellerController {
 	@Autowired
 	private CalculateService calculateService;
 	@Autowired
-	private OrderService orderservice;
+	private OrderService orderService;
+	@Autowired
+	private OptionService optionService;
 
 	// 상품 등록 폼으로 이동
 	@RequestMapping(value = "/goodsuploadform")
@@ -76,22 +82,6 @@ public class SellerController {
 		System.out.println(optioncount);
 		System.out.println(optioncom);
 		
-		// 옵션을 작성한 경우
-		if (optioncom != null) {
-			String[] optioncomarr = optioncom.split(",");
-			String[] optioncountarr = optioncount.split(",");
-			String[] option = new String[optioncomarr.length];
-			for (int i = 0; i < option.length; i++) {
-				option[i] = optioncomarr[i] + "-" + optioncountarr[i];
-			}
-
-			for (String s : option) {
-				System.out.println(s);
-			}
-			String gds_option = Arrays.toString(option);
-
-			goods.setGds_option(gds_option);
-		}
 
 		// 썸네일 저장
 		if (mf != null) {
@@ -130,7 +120,82 @@ public class SellerController {
 			goods.setGds_thumbnail(filename);
 		}
 		goodsService.insert(goods);// 저장 메소드 호출
+		int gds_num = goods.getGds_num();
+		System.out.println(gds_num);
 		
+		// 옵션을 작성한 경우
+		if (optioncom != null) {
+			String option1name = request.getParameter("option1name");
+			String option1val = request.getParameter("option1val");
+			String option2name = request.getParameter("option2name");
+			String option2val = request.getParameter("option2val");
+			System.out.println("option2name"+option2name);
+			System.out.println("option2val"+option2val);
+			
+			// 옵션을 2개 작성한 경우
+			 if(!option2name.isEmpty() || !option2val.isEmpty()) {											
+				// 받아온 옵션값 쪼개기
+				String[] optioncomarr = optioncom.split(",");
+				// 쪼갠 옵션을 받을 배열
+				String[] opcom = new String[2];
+				// 옵션별 수량 받아오기
+				String[] optioncountarr = optioncount.split(",");
+				
+				//list에 값 담아서 service로 넘기기
+				List<OptionVO> list = new ArrayList<OptionVO>();
+				
+				// 각 배열에 값 분배하기
+				for(int i=0; i<optioncomarr.length; i++) {
+					opcom = optioncomarr[i].split(" - ");
+					OptionVO optionvo = new OptionVO();
+					optionvo.setGds_num(gds_num);
+					optionvo.setOpt_1stname(option1name);
+					optionvo.setOpt_1stval(opcom[0]);
+					optionvo.setOpt_2edname(option2name);
+					optionvo.setOpt_2edval(opcom[1]);
+					optionvo.setOpt_count(Integer.parseInt(optioncountarr[i]));
+					
+					list.add(optionvo);
+				}
+			    Map<String, Object> map = new HashMap<String, Object>();	
+			    map.put("list", list); //map에 list담기
+			    optionService.insertOptions(map);
+			    
+			 //옵션을 1개 작성한 경우
+			}else{  
+				// 받아온 옵션값 쪼개기
+				String[] optioncomarr = optioncom.split(",");
+				// 옵션별 수량 받아오기
+				String[] optioncountarr = optioncount.split(",");
+				
+				//list에 값 담아서 service로 넘기기
+				List<OptionVO> list = new ArrayList<OptionVO>();
+				
+				// 각 배열에 값 분배하기
+				for(int i=0; i<optioncomarr.length; i++) {
+					OptionVO optionvo = new OptionVO();
+					optionvo.setGds_num(gds_num);
+					optionvo.setOpt_1stname(option1name);
+					optionvo.setOpt_1stval(optioncomarr[i]);
+					optionvo.setOpt_count(Integer.parseInt(optioncountarr[i]));
+					
+					list.add(optionvo);
+				}
+			    Map<String, Object> map = new HashMap<String, Object>();	
+			    map.put("list", list); //map에 list담기
+			    optionService.insertOptions(map);
+			}
+		// 옵션을 작성하지 않은경우
+		}else {
+			String opt_count = request.getParameter("opt_count");
+			OptionVO optionvo = new OptionVO();
+			optionvo.setGds_num(gds_num);
+			optionvo.setOpt_count(Integer.parseInt(opt_count));
+			optionService.insertOption(optionvo);
+			
+			
+		}
+				
 		// 배송템플릿을 작성한 경우
 		if(del_info != null) {
 			
@@ -179,25 +244,30 @@ public class SellerController {
 	@RequestMapping(value = "/optioncom")
 	public String optioncom(HttpServletRequest request, Model model) throws Exception {
 		System.out.println("optioncom");
-		String option1 = request.getParameter("option1");
-		String option2 = request.getParameter("option2");
+		String option1name = request.getParameter("option1name");
+		String option1val = request.getParameter("option1val");
+		String option2name = request.getParameter("option2name");
+		String option2val = request.getParameter("option2val");
 		// 옵션을 1개만 입력한 경우
-		if (option2 == "") {
-			String[] optioncom = option1.split(",");
+		if (option2name == "" || option2val == "") {
+			String[] optioncom = option1val.split(",");
+			model.addAttribute("option1name", option1name);
 			model.addAttribute("optioncom", optioncom);
 		// 옵션을 2개 입력한 경우
 		} else { 
-			String[] op1arr = option1.split(",");
-			String[] op2arr = option2.split(",");
-			String[] optioncom = new String[op1arr.length * op2arr.length];
+			String[] option1valarr = option1val.split(",");
+			String[] option2valarr = option2val.split(",");
+			String[] optioncom = new String[option1valarr.length * option2valarr.length];
 			int k = 0;
 			// 옵션섞기
-			for (int i = 0; i < op1arr.length; i++) {
-				for (int j = 0; j < op2arr.length; j++) {
-					optioncom[k] = op1arr[i] + "-" + op2arr[j];
+			for (int i = 0; i < option1valarr.length; i++) {
+				for (int j = 0; j < option2valarr.length; j++) {
+					optioncom[k] = option1valarr[i] + " - " + option2valarr[j];
 					k++;
 				}
 			}
+			model.addAttribute("option1name", option1name);
+			model.addAttribute("option2name", option2name);
 			model.addAttribute("optioncom", optioncom);
 		}
 		return "seller/optioncom";
@@ -454,7 +524,7 @@ public class SellerController {
 		
 		
 		// 정산정보의 ord_num으로 주문정보 불러오기
-		OrderVO order = orderservice.getOrderDetail(calculate.getOrd_num());
+		OrderVO order = orderService.getOrderDetail(calculate.getOrd_num());
 		
 		
 		// 정산정보의 gds_num으로 상품정보 불러오기

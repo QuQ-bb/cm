@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="optionMapper">
+	<!-- 대량옵션 insert -->
+	<select id="insert_options" parameterType="java.util.Map">
+		INSERT INTO project.option
+		(gds_num, opt_1stname, opt_1stval, 
+		opt_2edname, opt_2edval, opt_count)
+		VALUES
+		<foreach item="option" collection="list" separator=",">
+			(#{option.gds_num}, #{option.opt_1stname}, #{option.opt_1stval}, 
+			#{option.opt_2edname}, #{option.opt_2edval}, #{option.opt_count})
+		</foreach>
+	</select>
+
+	<!-- 옵션이 없는경우 insert -->
+	<select id="insert_option" parameterType="option">
+		INSERT INTO project.option
+		(gds_num, opt_count)
+		VALUES
+		(#{gds_num}, #{opt_count})
+		
+	</select>
+
+</mapper>

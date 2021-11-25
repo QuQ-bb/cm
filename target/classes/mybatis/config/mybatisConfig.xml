@@ -12,6 +12,7 @@
  		<typeAlias type="com.myshop.cm.model.DeliveryTemplateVO" alias="deliveryTemplate"/>
  		<typeAlias type="com.myshop.cm.model.CalculateVO" alias="calculate"/>
  		<typeAlias type="com.myshop.cm.model.OrderVO" alias="order"/>
+ 		<typeAlias type="com.myshop.cm.model.OptionVO" alias="option"/>
  	</typeAliases>
  </configuration>
  

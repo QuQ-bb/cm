@@ -13,7 +13,10 @@
 	<div>
 		<table border="1">
 			<tr>
-				<td>옵션</td>
+				<td>${option1name}
+					<c:if test="${option2name != null}"> - ${option2name}
+					</c:if>
+				</td>
 				<td>수량</td>
 			</tr>
 			<c:forEach var="optioncom" items="${optioncom}">

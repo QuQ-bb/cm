@@ -66,8 +66,10 @@
 					<th>옵션</th>
 					<td>
 						<div id="pre_set">
-							옵션1 : <input type="text" name="size" id="option1" style="width:150px">
-							옵션2 : <input type="text" name="color" id="option2" style="width:150px">
+							<input type="text" name="option1name" id="option1name" placeholder="옵션명" size=7 >  : 
+							<input type="text" name="option1val" id="option1val" style="width:300px" placeholder="쉼표(,)로 구분해주세요. ex)red,blue,..."><br>
+							<input type="text" name="option2name" id="option2name" placeholder="옵션명" size=7>  : 
+							<input type="text" name="option2val" id="option2val" style="width:300px" placeholder="쉼표(,)로 구분해주세요. ex)L,XL,..."><br>
 							<input type="button" value="추가 " onclick="add_item()">
 						</div>
 						
@@ -77,7 +79,7 @@
 				</tr>
 				<tr>
 					<th>재고</th>
-					<td><input type="text" id="gds_count" name="gds_count"></td>
+					<td><input type="text" id="opt_count" name="opt_count"></td>
 				</tr>
 				<tr>
 					<th>배송 정보</th>

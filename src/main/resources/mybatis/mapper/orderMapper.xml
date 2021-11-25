@@ -7,8 +7,9 @@
 
 	<!-- 판매자 페이지에서 주문 상세정보 구해오기 -->
 	<select id="select_order_detail" resultType="order" parameterType="int" >
-	select * from project.order 
-	where ord_num=#{ord_num}
+		select * from project.order 
+		where ord_num=#{ord_num}
 	</select>
 
 </mapper>
+

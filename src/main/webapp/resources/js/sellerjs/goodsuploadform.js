@@ -1,17 +1,21 @@
 // 옵션 Ajax
 function add_item(){
 	// 옵션을 입력하였을 경우
-	 if($("#option1").val()!=""){
-         var option1 = $("#option1").val();
-         var option2 = $("#option2").val();
+	 if($("#opt_1stname").val()!=""){
+		 var option1name = $("#option1name").val();
+         var option1val = $("#option1val").val();
+         var option2name = $("#option2name").val();
+         var option2val = $("#option2val").val();
          
          $.ajax({
        	    url : '/optioncom', // 요청 할 주소
        	    type : 'post', // GET, PUT
        	    dataType : 'text',
        	    data : {
-       	    	"option1" : option1,
-       	    	"option2" : option2,
+       	    	"option1name" : option1name,
+       	    	"option1val" : option1val,
+       	    	"option2name" : option2name,
+       	    	"option2val" : option2val,
        	    },
        	    success : function(data) {
        	    	$('#field').html(data);
@@ -101,14 +105,14 @@ function goodsupload_check(){
          oEditors.getById["gds_detail"].exec("FOCUS"); //포커싱
          return;
     }
-	if ($.trim($("#gds_count").val()) == "") {
+	if ($.trim($("#opt_count").val()) == "") {
 		alert("수량을 입력해 주세요");
-		$("#gds_count").val("").focus();
+		$("#opt_count").val("").focus();
 		return false;
 	}
-	if (isNaN($("#gds_count").val())) {
+	if (isNaN($("#opt_count").val())) {
 		alert("수량은 숫자만 입력해 주세요");
-		$("#gds_count").val("").focus();
+		$("#opt_count").val("").focus();
 		return false;
 	}
 	if ($.trim($("#deltem_num").val()) < 0) {

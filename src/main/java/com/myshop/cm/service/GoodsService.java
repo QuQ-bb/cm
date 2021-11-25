@@ -81,17 +81,17 @@ public class GoodsService {
 	}
 
 	// 상품 삭제
-	public void deletegoods(int gds_num) {
+	public void deletegoods(int gds_num) throws Exception{
 		sellerDAO.deleteGoods(gds_num);
 	}
 
 	// 상품 정지
-	public void goodshide(int gds_num) {
+	public void goodshide(int gds_num) throws Exception{
 		sellerDAO.goodshide(gds_num);
 	}
 
 	// 상품 노출
-	public void goodsview(int gds_num) {
+	public void goodsview(int gds_num) throws Exception{
 		sellerDAO.goodsview(gds_num);
 	}
 

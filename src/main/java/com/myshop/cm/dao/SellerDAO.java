@@ -45,23 +45,28 @@ public class SellerDAO {
 	}
 
 	// 상품 수정
-	public void updateGoods(GoodsVO goods) {
+	@Transactional
+	public void updateGoods(GoodsVO goods) throws Exception{
 		sqlSession.update("sellerMapper.goods_update", goods);
 	}
 
 	// 상품 삭제
-	public void deleteGoods(int gds_num) {
+	@Transactional
+	public void deleteGoods(int gds_num) throws Exception{
 		sqlSession.delete("sellerMapper.goods_delete", gds_num);
 	}
 
 	// 상품 정지
-	public void goodshide(int gds_num) {
+	@Transactional
+	public void goodshide(int gds_num) throws Exception{
 		sqlSession.update("sellerMapper.goods_update_viewn", gds_num);
 	}
 
 	// 상품 노출
-	public void goodsview(int gds_num) {
+	@Transactional
+	public void goodsview(int gds_num) throws Exception{
 		sqlSession.update("sellerMapper.goods_update_viewy", gds_num);
 	}
+
 
 }
