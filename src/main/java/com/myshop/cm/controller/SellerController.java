@@ -2,7 +2,6 @@ package com.myshop.cm.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -99,7 +98,7 @@ public class SellerController {
 				file[1] = st.nextToken(); // 확장자
 
 				// 사이즈가 1mb 이상인경우
-				if (size > 1000000) {
+				if (size > 5000000) {
 					result = 1;
 					model.addAttribute("result", result);
 
@@ -151,8 +150,8 @@ public class SellerController {
 					optionvo.setGds_num(gds_num);
 					optionvo.setOpt_1stname(option1name);
 					optionvo.setOpt_1stval(opcom[0]);
-					optionvo.setOpt_2edname(option2name);
-					optionvo.setOpt_2edval(opcom[1]);
+					optionvo.setOpt_2ndname(option2name);
+					optionvo.setOpt_2ndval(opcom[1]);
 					optionvo.setOpt_count(Integer.parseInt(optioncountarr[i]));
 					
 					list.add(optionvo);
@@ -187,13 +186,12 @@ public class SellerController {
 			}
 		// 옵션을 작성하지 않은경우
 		}else {
+			System.out.println("옵션을 작성하지 않음");
 			String opt_count = request.getParameter("opt_count");
 			OptionVO optionvo = new OptionVO();
 			optionvo.setGds_num(gds_num);
 			optionvo.setOpt_count(Integer.parseInt(opt_count));
 			optionService.insertOption(optionvo);
-			
-			
 		}
 				
 		// 배송템플릿을 작성한 경우
@@ -281,32 +279,8 @@ public class SellerController {
 		ModelAndView goodsupdateM = new ModelAndView();
 		GoodsVO goods = goodsService.goodsdetail(gds_num);
 		
-		if(goods.getGds_option() != null) {
-			String getOption = goods.getGds_option().replaceAll("\\[", "").replaceAll("\\]","");
-			
-			String[] optionarr = getOption.split(", ");
-			String[] optioncom = new String[optionarr.length];
-			String[] optioncount = new String[optionarr.length];
-			
-			// 옵션을 1개만 입력했을 때
-			if(optionarr[0].split("-").length == 2) {
-				for(int i=0; i<optionarr.length; i++) {
-					String[] op = optionarr[i].split("-");
-					optioncom[i] = op[0];
-					optioncount[i] = op[1];
-				}
-			}
-			// 옵션을 2개를 입력했을 때
-			if(optionarr[0].split("-").length == 3) {
-				for(int i=0; i<optionarr.length; i++) {
-					String[] op = optionarr[i].split("-");
-					optioncom[i] = op[0]+"-"+op[1];
-					optioncount[i] = op[2];
-				}
-			}
-			goodsupdateM.addObject("optioncom", optioncom);
-			goodsupdateM.addObject("optioncount", optioncount);
-		}
+		// 옵션정보 불러오기
+		List<OptionVO> optionlist = optionService.optionlist(gds_num);
 		
 		// 배송 카테고리 목록 불러오기
 		Map<String, Object> getdeliverycatelist = deliveryCategoryService.getDeliveryCateList(request, response);
@@ -317,11 +291,9 @@ public class SellerController {
 		// 베송 템플릿 불러오기
 		DeliveryTemplateVO gettemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
 		
-		
-		goodsupdateM.addObject("gettemplate", gettemplate);
-		
-		// 경로 설정
 		goodsupdateM.addAllObjects(getdeliverycatelist);
+		goodsupdateM.addObject("gettemplate", gettemplate);
+		goodsupdateM.addObject("optionlist", optionlist);
 		goodsupdateM.addObject("deltemlist", deltemlist);
 		goodsupdateM.addObject("goods", goods);
 		goodsupdateM.addObject("page", page);
@@ -340,26 +312,116 @@ public class SellerController {
 							  DeliveryTemplateVO deliverytemplate, GoodsVO goods,
 							  HttpServletRequest request, Model model) throws Exception {
 		
-		// 옵션을 작성 및 수정한 경우
+		// 옵션을 새로 작성한 경우
 		if (optioncom != null) {
-			String[] optioncomarr = optioncom.split(",");
-			String[] optioncountarr = optioncount.split(",");
-			String[] option = new String[optioncomarr.length];
-			for (int i = 0; i < option.length; i++) {
-				option[i] = optioncomarr[i] + "-" + optioncountarr[i];
+			// 기존옵션삭제
+			optionService.deleteOptions(goods.getGds_num());
+			String option1name = request.getParameter("option1name");
+			String option1val = request.getParameter("option1val");
+			String option2name = request.getParameter("option2name");
+			String option2val = request.getParameter("option2val");
+			System.out.println("option2name"+option2name);
+			System.out.println("option2val"+option2val);
+			
+			// 옵션을 2개 작성한 경우
+			 if(!option2name.isEmpty() && !option2val.isEmpty()) {											
+				// 받아온 옵션값 쪼개기
+				String[] optioncomarr = optioncom.split(",");
+				// 쪼갠 옵션을 받을 배열
+				String[] opcom = new String[2];
+				// 옵션별 수량 받아오기
+				String[] optioncountarr = optioncount.split(",");
+				
+				//list에 값 담아서 service로 넘기기
+				List<OptionVO> list = new ArrayList<OptionVO>();
+				
+				// 각 배열에 값 분배하기
+				for(int i=0; i<optioncomarr.length; i++) {
+					opcom = optioncomarr[i].split(" - ");
+					OptionVO optionvo = new OptionVO();
+					optionvo.setGds_num(goods.getGds_num());
+					optionvo.setOpt_1stname(option1name);
+					optionvo.setOpt_1stval(opcom[0]);
+					optionvo.setOpt_2ndname(option2name);
+					optionvo.setOpt_2ndval(opcom[1]);
+					optionvo.setOpt_count(Integer.parseInt(optioncountarr[i]));
+					
+					list.add(optionvo);
+				}
+			    Map<String, Object> map = new HashMap<String, Object>();	
+			    map.put("list", list); //map에 list담기
+			    optionService.insertOptions(map);
+			    
+			 //옵션을 1개 작성한 경우
+			}else if(!option1name.isEmpty() && !option1val.isEmpty() && 
+					 option2name.isEmpty() && option2val.isEmpty()){ 
+				System.out.println("옵션을 1개만 작성한 경우");
+				// 받아온 옵션값 쪼개기
+				String[] optioncomarr = optioncom.split(",");
+				// 옵션별 수량 받아오기
+				String[] optioncountarr = optioncount.split(",");
+				
+				//list에 값 담아서 service로 넘기기
+				List<OptionVO> list = new ArrayList<OptionVO>();
+				
+				// 각 배열에 값 분배하기
+				for(int i=0; i<optioncomarr.length; i++) {
+					OptionVO optionvo = new OptionVO();
+					optionvo.setGds_num(goods.getGds_num());
+					optionvo.setOpt_1stname(option1name);
+					optionvo.setOpt_1stval(optioncomarr[i]);
+					optionvo.setOpt_count(Integer.parseInt(optioncountarr[i]));
+					
+					list.add(optionvo);
+				}
+			    Map<String, Object> map = new HashMap<String, Object>();	
+			    map.put("list", list); //map에 list담기
+			    optionService.insertOptions(map);
+			}else {
+				OptionVO optionvo = new OptionVO();
+				optionvo.setGds_num(goods.getGds_num());
+				optionvo.setOpt_count(Integer.parseInt(request.getParameter("opt_count")));
+				optionService.insertOption(optionvo);
 			}
-
-			for (String s : option) {
-				System.out.println(s);
+		// 옵션을 새로 작성하지 않은경우
+		}else {
+			// 기존 작성한 옵션이 있는경우
+			if(request.getParameter("edit_opt_1stval") != null ) {
+				System.out.println("기존 작성한 옵션이 있는 경우 - 기존에 2개 또는 1개옵션으로 작성");
+				String[] edit_opt_numarr = request.getParameterValues("edit_opt_num");
+				String[] edit_opt_countarr = request.getParameterValues("edit_opt_count");
+				for(int i=0; i<edit_opt_numarr.length; i++) {
+					System.out.println(edit_opt_numarr[i] +" + "+ edit_opt_countarr[i]);
+				}
+				
+				List<OptionVO> list = new ArrayList<OptionVO>();
+				
+				for(int i=0; i<edit_opt_numarr.length; i++) {
+					OptionVO optionvo = new OptionVO();
+					optionvo.setOpt_num(Integer.parseInt(edit_opt_numarr[i]));
+					optionvo.setOpt_count(Integer.parseInt(edit_opt_countarr[i]));
+					
+					list.add(optionvo);
+				}
+				Map<String, Object> map = new HashMap<String, Object>();	
+				map.put("list", list); //map에 list담기
+				optionService.updateOptions(map);
+			// 옵션없이 작성한 경우(단일옵션)
+			}else {
+				System.out.println("기존 작성한 옵션이 있는 경우 - 기존에 옵션없이 작성");
+				OptionVO optionvo = new OptionVO();
+				optionvo.setOpt_num(Integer.parseInt(request.getParameter("edit_opt_num")));
+				optionvo.setOpt_count(Integer.parseInt(request.getParameter("edit_opt_count")));
+				
+				optionService.updateOption(optionvo);
 			}
-			String gds_option = Arrays.toString(option);
-
-			goods.setGds_option(gds_option);
 		}
 
 		// 썸네일 을 수정한경우
-		if (mf != null) {
-			
+		if (!mf.isEmpty()) {
+			System.out.println("썸네일 수정");
+			System.out.println("mf.isEmpty() : "+mf.isEmpty());
+			System.out.println(mf.getOriginalFilename());
 			// 기존 파일 삭제
 			GoodsVO oldgoods = goodsService.goodsdetail(goods.getGds_num());
 			
@@ -374,57 +436,53 @@ public class SellerController {
 			// 새로운 파일 저장
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid + mf.getOriginalFilename();
-			int size = (int) mf.getSize();
 			String path = request.getRealPath("resources/image/thumbnailimage");
-			int result = 0;
-			String file[] = new String[2];
 
-			// 썸네일 유효성 체크
-			if (filename != "") {
-				StringTokenizer st = new StringTokenizer(filename, ".");
-				file[0] = st.nextToken();
-				file[1] = st.nextToken(); // 확장자
+//			// 썸네일 유효성 체크
+//			if (filename != "") {
+//				StringTokenizer st = new StringTokenizer(filename, ".");
+//				file[0] = st.nextToken();
+//				file[1] = st.nextToken(); // 확장자
+//
+//				// 사이즈가 1mb 이상인경우
+//				if (size > 1000000) {
+//					result = 1;
+//					model.addAttribute("result", result);
+//	
+//					return "seller/goodsuploadresult";
+//	
+//				// 그림파일이 아닌경우
+//				} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
+//					result = 2;
+//					model.addAttribute("result", result);
+//	
+//					return "seller/goodsuploadresult";
+//				}
+//			}
+			mf.transferTo(new File(path + "/" + filename));
+			goods.setGds_thumbnail(filename);			
 
-				// 사이즈가 1mb 이상인경우
-				if (size > 1000000) {
-					result = 1;
-					model.addAttribute("result", result);
-	
-					return "seller/goodsuploadresult";
-	
-				// 그림파일이 아닌경우
-				} else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png")) {
-					result = 2;
-					model.addAttribute("result", result);
-	
-					return "seller/goodsuploadresult";
-				}
-			}
 			
-			if (size > 0) { // 첨부 파일이 수정되면
-				mf.transferTo(new File(path + "/" + filename));
-				goods.setGds_thumbnail(filename);			
-			} else { // 첨부파일이 수정되지 않으면
-				goods.setGds_thumbnail(oldgoods.getGds_thumbnail());
-			}
-			
+		} else { // 첨부파일이 수정되지 않으면 기존 파일명 사용
+			System.out.println("썸네일 수정 안함");
+			System.out.println("mf.isEmpty() : "+mf.isEmpty());
+			GoodsVO oldgoods = goodsService.goodsdetail(goods.getGds_num());
+			System.out.println(oldgoods.getGds_thumbnail());
+			goods.setGds_thumbnail(oldgoods.getGds_thumbnail());
 		}
 		
 		goodsService.update(goods);// 저장 메소드 호출
 		
 		// 배송템플릿을 새로 작성한 경우
 		if(del_info != null) {
-			
 			String[] delinfoarr = del_info.split(",");
-			for(int i=0; i<2; i++) {
-				System.out.println(i+","+delinfoarr[i]);
-			}
+
 			deliverytemplate.setDel_code(Integer.parseInt(delinfoarr[0]));
 			deliverytemplate.setDel_name(delinfoarr[1]);
 			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
-		}
+		} // if end
 		return "redirect:/sellergoodslist?page="+page;
-	} 
+	}  //goodsupdate end
 	
 	// 상품 삭제하기
 	@RequestMapping(value = "goodsdelete")
@@ -476,6 +534,9 @@ public class SellerController {
 			thumbnailfile.delete();
         }
 		
+		// 옵션삭제
+		optionService.deleteOptions(gds_num);
+		
 		// DB 에서 goods데이터 삭제
 		goodsService.deletegoods(gds_num);
 		
@@ -523,7 +584,6 @@ public class SellerController {
 		CalculateVO calculate = calculateService.getCalculDetail(clcln_num);
 		
 		
-		// 정산정보의 ord_num으로 주문정보 불러오기
 		OrderVO order = orderService.getOrderDetail(calculate.getOrd_num());
 		
 		

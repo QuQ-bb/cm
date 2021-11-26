@@ -68,5 +68,11 @@ public class SellerDAO {
 		sqlSession.update("sellerMapper.goods_update_viewy", gds_num);
 	}
 
+	// 리스트에 출력할 상품들의 번호값들 가져오기
+	@Transactional
+	public List<GoodsVO> getSellerGoodsNumList(int pageIndex) throws Exception{
+		return sqlSession.selectList("sellerMapper.goods_select_num_list", pageIndex);
+	}
+
 
 }

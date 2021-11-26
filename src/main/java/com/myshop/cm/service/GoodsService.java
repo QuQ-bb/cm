@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myshop.cm.dao.OptionDAO;
 import com.myshop.cm.dao.SellerDAO;
 import com.myshop.cm.model.GoodsVO;
 
@@ -19,6 +20,8 @@ public class GoodsService {
 	
 	@Autowired
 	private SellerDAO sellerDAO;
+	@Autowired
+	private OptionDAO optionDAO;
 	
 	// 상품 등록
 	public void insert(GoodsVO goods) throws Exception{

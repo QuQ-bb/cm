@@ -5,8 +5,8 @@ public class OptionVO {
 	private int gds_num;
 	private String opt_1stname;
 	private String opt_1stval;
-	private String opt_2edname;
-	private String opt_2edval;
+	private String opt_2ndname;
+	private String opt_2ndval;
 	private int opt_count;
 	
 	public int getOpt_num() {
@@ -33,17 +33,17 @@ public class OptionVO {
 	public void setOpt_1stval(String opt_1stval) {
 		this.opt_1stval = opt_1stval;
 	}
-	public String getOpt_2edname() {
-		return opt_2edname;
+	public String getOpt_2ndname() {
+		return opt_2ndname;
 	}
-	public void setOpt_2edname(String opt_2edname) {
-		this.opt_2edname = opt_2edname;
+	public void setOpt_2ndname(String opt_2ndname) {
+		this.opt_2ndname = opt_2ndname;
 	}
-	public String getOpt_2edval() {
-		return opt_2edval;
+	public String getOpt_2ndval() {
+		return opt_2ndval;
 	}
-	public void setOpt_2edval(String opt_2edval) {
-		this.opt_2edval = opt_2edval;
+	public void setOpt_2ndval(String opt_2ndval) {
+		this.opt_2ndval = opt_2ndval;
 	}
 	public int getOpt_count() {
 		return opt_count;

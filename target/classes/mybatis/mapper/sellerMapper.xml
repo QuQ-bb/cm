@@ -27,10 +27,36 @@
 	
 	<!-- 판매자별 상품 리스트 출력 -->
 	<select id="seller_goods_list" resultType="goods" parameterType="int">
-		select * from goods
+		SELECT g.gds_num,
+		    g.lcate_code,
+		    g.mcate_code,
+		    g.scate_code,
+		    g.gds_seller,
+		    g.gds_name,
+		    g.gds_price,
+		    g.gds_detail,
+		    g.gds_option,
+		    g.gds_thumbnail,
+		    g.gds_date,
+		    g.deltem_num,
+		    g.gds_good,
+		    g.gds_readcount,
+		    g.gds_sellcount,
+		    g.gds_ears,
+		    g.gds_viewyn,
+		    g.gds_delyn,
+		    sum(o.opt_count) as gds_count
+		FROM goods g join project.option o
+		on g.gds_num = o.gds_num
 		where gds_delyn='y' <!-- and gds_seller=${gds_seller} -->
+		group by gds_num
 		order by gds_num desc
-		limit #{pageIndex}, 10
+		limit #{pageIndex}, 10;
+	
+	<!-- 	select * from goods
+		where gds_delyn='y' 
+		order by gds_num desc
+		limit #{pageIndex}, 10 -->
 	</select>
 	
 	<!-- 판매자별 상품 리스트 출력 -->
@@ -48,8 +74,6 @@
 		gds_name = #{gds_name},
 		gds_price = #{gds_price},
 		gds_detail = #{gds_detail},
-		gds_option = #{gds_option},
-		gds_count = #{gds_count},
 		gds_thumbnail = #{gds_thumbnail},
 		deltem_num = #{deltem_num},
 		gds_ears = #{gds_ears}
@@ -80,6 +104,13 @@
 	<!-- 마지막으로 auto increment된 값 가져오기 -->
 	<select id="goods_select_lastnum" resultType="int">
 		select LAST_INSERT_ID();
+	</select>
+	
+	<select id="goods_select_num_list" parameterType="int" resultType="goods">
+		select gds_num from goods
+		where gds_delyn='y' <!-- and gds_seller=${gds_seller} -->
+		order by gds_num desc
+		limit #{pageIndex}, 10
 	</select>
 	
 </mapper>
