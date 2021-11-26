@@ -14,8 +14,9 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
-	<resources mapping="/images/**" location="/resources/images/" />
-	
+    <resources mapping="/css/**" location="/css/" />
+    <resources mapping="/js/**" location="/js/" />
+	<resources mapping="/image/**" location="/image/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -35,6 +36,9 @@
 		<beans:property name="maxUploadSize" value="104857600" />
 		<!-- 파일당 최대 허용 크기 -->
 	</beans:bean>
+	
+	<!-- 스마트 에디터 리소스 경로설정 -->
+	<resources location="/resources/smarteditor2/" mapping="/resources/smarteditor2/**"/>
 	
 	<!-- 인터셉터 -->
 </beans:beans>

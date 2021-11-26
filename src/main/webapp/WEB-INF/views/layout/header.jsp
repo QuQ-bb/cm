@@ -19,19 +19,20 @@
 
 	<header>
 		  <div class="links">
-        <c:if test="${member == null}"><a href="login" class="link_text">로그인</a></c:if>
+         <c:if test="${member == null}"><a href="login" class="link_text">로그인</a></c:if>
+         <c:if test="${member != null}">${member.userId}님 안녕하세요.</c:if>
          <c:if test="${member != null}"><a href="/" class="link_text">로그아웃</a></c:if>
          <c:if test="${member != null}"><a href="mypage" class="link_text">마이페이지</a></c:if>
          <c:if test="${member == null}"><a href="/" class="link_text">회원가입</a></c:if>
         <a href="/" class="link_text">공지</a>
       </div>
-      <a href="home"><img src="resources/images/logo3.png" class="img_logo"/></a>
+      <a href="home"><img src="resources/image/logo3.png" class="img_logo"/></a>
       <form>
         <fieldset>
           <legend class="visually-hidden">검색</legend>
           <div class="search_box">
             <input type="text" id= "tags" />
-            <button type="submit" tabindex="2">
+            <button type="button" class="searchBtn" tabindex="2" onClick="location.href='searchlist'">
               <i class="fa fa-search"></i>
             </button>
           </div>

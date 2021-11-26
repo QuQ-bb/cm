@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="position:absoulte;width:100%;height:100%;"> 
-<img class="errorpage" src="${pageContext.request.contextPath}/resources/images/error.png" style="position:absoulte;width:40%;height:40%;margin:60px 0 0 610px;">
+<img class="errorpage" src="${pageContext.request.contextPath}/resources/image/error.png" style="position:absoulte;width:40%;height:40%;margin:60px 0 0 610px;">
 </div>
 </body>
 </html>

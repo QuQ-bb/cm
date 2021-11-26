@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="AdminMapperns">
+ 	<!-- 공지 등록 -->
+	<insert id="insertnt" parameterType="notice">
+		insert into notice( ntc_sort
+						  , ntc_title
+						  , ntc_content
+						  , ntc_date
+						  , ntc_check
+						  , ntc_delyn
+						  )
+				    values( #{ntc_sort}
+				    	  , #{ntc_title}
+				    	  , #{ntc_content}
+				    	  , sysdate()
+				    	  , #{ntc_check}
+				    	  , 'y'
+				    	  )
+	</insert>  
+	<!-- 공지 리스트 -->
+	<select id="noticelist" resultType="notice">
+		select * 
+		  from notice
+		  where ntc_delyn='y'
+	  order by ntc_num desc
+	           limit 10 offset 0
+	</select>
+	<!-- 공지 수정 -->
+	<update id="updatent" parameterType="notice">
+		update notice set ntc_sort    = #{ntc_sort}
+						, ntc_title   = #{ntc_title}
+						, ntc_content = #{ntc_content}
+						, ntc_delyn	  = #{ntc_delyn}
+		where ntc_num = #{ntc_num}
+	</update>
+	<!-- 카테고리 등록(대) -->
+	<insert id="insertlcate" parameterType="lcate">
+		insert into lcate(    lcate_code
+							, lcate_name
+							) 
+					  values(
+							  #{lcate_code}
+						    , #{lcate_name}
+						   )
+	</insert>
+	<!-- 카테고리 등록(중) -->
+	<insert id="insertmcate" parameterType="mcate">
+		insert into mcate(    mcate_code
+							, mcate_name
+							, lcate_code
+							) 
+					  values(
+							  #{mcate_code}
+						    , #{mcate_name}
+						    , #{lcate_code}
+						   )
+	</insert>
+	<!-- 카테고리 등록(소) -->
+	<insert id="insertscate" parameterType="scate">
+		insert into scate(    scate_code
+							, scate_name
+							, lcate_code
+							, mcate_code
+							) 
+					  values(
+							  #{mcate_code}
+						    , #{mcate_name}
+						    , #{lcate_code}
+						    , #{mcate_code}
+						   )
+	</insert>
+	<!-- 카테고리 리스트(대) -->
+ 	<select id="lcatelist" resultType="lcate">
+ 		select lcate_code
+ 		     , lcate_name
+ 		  from lcate 
+ 	  order by lcate_code desc
+ 	</select>
+ 	<!-- 카테고리 리스트(중) -->
+ 	<select id="mcatelist" resultType="mcate">
+ 		select mcate_code
+ 			 , mcate_name
+ 			 , lcate_code
+ 		  from mcate
+ 	  order by mcate_code desc
+ 	</select>
+ 	<!-- 카테고리 리스트(소) -->
+ 	<select id="scatelist" resultType="scate">
+ 	    select scate_code
+ 	         , scate_name
+ 	         , lcate_code
+ 	         , mcate_code
+ 	      from scate
+ 	  order by scate_code desc
+ 	</select>
+	<!-- FAQ등록 -->
+	<insert id="insertfaq" parameterType="faq">
+		insert into notice( faq_num
+						  , faq_sort
+						  , faq_title
+						  , faq_content
+						  ) 
+				    values(
+				    		#{faq_num}
+				    	  , #{faq_sort}
+				    	  , #{faq_title}
+				    	  , #{faq_content}
+				    	  )
+	</insert>
+	<!-- faq 리스트 -->
+	<select id="faqlist" resultType="faq">
+		select faq_num
+			 , faq_title 
+		  from faq 
+	  order by faq_num desc limit 10 offset 0
+	</select>
+ </mapper>

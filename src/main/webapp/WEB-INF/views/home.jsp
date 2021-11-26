@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +21,7 @@
 			<%-- <c:forEach items="${list}" var="list"> --%>
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -30,7 +29,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -38,7 +37,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -46,7 +45,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -54,7 +53,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -62,7 +61,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -70,7 +69,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -78,7 +77,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -86,7 +85,7 @@
 			</li>		
 			<li>
 				<div class="best_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="best_goods_name">
 					<a href="#">상품1</a>
@@ -107,7 +106,7 @@
 			<%-- <c:forEach items="${list}" var="list"> --%>
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -115,7 +114,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -123,7 +122,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -131,7 +130,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -139,7 +138,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -147,7 +146,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -155,7 +154,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -163,7 +162,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>
@@ -171,7 +170,7 @@
 			</li>		
 			<li>
 				<div class="new_goods">
-				<img src="resources/images/logo2.png"/>
+				<img src="resources/image/logo2.png"/>
 				</div>
 				<div class="new_goods_name">
 					<a href="#">상품1</a>

@@ -11,7 +11,7 @@
 </head>
 <body>
 <div style="position:absoulte;width:100%;height:100%;"> 
-<img class="404" src="${pageContext.request.contextPath}/resources/images/404.png" style="position:absoulte;width:50%;height:50%;margin:50px 0 0 420px;">
+<img class="404" src="${pageContext.request.contextPath}/resources/image/404.png" style="position:absoulte;width:50%;height:50%;margin:50px 0 0 420px;">
 </div>
 </body>
 </html>

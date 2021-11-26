@@ -7,5 +7,19 @@
  	<typeAliases>
  		<typeAlias type="java.lang.Integer" alias="Integer"/>
  		<typeAlias type="java.lang.String" alias="String"/>
+ 		<typeAlias type="com.myshop.cm.model.GoodsVO" alias="goods"/>
+ 		<typeAlias type="com.myshop.cm.model.DeliveryCategoryVO" alias="deliveryCategory"/>
+ 		<typeAlias type="com.myshop.cm.model.DeliveryTemplateVO" alias="deliveryTemplate"/>
+ 		<typeAlias type="com.myshop.cm.model.CalculateVO" alias="calculate"/>
+ 		<typeAlias type="com.myshop.cm.model.OrderVO" alias="order"/>
+ 		<typeAlias type="com.myshop.cm.model.OptionVO" alias="option"/>
+ 		<typeAlias type="com.myshop.cm.model.LcateVO" alias="lcate"/>
+ 		<typeAlias type="com.myshop.cm.model.McateVO" alias="mcate"/>
+ 		<typeAlias type="com.myshop.cm.model.ScateVO" alias="scate"/>
+ 		<typeAlias type="com.myshop.cm.model.FaqVO" alias="faq"/>
+ 		<typeAlias type="com.myshop.cm.model.NoticeVO" alias="notice"/>
+ 		<typeAlias type="com.myshop.cm.util.Pager" alias="Pager"/>
  	</typeAliases>
  </configuration>
+ 
+ 
