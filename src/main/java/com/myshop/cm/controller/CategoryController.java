@@ -59,25 +59,46 @@ public class CategoryController {
 		return "admin/scatelist";
 	}
 	
-	// 카테고리 등록폼
-	@RequestMapping(value = "/addcategory")
-	private String addcategory(LcateVO lcateVO , Model model) throws Exception{
+	// 카테고리 등록폼(중)
+	@RequestMapping(value = "/addmcate")
+	private String addmcate(McateVO mcateVO , Model model) throws Exception{
 		System.out.println("1111");
 		
-		List<LcateVO> lcatelist = categoryservice.lcatelist(lcateVO);
-		model.addAttribute("lcatelist", lcatelist);
+		List<McateVO> mcatelist = categoryservice.mcatelist(mcateVO);
+		model.addAttribute("mcatelist", mcatelist);
 		
-		return "admin/addcategory";
+		return "admin/addmcate";
 	}
-	// 카테고리 등록
-	@RequestMapping(value = "/insertcategory")
-	private String insertcategory(LcateVO lcateVO , Model model) throws Exception{
+	// 카테고리 등록(중)
+	@RequestMapping(value = "/insertmcate")
+	private String insertmcate(McateVO mcateVO , Model model) throws Exception{
 		System.out.println("3333");
 		
-		 int cateInsert = categoryservice.LcateInsert(lcateVO);
-		 model.addAttribute("cateInsert",cateInsert);
+		 int mcateInsert = categoryservice.McateInsert(mcateVO);
+		 model.addAttribute("mcateInsert",mcateInsert);
 		 
 		System.out.println("4444");
-		return "admin/addcategory";
+		return "admin/insertmcate";
+	}
+	// 카테고리 등록폼(소)
+	@RequestMapping(value ="/addscate")
+	private String addscate(ScateVO scateVO , Model model) throws Exception{
+		System.out.println("등록폼소컨트롤러진입");
+		
+		List<ScateVO> scatelist = categoryservice.scatelist(scateVO);
+		model.addAttribute("scatelist", scatelist);
+		
+		return "admin/addscate";
+	}
+	// 카테고리 등록(소)
+	@RequestMapping(value = "/insertscate")
+	private String insertscate(ScateVO scateVO , Model model) throws Exception{
+		System.out.println("3333");
+		
+		 int scateInsert = categoryservice.ScateInsert(scateVO);
+		 model.addAttribute("scateInsert",scateInsert);
+		 
+		System.out.println("4444");
+		return "admin/insertscate";
 	}
 }
