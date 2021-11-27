@@ -37,16 +37,6 @@
 						, ntc_delyn	  = #{ntc_delyn}
 		where ntc_num = #{ntc_num}
 	</update>
-	<!-- 카테고리 등록(대) -->
-	<insert id="insertlcate" parameterType="lcate">
-		insert into lcate(    lcate_code
-							, lcate_name
-							) 
-					  values(
-							  #{lcate_code}
-						    , #{lcate_name}
-						   )
-	</insert>
 	<!-- 카테고리 등록(중) -->
 	<insert id="insertmcate" parameterType="mcate">
 		insert into mcate(    mcate_code

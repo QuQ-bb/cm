@@ -15,10 +15,6 @@ import com.myshop.cm.model.ScateVO;
 public class CategoryService {
 	@Autowired  // DAO 객체 주입
 	private AdminDAO dao;
-	// 카테고리 등록(대)
-	public int LcateInsert(LcateVO lcateVO) throws Exception {
-		return dao.LcateInsert(lcateVO);
-	}
 	// 카테고리 리스트(대)
 	public List<LcateVO> lcatelist(LcateVO lcateVO) throws Exception{
 		return dao.lcatelist(lcateVO);

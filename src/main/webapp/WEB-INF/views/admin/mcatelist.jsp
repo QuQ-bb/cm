@@ -9,7 +9,8 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminmain.jsp"></jsp:include>
-	<table border="1" width="1000" align="center">
+	<input type="button" name="addmcate" value="소분류 등록" onClick="location.href='addscate'">
+	<table border="1" width="1000" align="left">
     	<tr>
         	<td>카테고리 분류</td>
             <td>카테고리 이름</td>

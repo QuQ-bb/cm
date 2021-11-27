@@ -19,13 +19,12 @@ public class CategoryController {
 	@RequestMapping(value = "/lcatelist")
 	private String lcatelist(LcateVO lcateVo , Model model) throws Exception{
 		System.out.println("대컨트롤러 진입");
-		
+
 		List<LcateVO> lcatelist = categoryservice.lcatelist(lcateVo);		
 		
 		System.out.println("대컨트롤러진입2");
 							 //key, 	   value
 		model.addAttribute("lcatelist" , lcatelist);
-		
 		System.out.println("대컨트롤러진입3");
 		
 		return "admin/lcatelist";
