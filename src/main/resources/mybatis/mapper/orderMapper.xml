@@ -10,6 +10,35 @@
 		select * from project.order 
 		where ord_num=#{ord_num}
 	</select>
-
+	
+	<!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
+	<select id="select_order_list_count" resultType="int" >
+		select count(*) from project.order
+	</select>
+	
+	<!-- 판매자 페이지에서 주문 리스트 불러오기 -->
+	<select id="select_order_list" resultType="order" parameterType="int">
+	select 
+		o.ord_num,
+		o.ord_memnum,
+		o.ord_gdsnum,
+		o.ord_gdsoption,
+		o.ord_gdscount,
+		o.ord_delfee,
+		o.ord_request,
+		o.ord_totalprice,
+	    g.gds_thumbnail,
+	    g.gds_name,
+	    m.mem_id
+	from project.order as o
+		left JOIN project.goods as g
+			on o.ord_gdsnum = g.gds_num
+		left JOIN project.member as m
+			on o.ord_memnum = m.mem_num
+	<!-- where -->
+	group by o.ord_num
+	order by o.ord_num desc
+	limit #{pageIndex}, 10
+	</select>
 </mapper>
 

@@ -212,12 +212,17 @@ public class SellerController {
 	@RequestMapping(value = "/sellergoodslist")
 	public ModelAndView list(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
+		// select로 검색한 결과를 받아올 map객체 선언
+		// request, response를 인자값으로 받는 이유는 service단에서 getParameter로 값을 받기 위함이다.
 		Map<String, Object> sellergoodslist = goodsService.sellergoodslist(request, response);
 
+		// ModelAndView 객체를 생성과 동시에 경로를 설정함
 		ModelAndView sellergoodslistM = new ModelAndView("seller/sellergoodslist");
 		
+		// ModelAndView 객체에 요청받아온 값을 담아준다.
 		sellergoodslistM.addAllObjects(sellergoodslist);
 
+		// ModelAndView을 리턴해준다.
 		return sellergoodslistM;
 	}
 
@@ -373,7 +378,7 @@ public class SellerController {
 					optionvo.setOpt_count(Integer.parseInt(optioncountarr[i]));
 					
 					list.add(optionvo);
-				}
+				} // for end
 			    Map<String, Object> map = new HashMap<String, Object>();	
 			    map.put("list", list); //map에 list담기
 			    optionService.insertOptions(map);
@@ -382,7 +387,7 @@ public class SellerController {
 				optionvo.setGds_num(goods.getGds_num());
 				optionvo.setOpt_count(Integer.parseInt(request.getParameter("opt_count")));
 				optionService.insertOption(optionvo);
-			}
+			} // if ~ else if ~ else end
 		// 옵션을 새로 작성하지 않은경우
 		}else {
 			// 기존 작성한 옵션이 있는경우
@@ -392,7 +397,7 @@ public class SellerController {
 				String[] edit_opt_countarr = request.getParameterValues("edit_opt_count");
 				for(int i=0; i<edit_opt_numarr.length; i++) {
 					System.out.println(edit_opt_numarr[i] +" + "+ edit_opt_countarr[i]);
-				}
+				} // for end
 				
 				List<OptionVO> list = new ArrayList<OptionVO>();
 				
@@ -402,7 +407,7 @@ public class SellerController {
 					optionvo.setOpt_count(Integer.parseInt(edit_opt_countarr[i]));
 					
 					list.add(optionvo);
-				}
+				} // for end
 				Map<String, Object> map = new HashMap<String, Object>();	
 				map.put("list", list); //map에 list담기
 				optionService.updateOptions(map);
@@ -414,8 +419,8 @@ public class SellerController {
 				optionvo.setOpt_count(Integer.parseInt(request.getParameter("edit_opt_count")));
 				
 				optionService.updateOption(optionvo);
-			}
-		}
+			} // else end
+		} // if ~ else end
 
 		// 썸네일 을 수정한경우
 		if (!mf.isEmpty()) {
@@ -431,7 +436,7 @@ public class SellerController {
     		System.out.println(oldfile.exists());
 			if(oldfile.exists() == true){
 			oldfile.delete();
-	        }
+	        } // if end
 			
 			// 새로운 파일 저장
 			UUID uuid = UUID.randomUUID();
@@ -469,7 +474,7 @@ public class SellerController {
 			GoodsVO oldgoods = goodsService.goodsdetail(goods.getGds_num());
 			System.out.println(oldgoods.getGds_thumbnail());
 			goods.setGds_thumbnail(oldgoods.getGds_thumbnail());
-		}
+		} // else end
 		
 		goodsService.update(goods);// 저장 메소드 호출
 		
@@ -509,8 +514,8 @@ public class SellerController {
 				 // 이미지가 더이상없으면 for문 나가기(index에 -1이 들어가게되면 오류발생)
 				 if(index < 0) {
 					 break;
-				 }
-			 }
+				 } // if end
+			 } // else end
 			 gds_detailIndex[i] = index;
 			 String gds_detailfile = gds_detail.substring(gds_detailIndex[i], gds_detailIndex[i]+81);
 			 gds_detailarr[i] = request.getRealPath(gds_detailfile);
@@ -522,8 +527,8 @@ public class SellerController {
 	    	 System.out.println(detailfile.exists());
 			 if(detailfile.exists() == true){
 				 detailfile.delete();
-		     }
-		}
+		     }// if end
+		} // for end
 		
 		// 썸네일 이미지 삭제
 		String thumbnailfilepath = request.getRealPath("resources/image/thumbnailimage/");
@@ -584,12 +589,14 @@ public class SellerController {
 		CalculateVO calculate = calculateService.getCalculDetail(clcln_num);
 		
 		
+		// 정산정보의 getOrd_num 값으로 주문정보 불러오기
 		OrderVO order = orderService.getOrderDetail(calculate.getOrd_num());
 		
 		
 		// 정산정보의 gds_num으로 상품정보 불러오기
 		GoodsVO goods = goodsService.goodsdetail(calculate.getGds_num());
 		
+		// modelAndView 객체 생성과 동시에 패스설정
 		ModelAndView showcalculdetailM = new ModelAndView("seller/calculdetail");
 		
 		
@@ -601,14 +608,31 @@ public class SellerController {
 		return showcalculdetailM;
 	}
 	
-//	
-//	// 판매자 정산내역 상세페이지
-//	@RequestMapping(value = "/showcalculdetail")
-//	public ModelAndView showcalculdetail(CalculateVO calculate, HttpServletRequest request, 
-//			HttpServletResponse response) throws Exception {
-//		
-//		ModelAndView calculdetailM = new ModelAndView("seller/calculdetail");
-//		
-//		return calculdetailM;
-//	}
+	// 판매자 문의내역 목록으로 이동
+	@RequestMapping(value = "sellergoodsqnalist")
+	public ModelAndView sellergoodsqnalist() {
+		ModelAndView sellergoodsqnalistM = new ModelAndView("seller/sellergoodsqnalist");
+		
+		
+		
+		return sellergoodsqnalistM;
+	}
+	
+	//판매자 주문내역 목록으로 이동
+	@RequestMapping(value = "sellerorderlist")
+	public ModelAndView sellerorderlist(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		
+		// 주문리스트 받아오기
+		Map<String, Object> orderlist = orderService.getOrderList(request, response);
+		
+		// 
+		
+		
+		
+		ModelAndView sellerorderlistM = new ModelAndView("seller/sellerorderlist");
+		sellerorderlistM.addAllObjects(orderlist);
+		
+		return sellerorderlistM;
+	}
+
 }

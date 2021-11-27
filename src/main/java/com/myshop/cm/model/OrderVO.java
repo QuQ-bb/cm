@@ -10,6 +10,11 @@ public class OrderVO {
 	private String ord_request;
 	private int ord_totalprice;
 	
+	// 주문정보를 토대로 받아올 추가정보들
+    private String gds_thumbnail;
+    private String gds_name;
+    private String mem_id;
+	
 	public int getOrd_num() {
 		return ord_num;
 	}
@@ -57,6 +62,26 @@ public class OrderVO {
 	}
 	public void setOrd_totalprice(int ord_totalprice) {
 		this.ord_totalprice = ord_totalprice;
+	}
+	
+	
+	public String getGds_thumbnail() {
+		return gds_thumbnail;
+	}
+	public void setGds_thumbnail(String gds_thumbnail) {
+		this.gds_thumbnail = gds_thumbnail;
+	}
+	public String getGds_name() {
+		return gds_name;
+	}
+	public void setGds_name(String gds_name) {
+		this.gds_name = gds_name;
+	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
 	}
 	
 	

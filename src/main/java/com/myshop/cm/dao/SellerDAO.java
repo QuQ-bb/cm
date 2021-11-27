@@ -24,10 +24,7 @@ public class SellerDAO {
 	// 상품 목록 총 개수
 	@Transactional
 	public int getListCount() throws Exception{
-		int count = 0;
-		count = ((Integer)sqlSession.selectOne("sellerMapper.seller_goods_count")).intValue();
-		
-		return count;
+		return ((Integer)sqlSession.selectOne("sellerMapper.seller_goods_count")).intValue();
 	}
 
 	// 판매자 상품 리스트
@@ -67,12 +64,5 @@ public class SellerDAO {
 	public void goodsview(int gds_num) throws Exception{
 		sqlSession.update("sellerMapper.goods_update_viewy", gds_num);
 	}
-
-	// 리스트에 출력할 상품들의 번호값들 가져오기
-	@Transactional
-	public List<GoodsVO> getSellerGoodsNumList(int pageIndex) throws Exception{
-		return sqlSession.selectList("sellerMapper.goods_select_num_list", pageIndex);
-	}
-
 
 }

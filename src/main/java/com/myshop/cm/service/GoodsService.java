@@ -33,19 +33,21 @@ public class GoodsService {
 	public Map<String, Object> sellergoodslist(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<GoodsVO> sellergoodslist = new ArrayList<GoodsVO>();
 		
-		int page = 1;
+		int page = 1;	// 페이지 기본값 
 		int limit = 10;	// 한 화면에 출력할 상품 수
 		
+		// 만약 페이지 요청값이 없다면 페이지기본값(1페이지)가 출력되게
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
 		
+		// mySQL의 limit에 넣어줄 값
 		int pageIndex = (page-1)*10;
 		
-		// 총 리스트 수를 받아옴
+		// 총 개수를 받아옴
 		int listcount = sellerDAO.getListCount();
 		
-		// 페이지 번호(page)를 DAO 클래스에 전달한다.
+		// 페이지 인덱스(pageIndex)를 DAO 클래스에 전달한다.
 		sellergoodslist = sellerDAO.getSellerGoodsList(pageIndex);	// 리스트를 받아옴
 		
 		// 총 페이지 수
@@ -56,9 +58,11 @@ public class GoodsService {
 		// 현재 페이지에 보여줄 마지막 페이지 수.(10, 20, 30 등...)
 		int endpage = maxpage;
 
+		// 만약 endPage가  10 20 30 을 넘어간다면, 고정함
 		if (endpage > startpage + 10 - 1)
 			endpage = startpage + 10 - 1;
 		
+		// map객체를 선언하여 위에 새로 선언한 변수들을 담아준다.
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap.put("page", page);
@@ -74,7 +78,6 @@ public class GoodsService {
 	// 판매자 상품 구매자페이지로 보기
 	public GoodsVO goodsdetail(int gds_num) throws Exception{
 		GoodsVO goods = sellerDAO.getGoodsContent(gds_num);
-		
 		return goods;
 	}
 

@@ -13,6 +13,7 @@
  		<typeAlias type="com.myshop.cm.model.CalculateVO" alias="calculate"/>
  		<typeAlias type="com.myshop.cm.model.OrderVO" alias="order"/>
  		<typeAlias type="com.myshop.cm.model.OptionVO" alias="option"/>
+ 		<typeAlias type="com.myshop.cm.model.GoodsQnaVO" alias="goodsqna"/>
  	</typeAliases>
  </configuration>
  

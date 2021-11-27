@@ -46,8 +46,9 @@
 		    g.gds_viewyn,
 		    g.gds_delyn,
 		    sum(o.opt_count) as gds_count
-		FROM goods g join project.option o
-		on g.gds_num = o.gds_num
+		FROM goods g 
+			left join project.option o
+				on g.gds_num = o.gds_num
 		where gds_delyn='y' <!-- and gds_seller=${gds_seller} -->
 		group by gds_num
 		order by gds_num desc
@@ -100,18 +101,6 @@
 		gds_viewyn = 'y'
 		where gds_num = #{gds_num}
 	</update>
-	
-	<!-- 마지막으로 auto increment된 값 가져오기 -->
-	<select id="goods_select_lastnum" resultType="int">
-		select LAST_INSERT_ID();
-	</select>
-	
-	<select id="goods_select_num_list" parameterType="int" resultType="goods">
-		select gds_num from goods
-		where gds_delyn='y' <!-- and gds_seller=${gds_seller} -->
-		order by gds_num desc
-		limit #{pageIndex}, 10
-	</select>
 	
 </mapper>
 	
