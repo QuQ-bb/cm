@@ -9,10 +9,12 @@
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminmain.jsp"></jsp:include>
-	<table border="1" width="1000" align="center">
+	<table border="1" width="1000" align="left">
     	<tr>
         	<td>카테고리 분류</td>
             <td>카테고리 이름</td>
+            <td>대분류 코드</td>
+            <td>중분류 코드</td>
         </tr>
         <c:forEach var="ScateVO" items="${scatelist}">
         <tr>

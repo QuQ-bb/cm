@@ -2,6 +2,9 @@ package com.myshop.cm.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.omg.CORBA.Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,14 +73,13 @@ public class CategoryController {
 	}
 	// 카테고리 등록(중)
 	@RequestMapping(value = "/insertmcate")
-	private String insertmcate(McateVO mcateVO , Model model) throws Exception{
-		System.out.println("3333");
-		
+	private String insertmcate(McateVO mcateVO , Model model , HttpServletRequest request) throws Exception{
+		 mcateVO.setMcate_code(Integer.parseInt(request.getParameter("mcatecode")));
+		 mcateVO.setMcate_name(request.getParameter("mcatename"));
+		 mcateVO.setLcate_code(Integer.parseInt(request.getParameter("lcatecode")));
 		 int mcateInsert = categoryservice.McateInsert(mcateVO);
 		 model.addAttribute("mcateInsert",mcateInsert);
-		 
-		System.out.println("4444");
-		return "admin/insertmcate";
+		return "admin/mcatelist";
 	}
 	// 카테고리 등록폼(소)
 	@RequestMapping(value ="/addscate")
@@ -91,13 +93,15 @@ public class CategoryController {
 	}
 	// 카테고리 등록(소)
 	@RequestMapping(value = "/insertscate")
-	private String insertscate(ScateVO scateVO , Model model) throws Exception{
+	private String insertscate(ScateVO scateVO , Model model , HttpServletRequest request) throws Exception{
 		System.out.println("3333");
-		
+		 scateVO.setScate_code(Integer.parseInt(request.getParameter("scatecode")));
+		 scateVO.setScate_name(request.getParameter("scatename"));
+		 scateVO.setLcate_code(Integer.parseInt(request.getParameter("lcatecode")));
+		 scateVO.setMcate_code(Integer.parseInt(request.getParameter("mcatecode")));
 		 int scateInsert = categoryservice.ScateInsert(scateVO);
 		 model.addAttribute("scateInsert",scateInsert);
-		 
-		System.out.println("4444");
-		return "admin/insertscate";
+		
+		return "admin/scatelist";
 	}
 }

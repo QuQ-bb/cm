@@ -14,6 +14,7 @@
     	<tr>
         	<td>카테고리 분류</td>
             <td>카테고리 이름</td>
+            <td>대분류 코드</td>
         </tr>
         <c:forEach var="McateVO" items="${mcatelist}">
         <tr>

@@ -57,8 +57,8 @@
 							, mcate_code
 							) 
 					  values(
-							  #{mcate_code}
-						    , #{mcate_name}
+							  #{scate_code}
+						    , #{scate_name}
 						    , #{lcate_code}
 						    , #{mcate_code}
 						   )
@@ -68,7 +68,7 @@
  		select lcate_code
  		     , lcate_name
  		  from lcate 
- 	  order by lcate_code desc
+ 	  order by lcate_code asc
  	</select>
  	<!-- 카테고리 리스트(중) -->
  	<select id="mcatelist" resultType="mcate">
@@ -76,7 +76,7 @@
  			 , mcate_name
  			 , lcate_code
  		  from mcate
- 	  order by mcate_code desc
+ 	  order by mcate_code asc
  	</select>
  	<!-- 카테고리 리스트(소) -->
  	<select id="scatelist" resultType="scate">
@@ -85,7 +85,7 @@
  	         , lcate_code
  	         , mcate_code
  	      from scate
- 	  order by scate_code desc
+ 	  order by scate_code asc
  	</select>
 	<!-- FAQ등록 -->
 	<insert id="insertfaq" parameterType="faq">

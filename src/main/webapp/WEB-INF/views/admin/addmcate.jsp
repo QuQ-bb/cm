@@ -5,32 +5,40 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <title>중분류 등록</title>
 </head>
 <body>
-	<form class="center" id="addmcate" method="post">
 		<div>
 			<h2>중분류 등록</h2>
+	<form class="center" id="addmcate" method="post" action="/insertmcate">
 				<table>
 					<tr>
 						<th>분류코드</th>
-						<td><input type="text" id="mcatecode" name="mcatecode" value="${mcate_code}"></td>
+						<td><input type="text" id="mcatecode" name="mcatecode" value=""></td>
 					</tr>
 					
 					<tr>
 						<th>분류명</th>
-						<td><input type="text" id="mcatename" name="mcatename" value="${mcate_name}"></td>
+						<td><input type="text" id="mcatename" name="mcatename" value=""></td>
 					</tr>
 					<tr>
 						<th>상위분류</th>
-						<td><input type="text" id="lcatecode" name="lacatecode" value="${lcate_code}"></td>
+						<td><input type="text" id="lcatecode" name="lcatecode" value=""></td>
 					</tr>
 				</table>
-				<input type="submit" value="등록" class="input_button">
-				<input type="reset" value="취소" class="input_button" 
-				 onclick="$('#mcate_code').focus();">
-		</div>
-	
 	</form>
+				<input type="button" value="등록" class="input_button" onclick="regist();"/>
+				<input type="reset" value="리셋" class="input_button" onclick="focusing();"/>
+		</div>
+<script>
+	function focusing(){
+		$("#mcatecode").focus();
+	}
+	
+	function regist(){
+		$("#addmcate").submit();
+	}
+</script>
 </body>
 </html>
