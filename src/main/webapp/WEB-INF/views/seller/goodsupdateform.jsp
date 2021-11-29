@@ -32,9 +32,40 @@
 				<tr>
 					<th width="100">카테고리 선택</th>
 					<td>
-						<input type="text" id="lcate_code" name="lcate_code" value="${goods.lcate_code}">
-						<input type="text" id="mcate_code" name="mcate_code" value="${goods.mcate_code}">
-						<input type="text" id="scate_code" name="scate_code" value="${goods.scate_code}">
+						<span id="lcate">
+							<select id="lcate_code" name="lcate_code" onchange="mcateload()">
+									<option value=0>대분류 선택</option>
+								<c:forEach var="lcate" items="${lcatelist}">
+									<option value="${lcate.lcate_code}" 
+									<c:if test="${lcate.lcate_code == goods.lcate_code}"> 
+										selected="selected"</c:if>
+									>${lcate.lcate_name}</option>
+								</c:forEach>
+							</select>
+						</span>
+						<span id="mcate">
+						<select id="mcate_code" name="mcate_code" onchange="scateload()">
+								<option value=0>중분류 선택</option>
+							<c:forEach var="mcate" items="${mcatelist}">
+								<option value="${mcate.mcate_code}"
+								<c:if test="${mcate.mcate_code == goods.mcate_code}"> 
+										selected="selected"</c:if>>${mcate.mcate_name}</option>
+							</c:forEach>
+						</select>
+						</span>
+						<span id="scate">
+							<select id="scate_code" name="scate_code">
+									<option value=-1>소분류 선택</option>
+								<c:forEach var="scate" items="${scatelist}">
+									<option value="${scate.scate_code}"
+									<c:if test="${scate.scate_code == goods.scate_code}"> 
+										selected="selected"</c:if>>${scate.scate_name}</option>
+								</c:forEach>
+									<option value=0 
+									<c:if test="${goods.scate_code == 0}"> 
+										selected="selected"</c:if>>소분류 없음</option>
+							</select>						
+						</span>
 					</td>
 				</tr>
 				<tr>

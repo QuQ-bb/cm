@@ -29,12 +29,18 @@
 		o.ord_totalprice,
 	    g.gds_thumbnail,
 	    g.gds_name,
-	    m.mem_id
+	    m.mem_id,
+	    p.opt_1stname, 
+	    p.opt_1stval, 
+		p.opt_2ndname, 
+		p.opt_2ndval
 	from project.order as o
 		left JOIN project.goods as g
 			on o.ord_gdsnum = g.gds_num
 		left JOIN project.member as m
 			on o.ord_memnum = m.mem_num
+		left JOIN project.option as p
+			on o.ord_gdsoption = p.opt_num
 	<!-- where -->
 	group by o.ord_num
 	order by o.ord_num desc

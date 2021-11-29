@@ -53,6 +53,11 @@
 			WHERE
 			opt_num = #{opt_num}
 	</update>
+	
+	<!-- 옵션번호로 옵션 불러오기-->
+	<select id="select_option" parameterType="int" resultType="option">
+		select * from project.option WHERE opt_num=#{opt_num}
+	</select>
 
 
 </mapper>

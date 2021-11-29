@@ -14,6 +14,11 @@
  		<typeAlias type="com.myshop.cm.model.OrderVO" alias="order"/>
  		<typeAlias type="com.myshop.cm.model.OptionVO" alias="option"/>
  		<typeAlias type="com.myshop.cm.model.GoodsQnaVO" alias="goodsqna"/>
+ 		<typeAlias type="com.myshop.cm.model.MemberVO" alias="member"/>
+ 		<typeAlias type="com.myshop.cm.model.DeliveryAddressVO" alias="deliveryAddress"/>
+ 		<typeAlias type="com.myshop.cm.model.LCateVO" alias="lcate"/>
+ 		<typeAlias type="com.myshop.cm.model.MCateVO" alias="mcate"/>
+ 		<typeAlias type="com.myshop.cm.model.SCateVO" alias="scate"/>
  	</typeAliases>
  </configuration>
  

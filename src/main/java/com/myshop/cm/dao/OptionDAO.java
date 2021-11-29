@@ -6,7 +6,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.cm.model.OptionVO;
 
@@ -16,40 +15,38 @@ public class OptionDAO {
 	private SqlSession sqlSession;
 	
 	// 여러옵션입력
-	@Transactional
 	public void insertOptions(Map<String, Object> map) throws Exception{
 		sqlSession.insert("optionMapper.insert_options", map);
 	}
 
 	// 옵션 단일입력
-	@Transactional
 	public void insertOption(OptionVO optionvo) throws Exception{
 		sqlSession.insert("optionMapper.insert_option", optionvo);
 	}
 
 	// 상품별 옵션리스트 출력
-	@Transactional
 	public List<OptionVO> optionlist(int gds_num) throws Exception{
 		List<OptionVO> list = sqlSession.selectList("optionMapper.select_option_list", gds_num);
 		return list;
 	}
 
 	// 여러옵션 삭제
-	@Transactional
 	public void deleteOptions(int gds_num) throws Exception{
 		sqlSession.delete("optionMapper.delete_options", gds_num);
 	}
 
 	// 여러옵션 수정
-	@Transactional
-	public void updateOptions(Map<String, Object> map) {
+	public void updateOptions(Map<String, Object> map) throws Exception{
 		sqlSession.update("optionMapper.update_options",map);
 	}
 
 	// 단일옵션 수정
-	@Transactional
-	public void updateOption(OptionVO optionvo) {
+	public void updateOption(OptionVO optionvo) throws Exception{
 		sqlSession.update("optionMapper.update_option",optionvo);
+	}
+
+	public OptionVO getoption(int opt_num) throws Exception{
+		return sqlSession.selectOne("optionMapper.select_option", opt_num);
 	}
 
 }

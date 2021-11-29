@@ -16,7 +16,7 @@ ${listcount }
 	<table border="1">
 		<tr style="text-align: center;">
 			<th>주문번호</th>
-			<th>썸네일, 상품이름</th>
+			<th colspan="2">상품이름</th>
 			<th>옵션</th>
 			<th>수량</th>
 			<th>주문자(이름)</th>
@@ -35,12 +35,27 @@ ${listcount }
  					<c:out value="${num}"/>			
 					<c:set var="num" value="${num-1}"/>	 
 				</td>
-				<td>
+				<td style="border-right: none;">
 					<img src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${order.gds_thumbnail}" height="100" width="100" />
-						<a>${order.gds_name}<br></a>
-						<div style="text-align: right">상품 수정하기</div>
 				</td>
-				<td>${order.ord_gdsoption}</td>
+				<td style="border-left: none;">
+					<a href="sellerorderdetail?ord_num=${order.ord_num}&page=${page}">${order.gds_name}<br><br></a>
+					<div style="text-align: right"> <a href="goodsupdate?&gds_num=${order.ord_gdsnum}">상품 수정하기</a></div>
+				</td>
+				<td>
+					<c:choose>
+						<c:when test="${order.opt_2ndval != null}">
+							${order.opt_1stname} : ${order.opt_1stval}	<br>
+							${order.opt_2ndname} : ${order.opt_2ndval}
+						</c:when>
+						<c:when test="${order.opt_2ndval != null}">
+							${order.opt_1stname} : ${order.opt_1stval}
+						</c:when>
+						<c:otherwise>
+							-
+						</c:otherwise>
+					</c:choose>
+				</td>
 				<td>${order.ord_gdscount}</td>
 				<td>${order.mem_id}</td>
 				<td><fmt:formatNumber value="${order.ord_delfee}" pattern="#,###원" /></td>

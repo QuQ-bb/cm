@@ -21,14 +21,22 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myshop.cm.model.CalculateVO;
+import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.DeliveryTemplateVO;
 import com.myshop.cm.model.GoodsVO;
+import com.myshop.cm.model.LCateVO;
+import com.myshop.cm.model.MCateVO;
+import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.OptionVO;
 import com.myshop.cm.model.OrderVO;
+import com.myshop.cm.model.SCateVO;
 import com.myshop.cm.service.CalculateService;
+import com.myshop.cm.service.CategoryService;
+import com.myshop.cm.service.DeliveryAddressService;
 import com.myshop.cm.service.DeliveryCategoryService;
 import com.myshop.cm.service.DeliveryTemplateService;
 import com.myshop.cm.service.GoodsService;
+import com.myshop.cm.service.MemberService;
 import com.myshop.cm.service.OptionService;
 import com.myshop.cm.service.OrderService;
 
@@ -47,6 +55,13 @@ public class SellerController {
 	private OrderService orderService;
 	@Autowired
 	private OptionService optionService;
+	@Autowired
+	private MemberService memberService;
+	@Autowired
+	private DeliveryAddressService deliveryAddressService;
+	@Autowired
+	private CategoryService categoryService;
+	
 
 	// 상품 등록 폼으로 이동
 	@RequestMapping(value = "/goodsuploadform")
@@ -60,10 +75,14 @@ public class SellerController {
 		// 배송 템플릿 목록 구해오기
 		List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList();
 		
+		// 카테고리 대분류 불러오기
+		List<LCateVO> lcatelist = categoryService.getLCateList();
+		
 		// 경로 설정
 		ModelAndView goodsuploadformM = new ModelAndView("seller/goodsuploadform");
 		goodsuploadformM.addAllObjects(getdeliverycatelist);
 		goodsuploadformM.addObject("deltemlist", deltemlist);
+		goodsuploadformM.addObject("lcatelist", lcatelist);
 		
 		return goodsuploadformM;
 	}
@@ -279,7 +298,8 @@ public class SellerController {
 	
 	// 상품 수정폼으로 이동
 	@RequestMapping(value = "/goodsupdate")
-	public ModelAndView goodsupdate(@RequestParam("gds_num") int gds_num, @RequestParam("page") String page,
+	public ModelAndView goodsupdate(@RequestParam("gds_num") int gds_num,
+									@RequestParam(value = "page", required = false) String page,
 			HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView goodsupdateM = new ModelAndView();
 		GoodsVO goods = goodsService.goodsdetail(gds_num);
@@ -296,10 +316,22 @@ public class SellerController {
 		// 베송 템플릿 불러오기
 		DeliveryTemplateVO gettemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
 		
+		// 카테고리 대분류 불러오기
+		List<LCateVO> lcatelist = categoryService.getLCateList();
+		
+		//  대분류코드로 중분류 카테고리 리스트 불러오기
+		List<MCateVO> mcatelist = categoryService.getMCateList(goods.getLcate_code());
+		
+		// 중분류 코드로 소분류코드 불러오기
+		List<SCateVO> scatelist = categoryService.getSCateList(goods.getMcate_code());
+		
 		goodsupdateM.addAllObjects(getdeliverycatelist);
 		goodsupdateM.addObject("gettemplate", gettemplate);
 		goodsupdateM.addObject("optionlist", optionlist);
 		goodsupdateM.addObject("deltemlist", deltemlist);
+		goodsupdateM.addObject("lcatelist", lcatelist);
+		goodsupdateM.addObject("mcatelist", mcatelist);
+		goodsupdateM.addObject("scatelist", scatelist);
 		goodsupdateM.addObject("goods", goods);
 		goodsupdateM.addObject("page", page);
 		goodsupdateM.setViewName("seller/goodsupdateform");
@@ -588,10 +620,8 @@ public class SellerController {
 		// calcul_num으로 정산정보 불러오기
 		CalculateVO calculate = calculateService.getCalculDetail(clcln_num);
 		
-		
 		// 정산정보의 getOrd_num 값으로 주문정보 불러오기
 		OrderVO order = orderService.getOrderDetail(calculate.getOrd_num());
-		
 		
 		// 정산정보의 gds_num으로 상품정보 불러오기
 		GoodsVO goods = goodsService.goodsdetail(calculate.getGds_num());
@@ -613,8 +643,6 @@ public class SellerController {
 	public ModelAndView sellergoodsqnalist() {
 		ModelAndView sellergoodsqnalistM = new ModelAndView("seller/sellergoodsqnalist");
 		
-		
-		
 		return sellergoodsqnalistM;
 	}
 	
@@ -625,14 +653,49 @@ public class SellerController {
 		// 주문리스트 받아오기
 		Map<String, Object> orderlist = orderService.getOrderList(request, response);
 		
-		// 
-		
-		
-		
 		ModelAndView sellerorderlistM = new ModelAndView("seller/sellerorderlist");
 		sellerorderlistM.addAllObjects(orderlist);
 		
 		return sellerorderlistM;
 	}
+	
+	// 판매자 주문 상세목록으로 이동
+	@RequestMapping(value = "sellerorderdetail")
+	public ModelAndView sellerorderdetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		int ord_num = Integer.parseInt(request.getParameter("ord_num"));		
+		String page = request.getParameter("page");
+		
+		// 주문 상세정보 구해오기
+		OrderVO order = orderService.getOrderDetail(ord_num);
+		
+		// 주문 상세정보의 gds_num으로 상품정보 불러오기
+		GoodsVO goods = goodsService.goodsdetail(order.getOrd_gdsnum());
+		
+		// 주문 상세정보의 ord_gdsoption 으로 옵션정보 불러오기
+		OptionVO option = optionService.getoption(order.getOrd_gdsoption());
+		
+		// 상품 상세정보의 deltem_num 으로 배송탬플릿 정보 불러오기
+		DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
+		
+		// 주문 상세정보의 mem_num으로 구매자 상세정보 불러오기
+		MemberVO member = memberService.getmemberinfo(order.getOrd_memnum());
+		
+		// 주문 상세정보의 mem_num으로 배송지 상세정보구하기
+		DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getOrd_memnum());
+		
+		
+		ModelAndView sellerorderdetailM = new ModelAndView("seller/sellerorderdetail");
+		sellerorderdetailM.addObject("page", page);
+		sellerorderdetailM.addObject("order", order);
+		sellerorderdetailM.addObject("goods", goods);
+		sellerorderdetailM.addObject("option", option);
+		sellerorderdetailM.addObject("deliverytemplate", deliverytemplate);
+		sellerorderdetailM.addObject("member", member);
+		sellerorderdetailM.addObject("deliveryAddress", deliveryAddress);
+		
+		return sellerorderdetailM;
+	}
+	
+
 
 }

@@ -4,7 +4,7 @@ public class OrderVO {
 	private int ord_num;
 	private int ord_memnum;
 	private int ord_gdsnum;
-	private String ord_gdsoption;
+	private int ord_gdsoption;
 	private int ord_gdscount;
 	private int ord_delfee;
 	private String ord_request;
@@ -14,6 +14,10 @@ public class OrderVO {
     private String gds_thumbnail;
     private String gds_name;
     private String mem_id;
+    private String opt_1stname;
+    private String opt_1stval; 
+    private String opt_2ndname;
+    private String opt_2ndval;
 	
 	public int getOrd_num() {
 		return ord_num;
@@ -33,10 +37,10 @@ public class OrderVO {
 	public void setOrd_gdsnum(int ord_gdsnum) {
 		this.ord_gdsnum = ord_gdsnum;
 	}
-	public String getOrd_gdsoption() {
+	public int getOrd_gdsoption() {
 		return ord_gdsoption;
 	}
-	public void setOrd_gdsoption(String ord_gdsoption) {
+	public void setOrd_gdsoption(int ord_gdsoption) {
 		this.ord_gdsoption = ord_gdsoption;
 	}
 	public int getOrd_gdscount() {
@@ -64,7 +68,6 @@ public class OrderVO {
 		this.ord_totalprice = ord_totalprice;
 	}
 	
-	
 	public String getGds_thumbnail() {
 		return gds_thumbnail;
 	}
@@ -84,6 +87,28 @@ public class OrderVO {
 		this.mem_id = mem_id;
 	}
 	
-	
-
+	public String getOpt_1stname() {
+		return opt_1stname;
+	}
+	public void setOpt_1stname(String opt_1stname) {
+		this.opt_1stname = opt_1stname;
+	}
+	public String getOpt_1stval() {
+		return opt_1stval;
+	}
+	public void setOpt_1stval(String opt_1stval) {
+		this.opt_1stval = opt_1stval;
+	}
+	public String getOpt_2ndname() {
+		return opt_2ndname;
+	}
+	public void setOpt_2ndname(String opt_2ndname) {
+		this.opt_2ndname = opt_2ndname;
+	}
+	public String getOpt_2ndval() {
+		return opt_2ndval;
+	}
+	public void setOpt_2ndval(String opt_2ndval) {
+		this.opt_2ndval = opt_2ndval;
+	}
 }

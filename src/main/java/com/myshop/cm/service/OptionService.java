@@ -37,14 +37,18 @@ public class OptionService {
 	}
 
 	// 여러옵션수정
-	public void updateOptions(Map<String, Object> map) {
+	public void updateOptions(Map<String, Object> map) throws Exception{
 		optionDAO.updateOptions(map);
 		
 	}
 
 	// 단일옵션 수정
-	public void updateOption(OptionVO optionvo) {
+	public void updateOption(OptionVO optionvo) throws Exception{
 		optionDAO.updateOption(optionvo);
+	}
+
+	public OptionVO getoption(int opt_num) throws Exception{
+		return optionDAO.getoption(opt_num);
 	}
 	
 	//
