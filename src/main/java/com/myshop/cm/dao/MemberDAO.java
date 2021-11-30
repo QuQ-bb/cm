@@ -1,7 +1,4 @@
 package com.myshop.cm.dao;
-
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -73,6 +70,8 @@ public class MemberDAO {
 		MemberVO member = sqlSession.selectOne("memberns.select_memeber_info", mem_id);
 		return member;
 	}
-	
 
+	public Object getmemberInfo(int mem_num) {
+		return sqlSession.selectOne("memberMapper.select_member",mem_num);
+	}
 }

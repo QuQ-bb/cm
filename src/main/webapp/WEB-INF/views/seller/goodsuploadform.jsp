@@ -33,9 +33,18 @@
 				<tr>
 					<th width="100">카테고리 선택</th>
 					<td>
-						<input type="text" id="lcate_code" name="lcate_code">
-						<input type="text" id="mcate_code" name="mcate_code">
-						<input type="text" id="scate_code" name="scate_code">
+						<span id="lcate">
+							<select id="lcate_code" name="lcate_code" onchange="mcateload()">
+									<option value=0>대분류 선택</option>
+								<c:forEach var="lcate" items="${lcatelist}">
+									<option value="${lcate.lcate_code}">${lcate.lcate_name}</option>
+								</c:forEach>
+							</select>
+						</span>
+						<span id="mcate">
+						</span>
+						<span id="scate">
+						</span>
 					</td>
 				</tr>
 				<tr>
@@ -93,7 +102,6 @@
 						</select>
 						<div id="deltemdiv" name="deltemdiv">
 						</div>
-					
 					
 					</td>
 				</tr>

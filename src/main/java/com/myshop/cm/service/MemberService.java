@@ -1,18 +1,15 @@
 package com.myshop.cm.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myshop.cm.dao.MemberDAO;
 import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.MemberVO;
-import com.myshop.cm.model.SellerVO;
 
 @Service
 public class MemberService {
-
+	
 	@Autowired
 	private MemberDAO memberDao;
 	
@@ -68,6 +65,7 @@ public class MemberService {
 	}
 	//
 
-
-	
+	public MemberVO getmemberinfo(int mem_num) {
+		return (MemberVO)memberDao.getmemberInfo(mem_num);
+	}
 }

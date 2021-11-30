@@ -15,7 +15,6 @@ public class CalculateDAO {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	
 	@Transactional
 	public int getCalculListCount() throws Exception{
 		int count = 0;
@@ -31,7 +30,6 @@ public class CalculateDAO {
 		return list;
 	}
 	
-	
 	@Transactional
 	public CalculateVO getCalculDetail(int clcln_num) throws Exception{
 		CalculateVO calculateVO = sqlSession.selectOne("calculatorMapper.select_calcul_detail", clcln_num);
@@ -40,3 +38,4 @@ public class CalculateDAO {
 	
 
 }
+

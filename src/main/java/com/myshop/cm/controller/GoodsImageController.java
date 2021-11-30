@@ -152,8 +152,4 @@ public class GoodsImageController {
 			e.printStackTrace();
 		}
 	}
-	
-
-	
-	
 }

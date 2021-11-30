@@ -19,6 +19,8 @@ public class OrderService {
 	
 	@Autowired
 	private OrderDAO orderDao;
+	@Autowired
+	private OrderDAO orderDAO;
 
 	//리뷰페이지 ord_num값 구하기
 	public OrderVO getOrdReview(int ord_num)throws Exception {
@@ -26,6 +28,55 @@ public class OrderService {
 		return orderrev;
 	}
 
+	// 판매자페이지에서 주문 상세내역 불러오기
+	public OrderVO getOrderDetail(int ord_num) throws Exception{
+		OrderVO order = orderDAO.getOrderDetail(ord_num);
+		return order;
+	}
+
+	public Map<String, Object> getOrderList(HttpServletRequest request, 
+			HttpServletResponse response) throws Exception{
+		List<OrderVO> orderlist = new ArrayList<OrderVO>();
+		
+		int page = 1;
+		int limit = 10;	// 한 화면에 출력할 상품 수
+		
+		if(request.getParameter("page") != null) {
+			page = Integer.parseInt(request.getParameter("page"));
+		}
+		
+		int pageIndex = (page-1)*10;
+		
+		// 페이지 번호(page)를 DAO 클래스에 전달한다.
+		// 총 리스트 수를 받아옴
+		int listcount = orderDAO.getOrderListCount();
+		
+		// 페이지 번호(page)를 DAO 클래스에 전달한다.
+		orderlist = orderDAO.getOrderList(pageIndex);	// 리스트를 받아옴
+		
+		// 총 페이지 수
+		int maxpage = (int)((double)listcount / limit + 0.95); // 0.95를 더해서 올림처리
+		
+		// 현재 페이지에 보여줄 시작 페이지 수(1, 11, 21 등...)
+		int startpage = (((int) ((double) page / 10 + 0.9)) - 1) * 10 + 1;
+		// 현재 페이지에 보여줄 마지막 페이지 수.(10, 20, 30 등...)
+		int endpage = maxpage;
+
+		if (endpage > startpage + 10 - 1)
+			endpage = startpage + 10 - 1;
+		
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		
+		resultMap.put("page", page);
+		resultMap.put("startpage", startpage);
+		resultMap.put("endpage", endpage);
+		resultMap.put("maxpage", maxpage);
+		resultMap.put("listcount", listcount);
+		resultMap.put("orderlist", orderlist);
+
+		return resultMap;
+	}
+	
 	public Map<String, Object> getHistoryList(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception{
 		List<OrderVO> historylist = new ArrayList<OrderVO>();
@@ -39,11 +90,12 @@ public class OrderService {
 		
 		int pageIndex = (page-1)*10;
 		
-		// 총 리스트 수를 받아옴
-		int listcount = orderDao.getHistoryListCount();
-		
 		// 페이지 번호(page)를 DAO 클래스에 전달한다.
 		historylist = orderDao.getHistoryList(pageIndex);	// 리스트를 받아옴
+		// 총 리스트 수를 받아옴
+		int listcount = orderDAO.getHistoryListCount();
+		
+		// 페이지 번호(page)를 DAO 클래스에 전달한다.
 		
 		// 총 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 0.95를 더해서 올림처리
@@ -67,7 +119,4 @@ public class OrderService {
 
 		return resultMap;
 	}
-
-	
-
 }

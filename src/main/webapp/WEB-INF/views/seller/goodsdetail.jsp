@@ -8,10 +8,6 @@
 <meta charset="UTF-8">
 <title>상품 상세페이지</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
-<!-- SmartEditor 텍스트 편집기 -->
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/resources/smarteditor2/js/HuskyEZCreator.js"
-	charset="utf-8"></script>
 </head>
 <body>
 

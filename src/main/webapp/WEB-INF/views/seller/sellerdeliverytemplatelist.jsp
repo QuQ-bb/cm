@@ -33,7 +33,7 @@
 		<th>액션</th>
 	</tr>
 	
-		<c:set var="num" value="${listcount-(page-1)*10}"/> 	 	
+		<c:set var="num" value="${listcount}"/> 	 	
 		<c:forEach var="deltemlist" items="${deltemlist}">
 			<tr>
 				<!-- 번호 출력 부분 -->	

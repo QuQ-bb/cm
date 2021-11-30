@@ -109,6 +109,7 @@ function deltemLoad() {
 }
 
 
+
 //배송템플릿 유효성검사
 function goodsupload_check(){
 	// 스마트 에디터 유효성검사
@@ -130,6 +131,11 @@ function goodsupload_check(){
 		$("#gds_name").val("").focus();
 		return false;
 	}
+	/*if ($.trim($("#gds_thumbnail1").val()) == "" && $.trim($("#oldgds_thumbnail").val()) == "" ) {
+		alert("대표이미지를 업로드 해주세요");
+		$("#gds_thumbnail1").val("").focus();
+		return false;
+	}*/
 	if ($.trim($("#gds_price").val()) == "") {
 		alert("가격을 입력해 주세요");
 		$("#gds_price").val("").focus();

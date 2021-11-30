@@ -4,25 +4,60 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="optionMapper">
-	<!-- 대량옵션 insert -->
-	<select id="insert_options" parameterType="java.util.Map">
+	<!-- 여러옵션 insert -->
+	<insert id="insert_options" parameterType="java.util.Map">
 		INSERT INTO project.option
 		(gds_num, opt_1stname, opt_1stval, 
-		opt_2edname, opt_2edval, opt_count)
+		opt_2ndname, opt_2ndval, opt_count)
 		VALUES
 		<foreach item="option" collection="list" separator=",">
 			(#{option.gds_num}, #{option.opt_1stname}, #{option.opt_1stval}, 
-			#{option.opt_2edname}, #{option.opt_2edval}, #{option.opt_count})
+			#{option.opt_2ndname}, #{option.opt_2ndval}, #{option.opt_count})
 		</foreach>
-	</select>
+	</insert>
 
 	<!-- 옵션이 없는경우 insert -->
-	<select id="insert_option" parameterType="option">
+	<insert id="insert_option" parameterType="option">
 		INSERT INTO project.option
 		(gds_num, opt_count)
 		VALUES
 		(#{gds_num}, #{opt_count})
-		
+	</insert>
+	
+	<!-- 상품별 옵션 리스트 출력 -->
+	<select id="select_option_list" parameterType="int" resultType="option">
+		select * from project.option where gds_num = #{gds_num}
 	</select>
+	
+	<!-- 여러 옵션 삭제 -->
+	<delete id="delete_options" parameterType="int">
+		delete from project.option where gds_num = #{gds_num}
+	</delete>
+	
+	<!-- 여러 옵션 수정 -->
+	<update id="update_options" parameterType="java.util.Map">
+		<foreach item="option" collection="list" separator=";">
+			UPDATE project.option
+			SET
+			opt_count = #{option.opt_count}
+			WHERE
+			opt_num = #{option.opt_num}
+		</foreach>
+	</update>
+	
+	<!-- 단일옵션 수정 -->
+	<update id="update_option" parameterType="option">
+		UPDATE project.option
+			SET
+			opt_count = #{opt_count}
+			WHERE
+			opt_num = #{opt_num}
+	</update>
+	
+	<!-- 옵션번호로 옵션 불러오기-->
+	<select id="select_option" parameterType="int" resultType="option">
+		select * from project.option WHERE opt_num=#{opt_num}
+	</select>
+
 
 </mapper>

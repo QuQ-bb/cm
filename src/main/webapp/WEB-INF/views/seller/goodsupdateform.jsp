@@ -13,8 +13,8 @@
 	src="<%=request.getContextPath()%>/resources/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- 우편번호 API, 배송템플릿 유효성검사 -->
 <script src="<%=request.getContextPath()%>/resources/js/sellerjs/sellerdeliverytemplate.js"></script>
-<!-- Ajax 및 상품업로드 유효성검사 -->
-<script src="<%=request.getContextPath()%>/resources/js/sellerjs/goodsuploadform.js"></script>
+<!-- Ajax 및 상품수정 유효성검사 -->
+<script src="<%=request.getContextPath()%>/resources/js/sellerjs/goodsupdateform.js"></script>
 <!-- 옵션 유효성검사 -->
 <script src="<%=request.getContextPath()%>/resources/js/sellerjs/insertOption.js"></script>
 
@@ -32,9 +32,40 @@
 				<tr>
 					<th width="100">카테고리 선택</th>
 					<td>
-						<input type="text" id="lcate_code" name="lcate_code" value="${goods.lcate_code}">
-						<input type="text" id="mcate_code" name="mcate_code" value="${goods.mcate_code}">
-						<input type="text" id="scate_code" name="scate_code" value="${goods.scate_code}">
+						<span id="lcate">
+							<select id="lcate_code" name="lcate_code" onchange="mcateload()">
+									<option value=0>대분류 선택</option>
+								<c:forEach var="lcate" items="${lcatelist}">
+									<option value="${lcate.lcate_code}" 
+									<c:if test="${lcate.lcate_code == goods.lcate_code}"> 
+										selected="selected"</c:if>
+									>${lcate.lcate_name}</option>
+								</c:forEach>
+							</select>
+						</span>
+						<span id="mcate">
+						<select id="mcate_code" name="mcate_code" onchange="scateload()">
+								<option value=0>중분류 선택</option>
+							<c:forEach var="mcate" items="${mcatelist}">
+								<option value="${mcate.mcate_code}"
+								<c:if test="${mcate.mcate_code == goods.mcate_code}"> 
+										selected="selected"</c:if>>${mcate.mcate_name}</option>
+							</c:forEach>
+						</select>
+						</span>
+						<span id="scate">
+							<select id="scate_code" name="scate_code">
+									<option value=-1>소분류 선택</option>
+								<c:forEach var="scate" items="${scatelist}">
+									<option value="${scate.scate_code}"
+									<c:if test="${scate.scate_code == goods.scate_code}"> 
+										selected="selected"</c:if>>${scate.scate_name}</option>
+								</c:forEach>
+									<option value=0 
+									<c:if test="${goods.scate_code == 0}"> 
+										selected="selected"</c:if>>소분류 없음</option>
+							</select>						
+						</span>
 					</td>
 				</tr>
 				<tr>
@@ -63,46 +94,89 @@
 				<tr>
 					<th>옵션</th>
 					<td>
-					<div id="pre_set">
-							옵션1 : <input type="text" name="size" id="option1" style="width:150px">
-							옵션2 : <input type="text" name="color" id="option2" style="width:150px">
+						<div id="pre_set">
+							<input type="text" name="option1name" id="option1name" placeholder="옵션명" size=7 value="${optionlist[0].opt_1stname}">  : 
+							<input type="text" name="option1val" id="option1val" style="width:300px" placeholder="쉼표(,)로 구분해주세요. ex)red,blue,..."><br>
+							<input type="text" name="option2name" id="option2name" placeholder="옵션명" size=7 value="${optionlist[0].opt_2ndname}">  : 
+							<input type="text" name="option2val" id="option2val" style="width:300px" placeholder="쉼표(,)로 구분해주세요. ex)L,XL,..."><br>
 							<input type="button" value="추가 " onclick="add_item()">
 						</div>
 					<div id="field">
-						<c:if test="${goods.gds_option != null }">
-						<table border="1">
-							<tr>
-								<td>옵션</td>
-								<td>수량</td>
-							</tr>
-							<c:forEach var="optioncom" items="${optioncom}" varStatus="status">
-							<tr>
-								<td><input type="text" id="optioncom" name="optioncom" value="${optioncom}" readonly></td>
-								<td><input type="text" id="optioncount" name="optioncount" value="${optioncount[status.index]}"></td>
-							</tr>
-							</c:forEach>
-							<tr>
-								<td><input type="button" onclick="insertOpion()" value="확인"></td>
-							</tr>
-						</table>
+						<c:set var="sum" value="0" />
+						<c:if test="${optionlist[0].opt_1stval != null }">
+							<c:choose>
+								<c:when test="${optionlist[0].opt_2ndval != null}">
+									<!-- 옵션값을 2개다 입력한 경우 -->
+									<table border="1">
+										<tr>
+											<td>${optionlist[0].opt_1stname} - ${optionlist[0].opt_2ndname}</td>
+											<td>재고</td>
+										</tr>
+										<c:forEach var="optionlist" items="${optionlist}">
+											<tr>
+												<td>
+													<input type="hidden" id="edit_opt_num" name="edit_opt_num" value="${optionlist.opt_num }">
+													<input type="text" id="edit_opt_1stval" name="edit_opt_1stval" value="${optionlist.opt_1stval} - ${optionlist.opt_2ndval}" readonly>
+												</td>
+												<td>
+													<input type="text" id="edit_opt_count" name="edit_opt_count" value="${optionlist.opt_count}">
+												</td>
+												<c:set var="sum" value="${sum+optionlist.opt_count}"/>
+											</tr>
+										</c:forEach>
+										<tr>
+											<td><input type="button" onclick="updateOption()" value="확인"></td>
+										</tr>
+									</table>
+									
+								</c:when>
+								<c:otherwise>
+								<!-- 옵션값을 1개만 입력한 경우 -->
+									<table border="1">
+										<tr>
+											<td>${optionlist[0].opt_1stname}</td>
+											<td>재고</td>
+										</tr>
+										<c:forEach var="optionlist" items="${optionlist}">
+											<tr>
+												<td>
+													<input type="hidden" id="edit_opt_num" name="edit_opt_num" value="${optionlist.opt_num }">
+													<input type="text" id="edit_opt_1stval" name="edit_opt_1stval" value="${optionlist.opt_1stval}" readonly>
+												</td>
+												<td>
+													<input type="text" id="edit_opt_count" name="edit_opt_count" value="${optionlist.opt_count}">
+												</td>
+												<c:set var="sum" value="${sum+optionlist.opt_count}"/>
+											</tr>
+										</c:forEach>
+										<tr>
+											<td><input type="button" onclick="updateOption()" value="확인"></td>
+										</tr>
+									</table>
+								</c:otherwise>
+							</c:choose>
+						</c:if>
+						<c:if test="${optionlist[0].opt_1stval == null}">
+							<input type="hidden" id="opt_num" name="opt_num" value="${optionlist[0].opt_num }">
+							<c:set var="sum" value="${optionlist[0].opt_count}"/>
 						</c:if>
 					</div>
 				<tr>
 					<th>재고</th>
-					<td><input type="text" id="gds_count" name="gds_count" value="${goods.gds_count}"></td>
+					<td><input type="text" id="opt_count" name="opt_count" value="${sum}"></td>
 				</tr>
 				<tr>
 					<th>배송 정보</th>
 					<td>
 						<select id="deltem_num" name="deltem_num" onchange="deltemLoad()">
 								<option value="-1">배송 템플릿</option>
-							<c:forEach var="dtlist" items="${deltemlist}">
+								<c:forEach var="dtlist" items="${deltemlist}">
 								<option value="${dtlist.deltem_num}" <c:if test="${dtlist.deltem_num == goods.deltem_num}"> selected="selected"</c:if>>
 									${dtlist.deltem_name}</option>
-							</c:forEach>
+								</c:forEach>
 								<option value="0">새로입력</option>
 						</select>
-						<div id="deltemdiv" name="deltemdiv">
+						<div id="deltemdiv">
 							<c:if test="${gettemplate != null}">
 								<table>
 									<tr>
@@ -152,8 +226,6 @@
 								</table>
 							</c:if>
 						</div>
-					
-					
 					</td>
 				</tr>
 				<tr>

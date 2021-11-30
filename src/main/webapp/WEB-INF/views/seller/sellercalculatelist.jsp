@@ -42,8 +42,6 @@
 			<c:forEach var="clist" items="${calculatelist}">
 			
 				<tr class="calculList">
-					
-					
 					<td>
 						<input type="hidden" id="clcln_num" name ="clcln_num" value="${clist.clcln_num}">
 						<input type="hidden" id="sel_num" name ="sel_num" value="${clist.sel_num}">

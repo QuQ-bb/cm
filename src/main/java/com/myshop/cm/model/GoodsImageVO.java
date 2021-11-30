@@ -50,6 +50,4 @@ public class GoodsImageVO {
 	public void setCallback_func(String callback_func) {
 		this.callback_func = callback_func;
 	}
-	
-	
 }

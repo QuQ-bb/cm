@@ -65,6 +65,4 @@
 		select del_name from deliverycategory where del_code=#{del_code}
 	</select> -->
 	
-	
-	
 </mapper>

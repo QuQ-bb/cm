@@ -52,7 +52,5 @@ public class DeliveryTemplateDAO {
 	@Transactional
 	public void deletedelitem(int deltem_num) {
 		sqlSession.delete("deliveryMapper.delete_template", deltem_num);
-		
 	}
-
 }

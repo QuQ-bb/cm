@@ -48,8 +48,4 @@ public class DeliveryTemplateService {
 	public void deletedelitem(int deltem_num) {
 		deliverytemplateDAO.deletedelitem(deltem_num);
 	}
-	
-
-	
-
 }
