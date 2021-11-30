@@ -52,5 +52,4 @@ public class NoticeVO {
 	public void setNtc_delyn(String ntc_delyn) {
 		this.ntc_delyn = ntc_delyn;
 	}
-		
 }

@@ -19,6 +19,7 @@
  		<typeAlias type="com.myshop.cm.model.OrderVO" alias="order"/>
  		<typeAlias type="com.myshop.cm.model.GoodsVO" alias="goods"/>
  		<typeAlias type="com.myshop.cm.model.PayDetailVO" alias="paydetail"/>
-
  	</typeAliases>
  </configuration>
+ 
+ 

@@ -186,5 +186,4 @@ public class GoodsVO {
 	public void setGds_delyn(String gds_delyn) {
 		this.gds_delyn = gds_delyn;
 	}
-
 }
