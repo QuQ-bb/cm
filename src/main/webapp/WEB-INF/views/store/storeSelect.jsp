@@ -59,7 +59,7 @@
 									<span class="position">
 										<span class="dc">
 											<span class="dc_price">
-												${select.gds_price}
+												<fmt:formatNumber value="${select.gds_price}" pattern="###,###,###" />
 												<span class="won">원</span>
 											</span>
 										</span>
@@ -86,72 +86,55 @@
 												<label class="text text1">선택</label>
 												<input type="hidden" class="opt_num" value>
 												<ul class="option-list" style="z-index: 10;">
-												<c:forEach	items="${select.optionVO}" var="opt">
-													<li class="option option1" id="${opt.opt_num}">${opt.opt_1stval}</li>
-												</c:forEach>
+													<c:forEach items="${select.optionVO}" var="opt">
+														<li class="option option1" id="${opt.opt_2ndval}">${opt.opt_1stval}</li>
+													</c:forEach>
 												</ul>
 											</div>
-											<script type="text/javascript">
-												// active가 추가되었을 경우에만 option-list가 보이도록
-												// active 클래스 추가/제거 이벤트 함수
-												$('.select1').click(function () {
-													$(this).toggleClass("active");
-												});
-												
-												// option 태그 클릭 시, 선택한 값으로 변경 이벤트 함수
-												$('.option1').click(function () {
-													var opt_1stval = $(this).text();
-													alert(opt_1stval);
-													var gds_num = ${select.gds_num};
-													alert(gds_num);
-													
-													$(".text1").html($(this).html());
-													$.ajax({
-														url: "option2Select",
-														type: "POST",
-														async: false,
-														data: {
-															gds_num : gds_num,
-															opt_1stval : opt_1stval
-														},
-														success: function(data) {
-															alert(data);
-															
-														},
-														error:{
-															
-														}
-													});
-												});
-											</script>
 										</dd>
 									</dl>
 								</c:if>
-									<dl class="list" style="overflow: visible;">
-										<dt class="tit">${select.optionVO[0].opt_2ndname}</dt>
-										<dd class="">
-											<div class="select select2">
-												<label class="text text2">선택</label>
-												<ul class="option-list">
-													<c:forEach	items="${select.optionVO}" var="opt">
-													<li class="option option1">${opt.opt_2ndval}</li>
-												</c:forEach>
-												</ul>
-											</div>
-											<script type="text/javascript">
-												// active가 추가되었을 경우에만 option-list가 보이도록
-												// active 클래스 추가/제거 이벤트 함수
-												$('.select2').click(function () {
-													$(this).toggleClass("active");
+									<div class="opt2select"></div>
+									<script type="text/javascript">
+										// active가 추가되었을 경우에만 option-list가 보이도록
+										// active 클래스 추가/제거 이벤트 함수
+										$('.select1').click(function () {
+											$(this).toggleClass("active");
+										});
+										
+										// option 태그 클릭 시, 선택한 값으로 변경 이벤트 함수
+										$('.option1').click(function () {
+											var opt_1stval = $(this).text();
+											//alert(opt_1stval);
+											var gds_num = ${select.gds_num};
+											//alert(gds_num);
+											
+											$(".text1").html($(this).html());
+											
+											var opt_2ndval = $(this).attr('id');
+											//alert('"'+opt_2ndval+'"');
+											
+											if (opt_2ndval) {
+												//option1 선택시, option2 불러오기
+												$.ajax({
+													url: "option2Select",
+													type: "GET",
+													async: false,
+													data: {
+														gds_num : gds_num,
+														opt_1stval : opt_1stval
+													},
+													success: function(data) {
+														//alert(data);
+														$('.opt2select').html(data);
+													},
+													error: function(){
+														alert("에러");
+													}
 												});
-												
-												// option 태그 클릭 시, 선택한 값으로 변경 이벤트 함수
-												$('.option2').click(function () {
-													$(".text2").html($(this).html());
-												});
-											</script>
-										</dd>
-									</dl>
+											}
+										});
+									</script>
 								</div>
 							</div>
 						<div class="quantity">

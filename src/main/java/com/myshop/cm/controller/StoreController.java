@@ -25,17 +25,19 @@ public class StoreController {
 	private StoreService storeService;
 	
 	//옵션2 찾아오는 거
-	@PostMapping("option2Select")
+	@GetMapping("option2Select")
 	public ModelAndView option2Select(OptionVO optionVO) throws Exception {
 		System.out.println("Option2Select 들어왔냐");
 		
 		ModelAndView mv = new ModelAndView();
 		
 		List<OptionVO> list = storeService.option2Select(optionVO);
-		System.out.println(list.get(0).getOpt_num());
+		//System.out.println(list.get(0).getOpt_num());
+		//System.out.println(list.get(0).getOpt_2ndname());
+		//System.out.println(list.get(0).getOpt_2ndval());
 		
-		mv.setViewName("common/ajaxResult");
-		mv.addObject("result", list);
+		mv.addObject("list", list);
+		mv.setViewName("common/option2Select");
 		
 		return mv;
 	}

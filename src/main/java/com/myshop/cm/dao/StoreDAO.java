@@ -23,6 +23,11 @@ public class StoreDAO {
 		return sqlSession.selectList(NAMESPACE+"storeList", pager);
 	}
 	
+	// 전체 상품 개수
+	public int storeCount(Pager pager) throws Exception {
+		return sqlSession.selectOne(NAMESPACE+"storeCount");
+	}
+	
 	// 상품 상세
 	public GoodsVO storeSelect(GoodsVO goodsVO) throws Exception {
 		return sqlSession.selectOne(NAMESPACE+"storeSelect", goodsVO);

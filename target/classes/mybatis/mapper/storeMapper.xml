@@ -56,10 +56,15 @@
 		from goods
 		<include refid="cateKind"></include> gds_viewyn='y'
 		order by gds_num desc
+		<!-- LIMIT #{startRow}, #{perPage} -->
+	</select>
+	
+	<select id="storeCount" resultType="Integer">
+		select count(gds_num) from goods
 	</select>
 	
 	<select id="storeSelect" resultMap="Select" parameterType="GoodsVO">
-		select G.*, O.opt_num, O.opt_1stname, O.opt_1stval
+		select G.*, O.opt_num, O.opt_1stname, O.opt_1stval, O.opt_2ndval
 		from Goods G left outer join project.option O
 		on G.gds_num = O.gds_num
 		where G.gds_num = #{gds_num}
