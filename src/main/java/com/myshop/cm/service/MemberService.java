@@ -66,6 +66,8 @@ public class MemberService {
 		MemberVO member = memberDao.getMemberInfo(mem_id);
 		return member;
 	}
+	//
+
 
 	
 }

@@ -54,47 +54,15 @@
     <input type="reset" class="btn btn-default form-control"
 onClick="location.href=''" value="취소">
 	  </div>
-	    <button type="button" class="btn btn-primary form-control" data-toggle="modal" data-target="#myModal">비밀번호 확인</button>
-   
-   <!-- The Modal -->
-   <div class="modal" id="myModal">
-  <div class="modal-dialog">
-    <div class="modal-content">
-
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">비밀번호 찾기</h4>
-        <button type="submit" class="close" data-dismiss="modal">&times;</button>
-      </div>
-
-      <!-- Modal body -->
-      <div class="modal-body">
-      <h5>회원님 ${pwdok}</h5>
-      </div>
-
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-      </div>
-
-    </div>
-  </div>
-</div>
 
  	</table>
   </form>
-   <h2 class="pwd_title2">비번찾기 결과</h2>
     <table id="pwd_t2">
      <tr>
-      <th>검색한 비번:</th>
-      <td>${pwdok}</td>
+      <th>${pwdok}</th>
+      <td></td>
      </tr>
     </table>
-    <div id="pwd_close2">
-    <input type="button" value="닫기" class="input_button"
-    onclick="self.close();" />
-    <!-- close()메서드로 공지창을 닫는다. self.close()는 자바스크립트이다. -->
-    </div>
   </div>
   <div class="col-lg-4"></div>
 </div> 

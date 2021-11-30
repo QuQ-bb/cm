@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="orderMapper">
+  
+  <!-- 리뷰페이지 ord_num값 구하기 -->
+  <select id="review_ord" parameterType="int" resultType="order" >
+  select * from project.order where ord_num =#{red_num}
+  </select>
+  <!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
+	<select id="history_list_count" resultType="int" >
+		select count(*) from project.order
+	</select>
+	
+	<!-- 판매자 페이지에서 주문 리스트 불러오기 -->
+	<select id="history_list" resultType="order" parameterType="int">
+	 select 
+      o.ord_num,
+      o.ord_memnum,
+      o.ord_gdsnum,
+      o.ord_gdsoption,
+      o.ord_gdscount,
+      o.ord_delfee,
+      o.ord_request,
+      o.ord_totalprice,
+       g.gds_thumbnail,
+       g.gds_name,
+       m.mem_id,
+       p.opt_1stname, 
+       p.opt_1stval, 
+      p.opt_2ndname, 
+      p.opt_2ndval
+   from project.order as o
+      left JOIN project.goods as g
+         on o.ord_gdsnum = g.gds_num
+      left JOIN project.member as m
+         on o.ord_memnum = m.mem_num
+      left JOIN project.option as p
+         on o.ord_gdsoption = p.opt_num
+	<!-- where -->
+	group by o.ord_num
+	order by o.ord_num desc
+	limit #{pageIndex}, 10
+	</select>
+  
+  
+  </mapper>

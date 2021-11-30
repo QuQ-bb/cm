@@ -35,6 +35,7 @@
 			<mapping path="/sellerchange_ok"/>
 			<mapping path="/member_delete"/>
 			<mapping path="/delete_ok"/>
+			<mapping path="/review_write"/>
 			<beans:ref bean="sessionChk"/>
 		</interceptor>
 	</interceptors>	 

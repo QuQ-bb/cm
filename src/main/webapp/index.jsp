@@ -17,3 +17,10 @@
 <a href="member_idFind">아이디찾기</a> <br>
 <a href="member_passFind">비밀번호찾기</a> <br>
 <a href="member_delete">탈퇴</a> <br>
+<a href="order_history">주문내역</a> <br>
+<a href="history_detail">상세내역</a> <br>
+<a href="review_write">후기작성</a> <br>
+<a href="review_list">후기목록</a> <br>
+<a href="review_cont">후기보기</a> <br>
+<a href="review_update">후기수정</a> <br>
+<a href="review_delete">후기삭제</a> <br>

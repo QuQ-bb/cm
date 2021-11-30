@@ -1,6 +1,7 @@
 package com.myshop.cm.controller;
 
 import java.io.PrintWriter;
+
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,7 +77,6 @@ public class MemberController {
 		 // id값으로 mem_num구하기
 		 int mem =  memberService.selectMemNum(member);
 		 deliveryaddress.setMem_num(mem);
-		 
 		 memberService.insertDelivery(deliveryaddress);
 		 
 	  return "redirect:member_login";
@@ -136,7 +136,7 @@ public class MemberController {
 	@RequestMapping(value="/id_find", method=RequestMethod.POST)
 	public String id_find(@RequestParam("mem_name") String mem_name,
 						  @RequestParam("mem_phone") String mem_phone,
-						  HttpSession session, Model model)throws Exception{
+						  HttpSession session,MemberVO member, Model model)throws Exception{
 		int result =0;
 		MemberVO vo = memberService.idFind(mem_name);
 		
@@ -152,9 +152,7 @@ public class MemberController {
 			if(vo.getMem_phone().equals(mem_phone)) {	//핸드폰번호가 일치할때
 				session.setAttribute("mem_name", mem_name);
 				System.out.println("id찾기 성공");
-				String mem_id = (String) session.getAttribute("mem_id");
-				MemberVO mv = memberService.loginCheck(mem_id);
-				model.addAttribute("mv", mv);
+				
 				
 				return "member/member_idFind";	//찾은 아이디 출력 페이지 만들기
 				
@@ -224,11 +222,8 @@ public class MemberController {
 			}
 
 			model.addAttribute("pwdok", "등록된 Email을 통해 비밀번호를 확인해 주세요.");
-			return "member/member_passFind";
-
+			return "member/findPassResult";
 		}
-
-		
 	}
 	
 	//로그아웃

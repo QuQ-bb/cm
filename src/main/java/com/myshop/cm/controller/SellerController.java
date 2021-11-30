@@ -46,7 +46,7 @@ public class SellerController {
 	         UUID uuid = UUID.randomUUID();
 	         String filename = uuid + mf.getOriginalFilename();
 	         int size = (int) mf.getSize();
-	         String path = request.getRealPath("resources/image/sellerimage");
+	         String path = request.getRealPath("resources/images/sellerimage");
 	         int result = 0;
 	         String file[] = new String[2];
 
@@ -85,19 +85,15 @@ public class SellerController {
 		// 현제 세션에 있는(로그인 한 member의 정보) mem_num값 가져오기
 		MemberVO loginmember = (MemberVO)session.getAttribute("member");
 		int mem_num = loginmember.getMem_num();
-		
 		seller.setMem_num(mem_num);
 		
 		sellerService.registerSeller(seller);
+		
 		System.out.println("컨트롤러");
 		
 		//mem_num불러오기
 		MemberVO vo = sellerService.getMember(member);
 		session.setAttribute("vo", vo);
-	
-		
-		
-		
 		return "redirect:sellerChange_end"; 
 	}
 	

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!-- 리뷰에 넣으려던 pay_Num.. -->
+  <mapper namespace="paydetailMapper">
+  <select id="review_pay" parameterType="int" resultType="paydetail">
+  select * from paydetail where pay_num = #{pay_num};
+  </select>
+  
+  
+  
+  </mapper>

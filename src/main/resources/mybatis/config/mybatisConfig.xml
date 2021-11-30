@@ -10,5 +10,9 @@
  		<typeAlias type="com.myshop.cm.model.MemberVO" alias="member"/>
  		<typeAlias type="com.myshop.cm.model.DeliveryAddressVO" alias="deliveryadd"/>
  		<typeAlias type="com.myshop.cm.model.SellerVO" alias="seller"/>
+ 		<typeAlias type="com.myshop.cm.model.ReviewVO" alias="review"/>
+ 		<typeAlias type="com.myshop.cm.model.OrderVO" alias="order"/>
+ 		<typeAlias type="com.myshop.cm.model.GoodsVO" alias="goods"/>
+ 		<typeAlias type="com.myshop.cm.model.PayDetailVO" alias="paydetail"/>
  	</typeAliases>
  </configuration>

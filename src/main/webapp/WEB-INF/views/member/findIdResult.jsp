@@ -13,7 +13,7 @@
 </head>
 <body>
 
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">ID확인</button>
+  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#myModal">ID확인</button>
    
    <!-- The Modal -->
    <div class="modal" id="myModal">
@@ -23,7 +23,7 @@
       <!-- Modal Header -->
       <div class="modal-header">
         <h4 class="modal-title">ID찾기</h4>
-        <button type="submit" class="close" data-dismiss="modal">&times;</button>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
 
       <!-- Modal body -->

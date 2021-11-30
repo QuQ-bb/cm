@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="reviewMapper">
+  	
+  	<!-- 리뷰 저장 -->
+  	<!-- 리뷰테이블 -->
+  	<insert id="insert_review" parameterType="review">
+  	insert into review
+  	(rev_num, pay_num, gds_num, gds_name,ord_gdsoption,
+  	 mem_num, mem_id, rev_content, rev_date,rev_filename,ord_num)
+  	 values
+  	 (#{rev_num}, #{pay_num}, #{gds_num}, #{gds_name}, #{ord_gdsoption},
+  	  #{mem_num},#{mem_id},#{rev_content}, sysdate(),#{rev_filename},#{ord_num})
+  	</insert>
+  	
+  	<!-- 리뷰 총 게시물 수 -->
+  	<select id="review_count" resultType="int">
+  		select count(rev_num) from review
+  	</select>
+  	
+  	<!--게시판 목록 -->
+  	<select id="review_list" parameterType="int" resultType="review">
+      select * from review
+      order by rev_num desc
+      limit #{pageIndex}, 5
+  	</select>
+  	
+  	<!-- 게시판 내용보기 -->
+	<select id="review_cont" parameterType="int" resultType="review" >
+		select * from review where rev_num =#{rev_num}
+	</select>  	
+
+	<!-- 리뷰 수정 -->
+	<update id="review_update" parameterType="review">
+	update review set
+	 rev_content=#{rev_content} where rev_num=#{rev_num}
+	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="review_delete" parameterType="int">
+	delete from review where rev_num=#{rev_num}
+	</delete>
+	
+  	
+  	
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  </mapper>
