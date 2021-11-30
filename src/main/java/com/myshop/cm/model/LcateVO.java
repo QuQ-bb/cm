@@ -1,8 +1,9 @@
 package com.myshop.cm.model;
 
-public class LcateVO {
+public class LCateVO {
 	private int lcate_code;
 	private String lcate_name;
+	
 	public int getLcate_code() {
 		return lcate_code;
 	}
@@ -15,4 +16,5 @@ public class LcateVO {
 	public void setLcate_name(String lcate_name) {
 		this.lcate_name = lcate_name;
 	}
+
 }

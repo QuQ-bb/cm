@@ -2,16 +2,15 @@ package com.myshop.cm.dao;
 
 import java.util.List;
 
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myshop.cm.model.FaqVO;
-import com.myshop.cm.model.LcateVO;
-import com.myshop.cm.model.McateVO;
+import com.myshop.cm.model.LCateVO;
+import com.myshop.cm.model.MCateVO;
 import com.myshop.cm.model.NoticeVO;
-import com.myshop.cm.model.ScateVO;
+import com.myshop.cm.model.SCateVO;
 
 @Repository
 /*
@@ -27,27 +26,27 @@ public class AdminDAO {
 	@Autowired
 	private SqlSession session;
 	// 카테고리 등록(대)
-	public int LcateInsert(LcateVO lcateVO) throws Exception {
+	public int LcateInsert(LCateVO lcateVO) throws Exception {
 		return session.insert("insertlcate", lcateVO);
 	}
 	// 카테고리 리스트(대)
-	public List<LcateVO> lcatelist(LcateVO lcateVO) throws Exception{
+	public List<LCateVO> lcatelist(LCateVO lcateVO) throws Exception{
 		return session.selectList("lcatelist");
 	}
 	// 카테고리 등록(중)
-	public int McateInsert(McateVO mcateVO) throws Exception {
+	public int McateInsert(MCateVO mcateVO) throws Exception {
 		return session.insert("insertmcate", mcateVO);
 	}
 	// 카테고리 리스트(중)
-	public List<McateVO> mcatelist(McateVO mcateVO) throws Exception{
+	public List<MCateVO> mcatelist(MCateVO mcateVO) throws Exception{
 		return session.selectList("mcatelist");
 	}
 	// 카테고리 등록(소)
-	public int ScateInsert(ScateVO scateVO) throws Exception {
+	public int ScateInsert(SCateVO scateVO) throws Exception {
 		return session.insert("insertscate", scateVO);
 	}
 	// 카테고리 리스트(소)
-	public List<ScateVO> scatelist(ScateVO scateVO) throws Exception{
+	public List<SCateVO> scatelist(SCateVO scateVO) throws Exception{
 		return session.selectList("scatelist");
 	}
 	// FAQ 등록

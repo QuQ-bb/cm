@@ -1,10 +1,12 @@
 package com.myshop.cm.model;
 
-public class ScateVO {
+public class SCateVO {
+
 	private int scate_code;
 	private String scate_name;
 	private int lcate_code;
 	private int mcate_code;
+	
 	public int getScate_code() {
 		return scate_code;
 	}
@@ -29,4 +31,7 @@ public class ScateVO {
 	public void setMcate_code(int mcate_code) {
 		this.mcate_code = mcate_code;
 	}
+	
+	
+
 }
