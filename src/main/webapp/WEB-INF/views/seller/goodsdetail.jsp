@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<th>썸네일</th>
-					<td><img src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${goods.gds_thumbnail}" height="200" width="200" /></td>
+					<td><img src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${goods.gds_thumbnail}" height="200" width="200" /></td>
 				</tr>
 				<tr>
 					<th>단위 가격</th>

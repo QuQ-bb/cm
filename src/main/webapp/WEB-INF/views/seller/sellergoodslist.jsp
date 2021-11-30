@@ -56,7 +56,7 @@
 				<td>
 					<div>
 						<!-- 썸네일 출력 부분 -->
-						<img src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${sgl.gds_thumbnail}" height="100" width="100" />	
+						<img src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${sgl.gds_thumbnail}" height="100" width="100" />	
 						<!-- 제목 출력 부분 -->	
 						<a href="goodsupdate?page=${page}&gds_num=${sgl.gds_num}">
 							${sgl.gds_name}

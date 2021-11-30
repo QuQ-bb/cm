@@ -599,7 +599,7 @@ public class SellerController {
 			deliverytemplate.setDel_name(delinfoarr[1]);
 			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
 		} // if end
-		return "redirect:/sellergoodslist?page="+page;
+		return "redirect:/sellergoodslist";
 	}  //goodsupdate end
 	
 	// 상품 삭제하기
