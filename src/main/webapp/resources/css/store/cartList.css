@@ -40,24 +40,24 @@ input {
     margin-top: -14px;
 }
 .cart_step_unit li.step1:before {
-    background: transparent url(../../images/store/shopping-cart_gray.png) center center no-repeat;
+    background: transparent url(../../images/cart/shopping-cart_gray.png) center center no-repeat;
 }
 .cart_step_unit li.step2:before {
-    background: transparent url(../../images/store/credit-card_gray.png) center center no-repeat;
+    background: transparent url(../../images/cart/credit-card_gray.png) center center no-repeat;
     background-size: 36px;
 }
 .cart_step_unit li.step3:before {
-    background: transparent url(../../images/store/icon-party_gray.png) center center no-repeat;
+    background: transparent url(../../images/cart/icon-party_gray.png) center center no-repeat;
     background-size: 36px;
 }
 .cart_step_unit li.step1.active:before {
-    background: transparent url(../../images/store/shopping-cart_red.png) center center no-repeat;
+    background: transparent url(../../images/cart/shopping-cart_red.png) center center no-repeat;
 }
 .cart_step_unit li.step2.active:before {
-    background: transparent url(../../images/store/credit-card_red.png) center center no-repeat;
+    background: transparent url(../../images/cart/credit-card_red.png) center center no-repeat;
 }
 .cart_step_unit li.step3.active:before {
-    background: transparent url(../../images/store/icon-party_red.png) center center no-repeat;
+    background: transparent url(../../images/cart/icon-party_red.png) center center no-repeat;
 }
 .cart_step_unit li span {
 	display: block;
@@ -85,7 +85,7 @@ input {
     width: 18px;
     height: 30px;
     margin-top: -15px;
-    background: transparent url(../../images/store/bg_step_arrow.png) left top scroll no-repeat;
+    background: transparent url(../../images/cart/bg_step_arrow.png) left top scroll no-repeat;
 }
 .cart_step_unit li:last-child {
 	margin-right: 0;
@@ -133,12 +133,12 @@ input[type="checkbox"].custom_checkbox_all + label:before {
     width: 24px;
     height: 24px;
     font-size: 0;
-    background: transparent url(../../images/store/checkbox_gray.png) -1px -1px scroll no-repeat;
+    background: transparent url(../../images/cart/checkbox_gray.png) -1px -1px scroll no-repeat;
     background-size: 30px 30px;
     background-position: -3px;
 }
 input[type="checkbox"].custom_checkbox_all:checked + label:before {
-	background: transparent url(../../images/store/checkbox_red.png) -1px -1px scroll no-repeat;
+	background: transparent url(../../images/cart/checkbox_red.png) -1px -1px scroll no-repeat;
 	background-size: 30px 30px;
 	background-position: -3px;
 }
@@ -203,12 +203,12 @@ input[type="checkbox"].cart_checkbox + label:before {
     width: 24px;
     height: 24px;
     font-size: 0;
-    background: transparent url(../../images/store/checkbox_gray.png) -1px -1px scroll no-repeat;
+    background: transparent url(../../images/cart/checkbox_gray.png) -1px -1px scroll no-repeat;
     background-size: 30px 30px;
     background-position: -3px;
 }
 input[type="checkbox"].cart_checkbox:checked + label:before {
-	background: transparent url(../../images/store/checkbox_red.png) -1px -1px scroll no-repeat;
+	background: transparent url(../../images/cart/checkbox_red.png) -1px -1px scroll no-repeat;
 	background-size: 30px 30px;
 	background-position: -3px;
 }
@@ -290,7 +290,7 @@ input[type="checkbox"].cart_checkbox:checked + label:before {
     width: 20px;
     height: 16px;
     margin-top: -1px;
-    background: transparent url(../../images/store/arrow-up.png) scroll no-repeat;
+    background: transparent url(../../images/cart/arrow-up.png) scroll no-repeat;
     background-size: 18px;
 }
 .product_info_amount_wrap .btn_amount_minus {
@@ -309,7 +309,7 @@ input[type="checkbox"].cart_checkbox:checked + label:before {
     width: 20px;
     height: 16px;
     margin-top: -2px;
-    background: transparent url(../../images/store/arrow-down.png) scroll no-repeat;
+    background: transparent url(../../images/cart/arrow-down.png) scroll no-repeat;
     background-size: 18px;
 }
 .product_info_amount_wrap .btn_amount_change {
@@ -364,7 +364,7 @@ input[type="checkbox"].cart_checkbox:checked + label:before {
     height: 22px;
     margin-top: 33px;
     font-size: 0;
-    background: transparent url(../../images/store/close_gray.png) center center scroll no-repeat;
+    background: transparent url(../../images/cart/close_gray.png) center center scroll no-repeat;
     /* border: 1px solid #bebebe; */
 }
 .cart_list_wrap .btn_del_selected {
@@ -438,7 +438,7 @@ table {
     top: 36px;
     width: 51px;
     height: 52px;
-    background: transparent url(../../images/store/subtract-line.png) center center no-repeat;
+    background: transparent url(../../images/cart/subtract-line.png) center center no-repeat;
     background-size: 52px;
 }
 .cart_total_price_wrap tbody td.cart_calculator:after {
@@ -449,7 +449,7 @@ table {
     top: 36px;
     width: 51px;
     height: 52px;
-    background: transparent url(../../images/store/equal_red.png)center center no-repeat;
+    background: transparent url(../../images/cart/equal_red.png)center center no-repeat;
 }
 .cart_total_price_wrap tbody td strong.cart_total_price {
 	color: rgb(218, 40, 28);
