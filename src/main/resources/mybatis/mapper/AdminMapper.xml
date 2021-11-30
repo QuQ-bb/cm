@@ -69,6 +69,7 @@
  		     , lcate_name
  		  from lcate 
  	  order by lcate_code asc
+ 	  		   limit 10 offset 0
  	</select>
  	<!-- 카테고리 리스트(중) -->
  	<select id="mcatelist" resultType="mcate">
@@ -77,6 +78,7 @@
  			 , lcate_code
  		  from mcate
  	  order by mcate_code asc
+ 	           limit 10 offset 0
  	</select>
  	<!-- 카테고리 리스트(소) -->
  	<select id="scatelist" resultType="scate">
@@ -86,6 +88,7 @@
  	         , mcate_code
  	      from scate
  	  order by scate_code asc
+ 	           limit 10 offset 0
  	</select>
 	<!-- FAQ등록 -->
 	<insert id="insertfaq" parameterType="faq">

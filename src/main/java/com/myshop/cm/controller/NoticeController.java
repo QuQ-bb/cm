@@ -2,6 +2,8 @@ package com.myshop.cm.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,13 +41,17 @@ public class NoticeController {
 	}
 	// 공지 등록
 	@RequestMapping(value = "/insertnotice")
-	private String insertnotice(NoticeVO noticeVO , Model model) throws Exception{
+	private String insertnotice(NoticeVO noticeVO , Model model , HttpServletRequest request) throws Exception{
 		System.out.println("notice컨트롤러");
+		noticeVO.setNtc_sort(request.getParameter("ntcsort"));
+		noticeVO.setNtc_title(request.getParameter("ntctitle"));
+		noticeVO.setNtc_content(request.getParameter("ntccontent"));
+		
 		
 		int noticeInsert = noticeservice.NoticeInsert(noticeVO);
 		model.addAttribute("noticeInsert", noticeInsert);
 		
 		System.out.println("notice컨트롤러2");
-		return "admin/noticeform";
+		return "admin/noticelist";
 	}
 }
