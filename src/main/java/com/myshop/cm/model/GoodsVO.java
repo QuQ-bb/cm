@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.List;
 
 public class GoodsVO {
+
+
 	private int gds_num;
 	private int lcate_code;
 	private int mcate_code;
@@ -23,10 +25,9 @@ public class GoodsVO {
 	private String gds_ears;
 	private String gds_viewyn;
 	private String gds_delyn;
-
 	// 옵션을 받기위한 VO
 	private List<String> optioncom;
-
+	
 	public List<String> getOptioncom() {
 		return optioncom;
 	}
@@ -186,5 +187,4 @@ public class GoodsVO {
 	public void setGds_delyn(String gds_delyn) {
 		this.gds_delyn = gds_delyn;
 	}
-
 }
