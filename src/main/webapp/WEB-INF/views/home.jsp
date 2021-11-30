@@ -11,10 +11,15 @@
 	Hello world!  
 	첫번째 연동 테스트(성훈)
 	김진
+	집가자
 </h1>
 <script>
 	location.href="adminmain";
 </script>
 <P>  The time on the server is ${serverTime}. </P>
+
+<button >
+
+</button>
 </body>
 </html>

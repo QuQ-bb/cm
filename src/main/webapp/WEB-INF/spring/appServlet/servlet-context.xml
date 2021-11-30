@@ -22,8 +22,26 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+	<!-- Component, Controller, Service, Repository	어노테이션이 붙은 클래스의 빈을 자동 생성하도록 설정 -->
 	<context:component-scan base-package="com.myshop.cm" />
+	
+	<!-- 인터셉터 설정 -->	
+	<beans:bean id="sessionChk" class="com.myshop.cm.interceptor.SessionCheck"/>	
+	 <interceptors>
+		<interceptor>
+			<mapping path="/member_update"/>
+			<mapping path="/update_ok"/>			
+			<mapping path="/member_del"/>
+			<mapping path="/del_ok"/>
+			<mapping path="/member_logout"/>
+			<mapping path="/sellerchange_ok"/>
+			<mapping path="/member_delete"/>
+			<mapping path="/delete_ok"/>
+			<mapping path="/review_write"/>
+			<beans:ref bean="sessionChk"/>
+		</interceptor>
+	</interceptors>	 
+	
 	
 	<!-- 일반 파일 업로드 경로 -->
 	<resources location="/resources/imgUpload" mapping="/imgUpload/**"/>

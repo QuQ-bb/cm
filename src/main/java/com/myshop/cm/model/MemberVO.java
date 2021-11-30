@@ -70,4 +70,8 @@ public class MemberVO {
 		this.mem_delyn = mem_delyn;
 	}
 	
+
 }
+
+
+
