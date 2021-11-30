@@ -14,8 +14,6 @@
 	<h2 align="center">공지사항 등록</h2>
 	<form action="/insertnotice" method="post">
 	
-	
 	</form>
-
 </body>
 </html>

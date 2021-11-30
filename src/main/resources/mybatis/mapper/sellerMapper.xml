@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="sellerMapper">
+
+	<!-- 판매자 전환 신청 -->
+	<insert id="register" parameterType="seller">
+		insert into seller
+		(sel_num, mem_num, sel_bnum, sel_name, sel_ceo, sel_mobnum,
+		sel_post, sel_add, sel_tel, sel_bank, sel_accholder, sel_acc, sel_yn, seling_filename)
+		values
+		(#{sel_num}, #{mem_num}, #{sel_bnum}, #{sel_name}, #{sel_ceo}, #{sel_mobnum},
+		#{sel_post}, #{sel_add}, #{sel_tel}, #{sel_bank},
+		#{sel_accholder},#{sel_acc}, 'Y', #{seling_filename})
+	</insert>
+	
+	<!-- mem_num 가져오기 -->
+	<select id="selectMemNum" parameterType="seller" resultType="member">
+	select mem_num from member where mem_id=#{mem_id}
+	</select>
+	
+	<!-- 상품 등록 -->
+	<insert id="goods_insert" parameterType="goods">
+		insert into goods
+		(lcate_code, mcate_code, scate_code, gds_seller, gds_name, gds_thumbnail, gds_date,
+		gds_price, gds_detail, deltem_num,
+		gds_ears, gds_readcount, gds_sellcount, gds_viewyn, gds_delyn)
+		values
+		(#{lcate_code}, #{mcate_code}, #{scate_code}, #{gds_seller}, #{gds_name}, #{gds_thumbnail}, now(),
+		#{gds_price}, #{gds_detail}, #{deltem_num},
+		#{gds_ears}, 0, 0, 'Y', 'Y')
+		<selectKey keyProperty="gds_num" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 판매자별 총 등록 상품 개수 -->
+	<select id="seller_goods_count" resultType="int">
+		select count(*) from goods where gds_delyn='y'
+		<!-- and gds_seller=${gds_seller} -->
+	</select>
+	
+	<!-- 판매자별 상품 리스트 출력 -->
+	<select id="seller_goods_list" resultType="goods" parameterType="int">
+		SELECT g.gds_num,
+		    g.lcate_code,
+		    g.mcate_code,
+		    g.scate_code,
+		    g.gds_seller,
+		    g.gds_name,
+		    g.gds_price,
+		    g.gds_detail,
+		    g.gds_option,
+		    g.gds_thumbnail,
+		    g.gds_date,
+		    g.deltem_num,
+		    g.gds_good,
+		    g.gds_readcount,
+		    g.gds_sellcount,
+		    g.gds_ears,
+		    g.gds_viewyn,
+		    g.gds_delyn,
+		    sum(o.opt_count) as gds_count
+		FROM goods g 
+			left join project.option o
+				on g.gds_num = o.gds_num
+		where gds_delyn='y' <!-- and gds_seller=${gds_seller} -->
+		group by gds_num
+		order by gds_num desc
+		limit #{pageIndex}, 10;
+	
+	<!-- 	select * from goods
+		where gds_delyn='y' 
+		order by gds_num desc
+		limit #{pageIndex}, 10 -->
+	</select>
+	
+	<!-- 판매자별 상품 리스트 출력 -->
+	<select id="goods_detail" resultType="goods" parameterType="int">
+		select * from goods where gds_num=#{gds_num}
+	</select>
+	
+	<!-- 상품 수정하기 -->
+	<update id="goods_update" parameterType="goods">
+		UPDATE goods
+		SET
+		lcate_code = #{lcate_code},
+		mcate_code = #{mcate_code},
+		scate_code = #{scate_code},
+		gds_name = #{gds_name},
+		gds_price = #{gds_price},
+		gds_detail = #{gds_detail},
+		gds_thumbnail = #{gds_thumbnail},
+		deltem_num = #{deltem_num},
+		gds_ears = #{gds_ears}
+		WHERE gds_num = #{gds_num}
+	</update>
+	
+	<!-- 상품 삭제하기 -->
+	<delete id="goods_delete" parameterType="int">
+		delete from goods where gds_num=#{gds_num}
+	</delete>
+	
+	<!-- 판매중지 -->
+	<update id="goods_update_viewn" parameterType="int">
+		update goods
+		set
+		gds_viewyn = 'n'
+		where gds_num = #{gds_num}
+	</update>
+	
+	<!-- 판매중으로 전환 -->
+	<update id="goods_update_viewy" parameterType="int">
+		update goods
+		set
+		gds_viewyn = 'y'
+		where gds_num = #{gds_num}
+	</update>
+	
+</mapper>
+	

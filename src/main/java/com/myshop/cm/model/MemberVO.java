@@ -69,5 +69,5 @@ public class MemberVO {
 	public void setMem_delyn(String mem_delyn) {
 		this.mem_delyn = mem_delyn;
 	}
-	
 }
+

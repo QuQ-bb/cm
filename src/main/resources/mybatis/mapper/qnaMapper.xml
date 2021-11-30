@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="qnaMapper">
+
+	<select id="qnaList" parameterType="Pager" resultType="QnaVO">
+		select *
+		from qna
+		order by qna_ref desc, qna_step asc LIMIT #{startRow}, #{perPage}
+	</select>
+
+	<select id="qnaCount" resultType="Integer">
+		select count(qna_ref) from qna
+	</select>
+</mapper>

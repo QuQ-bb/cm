@@ -46,8 +46,6 @@ public class NoticeController {
 		noticeVO.setNtc_sort(request.getParameter("ntcsort"));
 		noticeVO.setNtc_title(request.getParameter("ntctitle"));
 		noticeVO.setNtc_content(request.getParameter("ntccontent"));
-		
-		
 		int noticeInsert = noticeservice.NoticeInsert(noticeVO);
 		model.addAttribute("noticeInsert", noticeInsert);
 		

@@ -15,6 +15,10 @@ public class Pager {
 	private Integer curBlock; // 현재 블럭 번호
 	private Integer totalBlock; // 전체 블럭 개수
 
+	// 분류가 대,중,소 중 어떤 것인지
+	private String cate_kind;
+	private int cate_code;
+
 	public Integer getCurPage() {
 		if (curPage == null || curPage == 0) {
 			curPage = 1;
@@ -85,6 +89,22 @@ public class Pager {
 
 	public void setTotalBlock(Integer totalBlock) {
 		this.totalBlock = totalBlock;
+	}
+
+	public String getCate_kind() {
+		return cate_kind;
+	}
+
+	public void setCate_kind(String cate_kind) {
+		this.cate_kind = cate_kind;
+	}
+
+	public int getCate_code() {
+		return cate_code;
+	}
+
+	public void setCate_code(int cate_code) {
+		this.cate_code = cate_code;
 	}
 
 	// makeRow
