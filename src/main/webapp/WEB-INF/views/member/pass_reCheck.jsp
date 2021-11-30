@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>비밀번호 재확인</title>
+<title>회원탈퇴</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -31,7 +31,7 @@ function check(){
 		<div class="page-header">
 			<div class="col-md-6 col-md-offset-3">
 				<div align=center>
-					<h2>회원탈퇴</h2>
+					<h2>비밀번호 재확인</h2>
 				</div>
 			</div>
 		</div>
