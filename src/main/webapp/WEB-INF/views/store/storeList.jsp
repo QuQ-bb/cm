@@ -9,7 +9,8 @@
 <title>CM StoreList</title>
 <c:import url="../template/boot.jsp" />
 <link href="${pageContext.request.contextPath}/resources/css/reset.css" rel="stylesheet">
-<link href="${pageContext.request.contextPath}/resources/css/store/storeList.css" rel="stylesheet"></head>
+<link href="${pageContext.request.contextPath}/resources/css/store/storeList.css" rel="stylesheet">
+</head>
 <body>
 	<div id="wrap">
 		<div id="container">
@@ -91,7 +92,7 @@
 										<li>
 											<div class="item">
 												<div class="thumb">
-													<a class="img" style="background: url('../resources/images/goodsimage/${list.gds_thumbnail}') center center no-repeat;"></a>
+													<a href="./storeSelect?gds_num=${list.gds_num}" class="img" style="background: url('../resources/images/goodsimage/${list.gds_thumbnail}') center center no-repeat;"></a>
 													<div class="exp_area">
 														<div class="util_bx">
 															<a class="btn_category_product_cart">

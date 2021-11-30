@@ -47,19 +47,19 @@
 						</div>
 						<div id="sectionView">
 							<div class="inner_view">
-								<div class="thumb" style="background: url('${pageContext.request.contextPath}/resources/images/storeList/EfzUDn3VoAE3cj0.png') center center no-repeat;"></div>
+								<div class="thumb" style="background: url('../resources/images/goodsimage/${select.gds_thumbnail}') center center no-repeat;"></div>
 								<p class="goods_name">
 									<span class="btn_share">
 										<button id="btnShare">공유하기</button>
 									</span>
-									<strong class="name">와인병으로 나팔 부는 모그리</strong>
-									<span class="short_desc">솔솔 풍기는 와인의 향</span>
+									<strong class="name">${select.gds_name}</strong>
+									<!-- <span class="short_desc">솔솔 풍기는 와인의 향</span> -->
 								</p>
 								<p class="goods_price">
 									<span class="position">
 										<span class="dc">
 											<span class="dc_price">
-												5490
+												${select.gds_price}
 												<span class="won">원</span>
 											</span>
 										</span>
@@ -71,26 +71,24 @@
 										<dd class="desc">1개</dd>
 									</dl>
 									<dl class="list">
-										<dt class="tit">배송구분</dt>
-										<dd class="desc">택배배송</dd>
-									</dl>
-									<dl class="list">
 										<dt class="tit">판매자</dt>
-										<dd class="desc">모그리</dd>
+										<dd class="desc">${select.gds_seller}</dd>
 									</dl>
 									<dl class="list">
 										<dt class="tit">택배사</dt>
 										<dd class="desc">CJ 대한통운</dd>
 									</dl>
-									<dl class="list">
-										<dt class="tit">색상</dt>
-										<dd class="desc">
+								<c:if test="${select.optionVO[0].opt_1stval ne null}">
+									<dl class="list fst">
+										<dt class="tit">${select.optionVO[0].opt_1stname}</dt>
+										<dd class="">
 											<div class="select select1">
-												<div class="text text1">선택</div>
-												<ul class="option-list">
-													<li class="option option1">레드</li>
-													<li class="option option1">블랙</li>
-													<li class="option option1">아이보리</li>
+												<label class="text text1">선택</label>
+												<input type="hidden" class="opt_num" value>
+												<ul class="option-list" style="z-index: 10;">
+												<c:forEach	items="${select.optionVO}" var="opt">
+													<li class="option option1" id="${opt.opt_num}">${opt.opt_1stval}</li>
+												</c:forEach>
 												</ul>
 											</div>
 											<script type="text/javascript">
@@ -102,20 +100,42 @@
 												
 												// option 태그 클릭 시, 선택한 값으로 변경 이벤트 함수
 												$('.option1').click(function () {
+													var opt_1stval = $(this).text();
+													alert(opt_1stval);
+													var gds_num = ${select.gds_num};
+													alert(gds_num);
+													
 													$(".text1").html($(this).html());
+													$.ajax({
+														url: "option2Select",
+														type: "POST",
+														async: false,
+														data: {
+															gds_num : gds_num,
+															opt_1stval : opt_1stval
+														},
+														success: function(data) {
+															alert(data);
+															
+														},
+														error:{
+															
+														}
+													});
 												});
 											</script>
 										</dd>
 									</dl>
-									<dl class="list">
-										<dt class="tit">사이즈</dt>
-										<dd class="desc">
+								</c:if>
+									<dl class="list" style="overflow: visible;">
+										<dt class="tit">${select.optionVO[0].opt_2ndname}</dt>
+										<dd class="">
 											<div class="select select2">
-												<div class="text text2">선택</div>
+												<label class="text text2">선택</label>
 												<ul class="option-list">
-													<li class="option option2">L</li>
-													<li class="option option2">M</li>
-													<li class="option option2">S</li>
+													<c:forEach	items="${select.optionVO}" var="opt">
+													<li class="option option1">${opt.opt_2ndval}</li>
+												</c:forEach>
 												</ul>
 											</div>
 											<script type="text/javascript">
@@ -134,6 +154,69 @@
 									</dl>
 								</div>
 							</div>
+						<div class="quantity">
+							<a href="javascript:void(0)" class="aMinus"><img alt="수량감소" src="../resources/images/storeSelect/btn_quantity_minus.jpg"></a>
+							<input type="text" class="numCount" value="1" readonly="readonly" name="camount">
+							<a href="javascript:void(0)" class="aPlus"><img alt="수량증가" src="../resources/images/storeSelect/btn_quantity_plus.jpg"></a>
+						</div>
+							
+						<div class="total">
+							<strong>총 상품 금액</strong>
+							<em>
+								<span class="totalPrice">
+									<fmt:formatNumber value="${select.gds_price}" pattern="###,###,###" />
+								</span>
+								원
+							</em>
+						</div>
+							
+						<script type="text/javascript">
+						if($('.numCount').val() == ""){
+							$('.numCount').val(1);
+						}
+						
+						//,찍어주는 정규식 함수
+						function addComma(price) {
+						  var regexp = /\B(?=(\d{3})+(?!\d))/g;
+						  return price.toString().replace(regexp, ',');
+						}
+						
+						//수량 감소
+						$('.aMinus').click(function() {
+							var num = $('.numCount').val();
+							var minusNum = num - 1;
+							var price = ${select.gds_price};
+							
+							if(minusNum <= 0){
+								$('.numCount').val(1);
+							}else {
+								$('.numCount').val(minusNum);
+								price = ${select.gds_price} * minusNum;
+							}
+							
+							price = addComma(price);
+							$('.totalPrice').text(price);
+						});
+						
+						//수량 증가
+						$('.aPlus').click(function() {
+							var num = $('.numCount').val();
+							num++;
+							$('.numCount').val(num);
+							
+							var price = ${select.gds_price} * num;
+							price = addComma(price);
+							$('.totalPrice').text(price);
+						});
+							
+						</script>
+<!-- ------------------------------------------ -->							
+						<div class="btn_wrap">
+							<a href="./storeList?store_package=" class="btn_list">상품 리스트</a>
+							<a href="#" class="btn_cart">장바구니</a>
+							<!-- <a class="btn_buy">구매하기</a> -->
+							<button type="button" class="btn_buy">구매하기</button>
+						</div>
 						</div>
 					</div>
 					<div class="layout-wrapper goods-view-area">

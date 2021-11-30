@@ -47,9 +47,21 @@ public class GoodsVO {
 	private String gds_ears;
 	private String gds_viewyn;
 	private String gds_delyn;
+	
+	//옵션
+	private List<OptionVO> optionVO;
+	
 	// 옵션을 받기위한 VO
 	private List<String> optioncom;
 	
+	public List<OptionVO> getOptionVO() {
+		return optionVO;
+	}
+
+	public void setOptionVO(List<OptionVO> optionVO) {
+		this.optionVO = optionVO;
+	}
+
 	public List<String> getOptioncom() {
 		return optioncom;
 	}

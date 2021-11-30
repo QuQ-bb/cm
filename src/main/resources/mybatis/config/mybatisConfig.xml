@@ -7,7 +7,9 @@
  	<typeAliases>
  		<typeAlias type="java.lang.Integer" alias="Integer"/>
  		<typeAlias type="java.lang.String" alias="String"/>
+ 		<typeAlias type="java.util.List" alias="List"/>
  		<typeAlias type="com.myshop.cm.model.QnaVO" alias="QnaVO"/>
+ 		<typeAlias type="com.myshop.cm.model.OptionVO" alias="OptionVO"/>
  		<typeAlias type="com.myshop.cm.model.GoodsVO" alias="GoodsVO"/>
  		<typeAlias type="com.myshop.cm.util.Pager" alias="Pager"/>
  	</typeAliases>
