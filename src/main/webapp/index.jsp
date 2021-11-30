@@ -9,7 +9,7 @@
 <body>
 
 <a href="home">home</a>										<br><br>
-
+<a href="adminmain">관리자페이지</a>			   <br>
 <a href="member_join">회원가입</a>               <br>
 <a href="member_login">로그인</a>               <br>
 <a href="sellerChange">판매자전환</a>            <br>
