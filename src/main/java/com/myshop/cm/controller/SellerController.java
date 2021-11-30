@@ -187,7 +187,7 @@ public class SellerController {
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid + mf.getOriginalFilename();
 			int size = (int) mf.getSize();
-			String path = request.getRealPath("resources/image/thumbnailimage");
+			String path = request.getRealPath("resources/images/thumbnailimage");
 			int result = 0;
 			String file[] = new String[2];
 
@@ -543,7 +543,7 @@ public class SellerController {
 			// 기존 파일 삭제
 			GoodsVO oldgoods = goodsService.goodsdetail(goods.getGds_num());
 			
-			String oldfilepath = request.getRealPath("resources/image/thumbnailimage/");
+			String oldfilepath = request.getRealPath("resources/images/thumbnailimage/");
 			String oldfilename = oldgoods.getGds_thumbnail();
     		File oldfile = new File(oldfilepath+oldfilename);
     		System.out.println(oldfile.exists());
@@ -554,7 +554,7 @@ public class SellerController {
 			// 새로운 파일 저장
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid + mf.getOriginalFilename();
-			String path = request.getRealPath("resources/image/thumbnailimage");
+			String path = request.getRealPath("resources/images/thumbnailimage");
 
 //			// 썸네일 유효성 체크
 //			if (filename != "") {
@@ -644,7 +644,7 @@ public class SellerController {
 		} // for end
 		
 		// 썸네일 이미지 삭제
-		String thumbnailfilepath = request.getRealPath("resources/image/thumbnailimage/");
+		String thumbnailfilepath = request.getRealPath("resources/images/thumbnailimage/");
 		String thumbnailfilename = goods.getGds_thumbnail();
 		File thumbnailfile = new File(thumbnailfilepath+thumbnailfilename);
 		System.out.println(thumbnailfile.exists());

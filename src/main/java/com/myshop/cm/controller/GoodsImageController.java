@@ -48,7 +48,7 @@ public class GoodsImageController {
 					// 파일 기본경로
 					String dftFilePath = request.getSession().getServletContext().getRealPath("/");
 					// 파일 기본경로 _ 상세경로
-					String filePath = dftFilePath + "resources" + File.separator + "image" + File.separator + "goodsimage"
+					String filePath = dftFilePath + "resources" + File.separator + "images" + File.separator + "goodsimage"
 							+ File.separator;
 					File file = new File(filePath);
 					if (!file.exists()) {
@@ -64,7 +64,7 @@ public class GoodsImageController {
 					///////////////// 서버에 파일쓰기 /////////////////
 					return3 += "&bNewLine=true";
 					return3 += "&sFileName=" + name;
-					return3 += "&sFileURL=/resources/image/goodsimage/" + realFileNm;
+					return3 += "&sFileURL=/resources/images/goodsimage/" + realFileNm;
 				}
 			} else {
 				return3 += "&errstr=error";
@@ -111,7 +111,7 @@ public class GoodsImageController {
 				// 파일 기본경로
 				String dftFilePath = request.getSession().getServletContext().getRealPath("/");
 				// 파일 기본경로 _ 상세경로
-				String filePath = dftFilePath + "resources" + File.separator + "image" + File.separator + "goodsimage"
+				String filePath = dftFilePath + "resources" + File.separator + "images" + File.separator + "goodsimage"
 						+ File.separator;
 				File file = new File(filePath);
 				if (!file.exists()) {
@@ -142,7 +142,7 @@ public class GoodsImageController {
 				// img 태그의 title 속성을 원본파일명으로 적용시켜주기 위함
 				sFileInfo += "&sFileName=" + filename;
 				;
-				sFileInfo += "&sFileURL=" + "/resources/image/goodsimage/" + realFileNm;
+				sFileInfo += "&sFileURL=" + "/resources/images/goodsimage/" + realFileNm;
 				PrintWriter print = response.getWriter();
 				print.print(sFileInfo);
 				print.flush();
