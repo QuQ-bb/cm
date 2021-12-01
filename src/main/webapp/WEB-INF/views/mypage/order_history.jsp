@@ -9,10 +9,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+<%@ include file="../layout/header.jsp" %>
+<%@ include file="../layout/mypage.jsp" %>
+<div class="main">
 구매내역 <br>
 ${listcount }
-<div>
 	<table border="1">
 		<tr style="text-align: center;">
 			<th>주문번호</th>
@@ -90,6 +91,6 @@ ${listcount }
 
 	</div>
 
-</div>
+<%@ include file="../layout/footer.jsp" %>
 </body>
 </html>

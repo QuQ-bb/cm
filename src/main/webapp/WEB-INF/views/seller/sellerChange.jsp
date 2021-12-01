@@ -88,7 +88,8 @@
 </head>
 
 <body>
-
+<%@ include file="../layout/header.jsp" %>
+<%@ include file="../layout/mypage.jsp" %>
 <div class="container">
 <div class="col-lg-4"></div>
 <div class="col-lg-4">
@@ -160,6 +161,6 @@
   </div>
   <div class="col-lg-4"></div>
 </div> 
-
+<%@ include file="../layout/footer.jsp" %>
 </body>
 </html>

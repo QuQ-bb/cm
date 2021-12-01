@@ -215,7 +215,8 @@
 </head>
 
 <body>
-
+<%@ include file="../layout/header.jsp" %>
+<%@ include file="../layout/mypage.jsp" %>
 	<article class="container">
 		<div class="page-header">
 			<div class="col-md-6 col-md-offset-3">
@@ -263,12 +264,12 @@
 					<div class="check_font" id="phone_check"></div>
 				</div>
 				<div class="form-group text-center">
-					<button type="submit" class="btn btn-primary">정보수정</button>
+					<button type="submit" class="btn btn-primary" style="background: #6e58fe; border: none">정보수정</button>
 				</div>
 			</form>
 		</div>
 	</article>
 
-
+<%@ include file="../layout/footer.jsp" %>
 </body>
 </html>

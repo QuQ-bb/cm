@@ -26,7 +26,8 @@ function check(){
 </head>
 
 <body>
-
+<%@ include file="../layout/header.jsp" %> 
+<%@ include file="../layout/mypage.jsp" %> 
 	<article class="container">
 		<div class="page-header">
 			<div class="col-md-6 col-md-offset-3">
@@ -50,12 +51,12 @@ function check(){
 					<div class="check_font" id="pw_check"></div>
 				</div>
 				<div class="form-group text-center">
-					<button type="submit" class="btn btn-primary">탈퇴</button>
+					<button type="submit" class="btn btn-primary" style="background: #6e58fe; border: none">탈퇴</button>
 				</div>
 			</form>
 		</div>
 	</article>
 
-
+<%@ include file="../layout/footer.jsp" %> 
 </body>
 </html>
