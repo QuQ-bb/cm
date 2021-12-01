@@ -12,18 +12,19 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="/resources/js/header.js"></script>
 <link rel="stylesheet"
-	href="<c:url value='/resources/css/header.css'/>">
+	href="<c:url value='/resources/css/header.css'/>">	
 </head>
 <body>
 
 	<header>
 		  <div class="links">
-         <c:if test="${member == null}"><a href="login" class="link_text">로그인</a></c:if>
+         <c:if test="${member == null}"><a href="member_login" class="link_text">로그인</a></c:if>
          <c:if test="${member != null}">${member.mem_id}님 안녕하세요.</c:if>
-         <c:if test="${member != null}"><a href="/" class="link_text">로그아웃</a></c:if>
+         <c:if test="${member != null}"><a href="member_logout" class="link_text">로그아웃</a></c:if>
          <c:if test="${member != null}"><a href="mypage" class="link_text">마이페이지</a></c:if>
-         <c:if test="${member == null}"><a href="/" class="link_text">회원가입</a></c:if>
+         <c:if test="${member == null}"><a href="member_join" class="link_text">회원가입</a></c:if>
         <a href="/" class="link_text">공지</a>
       </div>
       <a href="home"><img src="resources/image/logo3.png" class="img_logo"/></a>
@@ -42,24 +43,27 @@
         <div class="nav_items">
           <ul class="main1">
           <li><a href="home"><span class="glyphicon glyphicon-home"></span>홈</a></li>
-            <li><a href="#"> <span class="glyphicon glyphicon-align-justify"></span> 카테고리</a>
+            <li><a href="#" id="cate"> <span class="glyphicon glyphicon-align-justify"></span> 카테고리</a>
             	<ul class="main2">
-            		<li><a href="#">대메뉴1</a></li>
-            		<li><a href="#">대메뉴2</a>
+            		<li><div id="lcate"></div>
+            		<!-- <li><a href="#">대메뉴1</a></li>
+            		<li><a href="#">대메뉴2</a> -->
             			<ul class="main3">
-            				<li><a href="#">2단 중메뉴1</a></li>
+            				<li><div id="mcate"></div>
+            				<!-- <li><a href="#">2단 중메뉴1</a></li>
             				<li><a href="#">2단 중메뉴2</a></li>
-            				<li><a href="#">2단 중메뉴3</a>
+            				<li><a href="#">2단 중메뉴3</a> -->
             					<ul class="main4">
+            					<li><div id="scate"></div></li>
+            					<!-- <li><a href="#">3단 소메뉴</a></li>
             					<li><a href="#">3단 소메뉴</a></li>
             					<li><a href="#">3단 소메뉴</a></li>
-            					<li><a href="#">3단 소메뉴</a></li>
-            					<li><a href="#">3단 소메뉴</a></li>
+            					<li><a href="#">3단 소메뉴</a></li> -->
             					</ul>	
             				</li>
             			</ul>
             		</li>
-            		<li><a href="#">대메뉴3</a></li>
+            		<!-- <li><a href="#">대메뉴3</a></li> -->
             	</ul>
             </li>
           </ul>
