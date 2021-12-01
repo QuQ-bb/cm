@@ -68,7 +68,8 @@
 					<td>${clist.clcln_status}</td>
 					<td><input type="button" onclick="showcalculdetail(${clist.clcln_num})" value="상세페이지 보기"></td>
 				</tr>
-				<tr id="calculdetail${clist.clcln_num}" class="hide"></tr>
+				<tr id="calculdetail${clist.clcln_num}" class="hide">
+				</tr>
 				<!-- <tr>
 					
 				</tr> -->
