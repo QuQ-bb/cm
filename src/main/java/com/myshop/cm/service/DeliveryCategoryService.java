@@ -25,10 +25,6 @@ public class DeliveryCategoryService {
 		
 		getdeliverycatelist = deliverycategorydao.getCateList();
 		
-		for(DeliveryCategoryVO c : getdeliverycatelist) {
-			System.out.println(c);
-		}
-		
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		
 		resultMap.put("getdeliverycatelist", getdeliverycatelist);

@@ -9,7 +9,9 @@ public class OrderVO {
 	private int ord_delfee;
 	private String ord_request;
 	private int ord_totalprice;
+	private String gds_seller;
 	
+
 	// 주문정보를 토대로 받아올 추가정보들
     private String gds_thumbnail;
     private String gds_name;
@@ -110,6 +112,13 @@ public class OrderVO {
 	}
 	public void setOpt_2ndval(String opt_2ndval) {
 		this.opt_2ndval = opt_2ndval;
+	}
+	
+	public String getGds_seller() {
+		return gds_seller;
+	}
+	public void setGds_seller(String gds_seller) {
+		this.gds_seller = gds_seller;
 	}
 
 }

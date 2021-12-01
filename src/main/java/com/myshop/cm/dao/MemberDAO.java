@@ -72,6 +72,6 @@ public class MemberDAO {
 	}
 
 	public Object getmemberInfo(int mem_num) {
-		return sqlSession.selectOne("memberMapper.select_member",mem_num);
+		return sqlSession.selectOne("memberns.select_member",mem_num);
 	}
 }

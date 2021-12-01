@@ -1,6 +1,7 @@
 package com.myshop.cm.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,13 +34,13 @@ public class SellerDAO {
 	}
 
 	// 상품 목록 총 개수
-	public int getListCount() throws Exception{
-		return ((Integer)sqlSession.selectOne("sellerMapper.seller_goods_count")).intValue();
+	public int getListCount(String sel_name) throws Exception{
+		return ((Integer)sqlSession.selectOne("sellerMapper.seller_goods_count", sel_name)).intValue();
 	}
 
 	// 판매자 상품 리스트
-	public List<GoodsVO> getSellerGoodsList(int pageIndex) throws Exception{
-		List<GoodsVO> list = sqlSession.selectList("sellerMapper.seller_goods_list", pageIndex);
+	public List<GoodsVO> getSellerGoodsList(Map<String, Object> listIndexMap) throws Exception{
+		List<GoodsVO> list = sqlSession.selectList("sellerMapper.seller_goods_list", listIndexMap);
 		
 		return list;
 	}
@@ -67,5 +68,10 @@ public class SellerDAO {
 	// 상품 노출
 	public void goodsview(int gds_num) throws Exception{
 		sqlSession.update("sellerMapper.goods_update_viewy", gds_num);
+	}
+	
+	// 세션값의 mem_num으로 판매자정보 가져오기
+	public SellerVO getSellerInfo(int mem_num) {
+		return sqlSession.selectOne("sellerMapper.seller_select", mem_num);
 	}
 }

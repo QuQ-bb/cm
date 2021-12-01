@@ -5,13 +5,14 @@
 
 <mapper namespace="calculatorMapper">
 	<!-- 정산리스트 개수 -->
-	<select id="select_calcul_count" resultType="int">
-		select count(*) from calculate
+	<select id="select_calcul_count" resultType="int" parameterType="int">
+		select count(*) from calculate where sel_num=#{sel_num}
 	</select>
+	
 	<!-- 판매자별 정산리스트  출력 -->
-	<select id="select_calcul_list" resultType="calculate" parameterType="int">
+	<select id="select_calcul_list" resultType="calculate" parameterType="java.util.Map">
 		select * from calculate
-		<!-- where sel_num=${sel_num} -->
+		where sel_num=#{sel_num}
 		order by clcln_num desc
 		limit #{pageIndex}, 10
 	</select>

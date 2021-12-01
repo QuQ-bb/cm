@@ -49,7 +49,7 @@
 				</tr>
 				<tr>
 					<th>상품 판매자</th>
-					<td><input type="text" id="gds_seller" name="gds_seller"></td>
+					<td>${seller.sel_name}</td>
 				</tr>
 				<tr>
 					<th>상품명</th>

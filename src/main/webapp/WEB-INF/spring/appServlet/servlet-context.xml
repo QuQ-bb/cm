@@ -45,6 +45,32 @@
 		</interceptor>
 	</interceptors>	 
 	
+	<!-- 판매자 인터셉터 설정 -->	
+	<beans:bean id="sellerSessionChk" class="com.myshop.cm.interceptor.SellerCheck"/>	
+	 <interceptors>
+		<interceptor>
+			<mapping path="/goodsuploadform"/>
+			<mapping path="/goodsupload"/>			
+			<mapping path="/sellergoodslist"/>
+			<mapping path="/goodsdetail"/>
+			<mapping path="/optioncom"/>
+			<mapping path="/goodsupdate"/>
+			<mapping path="/goodsupdate"/>
+			<mapping path="/goodsdelete"/>
+			<mapping path="/goodshide"/>
+			<mapping path="/goodsview"/>
+			<mapping path="/sellercalculatelist"/>
+			<mapping path="/showcalculdetail"/>
+			<mapping path="/sellergoodsqnalist"/>
+			<mapping path="/sellerorderlist"/>
+			<mapping path="/sellerorderdetail"/>
+			<mapping path="/seller_Mainpage"/>
+			<mapping path="/sellerdeliverytemplate"/>
+			<mapping path="/sellerdeliverytemplatelist"/>
+			<beans:ref bean="sellerSessionChk"/>
+		</interceptor>
+	</interceptors>	 
+	
 	
 	<!-- 일반 파일 업로드 경로 -->
 	<resources location="/resources/imgUpload" mapping="/imgUpload/**"/>

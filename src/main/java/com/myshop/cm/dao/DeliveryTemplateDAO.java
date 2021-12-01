@@ -24,8 +24,8 @@ public class DeliveryTemplateDAO {
 	
 	// 배송템플릿 리스트 구해오기
 	@Transactional
-	public List<DeliveryTemplateVO> getTemplateList() throws Exception{
-		List<DeliveryTemplateVO> list = sqlSession.selectList("deliveryMapper.select_template_list");
+	public List<DeliveryTemplateVO> getTemplateList(int sel_num) throws Exception{
+		List<DeliveryTemplateVO> list = sqlSession.selectList("deliveryMapper.select_template_list", sel_num);
 		
 		return list;
 	}
@@ -38,8 +38,8 @@ public class DeliveryTemplateDAO {
 
 	// 배송템플릿 개수 구해오기
 	@Transactional
-	public int getTemplateCount() throws Exception{
-		return sqlSession.selectOne("deliveryMapper.select_template_count");
+	public int getTemplateCount(int sel_num) throws Exception{
+		return sqlSession.selectOne("deliveryMapper.select_template_count", sel_num);
 	}
 
 	// 배송템플릿 수정하기
