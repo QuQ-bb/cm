@@ -39,7 +39,7 @@
 			
 			<div class="cart_list_wrap">
 				<p class="cart_all_wrap">
-					<input type="checkbox" id="checkbox_all" class="custom_checkbox_all" checked="checked">
+					<input type="checkbox" id="checkbox_all" class="custom_checkbox_all">
 					<label for="checkbox_all">
 						전체선택
 					</label>
@@ -50,6 +50,13 @@
 					<strong class="checkbox_select">선택</strong>
 				</p>
 <!-- ------------------------------------------------------------ -->
+			<c:if test="${cartList eq null}">
+				<div class="inner_empty">
+					<span class="bg"></span>
+					<p class="txt">장바구니에 담긴 상품이 없습니다</p>
+				</div>
+			</c:if>
+			
 			<form action="../pay/marketPay" method="post" id="frm">
 			
 				<ul class="cart_list_style">

@@ -170,6 +170,18 @@ strong.checkbox_total {
 strong.checkbox_select {
 	width: 127px;
 }
+
+.inner_empty .txt{
+	width: 100%;
+    margin-top: 0;
+    padding: 115px 0 116px;
+    font-weight: 700;
+    font-size: 16px;
+    color: #333;
+    line-height: 24px;
+    text-align: center;
+}
+
 .cart_list_style {
 	border-bottom: 1px solid #000;
 }

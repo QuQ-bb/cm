@@ -26,7 +26,7 @@ public class StoreController {
 	
 	//옵션2 찾아오는 거
 	@GetMapping("option2Select")
-	public ModelAndView option2Select(OptionVO optionVO) throws Exception {
+	public ModelAndView option2Select(OptionVO optionVO, String gds_price) throws Exception {
 		System.out.println("Option2Select 들어왔냐");
 		
 		ModelAndView mv = new ModelAndView();
@@ -37,6 +37,8 @@ public class StoreController {
 		//System.out.println(list.get(0).getOpt_2ndval());
 		
 		mv.addObject("list", list);
+		mv.addObject("gds_price", gds_price);
+		
 		mv.setViewName("common/option2Select");
 		
 		return mv;
