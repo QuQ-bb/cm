@@ -149,7 +149,8 @@ header > nav {	/* 헤더 네비 간격 조정 */
     background: #ffffff;
     width: 200px;
     line-height:30px; 
-    padding : 10px 10px 10px 10px; 
+    padding : 10px 10px 10px 10px;
+    z-index: 99; 
 }
 
 .main2>li {			/* 서매중 다음 마지막 서브 매뉴 나오는 포지션 형태 설정 */
@@ -182,6 +183,7 @@ header > nav {	/* 헤더 네비 간격 조정 */
     height: 100%;
     /*left: 100%;*/
     /*display: none;*/
+    z-index: 99;
 }
 
 
@@ -199,6 +201,7 @@ header > nav {	/* 헤더 네비 간격 조정 */
     width: 250px;
     text-align: center;
     height: 200%;
+    z-index: 99;
 }
 .main4>li a:hover {
     display: block;
