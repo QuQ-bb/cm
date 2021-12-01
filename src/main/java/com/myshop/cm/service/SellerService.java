@@ -3,7 +3,6 @@ package com.myshop.cm.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.myshop.cm.dao.MemberDAO;
 import com.myshop.cm.dao.SellerDAO;
 import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.SellerVO;
@@ -23,6 +22,11 @@ public class SellerService {
 	//mem_num가져오기
 	public MemberVO getMember(MemberVO member) {
 		return sellerDao.getMember(member);
+	}
+	
+	// 세션값의 mem_num으로 판매자정보 가져오기
+	public SellerVO getSellerInfo(int mem_num) {
+		return sellerDao.getSellerInfo(mem_num);
 	}
 	
 

@@ -22,8 +22,8 @@ public class DeliveryTemplateService {
 	}
 
 	// 배송템플릿 리스트 불러오기
-	public List<DeliveryTemplateVO> getTemplateList() throws Exception{
-		List<DeliveryTemplateVO> list = deliverytemplateDAO.getTemplateList();
+	public List<DeliveryTemplateVO> getTemplateList(int sel_num) throws Exception{
+		List<DeliveryTemplateVO> list = deliverytemplateDAO.getTemplateList(sel_num);
 		return list;
 	}
 
@@ -34,8 +34,8 @@ public class DeliveryTemplateService {
 	}
 
 	// 배송템플릿 개수 구하기
-	public int gettemplatecount() throws Exception{
-		int gettemplatecount = deliverytemplateDAO.getTemplateCount();
+	public int gettemplatecount(int sel_num) throws Exception{
+		int gettemplatecount = deliverytemplateDAO.getTemplateCount(sel_num);
 		return gettemplatecount;
 	}
 

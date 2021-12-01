@@ -17,13 +17,12 @@
 </script>
 </head>
 <body>
-배송탬플릿 리스트 파일입니다.
 <table border="1">
 	<tr align="center">
 		<th>번호</th>
 		<th>배송 탬플릿 명</th>
 		<th>배송사 </th>
-		<th>배송비</th>
+		<th>배송비</th>	
 		<th>무료배송 기준금액	</th>
 		<th>반품 배송비</th>
 		<th>교환 배송비</th>

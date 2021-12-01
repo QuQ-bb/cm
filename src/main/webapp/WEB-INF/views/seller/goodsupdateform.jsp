@@ -70,7 +70,7 @@
 				</tr>
 				<tr>
 					<th>상품 판매자</th>
-					<td><input type="text" id="gds_seller" name="gds_seller" value="${goods.gds_seller}"></td>
+					<td>${goods.gds_seller}</td>
 				</tr>
 				<tr>
 					<th>상품명</th>
@@ -78,7 +78,7 @@
 				</tr>
 				<tr>
 					<th>대표이미지</th>
-					<td><img style="width: 400px;" id="preview-image" src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${goods.gds_thumbnail}">
+					<td><img style="width: 400px;" id="preview-image" src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${goods.gds_thumbnail}">
 					     <input style="display: block;" type="file" id="gds_thumbnail1" name="gds_thumbnail1">
 					</td>
 				</tr>

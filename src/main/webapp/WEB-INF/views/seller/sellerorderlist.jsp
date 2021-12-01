@@ -9,9 +9,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-판매자 주문 리스트 <br>
-${listcount }
 <div>
 	<table border="1">
 		<tr style="text-align: center;">
@@ -36,7 +33,7 @@ ${listcount }
 					<c:set var="num" value="${num-1}"/>	 
 				</td>
 				<td style="border-right: none;">
-					<img src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${order.gds_thumbnail}" height="100" width="100" />
+					<img src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${order.gds_thumbnail}" height="100" width="100" />
 				</td>
 				<td style="border-left: none;">
 					<a href="sellerorderdetail?ord_num=${order.ord_num}&page=${page}">${order.gds_name}<br><br></a>

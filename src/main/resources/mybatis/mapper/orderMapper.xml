@@ -22,8 +22,8 @@
 	</select>
 	
 	<!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
-	<select id="select_order_list_count" resultType="int" >
-		select count(*) from project.order
+	<select id="select_order_list_count" resultType="int" parameterType="String" >
+		select count(*) from project.order where gds_seller=#{sel_name}
 	</select>
 	
 	<!-- 판매자 페이지에서 주문 리스트 불러오기 -->
@@ -37,11 +37,11 @@
       o.ord_delfee,
       o.ord_request,
       o.ord_totalprice,
-       g.gds_thumbnail,
-       g.gds_name,
-       m.mem_id,
-       p.opt_1stname, 
-       p.opt_1stval, 
+      g.gds_thumbnail,
+      g.gds_name,
+      m.mem_id,
+      p.opt_1stname, 
+      p.opt_1stval, 
       p.opt_2ndname, 
       p.opt_2ndval
    from project.order as o
@@ -51,13 +51,12 @@
          on o.ord_memnum = m.mem_num
       left JOIN project.option as p
          on o.ord_gdsoption = p.opt_num
-         	<!-- where -->
 	group by o.ord_num
 	order by o.ord_num desc
 	limit #{pageIndex}, 10
 	</select>
 	
-	<select id="select_order_list" resultType="order" parameterType="int">
+	<select id="select_order_list" resultType="order" parameterType="java.util.Map">
 	select 
 		o.ord_num,
 		o.ord_memnum,
@@ -81,7 +80,7 @@
 			on o.ord_memnum = m.mem_num
 		left JOIN project.option as p
 			on o.ord_gdsoption = p.opt_num
-	<!-- where -->
+	where o.gds_seller=#{sel_name}
 	group by o.ord_num
 	order by o.ord_num desc
 	limit #{pageIndex}, 10

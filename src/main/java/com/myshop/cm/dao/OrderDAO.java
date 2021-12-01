@@ -1,6 +1,7 @@
 package com.myshop.cm.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,13 +39,13 @@ public class OrderDAO {
 	}
 	
 	// 판매자 페이지에서 주문리스트 갯수 가져오기
-	public int getOrderListCount() throws Exception{
-		return sqlSession.selectOne("orderMapper.select_order_list_count");
+	public int getOrderListCount(String sel_name) throws Exception{
+		return sqlSession.selectOne("orderMapper.select_order_list_count", sel_name);
 	}
 
 	// 판매자 페이지에서 주문리스트 가져오기
-	public List<OrderVO> getOrderList(int pageIndex) throws Exception{
-		return sqlSession.selectList("orderMapper.select_order_list",pageIndex);
+	public List<OrderVO> getOrderList(Map<String, Object> listIndexMap) throws Exception{
+		return sqlSession.selectList("orderMapper.select_order_list",listIndexMap);
 	}
 
 }

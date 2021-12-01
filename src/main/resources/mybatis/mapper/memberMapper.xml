@@ -42,7 +42,7 @@
 	
 	<!-- 로그인 저장 인증 -->
 	<select id ="login_check" parameterType="String" resultType="member">
-	select * from member where mem_id=#{mem_id} and mem_grade=1 and mem_delyn='Y'
+	select * from member where mem_id=#{mem_id} and mem_delyn='Y'
 	</select>
 	
 	<!-- 아이디 찾기 -->

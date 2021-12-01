@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,8 @@ import org.springframework.stereotype.Service;
 import com.myshop.cm.dao.GoodsDAO;
 import com.myshop.cm.dao.SellerDAO;
 import com.myshop.cm.model.GoodsVO;
+import com.myshop.cm.model.MemberVO;
+import com.myshop.cm.model.SellerVO;
 
 @Service
 public class GoodsService {
@@ -39,6 +42,14 @@ public class GoodsService {
 	public Map<String, Object> sellergoodslist(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		List<GoodsVO> sellergoodslist = new ArrayList<GoodsVO>();
 		
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerDAO.getSellerInfo(member.getMem_num());
+				
+		
 		int page = 1;	// 페이지 기본값 
 		int limit = 10;	// 한 화면에 출력할 상품 수
 		
@@ -51,10 +62,16 @@ public class GoodsService {
 		int pageIndex = (page-1)*10;
 		
 		// 총 개수를 받아옴
-		int listcount = sellerDAO.getListCount();
+		int listcount = sellerDAO.getListCount(seller.getSel_name());
+		
+		// 상품 리스트를 출력할 parameterType들을 map에 넣는다.
+		Map<String, Object> listIndexMap = new HashMap<String,Object>();
+		
+		listIndexMap.put("pageIndex", pageIndex);
+		listIndexMap.put("sel_name", seller.getSel_name());
 		
 		// 페이지 인덱스(pageIndex)를 DAO 클래스에 전달한다.
-		sellergoodslist = sellerDAO.getSellerGoodsList(pageIndex);	// 리스트를 받아옴
+		sellergoodslist = sellerDAO.getSellerGoodsList(listIndexMap);	// 리스트를 받아옴
 		
 		// 총 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 0.95를 더해서 올림처리

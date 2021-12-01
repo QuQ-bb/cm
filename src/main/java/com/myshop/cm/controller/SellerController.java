@@ -67,6 +67,7 @@ public class SellerController {
 	@Autowired
 	private CategoryService categoryService;
 	
+	
 	//판매자 전환 신청 폼
 	@RequestMapping(value="sellerChange")
 	public String sellerChange() {
@@ -149,12 +150,18 @@ public class SellerController {
 	public ModelAndView goodsuploadform(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception{
 		System.out.println("goodsuploadform");
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerService.getSellerInfo(member.getMem_num());
 		
 		// 배송 카테고리 목록 불러오기
 		Map<String, Object> getdeliverycatelist = deliveryCategoryService.getDeliveryCateList(request, response);
 		
 		// 배송 템플릿 목록 구해오기
-		List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList();
+		List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList(seller.getSel_num());
 		
 		// 카테고리 대분류 불러오기
 		List<LCateVO> lcatelist = categoryService.getLCateList();
@@ -164,6 +171,7 @@ public class SellerController {
 		goodsuploadformM.addAllObjects(getdeliverycatelist);
 		goodsuploadformM.addObject("deltemlist", deltemlist);
 		goodsuploadformM.addObject("lcatelist", lcatelist);
+		goodsuploadformM.addObject("seller", seller);
 		
 		return goodsuploadformM;
 	}
@@ -177,9 +185,12 @@ public class SellerController {
 			@RequestParam(value = "del_info", required = false) String del_info,
 			DeliveryTemplateVO deliverytemplate, GoodsVO goods,
 			HttpServletRequest request, Model model) throws Exception {
-		System.out.println("goodsupload");
-		System.out.println(optioncount);
-		System.out.println(optioncom);
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerService.getSellerInfo(member.getMem_num());
 		
 
 		// 썸네일 저장
@@ -218,6 +229,7 @@ public class SellerController {
 			}
 			goods.setGds_thumbnail(filename);
 		}
+		goods.setGds_seller(seller.getSel_name());
 		goodsService.insert(goods);// 저장 메소드 호출
 		int gds_num = goods.getGds_num();
 		System.out.println(gds_num);
@@ -296,13 +308,14 @@ public class SellerController {
 				
 		// 배송템플릿을 작성한 경우
 		if(del_info != null) {
-			
+			// 세션에 있는 member정보 받기
 			String[] delinfoarr = del_info.split(",");
 			for(int i=0; i<2; i++) {
 				System.out.println(i+","+delinfoarr[i]);
 			}
 			deliverytemplate.setDel_code(Integer.parseInt(delinfoarr[0]));
 			deliverytemplate.setDel_name(delinfoarr[1]);
+			deliverytemplate.setSel_num(seller.getSel_num());
 			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
 		}
 		return "redirect:/sellergoodslist";
@@ -385,6 +398,13 @@ public class SellerController {
 		ModelAndView goodsupdateM = new ModelAndView();
 		GoodsVO goods = goodsService.goodsdetail(gds_num);
 		
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerService.getSellerInfo(member.getMem_num());
+		
 		// 옵션정보 불러오기
 		List<OptionVO> optionlist = optionService.optionlist(gds_num);
 		
@@ -392,7 +412,7 @@ public class SellerController {
 		Map<String, Object> getdeliverycatelist = deliveryCategoryService.getDeliveryCateList(request, response);
 		
 		// 배송 템플릿 목록 구해오기
-		List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList();
+		List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList(seller.getSel_num());
 		
 		// 베송 템플릿 불러오기
 		DeliveryTemplateVO gettemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
@@ -400,7 +420,7 @@ public class SellerController {
 		// 카테고리 대분류 불러오기
 		List<LCateVO> lcatelist = categoryService.getLCateList();
 		
-		//  대분류코드로 중분류 카테고리 리스트 불러오기
+		// 대분류코드로 중분류 카테고리 리스트 불러오기
 		List<MCateVO> mcatelist = categoryService.getMCateList(goods.getLcate_code());
 		
 		// 중분류 코드로 소분류코드 불러오기
@@ -429,6 +449,13 @@ public class SellerController {
 							  @RequestParam(value = "page", required = false) String page,
 							  DeliveryTemplateVO deliverytemplate, GoodsVO goods,
 							  HttpServletRequest request, Model model) throws Exception {
+		
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerService.getSellerInfo(member.getMem_num());
 		
 		// 옵션을 새로 작성한 경우
 		if (optioncom != null) {
@@ -594,7 +621,7 @@ public class SellerController {
 		// 배송템플릿을 새로 작성한 경우
 		if(del_info != null) {
 			String[] delinfoarr = del_info.split(",");
-
+			deliverytemplate.setSel_num(seller.getSel_num());
 			deliverytemplate.setDel_code(Integer.parseInt(delinfoarr[0]));
 			deliverytemplate.setDel_name(delinfoarr[1]);
 			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
@@ -603,7 +630,7 @@ public class SellerController {
 	}  //goodsupdate end
 	
 	// 상품 삭제하기
-	@RequestMapping(value = "goodsdelete")
+	@RequestMapping(value = "/goodsdelete")
 	public String goodsdelete(@RequestParam(value = "gds_num") int gds_num,
 							  @RequestParam(value = "page") String page,
 							  HttpServletRequest request) throws Exception{
@@ -721,8 +748,11 @@ public class SellerController {
 	
 	// 판매자 문의내역 목록으로 이동
 	@RequestMapping(value = "sellergoodsqnalist")
-	public ModelAndView sellergoodsqnalist() {
+	public ModelAndView sellergoodsqnalist(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView sellergoodsqnalistM = new ModelAndView("seller/sellergoodsqnalist");
+		
+		// 문의 리스트 받아오기
+		Map<String, Object> goodsqnalist = orderService.getOrderList(request, response);
 		
 		return sellergoodsqnalistM;
 	}
@@ -776,6 +806,14 @@ public class SellerController {
 		
 		return sellerorderdetailM;
 	}
+	
+	// 판매자 메인페이지로 이동
+	@RequestMapping(value = "seller_Mainpage")
+	public String sellerMainpage() {
+		
+		return "seller/sellerMainpage";
+	}
+	
 	
 
 }
