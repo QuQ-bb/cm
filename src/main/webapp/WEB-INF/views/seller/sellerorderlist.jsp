@@ -12,7 +12,8 @@
 <body>
 <%@ include file="../layout/sellerSidebar.jsp" %>
 <div class="main">
-	<table border="1">
+	<h1>판매자 주문내역</h1>
+	<table border="1" id="customers">
 		<tr style="text-align: center;">
 			<th>주문번호</th>
 			<th colspan="2">상품이름</th>
@@ -39,7 +40,7 @@
 				</td>
 				<td style="border-left: none;">
 					<a href="sellerorderdetail?ord_num=${order.ord_num}&page=${page}">${order.gds_name}<br><br></a>
-					<div style="text-align: right"> <a href="goodsupdate?&gds_num=${order.ord_gdsnum}">상품 수정하기</a></div>
+					<button type="button" onclick="location.href='goodsupdate?&gds_num=${order.ord_gdsnum}'">상품 수정하기</button>
 				</td>
 				<td>
 					<c:choose>
