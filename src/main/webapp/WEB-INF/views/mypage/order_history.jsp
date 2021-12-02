@@ -7,14 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/mypage/order_history.css'/>">
 </head>
 <body>
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/mypage.jsp" %>
 <div class="main">
-구매내역 <br>
-${listcount }
-	<table border="1">
+<div id="count">구매내역 : ${listcount }건</div>
+	<table border="1" id="customers">
 		<tr style="text-align: center;">
 			<th>주문번호</th>
 			<th>썸네일, 상품이름</th>
@@ -54,10 +54,10 @@ ${listcount }
 				<td>${his.ord_request}</td>
 				<td><fmt:formatNumber value="${his.ord_totalprice}" pattern="#,###원" /></td>
 				<td>
-				<input type="button" value="취소">
-				<input type="button" value="환불">
-				<input type="button" value="교환">
-				<input type="button" value="후기쓰기" onClick="location.href='review_write?ord_gdsnum=${his.ord_gdsnum}&ord_num=${his.ord_num}'">
+				<button type="button" onclick="location.href='#'">취소</button>
+				<button type="button" onclick="location.href='#'">환불</button>
+				<button type="button" onclick="location.href='#'">교환</button>
+				<button type="button" onclick="location.href='review_write?ord_gdsnum=${his.ord_gdsnum}&ord_num=${his.ord_num}'">후기</button>
 				</td>
 			</tr>
 		</c:forEach>
