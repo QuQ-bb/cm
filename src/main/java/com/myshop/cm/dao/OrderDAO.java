@@ -47,5 +47,10 @@ public class OrderDAO {
 	public List<OrderVO> getOrderList(Map<String, Object> listIndexMap) throws Exception{
 		return sqlSession.selectList("orderMapper.select_order_list",listIndexMap);
 	}
+	
+	// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
+	public List<OrderVO> getMainOrderList(String Sel_name) {
+		return sqlSession.selectList("orderMapper.select_main_order_list", Sel_name);
+	}
 
 }

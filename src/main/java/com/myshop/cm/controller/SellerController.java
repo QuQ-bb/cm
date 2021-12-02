@@ -809,7 +809,21 @@ public class SellerController {
 	
 	// 판매자 메인페이지로 이동
 	@RequestMapping(value = "seller_Mainpage")
-	public String sellerMainpage() {
+	public String sellerMainpage(HttpServletRequest request, HttpServletResponse response, Model model) {
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerService.getSellerInfo(member.getMem_num());
+		
+		// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
+		List<OrderVO> mainOrderList = orderService.getMainOrderList(seller.getSel_name());
+		// 최근 5개 문의
+		// 최근 5개 후기
+		// 최근 5개 공지
+		
+		model.addAttribute("mainOrderList", mainOrderList);
 		
 		return "seller/sellerMainpage";
 	}

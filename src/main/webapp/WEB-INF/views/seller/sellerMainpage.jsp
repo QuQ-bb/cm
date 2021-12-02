@@ -135,6 +135,20 @@ body {
 </div>
 
 <div class="main">
+	<div class ="lefttop">
+		<table>
+			<tr>
+				<th>상품명</th>
+				<th>수량</th>
+				<th>금액</th>
+				<th>날짜</th>
+			</tr>
+			<c:forEach var="mainOrderList" items="${mainOrderList}">
+			
+			</c:forEach>
+		
+		</table>
+	</div>
 </div>  
 <script type="text/javascript">
 $(".title").click(function() {
