@@ -27,8 +27,9 @@
 <a href="review_cont">후기보기</a> <br>
 <a href="review_update">후기수정</a> <br>
 <a href="review_delete">후기삭제</a> <br><br>
+<a href="store/storeSelect">장바구니</a> <br><br>
 
-
+<!-- http://localhost/cm/store/storeList -->
 <a href="seller_Mainpage">판매자페이지로 이동</a> <br><br>
 
 </body>

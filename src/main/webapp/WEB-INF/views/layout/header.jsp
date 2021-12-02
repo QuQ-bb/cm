@@ -43,7 +43,7 @@
         <div class="nav_items">
           <ul class="main1">
           <li><a href="home"><span class="glyphicon glyphicon-home"></span>홈</a></li>
-            <li><a href="#" id="cate"> <span class="glyphicon glyphicon-align-justify"></span> 카테고리</a>
+            <li><a href="storeList" id="cate"> <span class="glyphicon glyphicon-align-justify"></span> 카테고리</a>
             	<ul class="main2">
             		<li><div id="lcate"></div>
             		<!-- <li><a href="#">대메뉴1</a></li>

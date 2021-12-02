@@ -17,6 +17,7 @@
 </script>
 </head>
 <body>
+<%@ include file="../layout/sellerSidebar.jsp" %>
 <table border="1">
 	<tr align="center">
 		<th>번호</th>

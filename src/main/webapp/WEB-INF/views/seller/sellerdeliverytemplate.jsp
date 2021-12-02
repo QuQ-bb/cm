@@ -12,6 +12,7 @@
 <script src="<%=request.getContextPath()%>/resources/js/sellerjs/sellerdeliverytemplate.js"></script>
 </head>
 <body>
+<%@ include file="../layout/sellerSidebar.jsp" %>
 	<br>
 	<form method="post" action="<%=request.getContextPath()%>/deliverytemplateupload" onSubmit="return template_check()">
 		<table>

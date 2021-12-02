@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="../layout/sellerSidebar.jsp" %>
 판매자 문의내역리스트
 
 

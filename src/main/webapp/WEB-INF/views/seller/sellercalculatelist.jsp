@@ -23,7 +23,7 @@
 </style>
 </head>
 <body>
-
+<%@ include file="../layout/sellerSidebar.jsp" %>
 	<div>
 		<table class="caltable" border="1">
 			<tr>
