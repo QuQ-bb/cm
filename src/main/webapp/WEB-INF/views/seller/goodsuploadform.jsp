@@ -19,10 +19,10 @@
 
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
+<link rel="stylesheet" href="<c:url value='/resources/css/seller/goodsuploadform.css'/>">
 </head>
 <body>
-
+<%@ include file="../layout/sellerSidebar.jsp" %>
 	<div id="goodsuploadform">
 
 		<form method="post" action="<%=request.getContextPath()%>/goodsupload" enctype="multipart/form-data" onsubmit="return goodsupload_check()">

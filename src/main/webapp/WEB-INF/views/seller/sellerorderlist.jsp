@@ -7,9 +7,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" href="<c:url value='/resources/css/seller/sellerorderlist.css'/>">
 </head>
 <body>
-<div>
+<%@ include file="../layout/sellerSidebar.jsp" %>
+<div class="main">
 	<table border="1">
 		<tr style="text-align: center;">
 			<th>주문번호</th>

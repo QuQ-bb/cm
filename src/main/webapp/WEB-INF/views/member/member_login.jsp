@@ -28,7 +28,7 @@
 </head>
 
 <body>
-
+<%@ include file="../layout/header.jsp" %>
 <div class="container">
 <div class="col-lg-4"></div>
 <div class="col-lg-4">
@@ -59,6 +59,6 @@ onClick="location.href='member_join'" value="회원가입">
   <div class="col-lg-4"></div>
 </div> 
 	
-
+<%@ include file="../layout/footer.jsp" %>
 </body>
 </html>

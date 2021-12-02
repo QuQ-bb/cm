@@ -128,6 +128,8 @@ header > nav {	/* 헤더 네비 간격 조정 */
 
 .main1>li a {		/* 마우스 온 했을때 보여지는 형태 */
     display: block;
+    text-decoration: none;
+    color: #000;
 }
 
 
@@ -145,17 +147,17 @@ header > nav {	/* 헤더 네비 간격 조정 */
     top: 50px;
     left: -9999px;
     background: #ffffff;
-    width: 120%;
-    line-height:20px;
+    width: 200px;
+    line-height:30px; 
+    padding : 10px 10px 10px 10px;
+    z-index: 99; 
 }
-
-
 
 .main2>li {			/* 서매중 다음 마지막 서브 매뉴 나오는 포지션 형태 설정 */
     position: relative;
+    /*   border-padding : 50px; */
+   /*  padding : 10px 50px 10px 50px; */
 }
-
-
 
 .main2>li:hover .main3 {	/* 서매중 다음 마지막 서브 매뉴 나오는 포지션 위치설정 */
     left: 100%;
@@ -176,10 +178,12 @@ header > nav {	/* 헤더 네비 간격 조정 */
     top: 0;
     left: -99999px;
     background: #ffffff;
-    width: 180px;
+    width: 250px;
     text-align: center;
+    height: 100%;
     /*left: 100%;*/
     /*display: none;*/
+    z-index: 99;
 }
 
 
@@ -194,8 +198,10 @@ header > nav {	/* 헤더 네비 간격 조정 */
     top: 0;
     left: -99999px;
     background: #ffffff;
-    width: 180px;
+    width: 250px;
     text-align: center;
+    height: 200%;
+    z-index: 99;
 }
 .main4>li a:hover {
     display: block;

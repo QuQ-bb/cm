@@ -110,6 +110,45 @@ public class CategoryController {
 //		return "admin/addcategory";
 //	}
 	
+	// 대분류코드 검색하기
+	@RequestMapping(value = "lcateload",  method = RequestMethod.POST)
+		public String lcateload(Model model) throws Exception{
+			
+			//  대분류코드로 중분류 카테고리 리스트 불러오기
+			List<LCateVO> lcatelist = categoryService.getLCateList();
+			
+			model.addAttribute("lcatelist", lcatelist);
+			
+			return "seller/ajaxlcate";
+	}
+	
+	//  중분류 검색하기
+	@RequestMapping(value = "mcload",  method = RequestMethod.POST)
+	public String mcload(@RequestParam(value ="lcate_code") int lcate_code,
+								Model model) throws Exception{
+			
+			//  대분류코드로 중분류 카테고리 리스트 불러오기
+			List<MCateVO> mcatelist = categoryService.getMCateList(lcate_code);
+			
+			model.addAttribute("mcatelist", mcatelist);
+			
+			return "seller/ajaxmcate2";
+	}
+	
+	//  소분류 검색하기
+	@RequestMapping(value = "scload",  method = RequestMethod.POST)
+	public String scload(@RequestParam(value ="mcate_code") int mcate_code,
+								Model model) throws Exception{
+			
+			// 중분류 코드로 소분류코드 불러오기
+			List<SCateVO> scatelist = categoryService.getSCateList(mcate_code);
+			
+			model.addAttribute("scatelist", scatelist);
+			
+			return "seller/ajaxscate2";
+	}
+	
+	
 	// 대분류코드로 중분류 검색하기
 	@RequestMapping(value = "mcateload",  method = RequestMethod.POST)
 	public String mcateload(@RequestParam(value ="lcate_code") int lcate_code,
