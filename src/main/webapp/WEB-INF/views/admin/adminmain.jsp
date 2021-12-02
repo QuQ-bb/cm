@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="eg">
 <head>
@@ -33,7 +34,14 @@
         </ul>
       </li>
     </ul>
-    <li><a href="#">판매자 전환</a></li>
+    <ul class="nav navbar-nav">
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">판매자 신청<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/chglist">판매자 신청 목록</a></li>
+          <li><a href="#">판매자 신청 승인</a></li>
+        </ul>
+      </li>
+    </ul>
       <ul class="nav navbar-nav">
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">공지사항<span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -42,6 +50,8 @@
         </ul>
       </li>
     </ul>
+    <li><a href="memberlist">회원 목록</a></li>
+     <li><a href="home">Home</a></li>
   </div>
 </nav>
 </body>

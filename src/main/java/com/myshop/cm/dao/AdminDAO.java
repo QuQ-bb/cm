@@ -5,12 +5,15 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.myshop.cm.model.FaqVO;
 import com.myshop.cm.model.LCateVO;
 import com.myshop.cm.model.MCateVO;
+import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.NoticeVO;
 import com.myshop.cm.model.SCateVO;
+import com.myshop.cm.model.SellerVO;
 
 @Repository
 /*
@@ -64,5 +67,22 @@ public class AdminDAO {
 	// 공지 리스트
 	public List<NoticeVO> noticelist(NoticeVO noticeVO) throws Exception{
 		return session.selectList("noticelist");
+	}
+	// 회원 리스트
+	public List<MemberVO> memlist(MemberVO memberVO) throws Exception{
+		return session.selectList("memlist");
+	}
+	// 판매자 신청 리스트
+	public List<MemberVO> chglist(SellerVO sellerVO) throws Exception{
+		return session.selectList("chglist");
+	}
+	// 판매자 신청 내용보기
+	public SellerVO chgdetail(int sel_num) throws Exception{
+		return (SellerVO) session.selectOne("chgdetail", sel_num);
+	}
+	// 관리자 로그인 인증
+	@Transactional
+	public MemberVO adminchk(String mem_id) throws Exception{
+		return (MemberVO) session.selectOne("adminchk", mem_id);
 	}
 }

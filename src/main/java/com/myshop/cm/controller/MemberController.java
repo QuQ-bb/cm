@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import java.util.List;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -305,5 +306,18 @@ public class MemberController {
 		}
 		
 	}
-	
+	// 회원 리스트(admin용)
+	@RequestMapping(value = "/memberlist")
+	public String memberlist(MemberVO memberVO , Model model , HttpSession session) throws Exception{
+		System.out.println("회원리스트들어옴?");
+		String id = (String) session.getAttribute("mem_id");
+		if(id == null || !(id.equals("admin"))) {
+			return "home";
+		}
+		List<MemberVO> memberlist = memberService.memlist(memberVO);
+		System.out.println("회원리스트괜찮음?");
+		model.addAttribute("memberlist", memberlist);
+		System.out.println("문제없음?");
+		return "admin/memberlist";
+	}
 }

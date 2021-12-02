@@ -1,8 +1,11 @@
 package com.myshop.cm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.myshop.cm.dao.AdminDAO;
 import com.myshop.cm.dao.MemberDAO;
 import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.MemberVO;
@@ -12,6 +15,8 @@ public class MemberService {
 	
 	@Autowired
 	private MemberDAO memberDao;
+	@Autowired
+	private AdminDAO dao;
 	
 	//ID유효성 검사
 	/*
@@ -68,4 +73,9 @@ public class MemberService {
 	public MemberVO getmemberinfo(int mem_num) {
 		return (MemberVO)memberDao.getmemberInfo(mem_num);
 	}
+	// 회원리스트(admin)
+	public List<MemberVO> memlist(MemberVO memberVO) throws Exception{
+		return dao.memlist(memberVO);
+	}
 }
+

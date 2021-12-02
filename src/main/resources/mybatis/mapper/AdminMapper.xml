@@ -111,4 +111,58 @@
 		  from faq 
 	  order by faq_num desc limit 10 offset 0
 	</select>
+	<!-- 회원 리스트 -->
+	<select id="memlist" resultType="memlist">
+		select mem_num
+		     , mem_id
+		     , mem_pass
+		     , mem_name
+		     , mem_email
+		     , mem_phone
+		     , mem_date
+		     , mem_grade
+		     , mem_delyn
+		  from member where mem_id not in ('admin')
+	  order by mem_num asc limit 10 offset 0
+	</select>
+	<!-- 판매자 전환 신청 리스트 -->
+	<select id = "chglist" resultType="chglist">
+		select m.mem_num
+		 	 , m.mem_id
+		 	 , m.mem_pass
+		 	 , m.mem_name
+		 	 , m.mem_email
+		 	 , m.mem_phone
+		 	 , m.mem_date
+		 	 , m.mem_grade
+		 	 , m.mem_delyn
+		 	 
+		 	 , s.sel_num
+			 , s.sel_bnum
+			 , s.sel_name
+			 , s.sel_ceo
+			 , s.sel_mobnum
+			 , s.sel_post
+			 , s.sel_add
+			 , s.sel_tel
+			 , s.sel_bank
+			 , s.sel_accholder
+			 , s.sel_acc
+			 , s.sel_yn
+			 , s.seling_filename
+	  	from member m
+      	inner join seller s
+       		on m.mem_num = s.mem_num
+        		where mem_grade = 1
+       group by mem_num
+       order by sel_num desc limit 0, 10;
+     </select>
+    <!-- 판매자 신청 내용보기 --> 
+    <select id="chgdetail" resultType="chgdetail">
+    	select * from seller where mem_num =#{mem_num}
+    </select>
+	<!-- 판매자 전환 -->
+	<update id="sellerupdate" parameterType="sellerupdate">
+		update member set mem_grade='1' where mem_grade'50' 
+	</update>
  </mapper>
