@@ -14,7 +14,7 @@
 <div class="main">
 	<h1>판매자 주문내역</h1>
 	<table border="1" id="customers">
-		<tr style="text-align: center;">
+		<tr>
 			<th>주문번호</th>
 			<th colspan="2">상품이름</th>
 			<th>옵션</th>
