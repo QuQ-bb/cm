@@ -52,12 +52,13 @@ body {
 <%@ include file="layout/header.jsp" %>    
 <div class="mypagesidenav">
   <h2>마이페이지</h2>
-  <a href="#about">주문관리</a>
+  <a href="order_history">주문관리</a>
   <a href="#services">배송지관리</a>
   <a href="#clients">취소 교환 반품 내역</a>
-  <a href="#contact">내정보수정</a>
+  <a href="passReCheck">정보수정</a>
+  <a href="passReCheck">비밀번호 수정</a>
   <a href="#contact">후기문의QNA</a>
-  <a href="#contact">판메자신청</a>
+  <a href="sellerChanget">판매자 신청</a>
 </div>
 
 <div class="main">

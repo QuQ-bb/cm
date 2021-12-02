@@ -34,7 +34,7 @@
   <div align="center"><h2>아이디 찾기</h2></div><br>
 
   
-  <form method="post" action="/id_find" onbutton="return check()">
+  <form method="post" action="/id_find" onSubmit="return check()">
    <table class="table table-bordered table-hover" align="center" >
     <div class="form-group">
     <label for="mem_name">이름</label>
@@ -62,7 +62,7 @@
 
       <!-- Modal body -->
       <div class="modal-body">
-      <h5>회원님의 아이디는${mv.mem_id}</h5>
+      <h5>회원님의 아이디는${mem_id}</h5>
       </div>
 
       <!-- Modal footer -->

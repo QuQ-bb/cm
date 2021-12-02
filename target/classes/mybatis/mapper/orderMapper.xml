@@ -26,7 +26,7 @@
 		select count(*) from project.order
 	</select>
 	
-	<!-- 판매자 페이지에서 주문 리스트 불러오기 -->
+	<!-- 리뷰페이지 리스트 불러오기 -->
 	<select id="history_list" resultType="order" parameterType="int">
 	 select 
       o.ord_num,
@@ -42,8 +42,8 @@
        m.mem_id,
        p.opt_1stname, 
        p.opt_1stval, 
-      p.opt_2ndname, 
-      p.opt_2ndval
+       p.opt_2ndname, 
+       p.opt_2ndval
    from project.order as o
       left JOIN project.goods as g
          on o.ord_gdsnum = g.gds_num
