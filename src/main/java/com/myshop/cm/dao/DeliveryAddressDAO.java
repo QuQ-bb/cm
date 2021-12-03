@@ -14,6 +14,11 @@ public class DeliveryAddressDAO {
 	public DeliveryAddressVO getdeliveryAddress(int mem_num) {
 		return (DeliveryAddressVO) sqlSession.selectOne("deliveryAddressMapper.select_deliveryadress",mem_num);
 	}
+
+	public void updatedeliveryAddress(DeliveryAddressVO deliveryaddress) {
+		sqlSession.update("deliveryAddressMapper.update_deliveryadress", deliveryaddress);
+		
+	}
 	
 
 }

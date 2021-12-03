@@ -34,7 +34,7 @@ public class MemberService {
 	public void insertDelivery(DeliveryAddressVO deliveryaddress) {
 		memberDao.insertAddress(deliveryaddress);
 	}
-	//id값 불러서 mem_num구하기
+	//id값으로 불러서 mem_num구하기
 	public int selectMemNum(MemberVO member) {
 		int mem = memberDao.selectMemNum(member);
 		return mem;

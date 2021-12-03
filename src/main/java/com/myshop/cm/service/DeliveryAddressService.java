@@ -15,4 +15,9 @@ public class DeliveryAddressService {
 		return deliveryAddressDAO.getdeliveryAddress(mem_num);
 	}
 
+	public void updatedeliveryAddress(DeliveryAddressVO deliveryaddress) {
+		deliveryAddressDAO.updatedeliveryAddress(deliveryaddress);
+		
+	}
+
 }

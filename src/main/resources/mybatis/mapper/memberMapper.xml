@@ -13,7 +13,6 @@
 		select count(*) from member where mem_id = #{mem_id}
 	</select>
 	
-	
 	<!-- 회원가입 회원저장  -->
 	<!-- member테이블 -->
 	<insert id="joinm" parameterType="member">
@@ -66,8 +65,13 @@
 	
 	<!-- 회원정보 수정 -->
 	<update id="update" parameterType="member">
-	update member set mem_name=#{mem_name}, mem_email=#{mem_email},
+	update member set mem_pass=#{mem_pass}, mem_name=#{mem_name}, mem_email=#{mem_email},
 	mem_phone=#{mem_phone} where mem_id=#{mem_id}
+	</update>
+	
+	<!-- 배송지 수정 -->
+	<update id="" parameterType="deliveryadd">
+	update deliveryaddress set deladd_post=#{deladd_post},deladd_add1=#{deladd_add1},deladd_add2=#{deladd_add2}	
 	</update>
 	
 	<!-- 회원 삭제 -->
