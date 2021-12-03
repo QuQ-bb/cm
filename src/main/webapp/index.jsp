@@ -28,7 +28,6 @@
 <a href="review_cont">후기보기</a><br>
 <a href="review_update">후기수정</a><br>
 <a href="review_delete">후기삭제</a><br>
-<a href="myReview_list">내 리뷰 확인</a><br><br><br>
 
 <a href="goodsuploadform">판매자 상품 업로드 폼</a>					<br>
 <a href="sellergoodslist">판매자 상품 리스트</a>					<br>
