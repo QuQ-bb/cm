@@ -79,13 +79,15 @@
 										<dt class="tit">택배사</dt>
 										<dd class="desc">CJ 대한통운</dd>
 									</dl>
+								<c:if test="${select.optionVO[0].opt_1stval eq null}">
+								<input type="hidden" id="opt_num" value="${select.optionVO[0].opt_num}" data-optnum="${opt.opt_num}">
+								</c:if>
 								<c:if test="${select.optionVO[0].opt_1stval ne null}">
 									<dl class="list fst">
 										<dt class="tit">${select.optionVO[0].opt_1stname}</dt>
 										<dd class="">
 											<div class="select select1">
 												<label class="text text1">선택</label>
-												<input type="hidden" class="opt_num" value>
 												<ul class="option-list" style="z-index: 10;">
 													<c:forEach items="${select.optionVO}" var="opt">
 														<li class="option option1" id="${opt.opt_2ndval}" data-optnum="${opt.opt_num}">${opt.opt_1stval}</li>
@@ -131,7 +133,7 @@
 		</div>
 	</div>
 <script type="text/javascript">
-	var opt_num = "";
+	var opt_num = $('#opt_num').val();
 	
 	//active가 추가되었을 경우에만 option-list가 보이도록
 	// active 클래스 추가/제거 이벤트 함수
@@ -223,8 +225,10 @@
 	//장바구니 버튼 클릭했을 때
 	$('.btn_cart').click(function(){
 		var gds_num = ${select.gds_num};
-		var cart_count = $('.numCount').val();
+		var cart_count = parseInt($('.numCount').val());
 		//alert(cart_count);
+		
+		alert(opt_num);
 		
 		//첫 번째 옵션 입력 여부
 		if($('.text1').text() == "선택"){
@@ -242,13 +246,19 @@
 						opt_num: opt_num
 					},
 					success: function (data) {
-						alert(data.result);
+						//alert(data);
+						//alert(data.result);
+						//alert(data.cart_num);
+						//alert(data.cart_count);
 						
 						//동일 상품 존재 O - Update
-						if(data == 1){
+						if(data.result == 1){
 							var confirm_val = confirm("장바구니에 동일한 상품이 존재합니다.\n수량을 변경하시겠습니까?");
 							
 							if(confirm_val){
+								var cart_num = data.cart_num;
+								cart_count = cart_count + data.cart_count;
+								alert(cart_count);
 								$.ajax({
 									url: "../cart/cartUpdate",
 									type: "POST",
@@ -257,16 +267,25 @@
 										cart_count: cart_count
 									},
 									success: function (data) {
-										alert(data);
+										if(data == 1){
+											confirm_val = confirm("장바구니의 수량을 변경했습니다.\n장바구니로 이동하시겠습니까?");
+											if(confirm_val){
+												
+											}else{
+												location.reload();
+											}
+										}else {
+											alert("수량 변경에 실패했습니다. 잠시 후에 다시 시도해주세요.");
+										}
 									},
 									error: function () {
 										alert("Update 에러");
 									}
-								});
+								});//ajax-cartUpdate end
 							}
-						}else if(data == 2){
+						}else if(data.result == 2){
 							//동일 상품 존재 X - Insert
-							/* $.ajax({
+							$.ajax({
 								url: "../cart/cartInsert",
 								type: "POST",
 								data: {
@@ -284,7 +303,7 @@
 								error : function () {
 									alert("오류가 발생했습니다. 잠시 후에 다시 시도해주세요.")
 								}
-							});//ajax-cartInsert end */
+							});//ajax-cartInsert end
 						//로그인 X
 						}else {
 							/* var confirm_val = confirm("로그인이 필요한 서비스입니다.\n로그인 페이지로 이동하시겠습니까?");
@@ -296,12 +315,15 @@
 					error: function () {
 						alert("에러")
 					}
-				});
+				});//ajax-cartSelect end
 			}
 		}
-		
-		
-	});
+	});//btn_cart onclick end
+	
+	//구매하기 버튼 눌렀을 때
+	//$('.btn_buy').click(function() {
+	//	$('#frm').submit();
+	//});
 </script>
 </body>
 </html>
