@@ -52,7 +52,7 @@
 				<th>반품/교환 배송지 <br>우편번호</th>
 				<td><input name="deltem_repost" id="deltem_repost" size="5"
 					class="input_box" readonly onclick="post_search()" /> 
-					<input type="button" value="우편번호 찾기" class="input_button" onclick="openDaumPostcode()" />
+					<button type="button" onclick="openDaumPostcode()">우편번호 찾기</button>
 				</td>
 			</tr>
 			<tr>
