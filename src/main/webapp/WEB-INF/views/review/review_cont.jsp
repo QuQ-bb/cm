@@ -6,11 +6,11 @@
 <meta charset="UTF-8">
 <title>리뷰 보기</title>
 <script>
-//상품 삭제 확인
+//리뷰 삭제 확인
 function del(page, rev_num) {
    var chk = confirm("정말 삭제하시겠습니까?");
    if (chk) {
-      location.href='review_delete?page='+page+'&rev_num='+rev_num;
+      location.href='review_delete?page='+page+'&rev_num='+review.rev_num;
    }
 }   
 </script>
@@ -18,6 +18,8 @@ function del(page, rev_num) {
 <body>
 	<div id="boardcont_wrap">
 		<h2 class="boardcont_title">게시물 내용보기</h2>
+		 <input type="hidden" name="rev_num" value="${review.rev_num}" />
+  <input type="hidden" name="page" value="${page}" />
 		<table id="boardcont_t">
 			<tr>
 				<th>글내용</th>

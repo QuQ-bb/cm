@@ -1,6 +1,7 @@
 package com.myshop.cm.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,12 +22,12 @@ public class ReviewService {
 		System.out.println("리뷰쓰기 서비스");
 	}
 	//게시물 갯수
-	public int getListCount() throws Exception{
-		return reviewDao.getListCount();
+	public int getListCount(int mem_num) throws Exception{
+		return reviewDao.getListCount(mem_num);
 	}
 	//리뷰 목록
-	public List<ReviewVO> getReviewList(int pageIndex)throws Exception {
-		return reviewDao.getReviewList(pageIndex);
+	public List<ReviewVO> getReviewList(Map<String, Object> indexMap)throws Exception {
+		return reviewDao.getReviewList(indexMap);
 	}
 	//리뷰 상세정보
 	public ReviewVO getReviewCont(int rev_num) throws Exception{
@@ -45,6 +46,7 @@ public class ReviewService {
 		System.out.println("서비스거기 계세요?");
 		reviewDao.reviewUpdate(review);
 	}
+	//리뷰 삭제
 	public void reviewDelete(int rev_num)throws Exception {
 		System.out.println("거기 삭제서비스 계세요?");
 		reviewDao.reviewDelete(rev_num);

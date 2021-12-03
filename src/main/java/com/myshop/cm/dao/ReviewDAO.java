@@ -1,6 +1,7 @@
 package com.myshop.cm.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +23,14 @@ public class ReviewDAO {
 		System.out.println("리뷰쓰기 DAO");
 	}
 	//리뷰 총갯수
-	public int getListCount() throws Exception{
+	public int getListCount(int mem_num) throws Exception{
 		int count =0;
-		count =sqlSession.selectOne("reviewMapper.review_count");
+		count =sqlSession.selectOne("reviewMapper.review_count", mem_num);
 		return count;
 	}
 	//리뷰 목록
-	public List<ReviewVO> getReviewList(int pageIndex) throws Exception {
-		List<ReviewVO> list = sqlSession.selectList("reviewMapper.review_list", pageIndex);
+	public List<ReviewVO> getReviewList(Map<String, Object> indexMap) throws Exception {
+		List<ReviewVO> list = sqlSession.selectList("reviewMapper.review_list", indexMap);
 		return list;
 	}
 	//리뷰 내용보기
@@ -47,6 +48,7 @@ public class ReviewDAO {
 		sqlSession.update("reviewMapper.review_update",review);
 		System.out.println("dao거기 계세요?");
 	}
+	//리뷰삭제
 	public void reviewDelete(int rev_num)throws Exception {
 		sqlSession.delete("reviewMapper.review_delete",rev_num);
 	}

@@ -41,7 +41,7 @@
 	                     ${his.opt_1stname} : ${his.opt_1stval}   <br>
 	                     ${his.opt_2ndname} : ${his.opt_2ndval}
 	                  </c:when>
-	                  <c:when test="${his.opt_2ndval != null}">
+	                  <c:when test="${his.opt_1stval != null}">
 	                     ${his.opt_1stname} : ${his.opt_1stval}
 	                  </c:when>
 	                  <c:otherwise>
