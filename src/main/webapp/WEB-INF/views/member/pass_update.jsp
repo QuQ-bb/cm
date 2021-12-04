@@ -171,7 +171,7 @@
 </head>
 
 <body>
-
+<%@ include file="../layout/header.jsp" %>
 	<article class="container">
 		<div class="page-header">
 			<div class="col-md-6 col-md-offset-3">
@@ -202,6 +202,6 @@
 		</div>
 	</article>
 
-
+<%@ include file="../layout/footer.jsp" %>
 </body>
 </html>
