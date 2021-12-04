@@ -10,7 +10,9 @@
   position: fixed;
   top: 0px;
   left: 0px;
+  color: white;
 }
+
 
 .mypagesidenav a {
   padding: 6px 8px 6px 16px;
