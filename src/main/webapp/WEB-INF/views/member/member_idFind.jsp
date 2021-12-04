@@ -47,7 +47,6 @@
     <div class="form-group">
     <input type="submit" class="btn btn-default form-control" value="확인">
       </div>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">ID확인</button>
    
    <!-- The Modal -->
    <div class="modal" id="myModal">
