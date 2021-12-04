@@ -75,9 +75,17 @@
 										<dt class="tit">판매자</dt>
 										<dd class="desc">${select.gds_seller}</dd>
 									</dl>
-									<dl class="list">
+									<dl class="list fst">
 										<dt class="tit">택배사</dt>
-										<dd class="desc">CJ 대한통운</dd>
+										<dd class="desc">${select.deliveryTemplateVO.del_name}</dd>
+									</dl>
+									<dl class="list fst">
+										<dt class="tit">기본배송비</dt>
+										<dd class="desc"><fmt:formatNumber value="${select.deliveryTemplateVO.deltem_delfee}" pattern="###,###,###" />원</dd>
+									</dl>
+									<dl class="list">
+										<dt class="tit">무료배송 주문금액</dt>
+										<dd class="desc"><fmt:formatNumber value="${select.deliveryTemplateVO.deltem_freedel}" pattern="###,###,###" />원</dd>
 									</dl>
 								<c:if test="${select.optionVO[0].opt_1stval eq null}">
 								<input type="hidden" id="opt_num" value="${select.optionVO[0].opt_num}" data-optnum="${opt.opt_num}">
@@ -139,6 +147,7 @@
 	// active 클래스 추가/제거 이벤트 함수
 	$('.select1').click(function () {
 		$(this).toggleClass("active");
+		$('.select2').removeClass("active");
 	});
 	
 	// option 태그 클릭 시, 선택한 값으로 변경 이벤트 함수

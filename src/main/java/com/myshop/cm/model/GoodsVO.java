@@ -42,6 +42,8 @@ public class GoodsVO {
 	private String gds_ears;
 	private String gds_viewyn;
 	
+	//배송 관련
+	private DeliveryTemplateVO deliveryTemplateVO;
 	//옵션
 	private List<OptionVO> optionVO;
 	
@@ -190,5 +192,13 @@ public class GoodsVO {
 
 	public void setGds_viewyn(String gds_viewyn) {
 		this.gds_viewyn = gds_viewyn;
+	}
+
+	public DeliveryTemplateVO getDeliveryTemplateVO() {
+		return deliveryTemplateVO;
+	}
+
+	public void setDeliveryTemplateVO(DeliveryTemplateVO deliveryTemplateVO) {
+		this.deliveryTemplateVO = deliveryTemplateVO;
 	}
 }
