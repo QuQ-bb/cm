@@ -27,9 +27,9 @@
 		</tr>
 		<!-- 화면 출력 번호  변수 정의 -->		
 		<c:set var="num" value="${listcount-(page-1)*10}"/> 	
-		
+		<c:choose>
+		<c:when test="${!empty historylist}">
 		<c:forEach var="his" items="${historylist}">
-         <c:if test="${historylist != null}">
 			<tr>
 				<td>${his.ord_num}</td>
 				<td>
@@ -61,13 +61,14 @@
 				<button type="button" onclick="location.href='review_write?ord_gdsnum=${his.ord_gdsnum}&ord_num=${his.ord_num}'">후기</button>
 				</td>
 			</tr>
-         </c:if>
-         <c:if test="${historylist == null}">
-         <tr>
-         	<td>구매한 내역이 없습니다.</td>
-         </tr>
-         </c:if>
 		</c:forEach>
+		</c:when>
+		<c:otherwise>
+		<tr>
+		 <td colspan="8">구매한 물품이 없습니다.</td>
+		</tr>
+		</c:otherwise>
+		</c:choose>
 		
 	</table>
 	<div id="bbslist_paging">

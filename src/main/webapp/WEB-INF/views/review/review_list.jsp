@@ -63,6 +63,8 @@ function del(page, rev_num) {
 			<th>상세정보</th>
 			<th>비고</th>
 		</tr>
+		<c:choose>
+		<c:when test="${!empty myreviewlist}">
 		<c:forEach var="myreviewlist" items="${myreviewlist}">
 			<tr>
 				<td width="50">
@@ -109,9 +111,14 @@ function del(page, rev_num) {
 					<div id="reviewdetail${myreviewlist.rev_num}" class="hide"  style="height:50px"></div>
 				</td>
 			</tr>
-		
-
 		</c:forEach>
+		</c:when>
+		<c:otherwise>
+		<tr>
+		 <td colspan="8">작성한 후기가 없습니다.</td>
+		</tr>
+		</c:otherwise>
+		</c:choose>
 		</table>
 		
 		<div id="revlist_paging">
