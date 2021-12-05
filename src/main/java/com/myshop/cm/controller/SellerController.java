@@ -791,7 +791,7 @@ public class SellerController {
 	}
 	
 	// 판매자 문의 답변 등록페이지로
-	@RequestMapping(value = "goodsqnaanswer")
+	@RequestMapping(value = "/goodsqnaanswer")
 	public String goodsqnaanswer(HttpServletRequest request, GoodsQnaVO goodsqna) {
 		// 세션에 있는 member정보 받기
 		HttpSession session = request.getSession();
@@ -810,6 +810,38 @@ public class SellerController {
 		
 		// 답변글 
 		goodsQnaService.insertGoodsQna(goodsquestion);
+		
+		return "redirect:/sellergoodsqnalist";
+	}
+	
+	// 상품 문의 답변 수정 폼으로 이동
+	@RequestMapping(value = "/updategoodsqnaanswerform")
+	public String updategoodsqnaanswerform(@RequestParam(value = "gdsqna_num") int gdsqna_num,
+										Model model) {
+		
+		// 받아온 gdsqna_num으로 답변 정보 불러오기
+		GoodsQnaVO answer =  goodsQnaService.getGoodsAnswer(gdsqna_num);
+		
+		model.addAttribute("answer", answer);
+		
+		return "seller/ajaxgoodsqnaanswerupdate";
+	}
+	
+	// 상품 문의 답변 수정 
+	@RequestMapping(value = "/updategoodsqnaanswer")
+	public String updategoodsqnaanswer(GoodsQnaVO goodsqna) {
+		
+		// 받아온 gdsqna_num으로 답변 정보 불러오기
+		goodsQnaService.updateAnswer(goodsqna);
+		
+		return "redirect:/sellergoodsqnalist";
+	}
+	
+	// 상품 문의 답변 삭제
+	@RequestMapping(value = "/deletegoodsqnaanswer")
+	public String deletegoodsqnaanswer(@RequestParam(value = "gdsqna_num") int gdsqna_num) {
+		
+		goodsQnaService.deleteAnswer(gdsqna_num);
 		
 		return "redirect:/sellergoodsqnalist";
 	}

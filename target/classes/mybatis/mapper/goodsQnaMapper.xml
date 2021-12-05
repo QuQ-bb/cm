@@ -74,7 +74,7 @@
 		where gq.gdsqna_num=#{gdsqna_num} and gdsqna_delyn=1
 	</select>
 	
-	<!-- 답변글 가져오기 -->
+	<!-- gdsqna_ref 로 답변글 가져오기 -->
 	<select id="select_goodsqna_answer" parameterType="int" resultType="goodsqna">
 		select
 			gq.gdsqna_num,
@@ -98,6 +98,30 @@
 			  and gdsqna_delyn=1 and gdsqna_step=1
 	</select>
 	
+	<!--qna_num로 답변글 가져오기 -->
+	<select id="select_goodsqna_answer_num" parameterType="int" resultType="goodsqna">
+		select
+			gq.gdsqna_num,
+			gq.gds_num,
+			gq.gdsqna_sort,
+			gq.gdsqna_title,
+			gq.gdsqna_content,
+			gq.gdsqna_ref,
+			gq.gdsqna_step,
+			gq.gdsqna_depth,
+			gq.gdsqna_date,
+			gq.gdsqna_check,
+			gq.gdsqna_answer,
+			gq.gdsqna_delyn,
+			gq.mem_id,
+			gqf.fname
+		from goodsqna gq
+		 	left join goodsqnafiles gqf
+		 		on gqf.num = gq.gdsqna_num
+		where gq.gdsqna_num=#{gdsqna_num} 
+			  and gdsqna_delyn=1 and gdsqna_step=1
+	</select>
+	
 	<!-- 문의 읽음여부 확인 -->
 	<update id="update_goodsqna_check" parameterType="int">
 		update goodsqna
@@ -108,7 +132,7 @@
 	</update>
 	
 	<!-- 문의 답변작성여부 체크 -->
-	<update id="update_goodsqna_answer" parameterType="goodsqna">
+	<update id="update_goodsqna_question_answer_1" parameterType="goodsqna">
 		update goodsqna
 		set
 			gdsqna_answer=1
@@ -143,7 +167,36 @@
 		SYSDATE(),
 		0,
 		0,
-		1);
+		1)
 	</insert>
+	
+	<!-- 문의 답변 수정하기 -->
+	<update id="update_goodsqna_answer" parameterType="goodsqna">
+		update goodsqna
+		set
+			gdsqna_title = #{gdsqna_title},
+			gdsqna_content = #{gdsqna_content},
+			gdsqna_date = SYSDATE()
+		where
+			gdsqna_num=#{gdsqna_num}
+	</update>
+	
+	<!-- 답변글의 ref 가져오기 -->
+	<select id="select_goodsqna_answer_ref" parameterType="int" resultType="int">
+		select
+			gdsqna_ref
+		from goodsqna
+		where gdsqna_num=#{gdsqna_num}
+	</select>
+	
+	<!-- 문의 답변작성여부 체크 -->
+	<update id="update_goodsqna_question_answer_0" parameterType="goodsqna">
+		update goodsqna
+		set
+			gdsqna_answer=0
+		where 
+			gdsqna_num=#{gdsqna_ref} and gdsqna_depth=0
+	</update>
+	
 
 </mapper>

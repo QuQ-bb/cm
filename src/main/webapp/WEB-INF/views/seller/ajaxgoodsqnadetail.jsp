@@ -2,6 +2,29 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<script type="text/javascript">
+function updategoodsqnaanswer(gdsqna_num) {
+		 $.ajax({
+		    url : '/updategoodsqnaanswerform', // 요청 할 주소
+		   // async: true, // false 일 경우 동기 요청으로 변경
+		    type : 'post', // GET, PUT
+		    dataType : 'text',
+		    data : {
+		    	"gdsqna_num" : gdsqna_num,
+		    },
+		    success : function(data) {
+		    	 /*var tr = $(this).parent().parent();
+		    	 tr.html(data);*/
+		    	$("#goodsQnaAnswer"+gdsqna_num).html(data);
+		    	$("#goodsQnaAnswer"+gdsqna_num).removeClass('hide').addClass('show');  
+		    }, // 요청 완료 시
+		    error :function(xhr,status,error){
+						console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
+						alert(xhr.status);
+			}
+		});
+}
+</script>
 
 <!-- 문의글 -->
 	<table id="questionTable" border="1" >
@@ -33,12 +56,12 @@
 				<pre style="border: none; background: none;">${goodsquestion.gdsqna_content}</pre>
 			</td>
 		</tr>
-	
 	</table>
 
 	<c:choose>
 <%-- 답변이 있을 경우 --%>
 		<c:when test="${answer == 1 }">
+		<div id="goodsQnaAnswer${goodsanswer.gdsqna_num}">
 			<table border="1">
 					<caption>답변</caption>
 					<tr>
@@ -51,7 +74,14 @@
 						<th>문의내용</th>
 						<td colspan="3"><pre style="border: none; background: none;">${goodsanswer.gdsqna_content}</pre></td>
 					</tr>
+					<tr>
+						<td colspan="4" align="center">
+							<input type="button" onclick="updategoodsqnaanswer(${goodsanswer.gdsqna_num})" value="수정">
+							<input type="button" onclick="location='deletegoodsqnaanswer?gdsqna_num=${goodsanswer.gdsqna_num}'" value="삭제">
+						</td>
+					</tr>
 				</table>
+			</div>
 		</c:when>
 <%-- 답변이 없을 경우 --%>
 		<c:when test="${answer == 0 }">
