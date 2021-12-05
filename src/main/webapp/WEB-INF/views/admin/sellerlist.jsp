@@ -5,11 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>판매자신청 목록</title>
+<title>판매자 목록</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminmain.jsp"></jsp:include>
-	<h2 align="center">판매자 신청 목록</h2>
+	<h2 align="center">판매자 목록</h2>
 	<table border="1" width="1500" align="center">
 		<tr>
 			<td>상호명</td>
@@ -18,9 +18,9 @@
 			<td>대표명</td>
 			<td>정지여부</td>
 		</tr>
-		<c:forEach var = "SellerVO" items="${chglist}">
+		<c:forEach var = "SellerVO" items="${sellist}">
 			<tr>
-			<td><a href="chgdetail?sel_name=${SellerVO.sel_name}&state=chgdetail">
+			<td><a href="seldetail?sel_name=${SellerVO.sel_name}&state=seldetail">
 				<c:out value="${SellerVO.sel_name}"/></a></td>
 			<td><c:out value="${SellerVO.sel_num}"/></td>
 			<td><c:out value="${SellerVO.mem_num}"/></td>

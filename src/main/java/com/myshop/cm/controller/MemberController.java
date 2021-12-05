@@ -320,4 +320,23 @@ public class MemberController {
 		System.out.println("문제없음?");
 		return "admin/memberlist";
 	}
+	// 회원 리스트 상세 조회(admin용)
+	@RequestMapping(value = "/memdetail")
+	public String memdetail(@RequestParam(value="mem_name" , required = false) String mem_name ,
+//			@RequestParam(value="page", defaultValue="1") String page,
+			@RequestParam("state") String state,
+			Model model) throws Exception{
+		System.out.println("회원상세보기 탔냐1?");
+		MemberVO memberVO = memberService.memdetail(mem_name);
+		System.out.println("회원상세보기 탔냐2?");
+		
+		model.addAttribute("memberVO", memberVO);
+//		model.addAttribute("page", page);
+		System.out.println("회원상세보기 탔냐3?");
+		if(state.equals("memdetail")) {  // 내용보기 일때 
+			return "/admin/memdetail"; // 내용보기 페이지 설정
+		}
+		System.out.println("회원상세보기 탔냐4?");
+		return null;
+	}
 }

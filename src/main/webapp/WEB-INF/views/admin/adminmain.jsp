@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.util.Date" %>
+<%@ page import="java.text.SimpleDateFormat" %>
+<%
+	Date nowTime = new Date();
+	SimpleDateFormat sf = new SimpleDateFormat("YYYY년 MM월 dd일  HH:mm:ss EEE요일");
+%>
 
 <!DOCTYPE html>
 <html lang="eg">
@@ -12,6 +18,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+<div align="center">${mem_id}이 접속중 입니다.<%= sf.format(nowTime) %></div>
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -35,10 +42,10 @@
       </li>
     </ul>
     <ul class="nav navbar-nav">
-      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">판매자 신청<span class="caret"></span></a>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">판매자 관리<span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li><a href="/chglist">판매자 신청 목록</a></li>
-          <li><a href="#">판매자 신청 승인</a></li>
+          <li><a href="/sellerlist">판매자 목록</a></li>
         </ul>
       </li>
     </ul>

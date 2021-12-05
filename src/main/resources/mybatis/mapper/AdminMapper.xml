@@ -122,9 +122,13 @@
 		     , mem_date
 		     , mem_grade
 		     , mem_delyn
-		  from member where mem_id not in ('admin')
-	  order by mem_num asc limit 10 offset 0
+		  from member where mem_grade not in('50','99')
+	  order by mem_num asc limit 100 offset 0
 	</select>
+	<!-- 회원 리스트 내용보기 --> 
+    <select id="memdetail" parameterType="String" resultType="memdetail">
+    	select * from member where mem_name = #{mem_name}
+    </select>
 	<!-- 판매자 전환 신청 리스트 -->
 	<select id = "chglist" resultType="chglist">
 		select m.mem_num
@@ -155,14 +159,36 @@
        		on m.mem_num = s.mem_num
         		where mem_grade = 1
        group by mem_num
-       order by sel_num desc limit 0, 10;
+       order by sel_num desc limit 0, 10
      </select>
     <!-- 판매자 신청 내용보기 --> 
-    <select id="chgdetail" resultType="chgdetail">
-    	select * from seller where mem_num =#{mem_num}
+    <select id="chgdetail" parameterType="String" resultType="chgdetail">
+    	select * from seller where sel_name = #{sel_name}
     </select>
 	<!-- 판매자 전환 -->
-	<update id="sellerupdate" parameterType="sellerupdate">
-		update member set mem_grade='1' where mem_grade'50' 
+	<update id="sellerupdate">
+		update member set mem_grade='50' where mem_num= #{mem_num}
 	</update>
+	<!-- 판매자 리스트 -->
+	<select id="sellist" parameterType="String" resultType="sellist">
+		select sel_num
+		, mem_num
+		, sel_bnum
+		, sel_name
+		, sel_ceo
+		, sel_mobnum
+		, sel_post
+		, sel_add
+		, sel_tel
+		, sel_bank
+		, sel_accholder
+		, sel_acc
+		, sel_yn
+	from seller where mem_grade not in ('1','99')
+	order by mem_num asc limit 10 offset 0
+	</select>
+	<!-- 판매자 리스트 상세보기 -->
+	 <select id="seldetail" parameterType="String" resultType="seldetail">
+    	select * from seller where sel_name = #{sel_name}
+    </select>
  </mapper>

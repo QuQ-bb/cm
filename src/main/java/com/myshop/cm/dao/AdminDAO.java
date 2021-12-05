@@ -72,13 +72,29 @@ public class AdminDAO {
 	public List<MemberVO> memlist(MemberVO memberVO) throws Exception{
 		return session.selectList("memlist");
 	}
+	// 회원 리스트 내용보기
+	public MemberVO memdetail(String mem_name) throws Exception{
+		return (MemberVO) session.selectOne("memdetail", mem_name);
+	}
+	// 판매자 리스트
+	public List<SellerVO> sellist(SellerVO sellerVO) throws Exception{
+		return session.selectList("sellist");
+	}
+	// 판매자 리스트 내용보기
+	public SellerVO seldetail(String sel_name) throws Exception{
+		return (SellerVO) session.selectOne("seldetail", sel_name);
+	}
 	// 판매자 신청 리스트
 	public List<MemberVO> chglist(SellerVO sellerVO) throws Exception{
 		return session.selectList("chglist");
 	}
 	// 판매자 신청 내용보기
-	public SellerVO chgdetail(int sel_num) throws Exception{
-		return (SellerVO) session.selectOne("chgdetail", sel_num);
+	public SellerVO chgdetail(String sel_name) throws Exception{
+		return (SellerVO) session.selectOne("chgdetail", sel_name);
+	}
+	// 판매자 전환 승인
+	public int UpdateMemgrade (MemberVO memberVO) throws Exception{
+		return session.update("sellerupdate", memberVO);
 	}
 	// 관리자 로그인 인증
 	@Transactional

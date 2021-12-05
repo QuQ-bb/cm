@@ -20,8 +20,21 @@ public class AdminService {
 		return dao.chglist(sellerVO);
 	}
 	// 상세정보
-	public SellerVO chgdetail(int sel_num) throws Exception{
-		SellerVO sellerVO = dao.chgdetail(sel_num);
+	public SellerVO chgdetail(String sel_name) throws Exception{
+		SellerVO sellerVO = dao.chgdetail(sel_name);
+		return sellerVO;
+	}
+	// 판매자 전환 승인
+	public int UpdateMemgrade(MemberVO memberVO) throws Exception{
+		return dao.UpdateMemgrade(memberVO);
+	}
+	// 판매자 리스트
+	public List<SellerVO> sellist(SellerVO sellerVO) throws Exception{
+		return dao.sellist(sellerVO);
+	}
+	// 판매자 리스트 상세정보
+	public SellerVO seldetail(String sel_name) throws Exception{
+		SellerVO sellerVO = dao.seldetail(sel_name);
 		return sellerVO;
 	}
 }

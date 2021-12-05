@@ -5,13 +5,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>판매자 전환 상세 정보</title>
+<title>Insert title here</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminmain.jsp"></jsp:include>
-<div class="chgdetail" style ="width:1000px;">
-<form action="chgaccess" method="post">
-<input type="hidden" name="mem_num" value="${sellerVO.mem_num}"/>
+<div class="seldetail" style ="width:1000px; margin-left:10px; margin-top: 10px;">
 	<table class="table" border="1">
 		<tr>
 				<th>판매자 번호</th>
@@ -72,9 +70,6 @@
 		</tr>
 		
 	</table>
-	
-	<input type ="submit" value ="승인" class ="input_button">
-	</form>
 </div>
 </body>
 </html>

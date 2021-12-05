@@ -77,5 +77,10 @@ public class MemberService {
 	public List<MemberVO> memlist(MemberVO memberVO) throws Exception{
 		return dao.memlist(memberVO);
 	}
+	// 회원 리스트 상세정보(admin)
+	public MemberVO memdetail(String mem_name) throws Exception{
+		MemberVO memberVO = dao.memdetail(mem_name);
+		return memberVO;
+	}
 }
 

@@ -33,9 +33,12 @@
  		<typeAlias type="com.myshop.cm.model.MCateVO" alias="mcate"/>
  		<typeAlias type="com.myshop.cm.model.SCateVO" alias="scate"/>
  		<typeAlias type="com.myshop.cm.model.MemberVO" alias="memlist"/>
+ 		<typeAlias type="com.myshop.cm.model.MemberVO" alias="memdetail"/>
  		<typeAlias type="com.myshop.cm.model.MemberVO" alias="sellerupdate"/>
  		<typeAlias type="com.myshop.cm.model.SellerVO" alias="chglist"/>
  		<typeAlias type="com.myshop.cm.model.SellerVO" alias="chgdetail"/>
+ 		<typeAlias type="com.myshop.cm.model.SellerVO" alias="sellist"/>
+ 		<typeAlias type="com.myshop.cm.model.SellerVO" alias="seldetail"/>
  	</typeAliases>
  </configuration>
  
