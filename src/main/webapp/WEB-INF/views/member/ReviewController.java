@@ -1,11 +1,9 @@
 package com.myshop.cm.controller;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import javax.mail.Session;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myshop.cm.model.GoodsVO;
@@ -57,18 +54,18 @@ public class ReviewController {
 	}
 		//후기 저장
 	@RequestMapping(value="review_ok", method=RequestMethod.POST)
-	public String review_ok(@RequestParam(value = "rev_filename1") MultipartFile mf,HttpServletRequest request, HttpServletResponse response, 
+	public String review_ok(HttpServletRequest request, HttpServletResponse response, 
 							HttpSession session, MemberVO member, Model model, 
 							ReviewVO review) throws Exception {
 		
-			if (mf != null) {
-		         //첨부파일 저장
-		         UUID uuid = UUID.randomUUID();
-		         String filename = uuid + mf.getOriginalFilename();
-		         int size = (int) mf.getSize();
-		         String path = request.getRealPath("resources/images/reviewimage");
-		         int result = 0;
-		         String file[] = new String[2];
+//			if (mf != null) {
+//		         //첨부파일 저장
+//		         UUID uuid = UUID.randomUUID();
+//		         String filename = uuid + mf.getOriginalFilename();
+//		         int size = (int) mf.getSize();
+//		         String path = request.getRealPath("resources/images/reviewimage");
+//		         int result = 0;
+//		         String file[] = new String[2];
 
 	         // 첨부파일 저장 체크
 //		         if (filename != "") {
@@ -93,14 +90,14 @@ public class ReviewController {
 //		            }
 //		         }
 
-		         // 첨부파일이 전송된 경우
-		         if (size > 0) {
-		            mf.transferTo(new File(path + "/" + filename));
-		         }
-
-		         review.setRev_filename(filename);
-		         System.out.println(path);
-		      }
+//		         // 첨부파일이 전송된 경우
+//		         if (size > 0) {
+//		            mf.transferTo(new File(path + "/" + filename));
+//		         }
+//
+//		         review.setRev_filename(filename);
+//		         System.out.println(path);
+//		      }
 		//현재 세션에 있는 member mem_num값 가져오기
 		// 현제 세션에 있는(로그인 한 member의 정보) mem_num값 가져오기
 //			MemberVO revmember = (MemberVO)session.getAttribute("member");
@@ -254,57 +251,16 @@ public class ReviewController {
 		}
 		//리뷰수정
 		@RequestMapping(value="/review_update_ok", method=RequestMethod.POST)
-		public String review_update_ok(@RequestParam(value = "rev_filename1") MultipartFile mf,
-									@ModelAttribute ReviewVO review,
+		public String review_update_ok(@ModelAttribute ReviewVO review,
 									@RequestParam("page") String page,
-									HttpSession session,HttpServletRequest request,
+									HttpSession session,
 									Model model)throws Exception {
-			if (mf != null) {
-		         //첨부파일 저장
-		         UUID uuid = UUID.randomUUID();
-		         String filename = uuid + mf.getOriginalFilename();
-		         int size = (int) mf.getSize();
-		         String path = request.getRealPath("resources/images/reviewimage");
-		         int result = 0;
-		         String file[] = new String[2];
-
-	         // 첨부파일 저장 체크
-//		         if (filename != "") {
-//		            StringTokenizer st = new StringTokenizer(filename, ".");
-//		            file[0] = st.nextToken();
-//		            file[1] = st.nextToken(); // 확장자
-//	
-//		            // 사이즈가 10mb 이상인경우
-//		            if (size > 10000000) {
-//		               result = 1;
-//		               model.addAttribute("result", result);
-//	
-//		               return "";
-//	
-//		            //  
-//		            } else if (!file[1].equals("jpg") && !file[1].equals("gif") && !file[1].equals("png") && !file[1].equals("pdf")) {
-//	
-//		               result = 2;
-//		               model.addAttribute("result", result);
-//	
-//		               return "";
-//		            }
-//		         }
-
-		         // 첨부파일이 전송된 경우
-		         if (size > 0) {
-		            mf.transferTo(new File(path + "/" + filename));
-		         }
-
-		         review.setRev_filename(filename);
-		         System.out.println(path);
-		      }
 			
 			//수정 메서드 호출
 			reviewService.reviewUpdate(review);
 			System.out.println("컨트롤러거기 계세요?");
 			
-			return "redirect:/review_list?rev_num=" + review.getRev_num() 
+			return "redirect:/review_cont?rev_num=" + review.getRev_num() 
 							+"&page=" + page;
 		}
 		//리뷰 삭제폼

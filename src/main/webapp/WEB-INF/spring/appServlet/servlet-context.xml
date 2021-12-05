@@ -42,6 +42,10 @@
 			<mapping path="/member_delete"/>
 			<mapping path="/delete_ok"/>
 			<mapping path="/review_write"/>
+			<mapping path="/pass_update"/>
+			<mapping path="/passReCheck"/>
+			<mapping path="/myReview_list"/>
+			<mapping path="/showreviewdetail"/>
 			<beans:ref bean="sessionChk"/>
 		</interceptor>
 	</interceptors>	 

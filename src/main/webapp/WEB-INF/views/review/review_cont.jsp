@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>리뷰 보기</title>
 <script>
-//상품 삭제 확인
+//리뷰 삭제 확인
 function del(page, rev_num) {
    var chk = confirm("정말 삭제하시겠습니까?");
    if (chk) {
-      location.href='review_delete?page='+page+'&rev_num='+rev_num;
+      location.href='review_delete?page='+page+'&rev_num='+review.rev_num;
    }
 }   
 </script>
@@ -18,6 +19,8 @@ function del(page, rev_num) {
 <body>
 	<div id="boardcont_wrap">
 		<h2 class="boardcont_title">게시물 내용보기</h2>
+		 <input type="hidden" name="rev_num" value="${review.rev_num}" />
+  <input type="hidden" name="page" value="${page}" />
 		<table id="boardcont_t">
 			<tr>
 				<th>글내용</th>
@@ -29,7 +32,15 @@ function del(page, rev_num) {
 					<img src="<%=request.getContextPath() %>/resources/images/sellerimage/${rev_filename}" height="100" width="100" />
 					${rcont.rev_content}
 					</c:if> --%>
-					${review.rev_content}
+					
+					 <c:if test="${empty review.rev_filename}">
+      				${review.rev_content}
+       				</c:if>
+       				<c:if test="${!empty review.rev_filename}">
+       				${review.rev_content}
+					<img src="<%=request.getContextPath() %>/resources/images/reviewimage/${review.rev_filename}" height="100" width="100" />
+       				</c:if>
+					
 					 <%-- <pre>${bcont.board_content}</pre> --%></td>
 				<td>
 					<!-- 이미지 파일 들어가야할거같음 -->

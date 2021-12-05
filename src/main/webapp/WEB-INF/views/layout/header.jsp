@@ -19,9 +19,9 @@
 
 	<header>
 		  <div class="links">
-         <c:if test="${member == null}"><a href="login" class="link_text">로그인</a></c:if>
-         <c:if test="${member != null}">${member.userId}님 안녕하세요.</c:if>
-         <c:if test="${member != null}"><a href="/" class="link_text">로그아웃</a></c:if>
+         <c:if test="${member == null}"><a href="member_login" class="link_text">로그인</a></c:if>
+         <c:if test="${member != null}">${member.mem_id}님 안녕하세요.</c:if>
+         <c:if test="${member != null}"><a href="/member_logout" class="link_text">로그아웃</a></c:if>
          <c:if test="${member != null}"><a href="mypage" class="link_text">마이페이지</a></c:if>
          <c:if test="${member == null}"><a href="/" class="link_text">회원가입</a></c:if>
         <a href="/" class="link_text">공지</a>
