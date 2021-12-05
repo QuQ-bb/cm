@@ -11,7 +11,7 @@
 function showreviewdetail(rev_num) {
 	if($("#reviewdetail"+rev_num).hasClass('hide')) {
 		 $.ajax({
-	 	    url : '/showreviewdetail', // 요청 할 주소
+	 	    url : '/showsellerreviewdetail', // 요청 할 주소
 	 	   // async: true, // false 일 경우 동기 요청으로 변경
 	 	    type : 'post', // GET, PUT
 	 	    dataType : 'text',

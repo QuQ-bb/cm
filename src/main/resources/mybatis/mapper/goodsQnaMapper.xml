@@ -9,7 +9,7 @@
 		goodsqna gq
 		 left join goods g
 		 	on g.gds_num = gq.gds_num
-		where g.gds_seller=#{sel_name} and gdsqna_delyn=0
+		where g.gds_seller=#{sel_name} and gdsqna_delyn=1 and gdsqna_depth=0
 		
 	</select>
 	
@@ -36,7 +36,7 @@
 		 		on g.gds_num = gq.gds_num
 		 	left join goodsqnafiles gqf
 		 		on gqf.num = gq.gdsqna_num
-		where g.gds_seller=#{sel_name} and gdsqna_delyn=0
+		where g.gds_seller=#{sel_name} and gdsqna_delyn=1 and gdsqna_depth=0
 		group by gdsqna_num
 		order by gdsqna_num desc
 		limit #{pageIndex}, 10
@@ -44,7 +44,7 @@
 	
 	<!-- 답변 달렸는지 체크하기 -->
 	<select id="select_goodsqna_check" parameterType="int" resultType="int">
-		select gdsqna_answer from goodsqna where gdsqna_num=#{gdsqna_num} and gdsqna_delyn=0
+		select gdsqna_answer from goodsqna where gdsqna_num=#{gdsqna_num} and gdsqna_delyn=1
 	</select>
 	
 	<!-- 문의글 가져오기 -->
@@ -71,10 +71,10 @@
 		 		on g.gds_num = gq.gds_num
 		 	left join goodsqnafiles gqf
 		 		on gqf.num = gq.gdsqna_num
-		where gq.gdsqna_num=#{gdsqna_num} and gdsqna_delyn=0
+		where gq.gdsqna_num=#{gdsqna_num} and gdsqna_delyn=1
 	</select>
 	
-	<!-- 답변글 가져오기 -->
+	<!-- gdsqna_ref 로 답변글 가져오기 -->
 	<select id="select_goodsqna_answer" parameterType="int" resultType="goodsqna">
 		select
 			gq.gdsqna_num,
@@ -94,8 +94,109 @@
 		from goodsqna gq
 		 	left join goodsqnafiles gqf
 		 		on gqf.num = gq.gdsqna_num
-		where gq.gdsqna_num=#{gdsqna_num} 
-			  and gdsqna_delyn=0 and gdsqna_step=0
+		where gq.gdsqna_ref=#{gdsqna_num} 
+			  and gdsqna_delyn=1 and gdsqna_step=1
 	</select>
+	
+	<!--qna_num로 답변글 가져오기 -->
+	<select id="select_goodsqna_answer_num" parameterType="int" resultType="goodsqna">
+		select
+			gq.gdsqna_num,
+			gq.gds_num,
+			gq.gdsqna_sort,
+			gq.gdsqna_title,
+			gq.gdsqna_content,
+			gq.gdsqna_ref,
+			gq.gdsqna_step,
+			gq.gdsqna_depth,
+			gq.gdsqna_date,
+			gq.gdsqna_check,
+			gq.gdsqna_answer,
+			gq.gdsqna_delyn,
+			gq.mem_id,
+			gqf.fname
+		from goodsqna gq
+		 	left join goodsqnafiles gqf
+		 		on gqf.num = gq.gdsqna_num
+		where gq.gdsqna_num=#{gdsqna_num} 
+			  and gdsqna_delyn=1 and gdsqna_step=1
+	</select>
+	
+	<!-- 문의 읽음여부 확인 -->
+	<update id="update_goodsqna_check" parameterType="int">
+		update goodsqna
+		set
+			gdsqna_check=1
+		where 
+			gdsqna_num=#{gdsqna_num} 
+	</update>
+	
+	<!-- 문의 답변작성여부 체크 -->
+	<update id="update_goodsqna_question_answer_1" parameterType="goodsqna">
+		update goodsqna
+		set
+			gdsqna_answer=1
+		where 
+			gdsqna_num=#{gdsqna_num} 
+	</update>
+	
+	<!-- 문의 답변 작성 -->
+	<insert id="insert_goodsqna_answer" parameterType="goodsqna">
+	insert into goodsqna
+		(gds_num,
+		mem_id,
+		gdsqna_sort,
+		gdsqna_title,
+		gdsqna_content,
+		gdsqna_ref,
+		gdsqna_step,
+		gdsqna_depth,
+		gdsqna_date,
+		gdsqna_check,
+		gdsqna_answer,
+		gdsqna_delyn)
+	VALUES
+		(#{gds_num},
+		#{mem_id},
+		#{gdsqna_sort},
+		#{gdsqna_title},
+		#{gdsqna_content},
+		#{gdsqna_ref},
+		1,
+		1,
+		SYSDATE(),
+		0,
+		0,
+		1)
+	</insert>
+	
+	<!-- 문의 답변 수정하기 -->
+	<update id="update_goodsqna_answer" parameterType="goodsqna">
+		update goodsqna
+		set
+			gdsqna_title = #{gdsqna_title},
+			gdsqna_content = #{gdsqna_content},
+			gdsqna_date = SYSDATE()
+		where
+			gdsqna_num=#{gdsqna_num}
+	</update>
+	
+	<!-- 답변글의 ref 가져오기 -->
+	<select id="select_goodsqna_answer_ref" parameterType="int" resultType="int">
+		select
+			gdsqna_ref
+		from goodsqna
+		where gdsqna_num=#{gdsqna_num}
+	</select>
+	
+	<!-- 문의 답변작성여부 체크 -->
+	<update id="update_goodsqna_question_answer_0" parameterType="goodsqna">
+		update goodsqna
+		set
+			gdsqna_answer=0
+		where 
+			gdsqna_num=#{gdsqna_ref} and gdsqna_depth=0
+	</update>
+	
 
 </mapper>
