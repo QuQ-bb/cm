@@ -44,6 +44,9 @@ public class GoodsVO {
 	
 <<<<<<< Updated upstream
 	//배송 관련
+=======
+	//배송관련
+>>>>>>> Stashed changes
 	private DeliveryTemplateVO deliveryTemplateVO;
 	//옵션
 	private List<OptionVO> optionVO;
