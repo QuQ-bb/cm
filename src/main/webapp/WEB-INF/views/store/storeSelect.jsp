@@ -139,7 +139,7 @@
 						</div>
 <!-- ------------------------------------------ -->							
 						<div class="btn_wrap">
-							<a href="./storeList" class="btn_list">상품 리스트</a>
+							<a href="./storeList?curPage=${curPage}" class="btn_list">상품 리스트</a>
 							<a href="#" class="btn_cart">장바구니</a>
 							<!-- <a class="btn_buy">구매하기</a> -->
 							<button type="button" class="btn_buy">구매하기</button>
@@ -147,6 +147,7 @@
 						</div>
 					</div>
 					<div class="layout-wrapper goods-view-area">
+							${select.gds_detail}
 					</div>
 				</div>
 			</div>

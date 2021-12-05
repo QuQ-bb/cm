@@ -92,7 +92,7 @@
 										<li>
 											<div class="item">
 												<div class="thumb">
-													<a href="./storeSelect?gds_num=${list.gds_num}" class="img" style="background: url('../resources/images/goodsimage/${list.gds_thumbnail}') center center no-repeat;"></a>
+													<a href="./storeSelect?gds_num=${list.gds_num}&curPage=${pager.curPage}" class="img" style="background: url('../resources/images/goodsimage/${list.gds_thumbnail}') center center no-repeat;"></a>
 													<div class="exp_area">
 														<div class="util_bx">
 															<a class="btn_category_product_cart">

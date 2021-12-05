@@ -46,12 +46,13 @@ public class StoreController {
 	
 	//상품 상세
 	@GetMapping("storeSelect")
-	public void storeSelect(GoodsVO goodsVO, Model model) throws Exception {
+	public void storeSelect(GoodsVO goodsVO, Model model, Pager pager) throws Exception {
 		System.out.println("StoreSelect 들어왔냐");
 		
 		goodsVO = storeService.storeSelect(goodsVO);
 		
 		model.addAttribute("select", goodsVO);
+		model.addAttribute("curPage", pager.getCurPage());
 	}
 	
 	//상품 목록
