@@ -2,7 +2,6 @@
 .mypagesidenav {
   width: 202px;
   position:absolute;
-  z-index: 80;
   top: 220px;
   left: 0px;
   background: #eee;

@@ -27,6 +27,7 @@
 		</tr>
 		<!-- 화면 출력 번호  변수 정의 -->		
 		<c:set var="num" value="${listcount-(page-1)*10}"/> 	
+		
 		<c:choose>
 		<c:when test="${!empty historylist}">
 		<c:forEach var="his" items="${historylist}">
@@ -61,7 +62,7 @@
 				<button type="button" onclick="location.href='review_write?ord_gdsnum=${his.ord_gdsnum}&ord_num=${his.ord_num}'">후기</button>
 				</td>
 			</tr>
-		</c:forEach>
+			</c:forEach>
 		</c:when>
 		<c:otherwise>
 		<tr>

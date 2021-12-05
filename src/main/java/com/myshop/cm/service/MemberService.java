@@ -34,7 +34,7 @@ public class MemberService {
 	public void insertDelivery(DeliveryAddressVO deliveryaddress) {
 		memberDao.insertAddress(deliveryaddress);
 	}
-	//id값으로 불러서 mem_num구하기
+	//id값 불러서 mem_num구하기
 	public int selectMemNum(MemberVO member) {
 		int mem = memberDao.selectMemNum(member);
 		return mem;
@@ -54,10 +54,10 @@ public class MemberService {
 		return memberDao.passRe(prmv);
 	}
 	//비밀번호 수정
-//	public void passUpdate(MemberVO member)throws Exception {
-//		System.out.println("비밀번호 변경 괜찮으시겠어요?");
-//		memberDao.passUpdate(member);
-//	}
+		public void passUpdate(MemberVO member)throws Exception {
+			System.out.println("비밀번호 변경 괜찮으시겠어요?");
+			memberDao.passUpdate(member);
+		}
 	//회원 수정
 	public void memberUpdate(MemberVO member)throws Exception {
 		memberDao.memberUpdate(member);
