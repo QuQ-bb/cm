@@ -66,7 +66,7 @@
 		o.ord_delfee,
 		o.ord_request,
 		o.ord_totalprice,
-		o.gds_seller
+		o.gds_seller,
 	    g.gds_thumbnail,
 	    g.gds_name,
 	    m.mem_id,
@@ -98,15 +98,13 @@
 		o.ord_request,
 		o.ord_totalprice,
 		o.gds_seller,
-		 g.gds_name
+		g.gds_name
 		from project.order as o
 		left JOIN project.goods as g
-			on o.ord_gdsnum = g.gds_num
-		where gds_seller=#{Sel_name}
+			on o.gds_seller = g.gds_seller
+		where o.gds_seller=#{sel_name}
 		order by ord_num desc
 		limit 0, 5
-		
-		
 	</select>
 	
 	

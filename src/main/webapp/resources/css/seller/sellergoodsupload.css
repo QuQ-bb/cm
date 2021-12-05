@@ -1,0 +1,13 @@
+@charset "UTF-8";
+th{
+background:#e9ecef;
+text-align:center;
+align-content: center;
+width:150px;
+}
+
+td.content{
+padding-left: 10px;
+padding-top: 10px;
+padding-bottom: 10px;
+}

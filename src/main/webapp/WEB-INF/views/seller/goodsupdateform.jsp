@@ -18,20 +18,21 @@
 <!-- 옵션 유효성검사 -->
 <script src="<%=request.getContextPath()%>/resources/js/sellerjs/insertOption.js"></script>
 
-<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="<c:url value='/resources/css/seller/goodsuploadform.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/seller/sellergoodsupload.css'/>">
 
 </head>
 <body>
-	<div id="goodsupdateform">
+<%@ include file="../layout/sellerSidebar.jsp" %>
+	<div id="goodsuploadform">
 		<form method="post" action="<%=request.getContextPath()%>/goodsupdate" enctype="multipart/form-data" onsubmit="return goodsupload_check()">
 			<input type="hidden" name="gds_num" value="${goods.gds_num}" />
  			<input type="hidden" name="page" value="${page}" />
 			<input type="hidden" name="oldgds_thumbnail" value="<%=request.getContextPath()%>/resources/image/thumbnailimage/${goods.gds_thumbnail}">
-			<table border="1" width="1400">
+			<table border="1" width="1200">
 				<tr>
-					<th width="100">카테고리 선택</th>
-					<td>
+					<th width="100" style="text-align:center;">카테고리</th>
+					<td class="content">
 						<span id="lcate">
 							<select id="lcate_code" name="lcate_code" onchange="mcateload()">
 									<option value=0>대분류 선택</option>
@@ -69,31 +70,31 @@
 					</td>
 				</tr>
 				<tr>
-					<th>상품 판매자</th>
-					<td>${goods.gds_seller}</td>
+					<th style="text-align:center;">상품 판매자</th>
+					<td class="content">${goods.gds_seller}</td>
 				</tr>
 				<tr>
-					<th>상품명</th>
-					<td><input type="text" id="gds_name" name="gds_name" value="${goods.gds_name}"></td>
+					<th style="text-align:center;">상품명</th>
+					<td class="content"><input type="text" id="gds_name" name="gds_name" size="100" value="${goods.gds_name}"></td>
 				</tr>
 				<tr>
-					<th>대표이미지</th>
-					<td><img style="width: 400px;" id="preview-image" src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${goods.gds_thumbnail}">
+					<th style="text-align:center;">대표이미지</th>
+					<td class="content"><img style="width: 400px;" id="preview-image" src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${goods.gds_thumbnail}">
 					     <input style="display: block;" type="file" id="gds_thumbnail1" name="gds_thumbnail1">
 					</td>
 				</tr>
 				<tr>
-					<th>단위 가격</th>
-					<td><input type="text" id="gds_price" name="gds_price" value="${goods.gds_price}"></td>
+					<th style="text-align:center;">단위 가격</th>
+					<td class="content"><input type="text" id="gds_price" name="gds_price" value="${goods.gds_price}"></td>
 				</tr>
 				<tr>
-					<th>상세설명</th>
-					<td width=900><textarea id="gds_detail" name="gds_detail"
+					<th style="text-align:center;">상세설명</th>
+					<td width=900 class="content"><textarea id="gds_detail" name="gds_detail"
 							rows="100" cols="150">${goods.gds_detail}</textarea></td>
 				</tr>
 				<tr>
-					<th>옵션</th>
-					<td>
+					<th style="text-align:center;">옵션</th>
+					<td class="content">
 						<div id="pre_set">
 							<input type="text" name="option1name" id="option1name" placeholder="옵션명" size=7 value="${optionlist[0].opt_1stname}">  : 
 							<input type="text" name="option1val" id="option1val" style="width:300px" placeholder="쉼표(,)로 구분해주세요. ex)red,blue,..."><br>
@@ -109,8 +110,8 @@
 									<!-- 옵션값을 2개다 입력한 경우 -->
 									<table border="1">
 										<tr>
-											<td>${optionlist[0].opt_1stname} - ${optionlist[0].opt_2ndname}</td>
-											<td>재고</td>
+											<th style="text-align:center;">${optionlist[0].opt_1stname} - ${optionlist[0].opt_2ndname}</th>
+											<th style="text-align:center;">재고</th>
 										</tr>
 										<c:forEach var="optionlist" items="${optionlist}">
 											<tr>
@@ -134,8 +135,8 @@
 								<!-- 옵션값을 1개만 입력한 경우 -->
 									<table border="1">
 										<tr>
-											<td>${optionlist[0].opt_1stname}</td>
-											<td>재고</td>
+											<th style="text-align:center;">${optionlist[0].opt_1stname}</th>
+											<th style="text-align:center;">재고</th>
 										</tr>
 										<c:forEach var="optionlist" items="${optionlist}">
 											<tr>
@@ -162,12 +163,12 @@
 						</c:if>
 					</div>
 				<tr>
-					<th>재고</th>
-					<td><input type="text" id="opt_count" name="opt_count" value="${sum}"></td>
+					<th style="text-align:center;">재고</th>
+					<td class="content"><input type="text" id="opt_count" name="opt_count" value="${sum}"></td>
 				</tr>
 				<tr>
-					<th>배송 정보</th>
-					<td>
+					<th style="text-align:center;">배송 정보</th>
+					<td class="content">
 						<select id="deltem_num" name="deltem_num" onchange="deltemLoad()">
 								<option value="-1">배송 템플릿</option>
 								<c:forEach var="dtlist" items="${deltemlist}">
@@ -180,46 +181,46 @@
 							<c:if test="${gettemplate != null}">
 								<table>
 									<tr>
-										<th>배송 탬플릿 명</th>
+										<th style="text-align:center;">배송 탬플릿 명</th>
 										<td><input type="text" id="deltem_name" name="deltem_name" value="${gettemplate.deltem_name}" disabled="disabled"></td>
 									</tr>
 									<tr>
-										<th>배송사 선택</th>
+										<th style="text-align:center;">배송사 선택</th>
 										<td>
 											<input type="hidden" id="del_code" name="del_code" value="${gettemplate.del_code}" disabled="disabled">
 											<input type="text" id="del_name" name="del_name" value="${gettemplate.del_name}" disabled="disabled">
 										</td>
 									</tr>
 									<tr>
-										<th>배송비</th>
+										<th style="text-align:center;">배송비</th>
 										<td><input type="text" name="deltem_delfee" id="deltem_delfee" value="${gettemplate.deltem_delfee}" disabled="disabled"></td>
 									</tr>
 									<tr>
-										<th>무료배송 기준금액</th>
+										<th style="text-align:center;">무료배송 기준금액</th>
 										<td><input type="text" name="deltem_freedel" id="deltem_freedel" value="${gettemplate.deltem_freedel}" disabled="disabled"></td>
 									</tr>
 									<tr>
-										<th>반품 배송비</th>
+										<th style="text-align:center;">반품 배송비</th>
 										<td><input type="text" name="deltem_redelfee" id="deltem_redelfee" value="${gettemplate.deltem_redelfee}" disabled="disabled"></td>
 									</tr>
 									<tr>
-										<th>교환 배송비</th>
+										<th style="text-align:center;">교환 배송비</th>
 										<td><input type="text" name="deltem_exdelfee" id="deltem_exdelfee" value="${gettemplate.deltem_exdelfee}" disabled="disabled"></td>
 									</tr>
 									<tr>
-										<th>반품/교환 배송지 <br>우편번호</th>
+										<th style="text-align:center;">반품/교환 배송지 <br>우편번호</th>
 										<td><input name="deltem_repost" id="deltem_repost" size="5"
 											class="input_box" readonly onclick="post_search()"  value="${gettemplate.deltem_repost}" disabled="disabled"/> 
 										</td>
 									</tr>
 									<tr>
-										<th>주소</th>
+										<th style="text-align:center;">주소</th>
 										<td><input name="deltem_readd1" id="deltem_readd1" size="50"
 											class="input_box" readonly onclick="post_search()" value="${gettemplate.deltem_readd1}" disabled="disabled"/></td>
 									</tr>
 						
 									<tr>
-										<th>나머지 주소</th>
+										<th style="text-align:center;">나머지 주소</th>
 										<td><input name="deltem_readd2" id="deltem_readd2" size="37"
 											class="input_box" value="${gettemplate.deltem_readd2}" disabled="disabled"/></td>
 									</tr>
@@ -229,11 +230,11 @@
 					</td>
 				</tr>
 				<tr>
-					<th>교환 환불 기준</th>
-					<td><textarea id="gds_ears" name="gds_ears" rows="20" cols="150">${goods.gds_ears}</textarea></td>
+					<th style="text-align:center;">교환 환불 기준</th>
+					<td class="content"><textarea id="gds_ears" name="gds_ears" rows="20" cols="150">${goods.gds_ears}</textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">
+					<td colspan="2" align="center" class="content">
 					<input type="submit" id="updatebutton" name="updatebutton" value="수정 하기"></td>
 				</tr>
 

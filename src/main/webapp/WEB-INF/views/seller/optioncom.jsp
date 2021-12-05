@@ -13,11 +13,11 @@
 	<div>
 		<table border="1">
 			<tr>
-				<td>${option1name}
+				<th style="text-align:center;">${option1name}
 					<c:if test="${option2name != null}"> - ${option2name}
 					</c:if>
-				</td>
-				<td>수량</td>
+				</th>
+				<th style="text-align:center;">수량</th>
 			</tr>
 			<c:forEach var="optioncom" items="${optioncom}">
 				<tr>

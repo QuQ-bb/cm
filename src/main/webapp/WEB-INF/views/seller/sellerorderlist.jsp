@@ -27,7 +27,7 @@
 		<!-- 화면 출력 번호  변수 정의 -->		
 		<c:set var="num" value="${listcount-(page-1)*10}"/> 	
 		
-		<c:forEach var="order" items="${orderlist}">
+		<c:forEach var="order" items="${orderlist}" >
 			<tr>
 				<td>
 					<!-- 번호 출력 부분 -->	
@@ -47,7 +47,7 @@
 							${order.opt_1stname} : ${order.opt_1stval}	<br>
 							${order.opt_2ndname} : ${order.opt_2ndval}
 						</c:when>
-						<c:when test="${order.opt_2ndval != null}">
+						<c:when test="${order.opt_1stval != null}">
 							${order.opt_1stname} : ${order.opt_1stval}
 						</c:when>
 						<c:otherwise>
@@ -63,9 +63,7 @@
 				<td>배송</td>
 			</tr>
 		</c:forEach>
-		
 	</table>
-
 </div>
 </body>
 </html>

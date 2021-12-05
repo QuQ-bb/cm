@@ -49,8 +49,8 @@ public class OrderDAO {
 	}
 	
 	// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
-	public List<OrderVO> getMainOrderList(String Sel_name) {
-		return sqlSession.selectList("orderMapper.select_main_order_list", Sel_name);
+	public List<OrderVO> getMainOrderList(String sel_name) {
+		return sqlSession.selectList("orderMapper.select_main_order_list", sel_name);
 	}
 
 }

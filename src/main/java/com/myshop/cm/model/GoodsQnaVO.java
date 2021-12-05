@@ -16,6 +16,13 @@ public class GoodsQnaVO {
 	private int gdsqna_answer;
 	private int gdsqna_delyn;
 	
+	// 판매자 문의 리스트에 띄울 추가정보들
+	private String mem_id;
+	private String gds_thumbnail;
+	private String fname;
+	private String gds_name;
+	
+	
 	public int getGdsqna_num() {
 		return gdsqna_num;
 	}
@@ -87,6 +94,32 @@ public class GoodsQnaVO {
 	}
 	public void setGdsqna_delyn(int gdsqna_delyn) {
 		this.gdsqna_delyn = gdsqna_delyn;
+	}
+	
+	
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getGds_thumbnail() {
+		return gds_thumbnail;
+	}
+	public void setGds_thumbnail(String gds_thumbnail) {
+		this.gds_thumbnail = gds_thumbnail;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+	public String getGds_name() {
+		return gds_name;
+	}
+	public void setGds_name(String gds_name) {
+		this.gds_name = gds_name;
 	}
 	
 	

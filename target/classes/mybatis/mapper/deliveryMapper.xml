@@ -33,6 +33,9 @@
 		values
 		(#{deltem_num}, #{deltem_name}, #{sel_num}, #{del_code}, #{del_name}, #{deltem_delfee}, #{deltem_redelfee},
 		#{deltem_exdelfee}, #{deltem_freedel}, #{deltem_repost}, #{deltem_readd1}, #{deltem_readd2})
+		<selectKey keyProperty="deltem_num" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 	</insert>
 	
 	<!-- 배송템플릿 수정하기 -->
@@ -40,7 +43,6 @@
 		UPDATE deliverytemplate
 		SET
 		deltem_name = #{deltem_name},
-		sel_num = #{sel_num},
 		del_code = #{del_code}, 
 		del_name = #{del_name}, 
 		deltem_delfee = #{deltem_delfee}, 

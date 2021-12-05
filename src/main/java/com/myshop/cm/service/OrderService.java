@@ -139,7 +139,9 @@ public class OrderService {
 	}
 
 	// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
-	public List<OrderVO> getMainOrderList(String Sel_name) {
-		return orderDAO.getMainOrderList(Sel_name);
+	public List<OrderVO> getMainOrderList(String sel_name) {
+		return orderDAO.getMainOrderList(sel_name);
 	}
+	
+	
 }

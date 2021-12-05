@@ -16,6 +16,13 @@ public class ReviewVO {
 	private String rev_filename;	//후기 사진파일
 	private int ord_num;			//주문번호
 	
+	// 리뷰정보를 토대로 받아올 추가정보들
+	private String gds_thumbnail;
+    private String opt_1stname;
+    private String opt_1stval; 
+    private String opt_2ndname;
+    private String opt_2ndval;
+	
 	public int getRev_num() {
 		return rev_num;
 	}
@@ -81,6 +88,36 @@ public class ReviewVO {
 	}
 	public void setOrd_num(int ord_num) {
 		this.ord_num = ord_num;
+	}
+	public String getOpt_1stname() {
+		return opt_1stname;
+	}
+	public void setOpt_1stname(String opt_1stname) {
+		this.opt_1stname = opt_1stname;
+	}
+	public String getOpt_1stval() {
+		return opt_1stval;
+	}
+	public void setOpt_1stval(String opt_1stval) {
+		this.opt_1stval = opt_1stval;
+	}
+	public String getOpt_2ndname() {
+		return opt_2ndname;
+	}
+	public void setOpt_2ndname(String opt_2ndname) {
+		this.opt_2ndname = opt_2ndname;
+	}
+	public String getOpt_2ndval() {
+		return opt_2ndval;
+	}
+	public void setOpt_2ndval(String opt_2ndval) {
+		this.opt_2ndval = opt_2ndval;
+	}
+	public String getGds_thumbnail() {
+		return gds_thumbnail;
+	}
+	public void setGds_thumbnail(String gds_thumbnail) {
+		this.gds_thumbnail = gds_thumbnail;
 	}
 	
 	

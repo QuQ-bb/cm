@@ -1,13 +1,13 @@
 package com.myshop.cm.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.ReviewVO;
 
 @Repository
@@ -50,5 +50,16 @@ public class ReviewDAO {
 	public void reviewDelete(int rev_num)throws Exception {
 		sqlSession.delete("reviewMapper.review_delete",rev_num);
 	}
+	
+	// 판매자 페이지에서 리뷰 리스트 개수 불러오기
+	public int sellerReviewListCount(String sel_name) {
+		return sqlSession.selectOne("reviewMapper.sellerReviewListCount", sel_name);
+	}
+	
+	// 판매자 페이지에서 리뷰 리스트 불러오기
+	public List<ReviewVO> getsellerReviewList(Map<String, Object> listIndexMap) {
+		return sqlSession.selectList("reviewMapper.sellerReviewList", listIndexMap);
+	}
+
 	
 }

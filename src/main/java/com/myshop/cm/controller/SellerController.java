@@ -24,12 +24,14 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myshop.cm.model.CalculateVO;
 import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.DeliveryTemplateVO;
+import com.myshop.cm.model.GoodsQnaVO;
 import com.myshop.cm.model.GoodsVO;
 import com.myshop.cm.model.LCateVO;
 import com.myshop.cm.model.MCateVO;
 import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.OptionVO;
 import com.myshop.cm.model.OrderVO;
+import com.myshop.cm.model.ReviewVO;
 import com.myshop.cm.model.SCateVO;
 import com.myshop.cm.model.SellerVO;
 import com.myshop.cm.service.CalculateService;
@@ -37,10 +39,12 @@ import com.myshop.cm.service.CategoryService;
 import com.myshop.cm.service.DeliveryAddressService;
 import com.myshop.cm.service.DeliveryCategoryService;
 import com.myshop.cm.service.DeliveryTemplateService;
+import com.myshop.cm.service.GoodsQnaService;
 import com.myshop.cm.service.GoodsService;
 import com.myshop.cm.service.MemberService;
 import com.myshop.cm.service.OptionService;
 import com.myshop.cm.service.OrderService;
+import com.myshop.cm.service.ReviewService;
 import com.myshop.cm.service.SellerService;
 
 @Controller
@@ -66,6 +70,10 @@ public class SellerController {
 	private DeliveryAddressService deliveryAddressService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private ReviewService reviewService;
+	@Autowired
+	private GoodsQnaService goodsQnaService;
 	
 	
 	//판매자 전환 신청 폼
@@ -229,6 +237,19 @@ public class SellerController {
 			}
 			goods.setGds_thumbnail(filename);
 		}
+		// 배송템플릿을 작성한 경우
+		if(del_info != null) {
+			// 세션에 있는 member정보 받기
+			String[] delinfoarr = del_info.split(",");
+			for(int i=0; i<2; i++) {
+				System.out.println(i+","+delinfoarr[i]);
+			}
+			deliverytemplate.setDel_code(Integer.parseInt(delinfoarr[0]));
+			deliverytemplate.setDel_name(delinfoarr[1]);
+			deliverytemplate.setSel_num(seller.getSel_num());
+			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
+		}
+		goods.setDeltem_num(deliverytemplate.getDeltem_num());
 		goods.setGds_seller(seller.getSel_name());
 		goodsService.insert(goods);// 저장 메소드 호출
 		int gds_num = goods.getGds_num();
@@ -306,18 +327,6 @@ public class SellerController {
 			optionService.insertOption(optionvo);
 		}
 				
-		// 배송템플릿을 작성한 경우
-		if(del_info != null) {
-			// 세션에 있는 member정보 받기
-			String[] delinfoarr = del_info.split(",");
-			for(int i=0; i<2; i++) {
-				System.out.println(i+","+delinfoarr[i]);
-			}
-			deliverytemplate.setDel_code(Integer.parseInt(delinfoarr[0]));
-			deliverytemplate.setDel_name(delinfoarr[1]);
-			deliverytemplate.setSel_num(seller.getSel_num());
-			deliveryTemplateService.insert(deliverytemplate);  // 저장메소드 호출
-		}
 		return "redirect:/sellergoodslist";
 	}
 
@@ -581,7 +590,7 @@ public class SellerController {
 			// 새로운 파일 저장
 			UUID uuid = UUID.randomUUID();
 			String filename = uuid + mf.getOriginalFilename();
-			String path = request.getRealPath("resources/images/thumbnailimage");
+			String path = request.getRealPath("resources/images/thumbnailimage/");
 
 //			// 썸네일 유효성 체크
 //			if (filename != "") {
@@ -737,28 +746,49 @@ public class SellerController {
 		// modelAndView 객체 생성과 동시에 패스설정
 		ModelAndView showcalculdetailM = new ModelAndView("seller/calculdetail");
 		
-		
 		showcalculdetailM.addObject("calculate", calculate);
 		showcalculdetailM.addObject("order", order);
 		showcalculdetailM.addObject("goods", goods);
-		
 		
 		return showcalculdetailM;
 	}
 	
 	// 판매자 문의내역 목록으로 이동
-	@RequestMapping(value = "sellergoodsqnalist")
+	@RequestMapping(value = "/sellergoodsqnalist")
 	public ModelAndView sellergoodsqnalist(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		ModelAndView sellergoodsqnalistM = new ModelAndView("seller/sellergoodsqnalist");
 		
 		// 문의 리스트 받아오기
-		Map<String, Object> goodsqnalist = orderService.getOrderList(request, response);
+		Map<String, Object> goodsqnalist = goodsQnaService.getGoodsQnaList(request, response);
+
+		sellergoodsqnalistM.addAllObjects(goodsqnalist);
 		
 		return sellergoodsqnalistM;
 	}
 	
+	// 판매자 문의 상세목록으로 이동
+	@RequestMapping(value = "/showgoodsQnadetail")
+	public String showgoodsQnadetail(@RequestParam("gdsqna_num") int gdsqna_num, Model model) throws Exception{
+		
+		// 답변이 달렸는지 확인하기
+		int answer = goodsQnaService.getGoodsQnaAnswer(gdsqna_num);
+		model.addAttribute("answer", answer);
+		
+		// 문의 확인하기
+		GoodsQnaVO goodsquestion = goodsQnaService.getGoodsQuestionDetail(gdsqna_num);
+		model.addAttribute("goodsquestion", goodsquestion);
+		
+		// 답변이 있다면 답변 확인하기
+		if(answer == 1) {
+			GoodsQnaVO goodsanswer = goodsQnaService.getGoodsAnswerDetail(gdsqna_num);
+			model.addAttribute("goodsanswer", goodsanswer);
+		}
+		
+		return "seller/ajaxgoodsqnadetail";
+	}
+	
 	//판매자 주문내역 목록으로 이동
-	@RequestMapping(value = "sellerorderlist")
+	@RequestMapping(value = "/sellerorderlist")
 	public ModelAndView sellerorderlist(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		
 		// 주문리스트 받아오기
@@ -771,7 +801,7 @@ public class SellerController {
 	}
 	
 	// 판매자 주문 상세목록으로 이동
-	@RequestMapping(value = "sellerorderdetail")
+	@RequestMapping(value = "/sellerorderdetail")
 	public ModelAndView sellerorderdetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		int ord_num = Integer.parseInt(request.getParameter("ord_num"));		
 		String page = request.getParameter("page");
@@ -819,15 +849,43 @@ public class SellerController {
 		
 		// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
 		List<OrderVO> mainOrderList = orderService.getMainOrderList(seller.getSel_name());
-		// 최근 5개 문의
-		// 최근 5개 후기
-		// 최근 5개 공지
+		
+		// 세션으로 가져온 판매자 정보로  최근 5개 공지 가져오기
+		
+		
+		// 세션으로 가져온 판매자 정보로 최근 5개 문의 가져오기
+		 
+		
+		// 세션으로 가져온 판매자 정보로  최근 5개 후기 가져오기
+		
 		
 		model.addAttribute("mainOrderList", mainOrderList);
 		
 		return "seller/sellerMainpage";
 	}
 	
+	// 판매자 후기 목록으로 이동
+	@RequestMapping(value = "sellerreviewlist")
+	public ModelAndView sellerreviewlist(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		ModelAndView sellerreviewlistM = new ModelAndView("seller/sellerreviewlist");
+		
+		// 후기 리스트 받아오기
+		Map<String, Object> sellerreviewlist = reviewService.getSellerReviewList(request, response);
+		
+		sellerreviewlistM.addAllObjects(sellerreviewlist);
+		
+		return sellerreviewlistM;
+	}
 	
-
+	// 후기 상세페이지 불러오기
+	@RequestMapping(value = "/showreviewdetail")
+	public String reviewdetail(@RequestParam("rev_num") int rev_num, Model model) throws Exception {
+		
+		// 받은 후기번호로 상세정보 구해오기
+		ReviewVO review = reviewService.getReviewCont(rev_num);
+		
+		model.addAttribute("review", review);
+		
+		return "seller/ajaxsellerreviewdetail";
+	}
 }

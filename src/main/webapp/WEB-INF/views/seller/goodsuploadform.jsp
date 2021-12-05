@@ -20,19 +20,17 @@
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="<c:url value='/resources/css/seller/goodsuploadform.css'/>">
+<link rel="stylesheet" href="<c:url value='/resources/css/seller/sellergoodsupload.css'/>">
 </head>
 <body>
 <%@ include file="../layout/sellerSidebar.jsp" %>
 	<div id="goodsuploadform">
-
 		<form method="post" action="<%=request.getContextPath()%>/goodsupload" enctype="multipart/form-data" onsubmit="return goodsupload_check()">
-			<input type="hidden">
-			<!-- 판매자명 가져가기 -->
-			<table border="1" width="1400">
+			<table border="1" width="1200" class="goodsUploadForm">
 
 				<tr>
-					<th width="100">카테고리 선택</th>
-					<td>
+					<th style="text-align:center;">카테고리</th>
+					<td class="content">
 						<span id="lcate">
 							<select id="lcate_code" name="lcate_code" onchange="mcateload()">
 									<option value=0>대분류 선택</option>
@@ -48,32 +46,32 @@
 					</td>
 				</tr>
 				<tr>
-					<th>상품 판매자</th>
-					<td>${seller.sel_name}</td>
+					<th style="text-align:center;">상품 판매자</th>
+					<td class="content">${seller.sel_name}</td>
 				</tr>
 				<tr>
-					<th>상품명</th>
-					<td><input type="text" id="gds_name" name="gds_name"></td>
+					<th style="text-align:center;">상품명</th>
+					<td class="content"><input type="text" id="gds_name" name="gds_name"></td>
 				</tr>
 				<tr>
-					<th>대표이미지</th>
-					<td> <img style="width: 400px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
+					<th style="text-align:center;">대표이미지</th>
+					<td class="content"> <img style="width: 400px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
 					     <input style="display: block;" type="file" id="gds_thumbnail1" name="gds_thumbnail1">
 					</td>
 				</tr>
 				
 				<tr>
-					<th>단위 가격</th>
-					<td><input type="text" id="gds_price" name="gds_price"></td>
+					<th style="text-align:center;">단위 가격</th>
+					<td class="content"><input type="text" id="gds_price" name="gds_price"></td>
 				</tr>
 				<tr>
-					<th>상세설명</th>
-					<td width=900><textarea id="gds_detail" name="gds_detail"
+					<th style="text-align:center;">상세설명</th>
+					<td width=900 class="content"><textarea id="gds_detail" name="gds_detail"
 							rows="100" cols="150"></textarea></td>
 				</tr>
 				<tr>
-					<th>옵션</th>
-					<td>
+					<th style="text-align:center;">옵션</th>
+					<td class="content">
 						<div id="pre_set">
 							<input type="text" name="option1name" id="option1name" placeholder="옵션명" size=7 >  : 
 							<input type="text" name="option1val" id="option1val" style="width:300px" placeholder="쉼표(,)로 구분해주세요. ex)red,blue,..."><br>
@@ -87,12 +85,12 @@
 					</td>
 				</tr>
 				<tr>
-					<th>재고</th>
-					<td><input type="text" id="opt_count" name="opt_count"></td>
+					<th style="text-align:center;">재고</th>
+					<td class="content"><input type="text" id="opt_count" name="opt_count"></td>
 				</tr>
 				<tr>
-					<th>배송 정보</th>
-					<td>
+					<th style="text-align:center;">배송 정보</th>
+					<td class="content">
 						<select id="deltem_num" name="deltem_num" onchange="deltemLoad()">
 								<option value="-1">배송 템플릿</option>
 							<c:forEach var="dtlist" items="${deltemlist}">
@@ -106,16 +104,16 @@
 					</td>
 				</tr>
 				<tr>
-					<th>교환 환불 기준</th>
-					<td><textarea id="gds_ears" name="gds_ears" rows="20" cols="150"></textarea></td>
+					<th style="text-align:center;">교환 환불 기준</th>
+					<td class="content"><textarea id="gds_ears" name="gds_ears" rows="20" cols="150"></textarea></td>
 				</tr>
 				<tr>
-					<td colspan="2" align="center">
+					<td colspan="2" align="center" class="content">
 					<input type="submit" id="uploadbutton" name="uploadbutton" value="업로드 하기"></td>
 				</tr>
-
 			</table>
 		</form>
+		<br><br>
 
 	</div>
 	<!-- 스마트에디터    -->
