@@ -29,21 +29,6 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scri
 </script>
 <script type="text/javascript">
 	
-/* 	//모든 공백 체크 정규식
-	var empJ = /\s/g;
-	//아이디 정규식
-	var idJ = /^[a-z0-9][a-z0-9_\-]{4,12}$/;
-	// 비밀번호 정규식
-	var pwJ = /^[A-Za-z0-9]{4,12}$/;
-	// 이름 정규식
-	var nameJ = /^[가-힣]{2,6}$/;
-	// 이메일 검사 정규식
-	var mailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	
-	/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$;
-	
-	var address = $('#deladd_add1'); */
-	
 	$(document).ready(function() {
 		//주소 뭐꼬
 		var address = $('#deladd_add1');

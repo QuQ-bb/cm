@@ -6,7 +6,27 @@
 <head>
 <meta charset="UTF-8">
 <title>리뷰 리스트</title>
-<link rel="stylesheet" href="<c:url value='/resources/css/review/review_list.css'/>">
+<style type="text/css">
+#sellerreviewlist{
+ 	margin-left: 260px; /* Same width as the sidebar + left position in px */
+    margin-right: 300px; /* Same width as the sidebar + left position in px */
+}
+th{
+	background:#e9ecef;
+	text-align:center;
+	align-content: center;
+}
+caption {
+	color: black;
+}
+
+.hide{
+ display: none;
+
+}
+
+
+</style>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -46,37 +66,32 @@ function del(page, rev_num) {
 
 </head>
 <body>
-<%@ include file="../layout/header.jsp" %>
-<%@ include file="../layout/mypage.jsp" %>
-
 <div id="myreviewlist">
-		<h2>내 후기 목록</h2>
-	<table border="1" id="customers">
+	<table border="1">
+		<caption><h2>내 후기 목록</h2></caption>
 		<!-- 화면 출력 번호  변수 정의 -->		
 		<c:set var="num" value="${listcount-(page-1)*5}"/> 	
 		<tr>
-			<th>번호</th>
-			<th colspan="2">상품명</th>
-			<th>옵션</th>
-			<th width="50">작성자</th>
-			<th>작성일</th>
-			<th>상세정보</th>
-			<th>비고</th>
+			<th style="text-align: center;">번호</th>
+			<th style="text-align: center;" colspan="2">상품명</th>
+			<th style="text-align: center;">옵션</th>
+			<th style="text-align: center;" width="50">작성자</th>
+			<th style="text-align: center;">작성일</th>
+			<th style="text-align: center;">상세정보</th>
+			<th style="text-align: center;">후기상태</th>
 		</tr>
-		<c:choose>
-		<c:when test="${!empty myreviewlist}">
 		<c:forEach var="myreviewlist" items="${myreviewlist}">
-			<tr>
-				<td width="50">
+			<tr class="head">
+				<td width="50" style="text-align: center;">
 				 <!-- 번호 출력 부분 -->	
 					<input type="hidden" id="rev_num" name="rev_num" value="${myreviewlist.rev_num}">
 					<c:out value="${num}"/>			
 					<c:set var="num" value="${num-1}"/>	 
 				</td>
-				<td >
+				<td style="border-right: none;">
 					<img src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${myreviewlist.gds_thumbnail}" height="100" width="100" />
 				</td>
-				<td >
+				<td style="border-left: none;">
 					${myreviewlist.gds_name}
 				</td>
 				<td>
@@ -100,25 +115,21 @@ function del(page, rev_num) {
 					${myreviewlist.rev_date}
 				</td>
 				<td>
-				<button type="button" onclick="showreviewdetail(${myreviewlist.rev_num})">상세정보 보기</button>
+				<input type="button" onclick="showreviewdetail(${myreviewlist.rev_num})" value="상세정보 보기"></td>
 				<td>
-				<button type="button" onclick="location='review_update?rev_num=${myreviewlist.rev_num}&page=${page}'">수정</button>
-				<button type="button" onclick="del(${page},${myreviewlist.rev_num})">삭제</button>
+				<input type="button" value="수정" class="input_button"
+				onclick="location='review_update?rev_num=${myreviewlist.rev_num}&page=${page}'" />
+				<input type="button" value="삭제" onclick="del(${page},${myreviewlist.rev_num})"/>
 				</td>
 			</tr>
 			<tr>
-				<td colspan="10">
-					<div id="reviewdetail${myreviewlist.rev_num}" class="hide"  style="height:50px"></div>
+				<td colspan="7">
+					<div id="reviewdetail${myreviewlist.rev_num}" class="hide" style="height:150px"></div>
 				</td>
 			</tr>
+		
+
 		</c:forEach>
-		</c:when>
-		<c:otherwise>
-		<tr>
-		 <td colspan="8">작성한 후기가 없습니다.</td>
-		</tr>
-		</c:otherwise>
-		</c:choose>
 		</table>
 		
 		<div id="revlist_paging">
@@ -147,6 +158,6 @@ function del(page, rev_num) {
 			</c:if>
 		</div>
 </div>
-<%@ include file="../layout/footer.jsp" %>
+
 </body>
 </html>

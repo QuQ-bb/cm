@@ -21,7 +21,7 @@
   		select count(rev_num) from review where mem_num=#{mem_num}
   	</select>
   	
-  	<!--게시판 목록 -->
+  	<!--리뷰 목록 -->
   	<select id="review_list" parameterType="java.util.Map" resultType="review">
      select 
       r.rev_num,
@@ -60,7 +60,7 @@
 	<!-- 리뷰 수정 -->
 	<update id="review_update" parameterType="review">
 	update review set
-	 rev_content=#{rev_content} where rev_num=#{rev_num}
+	 rev_content=#{rev_content},rev_filename=#{rev_filename} where rev_num=#{rev_num}
 	</update>
 	
 	<!-- 리뷰 삭제 -->
