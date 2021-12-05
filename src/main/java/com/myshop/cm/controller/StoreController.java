@@ -63,6 +63,8 @@ public class StoreController {
 		List<GoodsVO> list = storeService.storeList(pager);
 		
 		model.addAttribute("lists", list);
+		model.addAttribute("pager", pager);
+		
 	}
 	
 }

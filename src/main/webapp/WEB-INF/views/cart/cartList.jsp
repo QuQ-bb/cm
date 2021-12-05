@@ -358,7 +358,7 @@
 					<thead>
 						<tr>
 							<th>총 상품 금액</th>
-							<th>할인 금액</th>
+							<th>총 배송비</th>
 							<th>총 결제 예정 금액</th>
 						</tr>
 					</thead>

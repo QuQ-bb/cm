@@ -19,31 +19,12 @@ public class CartVO {
 	private int opt_num; // 옵션 번호
 	private int cart_count; // 주문 수량
 	private Date cart_date; // 주문 날짜
-	private String gds_viewyn; // 상품노출 Y/N
+	private String cart_viewyn; // 상품노출 Y/N
 
 	// 추가
 	private int gds_num;
+	private GoodsVO goodsVO; //상품
 	private OptionVO optionVO; // 상품 옵션
-	private int cartlist_num; // 카트 리스트 번호
-	private String gds_name; // 상품 이름
-	private int gds_price; // 상품 가격
-	private String gds_thumbimg;// 상품 썸네일 이미지
-
-	public int getCartlist_num() {
-		return cartlist_num;
-	}
-
-	public void setCartlist_num(int cartlist_num) {
-		this.cartlist_num = cartlist_num;
-	}
-
-	public String getGds_name() {
-		return gds_name;
-	}
-
-	public void setGds_name(String gds_name) {
-		this.gds_name = gds_name;
-	}
 
 	public OptionVO getOptionVO() {
 		return optionVO;
@@ -51,22 +32,6 @@ public class CartVO {
 
 	public void setOptionVO(OptionVO optionVO) {
 		this.optionVO = optionVO;
-	}
-
-	public int getGds_price() {
-		return gds_price;
-	}
-
-	public void setGds_price(int gds_price) {
-		this.gds_price = gds_price;
-	}
-
-	public String getGds_thumbimg() {
-		return gds_thumbimg;
-	}
-
-	public void setGds_thumbimg(String gds_thumbimg) {
-		this.gds_thumbimg = gds_thumbimg;
 	}
 
 	public int getCart_num() {
@@ -109,12 +74,12 @@ public class CartVO {
 		this.cart_date = cart_date;
 	}
 
-	public String getGds_viewyn() {
-		return gds_viewyn;
+	public GoodsVO getGoodsVO() {
+		return goodsVO;
 	}
 
-	public void setGds_viewyn(String gds_viewyn) {
-		this.gds_viewyn = gds_viewyn;
+	public void setGoodsVO(GoodsVO goodsVO) {
+		this.goodsVO = goodsVO;
 	}
 
 	public int getGds_num() {
@@ -123,6 +88,14 @@ public class CartVO {
 
 	public void setGds_num(int gds_num) {
 		this.gds_num = gds_num;
+	}
+
+	public String getCart_viewyn() {
+		return cart_viewyn;
+	}
+
+	public void setCart_viewyn(String cart_viewyn) {
+		this.cart_viewyn = cart_viewyn;
 	}
 
 }

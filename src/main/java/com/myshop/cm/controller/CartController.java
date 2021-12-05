@@ -56,7 +56,7 @@ public class CartController {
 		gds_viewyn = cartService.selectGdsviewyn(cartVO);
 		// System.out.println(gds_viewyn);
 		cartVO.setMem_num(1);
-		cartVO.setGds_viewyn(gds_viewyn);
+		cartVO.setCart_viewyn(gds_viewyn);
 		result = cartService.cartInsert(cartVO);
 		// System.out.println(result);
 		// }

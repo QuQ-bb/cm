@@ -237,7 +237,7 @@
 		var cart_count = parseInt($('.numCount').val());
 		//alert(cart_count);
 		
-		alert(opt_num);
+		//alert(opt_num);
 		
 		//첫 번째 옵션 입력 여부
 		if($('.text1').text() == "선택"){

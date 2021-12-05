@@ -62,11 +62,12 @@
 		from goods
 		<include refid="cateKind"></include> gds_viewyn='y'
 		order by gds_num desc
-		<!-- LIMIT #{startRow}, #{perPage} -->
+		LIMIT #{startRow}, #{perPage}
 	</select>
 	
 	<select id="storeCount" resultType="Integer">
 		select count(gds_num) from goods
+		where gds_viewyn='y'
 	</select>
 	
 	<select id="storeSelect" resultMap="Select" parameterType="GoodsVO">

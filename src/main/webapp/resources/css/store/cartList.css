@@ -109,6 +109,7 @@ input {
     padding: 12px 20px 13px;
     background-color: #fafafa;
     border-top: 3px solid #000;
+    margin-bottom: 0;
 }
 input[type="checkbox"].custom_checkbox_all {
 	overflow: hidden;
@@ -450,7 +451,7 @@ table {
     top: 36px;
     width: 51px;
     height: 52px;
-    background: transparent url(../../images/cart/subtract-line.png) center center no-repeat;
+    background: transparent url(../../images/cart/add-line.png) center center no-repeat;
     background-size: 52px;
 }
 .cart_total_price_wrap tbody td.cart_calculator:after {
