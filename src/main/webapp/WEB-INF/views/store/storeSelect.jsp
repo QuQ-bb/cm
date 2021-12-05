@@ -87,14 +87,6 @@
 										<dt class="tit">무료배송 주문금액</dt>
 										<dd class="desc"><fmt:formatNumber value="${select.deliveryTemplateVO.deltem_freedel}" pattern="###,###,###" />원</dd>
 									</dl>
-									<dl class="list fst">
-										<dt class="tit">기본 배송비</dt>
-										<dd class="desc">3000원</dd>
-									</dl>
-									<dl class="list">
-										<dt class="tit">무료배송 주문금액</dt>
-										<dd class="desc">3000원</dd>
-									</dl>
 								<c:if test="${select.optionVO[0].opt_1stval eq null}">
 									<input type="hidden" id="opt_num" value="${select.optionVO[0].opt_num}" data-optnum="${opt.opt_num}">
 									<dl class="list">
@@ -147,7 +139,10 @@
 						</div>
 					</div>
 					<div class="layout-wrapper goods-view-area">
-							${select.gds_detail}
+						${select.gds_detail}
+					</div>
+					<div>
+						
 					</div>
 				</div>
 			</div>

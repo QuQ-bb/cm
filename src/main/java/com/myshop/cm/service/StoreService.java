@@ -29,6 +29,7 @@ public class StoreService {
 	
 	//상품 상세
 	public GoodsVO storeSelect(GoodsVO goodsVO) throws Exception {
+		
 		return storeDAO.storeSelect(goodsVO);
 	}
 	

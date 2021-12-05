@@ -51,6 +51,9 @@ public class StoreController {
 		
 		goodsVO = storeService.storeSelect(goodsVO);
 		
+		//String gds_detail = goodsVO.getGds_detail().replace("/resources", "${pageContext.request.contextPath}/resources");
+		//goodsVO.setGds_detail(gds_detail);
+		
 		model.addAttribute("select", goodsVO);
 		model.addAttribute("curPage", pager.getCurPage());
 	}
