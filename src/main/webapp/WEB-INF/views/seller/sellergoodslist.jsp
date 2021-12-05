@@ -14,7 +14,6 @@
 <%@ include file="../layout/sellerheader.jsp" %>
 <%@ include file="../layout/sellerSidebar.jsp" %>
 	<div class="main">
-	  <!-- <a href="home"><img src="resources/image/logo3.png" class="img_logo"/></a><br><br> -->
 		<h1 class="goodslist_title">상품목록</h1>
 	<div id="goodslist_div">
 		<div id="goodslist_c">총 판매상품 : ${listcount}개</div>
