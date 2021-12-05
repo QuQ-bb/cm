@@ -28,8 +28,8 @@ public class OrderDAO {
 	}
 	// 마이 페이지 주문내역
 	@Transactional
-	public List<OrderVO> getHistoryList(Map<String, Object> indexMap) {
-		return sqlSession.selectList("orderMapper.history_list",indexMap);
+	public List<OrderVO> getHistoryList(int pageIndex) {
+		return sqlSession.selectList("orderMapper.history_list",pageIndex);
 	}
 	
 	// 판매자페이지에서 주문정보 불러오기
