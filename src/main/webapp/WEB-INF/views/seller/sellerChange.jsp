@@ -152,7 +152,7 @@
     </div>
     
       <div class="form-group">
-    <input type="submit" class="btn btn-default form-control" value="신청하기">
+    <input type="submit" class="btn btn-default form-control" style="background: #6e58fe; color:white; border: none" value="신청하기">
       </div>
 
 

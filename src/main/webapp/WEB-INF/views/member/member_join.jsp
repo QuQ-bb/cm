@@ -359,7 +359,7 @@ src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></scri
 				  <span>만 14세 이상입니다.&nbsp;<strong>(필수)</strong></span><br><br>
 				
 					<div class="form-group text-center">
-					<button type="submit" class="btn btn-primary form-control">회원가입</button>
+					<button type="submit" class="btn btn-primary form-control" style="background: #6e58fe; color:white; border: none">회원가입</button>
 				</div>
 				
 <!--------------------------------------약관 모달 창 개길어------------------------------------------------------------------------------------------>

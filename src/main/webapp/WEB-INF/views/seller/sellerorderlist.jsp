@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="<c:url value='/resources/css/seller/sellerorderlist.css'/>">
 </head>
 <body>
+<%@ include file="../layout/sellerheader.jsp" %>
 <%@ include file="../layout/sellerSidebar.jsp" %>
 <div class="main">
 	<h1>판매자 주문내역</h1>

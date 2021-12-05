@@ -50,7 +50,7 @@ function check(){
 						placeholder="PASSWORD">
 				</div>
 				<div class="form-group text-center">
-					<button type="submit" class="btn btn-primary"
+					<button type="submit" class="btn btn-primary" style="background: #6e58fe; color:white; border: none"
 					onClick="passReCheck?mem_id=${prmv.mem_id}">확인</button>
 				</div>
 			</form>
