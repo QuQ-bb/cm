@@ -7,23 +7,24 @@
 	margin-top: 85px; 
 }
 
-#caltable {
+#sellerreviewTable {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
+  border: 1px solid #ddd;
   width:100%;
   height: 20%;
 }
-#caltable td, #caltable th {
+#sellerreviewTable td, #sellerreviewTable th {
   border: 1px solid #ddd;
-  font-size: 12px;
+  font-size: 15px;
   text-align: center;
 }
 
-#caltable tr:nth-child(even){background-color: #ffffff;}
+#sellerreviewTable tr:nth-child(even){background-color: #ffffff;}
 
-#caltable tr:hover {background-color: #ddd;}
+#sellerreviewTable tr:hover {background-color: #ddd;}
 
-#caltable th {
+#sellerreviewTable th {
   padding-top: 12px;
   padding-bottom: 12px;
   background-color: #808080;
@@ -31,23 +32,24 @@
 }
 
 
-#caltable a{
+#sellerreviewTable a{
 	color: #000;
 	text-decoration: none;
 }
 
-#caltable a:hover{
-	color: #808080;
+#sellerreviewTable a:hover{
+	color: #007fff;
 }
 
-#caltable button{
+#sellerreviewTable button{
 	 background-color:#808080;
 	 color: #ffffff;
+	 float:right;
 	 border-radius: 3px;
 	 border: 1px solid #000;  /* 버튼 테두리 */
 }
 
-#caltable button:hover{	/* 버튼을 마우스에 올렸을때 */
+#sellerreviewTable button:hover{	/* 버튼을 마우스에 올렸을때 */
 	background-color: #ffffff;
 	color: #808080;
 }

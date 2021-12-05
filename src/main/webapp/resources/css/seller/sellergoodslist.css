@@ -21,6 +21,7 @@
   border: 1px solid #ddd;
   padding: 8px;
   font-size: 12px;
+  text-align: center;
 }
 
 #goodslist_t tr:nth-child(even){background-color: #ffffff;}
@@ -30,7 +31,6 @@
 #goodslist_t th {
   padding-top: 12px;
   padding-bottom: 12px;
-  text-align: center;
   background-color: #808080;
   color: white;
 }

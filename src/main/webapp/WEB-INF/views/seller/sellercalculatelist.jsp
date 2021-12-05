@@ -68,13 +68,15 @@
 					</c:if> <fmt:formatDate value="${clist.clcln_comdate}"
 							pattern="yyyy-MM-dd HH:mm:ss" /></td>
 					<td>${clist.clcln_status}</td>
-					<td><input type="button" onclick="showcalculdetail(${clist.clcln_num})" value="상세페이지 보기"></td>
+					<td>
+					<button type="button" onclick="showcalculdetail(${clist.clcln_num})">상세페이지 보기</button>
+					</td>
 				</tr>
-				<tr id="calculdetail${clist.clcln_num}" class="hide">
+				<tr>
+					<td colspan="10" >
+						<div id="calculdetail${clist.clcln_num}" class="hide"></div>
+					</td>
 				</tr>
-				<!-- <tr>
-					
-				</tr> -->
 
 			</c:forEach>
 		</table>
