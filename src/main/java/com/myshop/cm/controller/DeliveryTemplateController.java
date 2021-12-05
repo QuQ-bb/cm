@@ -119,8 +119,6 @@ public class DeliveryTemplateController {
 		//배송 템플릿 개수 구해오기
 		int listcount = deliveryTemplateService.gettemplatecount(seller.getSel_num());
 		
-		
-		
 		// 배송 템플릿 목록 구해오기
 		List<DeliveryTemplateVO> deltemlist = deliveryTemplateService.getTemplateList(seller.getSel_num());
 		

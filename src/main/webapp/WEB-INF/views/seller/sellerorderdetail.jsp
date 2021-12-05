@@ -49,7 +49,7 @@ background: #E2E2E2;
 						${option.opt_1stname} : ${option.opt_1stval}	<br>
 						${option.opt_2ndname} : ${option.opt_2ndval}
 					</c:when>
-					<c:when test="${option.opt_2ndval != null}">
+					<c:when test="${option.opt_1stval != null}">
 						${option.opt_1stname} : ${option.opt_1stval}
 					</c:when>
 					<c:otherwise>

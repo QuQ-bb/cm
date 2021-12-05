@@ -16,11 +16,6 @@
 				<td><input type="text" id="deltem_name" name="deltem_name" value="${gettemplate.deltem_name}" disabled="disabled"></td>
 			</tr>
 			<tr>
-				<th>판매자 번호</th>
-				<td><input type="text" id="sel_num" name="sel_num" value="${gettemplate.sel_num}" disabled="disabled"></td>
-			</tr>
-
-			<tr>
 				<th>배송사 선택</th>
 				<td>
 					<input type="hidden" id="del_code" name="del_code" value="${gettemplate.del_code}" disabled="disabled">
@@ -68,11 +63,6 @@
 				<th>배송 탬플릿 명</th>
 				<td><input type="text" id="deltem_name" name="deltem_name" ></td>
 			</tr>
-			<tr>
-				<th>판매자 번호</th>
-				<td><input type="text" id="sel_num" name="sel_num"></td>
-			</tr>
-
 			<tr>
 				<th>배송사 선택</th>
 				<td><select id="del_info" name="del_info" onchange="delivery_list()">

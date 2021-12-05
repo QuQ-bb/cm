@@ -8,7 +8,7 @@ public class ReviewVO {
 	private int pay_num;			//결제 번호
 	private int gds_num;			//상품 번호
 	private String gds_name;		//상품 이름
-	private int ord_gdsoption;		//상품 옵션
+	private String ord_gdsoption;	//상품 옵션
 	private int mem_num;			//회원 번호
 	private String mem_id;			//후기 작성자
 	private String rev_content;		//후기 내용
@@ -16,8 +16,8 @@ public class ReviewVO {
 	private String rev_filename;	//후기 사진파일
 	private int ord_num;			//주문번호
 	
-	// 주문정보를 토대로 받아올 추가정보들
-    private String gds_thumbnail;
+	// 리뷰정보를 토대로 받아올 추가정보들
+	private String gds_thumbnail;
     private String opt_1stname;
     private String opt_1stval; 
     private String opt_2ndname;
@@ -47,10 +47,10 @@ public class ReviewVO {
 	public void setGds_name(String gds_name) {
 		this.gds_name = gds_name;
 	}
-	public int getOrd_gdsoption() {
+	public String getOrd_gdsoption() {
 		return ord_gdsoption;
 	}
-	public void setOrd_gdsoption(int ord_gdsoption) {
+	public void setOrd_gdsoption(String ord_gdsoption) {
 		this.ord_gdsoption = ord_gdsoption;
 	}
 	public int getMem_num() {
@@ -89,12 +89,6 @@ public class ReviewVO {
 	public void setOrd_num(int ord_num) {
 		this.ord_num = ord_num;
 	}
-	public String getGds_thumbnail() {
-		return gds_thumbnail;
-	}
-	public void setGds_thumbnail(String gds_thumbnail) {
-		this.gds_thumbnail = gds_thumbnail;
-	}
 	public String getOpt_1stname() {
 		return opt_1stname;
 	}
@@ -118,6 +112,12 @@ public class ReviewVO {
 	}
 	public void setOpt_2ndval(String opt_2ndval) {
 		this.opt_2ndval = opt_2ndval;
+	}
+	public String getGds_thumbnail() {
+		return gds_thumbnail;
+	}
+	public void setGds_thumbnail(String gds_thumbnail) {
+		this.gds_thumbnail = gds_thumbnail;
 	}
 	
 	
