@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -10,7 +10,6 @@
 <title>Insert title here</title>
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
-<script src="<%=request.getContextPath()%>/resources/js/sellerjs/sellercalculatelistjs.js"></script>
 <style type="text/css">
 .goodsQnaList {
 	margin-left: 300px; /* Same width as the sidebar + left position in px */
@@ -20,11 +19,8 @@
 	padding: 0px 10px;
 }
 .goodsQnaList caption{
+	color : black;
   	font-size: 25px; /* Increased text to enable scrolling */
-}
-
-#goodsQnaTable tr{
-	height: 15px;
 }
 
 #goodsQnaTable th{
@@ -44,15 +40,13 @@ tr.notcheck {
 	text-overflow:ellipsis; 
 	overflow:hidden; 
 	white-space:nowrap;
-}
+} 
 
-	 table {width:900px;}  
+table {width:900px;}  
 
-/* .calculdetail {display:none;}  
+.hide {display:none;}
 
-   .calculList td {cursor:pointer;}   */
-
-   .show {display:table-row;}  
+.show {display:table-row;}  
 
 
 </style>
@@ -65,14 +59,14 @@ tr.notcheck {
 <body>
 <%@ include file="../layout/sellerSidebar.jsp" %>
 <div class="goodsQnaList">
-	<table border="1" id="goodsQnaTable" style="table-layout:fixed" width="800">
+	<table border="1" id="goodsQnaTable" width="800">
 		<caption>문의 내역</caption>
 		<tr>
 			<th width="5%">번호</th>
 			<th width="20%">상품명</th>
 			<th width="35%">문의제목</th>
 			<th width="20%">문의날짜</th>
-			<th width="9%">상태</th>
+			<th width="20%">상태</th>
 			<th>액션</th>
 		</tr>
 		<c:set var="num" value="${listcount-(page-1)*10}"/> 
@@ -132,10 +126,9 @@ tr.notcheck {
 				</td>
 			</tr>
 			<tr>
-				<td colspan="6" >
-					<div id="questiondetail${sellergoodsQnaList.gdsqna_num}" class="hide"> </div>
+				<td colspan="6">
+					<div id="questiondetail${sellergoodsQnaList.gdsqna_num}" class="hide"></div>
 				</td>
-			
 			</tr>
 		</c:forEach>
 	</table>

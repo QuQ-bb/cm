@@ -774,6 +774,9 @@ public class SellerController {
 		int answer = goodsQnaService.getGoodsQnaAnswer(gdsqna_num);
 		model.addAttribute("answer", answer);
 		
+		// 문의확인 업데이트
+		goodsQnaService.updateCheckQna(gdsqna_num);
+		
 		// 문의 확인하기
 		GoodsQnaVO goodsquestion = goodsQnaService.getGoodsQuestionDetail(gdsqna_num);
 		model.addAttribute("goodsquestion", goodsquestion);
@@ -785,6 +788,30 @@ public class SellerController {
 		}
 		
 		return "seller/ajaxgoodsqnadetail";
+	}
+	
+	// 판매자 문의 답변 등록페이지로
+	@RequestMapping(value = "goodsqnaanswer")
+	public String goodsqnaanswer(HttpServletRequest request, GoodsQnaVO goodsqna) {
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerService.getSellerInfo(member.getMem_num());
+		
+		// 폼테그에서 받아온 gdsqna_num값으로 원문 정보 가져오기
+		GoodsQnaVO goodsquestion = goodsQnaService.getGoodsQuestionDetail(goodsqna.getGdsqna_num());
+		
+		// 판매자가 작성한 정보 덮어씌우기
+		goodsquestion.setMem_id(seller.getSel_name());
+		goodsquestion.setGdsqna_title(goodsqna.getGdsqna_title());
+		goodsquestion.setGdsqna_content(goodsqna.getGdsqna_content());
+		
+		// 답변글 
+		goodsQnaService.insertGoodsQna(goodsquestion);
+		
+		return "redirect:/sellergoodsqnalist";
 	}
 	
 	//판매자 주문내역 목록으로 이동
@@ -878,7 +905,7 @@ public class SellerController {
 	}
 	
 	// 후기 상세페이지 불러오기
-	@RequestMapping(value = "/showreviewdetail")
+	@RequestMapping(value = "/showsellerreviewdetail")
 	public String reviewdetail(@RequestParam("rev_num") int rev_num, Model model) throws Exception {
 		
 		// 받은 후기번호로 상세정보 구해오기

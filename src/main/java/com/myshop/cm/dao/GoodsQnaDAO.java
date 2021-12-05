@@ -37,5 +37,22 @@ public class GoodsQnaDAO {
 		return sqlSession.selectOne("goodsQnaMapper.select_goodsqna_answer", gdsqna_num);
 	}
 
+	// 문의 확인 업데이트
+	public void updateCheckQna(int gdsqna_num) {
+		sqlSession.update("goodsQnaMapper.update_goodsqna_check",gdsqna_num);
+		
+	}
+
+	// 문의 답변 달기
+	public void insertGoodsQna(GoodsQnaVO goodsquestion) {
+		// 문의글 답변 update 하기
+		sqlSession.update("goodsQnaMapper.update_goodsqna_answer", goodsquestion);
+		// 답변글 insert하기
+		sqlSession.insert("goodsQnaMapper.insert_goodsqna_answer", goodsquestion);
+		
+	}
+	
+	
+
 
 }
