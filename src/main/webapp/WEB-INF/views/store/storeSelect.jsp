@@ -87,8 +87,20 @@
 										<dt class="tit">무료배송 주문금액</dt>
 										<dd class="desc"><fmt:formatNumber value="${select.deliveryTemplateVO.deltem_freedel}" pattern="###,###,###" />원</dd>
 									</dl>
+									<dl class="list fst">
+										<dt class="tit">기본 배송비</dt>
+										<dd class="desc">3000원</dd>
+									</dl>
+									<dl class="list">
+										<dt class="tit">무료배송 주문금액</dt>
+										<dd class="desc">3000원</dd>
+									</dl>
 								<c:if test="${select.optionVO[0].opt_1stval eq null}">
-								<input type="hidden" id="opt_num" value="${select.optionVO[0].opt_num}" data-optnum="${opt.opt_num}">
+									<input type="hidden" id="opt_num" value="${select.optionVO[0].opt_num}" data-optnum="${opt.opt_num}">
+									<dl class="list">
+										<dt class="tit">재고수량</dt>
+										<dd class="desc">${select.optionVO[0].opt_count}</dd>
+									</dl>
 								</c:if>
 								<c:if test="${select.optionVO[0].opt_1stval ne null}">
 									<dl class="list fst">
@@ -98,7 +110,7 @@
 												<label class="text text1">선택</label>
 												<ul class="option-list" style="z-index: 10;">
 													<c:forEach items="${select.optionVO}" var="opt">
-														<li class="option option1" id="${opt.opt_2ndval}" data-optnum="${opt.opt_num}">${opt.opt_1stval}</li>
+														<li class="option option1" id="${opt.opt_2ndval}" data-optnum="${opt.opt_num}">${opt.opt_1stval} (${opt.opt_count})</li>
 													</c:forEach>
 												</ul>
 											</div>

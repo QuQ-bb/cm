@@ -32,9 +32,9 @@ public class StoreController {
 		ModelAndView mv = new ModelAndView();
 		
 		List<OptionVO> list = storeService.option2Select(optionVO);
-		//System.out.println(list.get(0).getOpt_num());
-		//System.out.println(list.get(0).getOpt_2ndname());
-		//System.out.println(list.get(0).getOpt_2ndval());
+		System.out.println(list.get(0).getGds_num());
+		System.out.println(list.get(0).getOpt_1stname());
+		System.out.println(list.get(0).getOpt_2ndval());
 		
 		mv.addObject("list", list);
 		mv.addObject("gds_price", gds_price);

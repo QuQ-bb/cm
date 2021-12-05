@@ -42,6 +42,7 @@ public class GoodsVO {
 	private String gds_ears;
 	private String gds_viewyn;
 	
+<<<<<<< Updated upstream
 	//배송 관련
 	private DeliveryTemplateVO deliveryTemplateVO;
 	//옵션
