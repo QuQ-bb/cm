@@ -295,16 +295,16 @@ public class ReviewController {
 			return "redirect:/review_list?page=" + page;
 		}
 		
-		// 후기 상세페이지 불러오기
-		  @RequestMapping(value = "/showreviewdetail")
-		  public String reviewdetail(@RequestParam("rev_num") int rev_num, Model model) throws Exception {
-		      
-		     // 받은 후기번호로 상세정보 구해오기
-		     ReviewVO review = reviewService.getReviewCont(rev_num);
-		      
-		     model.addAttribute("review", review);
-		      
-		     return "review/ajaxMyReviewCont";
-		   }
-		
+//		// 후기 상세페이지 불러오기
+//		  @RequestMapping(value = "/showreviewdetail")
+//		  public String reviewdetail(@RequestParam("rev_num") int rev_num, Model model) throws Exception {
+//		      
+//		     // 받은 후기번호로 상세정보 구해오기
+//		     ReviewVO review = reviewService.getReviewCont(rev_num);
+//		      
+//		     model.addAttribute("review", review);
+//		      
+//		     return "review/ajaxMyReviewCont";
+//		   }
+//		
 }
