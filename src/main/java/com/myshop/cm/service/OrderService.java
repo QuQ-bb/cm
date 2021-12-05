@@ -7,11 +7,13 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myshop.cm.dao.OrderDAO;
+import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.OrderVO;
 
 @Service
@@ -76,9 +78,9 @@ public class OrderService {
 
 		return resultMap;
 	}
-	//리뷰페이지 목록 
+	//마이페이지 주문내역 목록 
 	public Map<String, Object> getHistoryList(HttpServletRequest request, 
-			HttpServletResponse response) throws Exception{
+			HttpServletResponse response,HttpSession session) throws Exception{
 		List<OrderVO> historylist = new ArrayList<OrderVO>();
 		
 		int page = 1;
@@ -87,15 +89,21 @@ public class OrderService {
 		if(request.getParameter("page") != null) {
 			page = Integer.parseInt(request.getParameter("page"));
 		}
+		Map<String, Object> indexMap = new HashMap<String, Object>();
+		
+		MemberVO member = (MemberVO)session.getAttribute("member");
+		 int mem_num =member.getMem_num();
 		
 		int pageIndex = (page-1)*10;
 		
-		// 페이지 번호(page)를 DAO 클래스에 전달한다.
-		historylist = orderDao.getHistoryList(pageIndex);	// 리스트를 받아옴
+		indexMap.put("mem_num", mem_num);
+		indexMap.put("pageIndex", pageIndex);
+		
 		// 총 리스트 수를 받아옴
 		int listcount = orderDAO.getHistoryListCount();
 		
 		// 페이지 번호(page)를 DAO 클래스에 전달한다.
+		historylist = orderDao.getHistoryList(indexMap);	// 리스트를 받아옴
 		
 		// 총 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 0.95를 더해서 올림처리
@@ -119,4 +127,5 @@ public class OrderService {
 
 		return resultMap;
 	}
+
 }

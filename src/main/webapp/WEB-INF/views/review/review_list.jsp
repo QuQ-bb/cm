@@ -78,7 +78,7 @@ function del(page, rev_num) {
 			<th style="text-align: center;" width="50">작성자</th>
 			<th style="text-align: center;">작성일</th>
 			<th style="text-align: center;">상세정보</th>
-			<th style="text-align: center;">비고</th>
+			<th style="text-align: center;">후기상태</th>
 		</tr>
 		<c:forEach var="myreviewlist" items="${myreviewlist}">
 			<tr class="head">

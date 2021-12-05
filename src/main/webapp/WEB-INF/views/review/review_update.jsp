@@ -9,7 +9,7 @@
 <body>
 	<div id="bbswrite_wrap">
   <h2 class="bbswrite_title">리뷰 수정폼</h2>
-  <form method="post" action="review_update_ok" onSubmit="return review_check()">
+  <form method="post" action="review_update_ok" onSubmit="return review_check()" enctype="multipart/form-data">
   <input type="hidden" name="rev_num" value="${review.rev_num}" />
   <input type="hidden" name="page" value="${page}" />
   
@@ -27,6 +27,14 @@
       class="input_box">${review.rev_content}</textarea>
      </td>
     </tr> 
+    <tr>
+		<th>후기사진</th>
+	<td><input type="file" class="form-control" id="rev_filename1"
+				name="rev_filename1"><br>
+			현재파일: <img src="resources/images/reviewimage/${review.rev_filename}" width="50"/>
+	
+	</td>
+	</tr>
     
    </table>
    

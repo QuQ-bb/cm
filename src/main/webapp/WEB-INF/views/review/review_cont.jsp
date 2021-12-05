@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +32,15 @@ function del(page, rev_num) {
 					<img src="<%=request.getContextPath() %>/resources/images/sellerimage/${rev_filename}" height="100" width="100" />
 					${rcont.rev_content}
 					</c:if> --%>
-					${review.rev_content}
+					
+					 <c:if test="${empty review.rev_filename}">
+      				${review.rev_content}
+       				</c:if>
+       				<c:if test="${!empty review.rev_filename}">
+       				${review.rev_content}
+					<img src="<%=request.getContextPath() %>/resources/images/reviewimage/${review.rev_filename}" height="100" width="100" />
+       				</c:if>
+					
 					 <%-- <pre>${bcont.board_content}</pre> --%></td>
 				<td>
 					<!-- 이미지 파일 들어가야할거같음 -->

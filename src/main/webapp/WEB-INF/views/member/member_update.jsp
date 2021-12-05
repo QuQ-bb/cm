@@ -35,6 +35,8 @@
 	$(document).ready(function() {
 		//주소 뭐꼬
 		var address = $('#deladd_add1');
+		//비밀번호 유효성
+		var pass = $('#mem_pass');
 		//모든 공백 체크 정규식
 		var empJ = /\s/g;
 		//아이디 정규식
@@ -95,7 +97,6 @@
 	},
 		  }); //ajax///
 		}//else if
-	
 });//blur
 	
 	var inval_Arr = new Array(7).fill(false)
@@ -110,24 +111,34 @@
 			return false;
 		}
 		// 현재/새비밀번호가 같은 경우 && 현재 비밀번호 정규식
-		if (($('#mem_pass0').val() != ($('#mem_pass').val()))
-				&& pwJ.test($('#mem_pass0').val())) {
+		if($('#mem_pass').val() != ""){
+			if (($('#mem_pass0').val() != ($('#mem_pass').val()))
+					&& pwJ.test($('#mem_pass').val())) {
+				inval_Arr[1] = true;
+			} else if($('#mem_pass0').val() == $('#mem_pass').val()){
+				inval_Arr[1] = false;
+				alert('현재 비밀번호와 일치합니다.');
+				$("#mem_pass").focus();
+				return false;
+			} else{
+				inval_Arr[1] = false;
+				alert('비밀번호를 4자 이상 12글자 이하, 숫자와 영문을 사용해서 입력해주세요.');
+			}
+			// 새비번/확인이 같은 경우 && 새 비밀번호 정규식
+			if (($('#mem_pass').val() == ($('#mem_pass2').val()))
+					&& pwJ.test($('#mem_pass').val()))	{
+				inval_Arr[2] = true;
+			} else if(pwJ.test($('#mem_pass').val()))	{
+				inval_Arr[2] = false;
+				alert('새 비밀번호를 확인하세요.');
+				$("#mem_pass").focus();
+				return false;
+			}
+		} else if($('#mem_pass').val() == ""){
 			inval_Arr[1] = true;
-		} else {
-			inval_Arr[1] = false;
-			alert('현재 비밀번호를 확인하세요.');
-			$("#mem_pass0").focus();
-			return false;
-		}
-		// 새비번/확인이 같은 경우 && 새 비밀번호 정규식
-		if (($('#mem_pass').val() == ($('#mem_pass2').val()))) {
 			inval_Arr[2] = true;
-		} else {
-			inval_Arr[2] = false;
-			alert('비밀번호를 확인하세요.'<br>'4~12자의 숫자 , 문자로만 사용 가능합니다.');
-			$("#mem_pass").focus();
-			return false;
 		}
+		 
 		// 이름 정규식
 		if (nameJ.test($('#mem_name').val())) {
 			inval_Arr[3] = true;
@@ -175,7 +186,8 @@
 		if(validAll == true){ // 유효성 모두 통과
 			alert('정보수정이 완료되었습니다.');
 		} else{
-			alert('정보를 다시 확인하세요.')
+			alert('정보를 다시 확인하세요.');
+			return false;
 			}
 		});
 	
@@ -189,7 +201,7 @@
 		}
 	});
 	
-	$('#mem_pass0').blur(function() {
+/* 	$('#mem_pass0').blur(function() {
 		if (pwJ.test($('#mem_pass0').val())) {
 			console.log('true');
 			$('#pw0_check').text('');
@@ -198,7 +210,7 @@
 			$('#pw0_check').text('4~12자의 숫자 , 문자로만 사용 가능합니다.');
 			$('#pw0_check').css('color', 'red');
 			}
-		});
+		}); */
  	$('#mem_pass').blur(function() {
 		if (pwJ.test($('#mem_pass').val())) {
 			console.log('true');
@@ -209,7 +221,7 @@
 			$('#pw_check').css('color', 'red');
 			}
 	});
-	//0~1 패스워드 일치 확인
+	// 현재/새 패스워드 일치 확인
 	$('#mem_pass').blur(function() {
 		if ($('#mem_pass0').val() == $(this).val()) {
 			$('#pw_check').text('현재 비밀번호와 일치합니다.');
@@ -218,7 +230,7 @@
 			$('#pw_check').text('');
 		}
 	});
-	//1~2 패스워드 일치 확인
+	//새 패스워드/새비번 확인 일치 확인
 	$('#mem_pass2').blur(function() {
 		if ($('#mem_pass').val() != $(this).val()) {
 			$('#pw2_check').text('비밀번호가 일치하지 않습니다.');
@@ -255,8 +267,8 @@
 		}
 	});
 });
-
 	</script>
+
 </head>
 
 <body>
@@ -281,14 +293,14 @@
 				<div class="form-group">
 					<label for="mem_pass0">현재 비밀번호</label> <input type="password"
 						class="form-control" id="mem_pass0" name="mem_pass0"
-						value="${upmv.mem_pass}">
+						value="${upmv.mem_pass}" readonly="readonly">
 					<div class="check_font" id="pw0_check"></div>
 				</div>	
 				<div class="form-group">
 					<label for="mem_pass">새 비밀번호&nbsp; </label> <input type="password" 
 						class="form-control" id="mem_pass" name="mem_pass"
 						placeholder="PASSWORD">
-					<div class="check_font" id="pw_check"></div>
+					<div class="check_font" id="pw_check"><h6>&nbsp;4~12자의 숫자 , 문자로만 사용 가능합니다.</h6></div>
 				</div>
 				<div class="form-group">
 					<label for="mem_pass2">새 비밀번호 확인</label> <input type="password"

@@ -60,9 +60,10 @@ public class MemberDAO {
 		System.out.println("영차영차 재확인");
 		return (MemberVO) sqlSession.selectOne("memberns.pass_recheck", prmv);
 	}
-	public void passUpdate(MemberVO member)throws Exception {
-		sqlSession.update("memberns.pass_update", member);
-	}
+	//비밀번호 수정
+//	public void passUpdate(MemberVO member)throws Exception {
+//		sqlSession.update("memberns.pass_update", member);
+//	}
 	//회원정보 수정
 	public void memberUpdate(MemberVO member) {
 		sqlSession.update("memberns.update",member);
@@ -80,6 +81,6 @@ public class MemberDAO {
 	}
 
 	public Object getmemberInfo(int mem_num) {
-		return sqlSession.selectOne("memberMapper.select_member",mem_num);
+		return sqlSession.selectOne("memberns.select_member",mem_num);
 	}
 }

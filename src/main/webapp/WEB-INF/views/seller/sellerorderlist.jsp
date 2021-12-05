@@ -48,7 +48,7 @@ ${listcount }
 							${order.opt_1stname} : ${order.opt_1stval}	<br>
 							${order.opt_2ndname} : ${order.opt_2ndval}
 						</c:when>
-						<c:when test="${order.opt_2ndval != null}">
+						<c:when test="${order.opt_1stval != null}">
 							${order.opt_1stname} : ${order.opt_1stval}
 						</c:when>
 						<c:otherwise>

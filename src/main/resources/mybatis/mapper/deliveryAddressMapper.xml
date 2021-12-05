@@ -8,6 +8,7 @@
 	select * from deliveryAddress where mem_num=#{mem_num}
 </select> 
 
+<!-- 배송지 수정하기  -->
 <update id="update_deliveryadress" parameterType="deliveryAddress">
 	update deliveryAddress 
 	set 
@@ -15,7 +16,6 @@
 	deladd_add1=#{deladd_add1},
 	deladd_add2=#{deladd_add2}
 	where deladd_num=#{deladd_num}
-
 </update>
 
 </mapper>

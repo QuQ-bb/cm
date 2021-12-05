@@ -247,29 +247,29 @@ public class MemberController {
 		return "redirect:member_update";
 		}
 	}
-	//비밀번호 수정 폼
-	@RequestMapping(value="/pass_update")
-	public String pass_update(HttpSession session, Model model)throws Exception{
-		//세션 객체 안에 있는 ID정보 저장
-				String mem_id = (String) session.getAttribute("mem_id");
-				System.out.println(mem_id);
-				//서비스안의 메서드 호출
-				MemberVO pmv = memberService.loginCheck(mem_id);
-		return "member/pass_update";
-	}
-	//비밀번호 수정 저장
-	@RequestMapping(value="pass_update_ok", method=RequestMethod.POST)
-	public String pass_update_ok(HttpSession session,MemberVO member, Model model)throws Exception{
-
-		//세션 객체 안에 있는id정보 저장
-		String mem_id = (String) session.getAttribute("mem_id");
-		//서비스안의 메서드 호출
-		MemberVO pmv = this.memberService.loginCheck(mem_id);
-		
-		memberService.passUpdate(member);
-		
-		return "home";
-	}
+//	//비밀번호 수정 폼
+//	@RequestMapping(value="/pass_update")
+//	public String pass_update(HttpSession session, Model model)throws Exception{
+//		//세션 객체 안에 있는 ID정보 저장
+//				String mem_id = (String) session.getAttribute("mem_id");
+//				System.out.println(mem_id);
+//				//서비스안의 메서드 호출
+//				MemberVO pmv = memberService.loginCheck(mem_id);
+//		return "member/pass_update";
+//	}
+//	//비밀번호 수정 저장
+//	@RequestMapping(value="pass_update_ok", method=RequestMethod.POST)
+//	public String pass_update_ok(HttpSession session,MemberVO member, Model model)throws Exception{
+//
+//		//세션 객체 안에 있는id정보 저장
+//		String mem_id = (String) session.getAttribute("mem_id");
+//		//서비스안의 메서드 호출
+//		MemberVO pmv = this.memberService.loginCheck(mem_id);
+//		
+//		memberService.passUpdate(member);
+//		
+//		return "home";
+//	}
 	
 	//회원정보 수정 폼
 	@RequestMapping(value="/member_update")
@@ -279,7 +279,7 @@ public class MemberController {
 		String mem_id = (String) session.getAttribute("mem_id");
 		//서비스안의 메서드 호출
 		MemberVO upmv = memberService.loginCheck(mem_id);
-		
+		//배송지 불러오기
 		DeliveryAddressVO deliadd = deliveryAddressService.getdeliveryAddress(upmv.getMem_num());
 		
 		System.out.println("수정폼 컨트롤");

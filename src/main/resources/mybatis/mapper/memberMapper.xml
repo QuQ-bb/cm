@@ -59,19 +59,14 @@
 	select * from member where mem_pass=#{mem_pass} and mem_delyn='Y'
 	</select>
 	<!-- 비밀번호 수정 -->
-	<update id="pass_update" parameterType="member">
+	<!-- <update id="pass_update" parameterType="member">
 	update member set mem_pass=#{mem_pass} where mem_id=#{mem_id}
-	</update>
+	</update> -->
 	
 	<!-- 회원정보 수정 -->
 	<update id="update" parameterType="member">
 	update member set mem_pass=#{mem_pass}, mem_name=#{mem_name}, mem_email=#{mem_email},
 	mem_phone=#{mem_phone} where mem_id=#{mem_id}
-	</update>
-	
-	<!-- 배송지 수정 -->
-	<update id="" parameterType="deliveryadd">
-	update deliveryaddress set deladd_post=#{deladd_post},deladd_add1=#{deladd_add1},deladd_add2=#{deladd_add2}	
 	</update>
 	
 	<!-- 회원 삭제 -->

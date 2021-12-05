@@ -10,7 +10,7 @@
 </head>
 <body>
 
-구매내역 <br>
+<h2>구매내역</h2> <br>
 ${listcount }
 <div>
 	<table border="1">
@@ -22,17 +22,22 @@ ${listcount }
 			<th>배송비</th>
 			<th>요청사항</th>
 			<th>총 결제금액</th>
-			<th>후기</th>
+			<th>배송상태</th>
+			<th>확인</th>
 		</tr>
 		<!-- 화면 출력 번호  변수 정의 -->		
 		<c:set var="num" value="${listcount-(page-1)*10}"/> 	
 		
 		<c:forEach var="his" items="${historylist}">
 			<tr>
-				<td>${his.ord_num}</td>
+				<td>
+					<!-- 번호출력부분 -->
+					<c:out value="${num}"/>
+					<c:set var="num" value="${num-1}"/>
+				</td>
 				<td>
 					<img src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${his.gds_thumbnail}" height="100" width="100" />
-						<a>${his.gds_name}<br></a>
+						<a href="history_detail?ord_num=${his.ord_num}&page=${page}">${his.gds_name}<br></a>
 				</td>
 				<td>
 					<c:choose>
@@ -52,6 +57,7 @@ ${listcount }
 				<td><fmt:formatNumber value="${his.ord_delfee}" pattern="#,###원" /></td>
 				<td>${his.ord_request}</td>
 				<td><fmt:formatNumber value="${his.ord_totalprice}" pattern="#,###원" /></td>
+				<%-- <td>${his.배송상태}</td> --%>
 				<td>
 				<input type="button" value="취소">
 				<input type="button" value="환불">

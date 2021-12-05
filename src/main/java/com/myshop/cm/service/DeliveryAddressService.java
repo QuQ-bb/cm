@@ -14,7 +14,7 @@ public class DeliveryAddressService {
 	public DeliveryAddressVO getdeliveryAddress(int mem_num) {
 		return deliveryAddressDAO.getdeliveryAddress(mem_num);
 	}
-
+	//배송지 수정하기
 	public void updatedeliveryAddress(DeliveryAddressVO deliveryaddress) {
 		deliveryAddressDAO.updatedeliveryAddress(deliveryaddress);
 		

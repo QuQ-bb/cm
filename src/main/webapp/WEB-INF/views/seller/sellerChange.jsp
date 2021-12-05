@@ -54,7 +54,7 @@
 			return false;
 		}
 		if($.trim($("#sel_add").val())==""){
-			alert("사업장 주소를 자세히 입력해주세요.");
+			alert("사업장 주소를 상세히 입력해주세요.");
 			$("#sel_add").val("").focus();
 			return false;
 		}
@@ -122,7 +122,7 @@
 		</button>
 	</div>
 	<div class="form-group">
-	  <input class="form-control" placeholder="사업장 주소" name="sel_add" id="sel_add" type="text"/>
+	  <input class="form-control" placeholder="사업장 상세주소" name="sel_add" id="sel_add" type="text"/>
 	</div>
     
     <div class="form-group">

@@ -10,7 +10,7 @@
 	  select * from project.order where ord_num =#{red_num}
 	  </select>
   
-  	<!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
+  	<!-- 마이 페이지에서 주문 리스트 갯수 구해오기 -->
 	<select id="history_list_count" resultType="int" >
 		select count(*) from project.order
 	</select>
@@ -26,8 +26,8 @@
 		select count(*) from project.order
 	</select>
 	
-	<!-- 리뷰페이지 리스트 불러오기 -->
-	<select id="history_list" resultType="order" parameterType="int">
+	<!-- 마이페이지 주문내역 리스트 불러오기 -->
+	<select id="history_list" resultType="order" parameterType="java.util.Map">
 	 select 
       o.ord_num,
       o.ord_memnum,
@@ -52,6 +52,7 @@
       left JOIN project.option as p
          on o.ord_gdsoption = p.opt_num
          	<!-- where -->
+    where o.ord_memnum=#{mem_num}
 	group by o.ord_num
 	order by o.ord_num desc
 	limit #{pageIndex}, 10
