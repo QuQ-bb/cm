@@ -23,11 +23,19 @@
 	</insert>  
 	<!-- 공지 리스트 -->
 	<select id="noticelist" resultType="notice">
-		select * 
-		  from notice
-		  where ntc_delyn='y'
-	  order by ntc_num desc
-	           limit 10 offset 0
+		select ntc_num
+     		, ntc_sort
+     		, ntc_title
+     		, ntc_content
+     		, ntc_date
+     		, ntc_delyn
+     		, mem_grade
+from notice
+where 1=1
+  and case when mem_grade = '1' then ntc_sort = '1'
+           when mem_grade = '50'then ntc_sort = '2'
+           else ntc_sort = '%'
+           end;
 	</select>
 	<!-- 공지 수정 -->
 	<update id="updatent" parameterType="notice">
@@ -122,7 +130,7 @@
 		     , mem_date
 		     , mem_grade
 		     , mem_delyn
-		  from member where mem_grade not in('50','99')
+		  from member where mem_grade not in('99')
 	  order by mem_num asc limit 100 offset 0
 	</select>
 	<!-- 회원 리스트 내용보기 --> 
