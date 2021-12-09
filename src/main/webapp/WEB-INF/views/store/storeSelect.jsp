@@ -138,7 +138,7 @@
 						</div>
 						</div>
 					</div>
-					<div class="layout-wrapper goods-view-area">
+					<div class="layout-wrapper goods-view-area" style="text-align: center;">
 						${select.gds_detail}
 					</div>
 					<div>

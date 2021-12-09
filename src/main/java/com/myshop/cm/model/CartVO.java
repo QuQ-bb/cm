@@ -19,7 +19,7 @@ public class CartVO {
 	private int opt_num; // 옵션 번호
 	private int cart_count; // 주문 수량
 	private Date cart_date; // 주문 날짜
-	private String cart_viewyn; // 상품노출 Y/N
+	private String cart_viewyn; // 상품노출 Y/N 확인용 컬럼(goods 테이블의 goods_viewyn과 비교하기 위함)
 
 	// 추가
 	private int gds_num;

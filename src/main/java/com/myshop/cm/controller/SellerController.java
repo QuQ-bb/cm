@@ -750,29 +750,29 @@ public class SellerController {
 		OrderVO order = orderService.getOrderDetail(ord_num);
 		
 		// 주문 상세정보의 gds_num으로 상품정보 불러오기
-		GoodsVO goods = goodsService.goodsdetail(order.getOrd_gdsnum());
+//		GoodsVO goods = goodsService.goodsdetail(order.getOrd_gdsnum());
 		
 		// 주문 상세정보의 ord_gdsoption 으로 옵션정보 불러오기
-		OptionVO option = optionService.getoption(order.getOrd_gdsoption());
+//		OptionVO option = optionService.getoption(order.getOrd_gdsoption());
 		
 		// 상품 상세정보의 deltem_num 으로 배송탬플릿 정보 불러오기
-		DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
+//		DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
 		
 		// 주문 상세정보의 mem_num으로 구매자 상세정보 불러오기
-		MemberVO member = memberService.getmemberinfo(order.getOrd_memnum());
+//		MemberVO member = memberService.getmemberinfo(order.getOrd_memnum());
 		
 		// 주문 상세정보의 mem_num으로 배송지 상세정보구하기
-		DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getOrd_memnum());
+//		DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getOrd_memnum());
 		
 		
 		ModelAndView sellerorderdetailM = new ModelAndView("seller/sellerorderdetail");
 		sellerorderdetailM.addObject("page", page);
 		sellerorderdetailM.addObject("order", order);
-		sellerorderdetailM.addObject("goods", goods);
-		sellerorderdetailM.addObject("option", option);
-		sellerorderdetailM.addObject("deliverytemplate", deliverytemplate);
-		sellerorderdetailM.addObject("member", member);
-		sellerorderdetailM.addObject("deliveryAddress", deliveryAddress);
+//		sellerorderdetailM.addObject("goods", goods);
+//		sellerorderdetailM.addObject("option", option);
+//		sellerorderdetailM.addObject("deliverytemplate", deliverytemplate);
+//		sellerorderdetailM.addObject("member", member);
+//		sellerorderdetailM.addObject("deliveryAddress", deliveryAddress);
 		
 		return sellerorderdetailM;
 	}

@@ -137,7 +137,7 @@ public class ReviewController {
 		// 주문번호로 주문정보 불러오기
 		OrderVO order = orderService.getOrdReview(ord_num);
 		// 주문정보의 상품옵션 리뷰객체에 담기
-		 review.setOrd_gdsoption(order.getOrd_gdsoption());
+//		 review.setOrd_gdsoption(order.getOrd_gdsoption());
 		// 주문정보의 상품번호로 상품 정보 불러오기
 		GoodsVO gds = goodsService.getGdsReview(ord_gdsnum);
 		// 상품이름을 리뷰객체에 담기
