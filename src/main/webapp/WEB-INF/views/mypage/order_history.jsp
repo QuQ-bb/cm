@@ -13,6 +13,7 @@
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/mypage.jsp" %>
 <div class="main">
+<h1>구매내역</h1>
 <div id="count">구매내역 : ${listcount }건</div>
 	<table border="1" id="customers">
 		<tr style="text-align: center;">

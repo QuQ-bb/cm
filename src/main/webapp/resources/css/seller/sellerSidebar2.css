@@ -10,11 +10,10 @@
   position: absolute;
   top: 235px;
   left: 0px;
-  padding-bottom:90%;
+  padding-bottom:210%;
   color: white;
   cursor:default; 
   overflow-y:hidden;
-  z-index: 100;
 
   
 }
