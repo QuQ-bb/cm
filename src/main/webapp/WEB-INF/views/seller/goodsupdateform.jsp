@@ -23,6 +23,7 @@
 
 </head>
 <body>
+<%@ include file="../layout/sellerheader.jsp" %>
 <%@ include file="../layout/sellerSidebar2.jsp" %>
 	<div id="goodsuploadform">
 		<form method="post" action="<%=request.getContextPath()%>/goodsupdate" enctype="multipart/form-data" onsubmit="return goodsupload_check()">

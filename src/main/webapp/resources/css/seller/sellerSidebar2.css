@@ -10,14 +10,11 @@
   position: absolute;
   top: 235px;
   left: 0px;
-  padding-bottom:210%;
+  padding-bottom:230%;
   color: white;
   cursor:default; 
   overflow-y:hidden;
-
-  
 }
-
 
 .mypagesidenav a {
   padding: 6px 8px 6px 16px;
