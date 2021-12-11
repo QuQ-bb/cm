@@ -96,7 +96,7 @@ public class OrderService {
 	}
 	//리뷰페이지 목록 
 	public Map<String, Object> getHistoryList(HttpServletRequest request, 
-			HttpServletResponse response) throws Exception{
+			HttpServletResponse response, HttpSession session) throws Exception{
 		List<OrderVO> historylist = new ArrayList<OrderVO>();
 		
 		int page = 1;
