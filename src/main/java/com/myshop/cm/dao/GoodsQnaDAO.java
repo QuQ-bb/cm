@@ -72,4 +72,8 @@ public class GoodsQnaDAO {
 		
 	}
 
+	public List<GoodsQnaVO> getMainGoodsQnaList(String sel_name) {
+		return sqlSession.selectList("goodsQnaMapper.select_main_goodsqna_list", sel_name);
+	}
+
 }

@@ -4,6 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="goodsQnaMapper">
+	<!-- 판매자 문의 -->
 	<select id="select_goodsqna_list_count" parameterType="String" resultType="int">
 		select count(*) from 
 		goodsqna gq
@@ -13,6 +14,7 @@
 		
 	</select>
 	
+	<!-- 판매자 문의글 가져오기 -->
 	<select id="select_goodsqna_list" parameterType="java.util.Map" resultType="goodsqna">
 		select
 			gq.gdsqna_num,
@@ -197,6 +199,36 @@
 		where 
 			gdsqna_num=#{gdsqna_ref} and gdsqna_depth=0
 	</update>
+	
+	<!-- 메인페이지 문의 리스트 -->
+	<select id="select_main_goodsqna_list" parameterType="String" resultType="goodsqna">
+		select
+			gq.gdsqna_num,
+			gq.gds_num,
+			gq.gdsqna_sort,
+			gq.gdsqna_title,
+			gq.gdsqna_content,
+			gq.gdsqna_ref,
+			gq.gdsqna_step,
+			gq.gdsqna_depth,
+			gq.gdsqna_date,
+			gq.gdsqna_check,
+			gq.gdsqna_answer,
+			gq.gdsqna_delyn,
+			gq.mem_id,
+			g.gds_name,
+			g.gds_thumbnail,
+			gqf.fname
+		from goodsqna gq
+			left join goods g
+		 		on g.gds_num = gq.gds_num
+		 	left join goodsqnafiles gqf
+		 		on gqf.num = gq.gdsqna_num
+		where g.gds_seller=#{sel_name} and gdsqna_delyn=1 and gdsqna_depth=0
+		group by gdsqna_num
+		order by gdsqna_num desc
+		limit 0, 5
+	</select>
 	
 
 </mapper>

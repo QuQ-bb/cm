@@ -119,5 +119,10 @@ public class ReviewService {
 
 		return resultMap;
 	}
+	
+	// 판매자 메인페이지 리뷰 정보 가져오기
+	public List<ReviewVO> getMainReviewList(String sel_name) {
+		return reviewDao.getMainReviewList(sel_name);
+	}
 
 }

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,6 +31,10 @@
 	overflow:hidden; 
 	white-space:nowrap;
 }
+
+td{
+	font-size: 12px; /* Increased text to enable scrolling */
+}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -50,14 +55,14 @@
 				<th width="20%">금액</th>
 				<th width="20%">날짜</th>
 			</tr>
-			<c:forEach var="mainOrderList" items="${mainOrderList}">
+			<%-- <c:forEach var="mainOrderList" items="${mainOrderList}">
 			<tr>
 				<td class="mainOrdername" title="${mainOrderList.gds_name }"><nobr>${mainOrderList.gds_name }</nobr></td>
 				<td>${mainOrderList.ord_gdscount }</td>
-				<td>${mainOrderList.ord_totalprice }</td>
+				<td><fmt:formatNumber value="${mainOrderList.ord_totalprice }" pattern="#,###원"/> </td>
 				<td></td>
 			</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</table>
 	</div>
 	<div class="righttop">
@@ -69,14 +74,14 @@
 				<th width="20%">금액</th>
 				<th width="20%">날짜</th>
 			</tr>
-			<c:forEach var="mainOrderList" items="${mainOrderList}">
+			<%-- <c:forEach var="mainOrderList" items="${mainOrderList}">
 			<tr>
 				<td class="mainOrdername" title="${mainOrderList.gds_name }"><nobr>${mainOrderList.gds_name }</nobr></td>
 				<td>${mainOrderList.ord_gdscount }</td>
 				<td>${mainOrderList.ord_totalprice }</td>
 				<td></td>
 			</tr>
-			</c:forEach>
+			</c:forEach> --%>
 		</table>
 	</div>
 	
@@ -84,17 +89,26 @@
 		<table border="1" style="table-layout:fixed" width="600" class="mainOrderTable">
 		<thead><h2>최근 문의</h2></thead>
 			<tr>
-				<th width="50%">상품명</th>
-				<th width="10%">수량</th>
-				<th width="20%">금액</th>
+				<th width="40%">상품명</th>
+				<th width="20%">제목</th>
 				<th width="20%">날짜</th>
+				<th width="20%">상태</th>
 			</tr>
-			<c:forEach var="mainOrderList" items="${mainOrderList}">
+			<c:forEach var="mainGoodsQnaList" items="${mainGoodsQnaList}">
 			<tr>
-				<td class="mainOrdername" title="${mainOrderList.gds_name }"><nobr>${mainOrderList.gds_name }</nobr></td>
-				<td>${mainOrderList.ord_gdscount }</td>
-				<td>${mainOrderList.ord_totalprice }</td>
-				<td></td>
+				<td class="mainOrdername" title="${mainGoodsQnaList.gds_name }"><nobr>${mainGoodsQnaList.gds_name }</nobr></td>
+				<td class="mainOrdername" title="${mainGoodsQnaList.gdsqna_title}"><nobr>${mainGoodsQnaList.gdsqna_title}</nobr></td>
+				<td><fmt:formatDate value="${mainGoodsQnaList.gdsqna_date}" pattern="yyyy-MM-dd"/></td>
+				<td>
+					<c:choose>
+						<c:when test="${mainGoodsQnaList.gdsqna_answer == 0}">
+							미답변
+						</c:when>
+						<c:when test="${mainGoodsQnaList.gdsqna_answer == 1}">
+							답변완료
+						</c:when>
+					</c:choose>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>
@@ -104,17 +118,30 @@
 		<table border="1" style="table-layout:fixed" width="600" class="mainOrderTable">
 		<thead><h2>최근 후기</h2></thead>
 			<tr>
-				<th width="50%">상품명</th>
-				<th width="10%">수량</th>
-				<th width="20%">금액</th>
+				<th width="40%">상품명</th>
+				<th width="20%">옵션</th>
+				<th width="20%">후기내용</th>
 				<th width="20%">날짜</th>
 			</tr>
-			<c:forEach var="mainOrderList" items="${mainOrderList}">
+			<c:forEach var="mainReviewList" items="${mainReviewList}">
 			<tr>
-				<td class="mainOrdername" title="${mainOrderList.gds_name }"><nobr>${mainOrderList.gds_name }</nobr></td>
-				<td>${mainOrderList.ord_gdscount }</td>
-				<td>${mainOrderList.ord_totalprice }</td>
-				<td></td>
+				<td class="mainOrdername" title="${mainReviewList.gds_name }"><nobr>${mainReviewList.gds_name }</nobr></td>
+				<td>
+					<c:choose>
+						<c:when test="${mainReviewList.opt_2ndval != null}">
+							${mainReviewList.opt_1stname} : ${mainReviewList.opt_1stval}	<br>
+							${mainReviewList.opt_2ndname} : ${mainReviewList.opt_2ndval}
+						</c:when>
+						<c:when test="${mainReviewList.opt_1stval != null}">
+							${mainReviewList.opt_1stname} : ${mainReviewList.opt_1stval}
+						</c:when>
+						<c:otherwise>
+							-
+						</c:otherwise>
+					</c:choose>
+				</td>
+				<td>${mainReviewList.rev_content }</td>
+				<td><fmt:formatDate value="${mainReviewList.rev_date}" pattern="yyyy-MM-dd"/></td>
 			</tr>
 			</c:forEach>
 		</table>

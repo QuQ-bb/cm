@@ -45,7 +45,7 @@ public class OrderDAO {
 
 	// 판매자 페이지에서 주문리스트 가져오기
 	public List<OrderVO> getOrderList(Map<String, Object> listIndexMap) throws Exception{
-		return sqlSession.selectList("orderMapper.select_order_list",listIndexMap);
+		return sqlSession.selectList("orderMapper.select_order_list", listIndexMap);
 	}
 	
 	// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기

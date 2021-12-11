@@ -122,4 +122,8 @@ public class GoodsQnaService {
 		goodsQnaDAO.deleteAnswer(gdsqna_num);
 	}
 
+	public List<GoodsQnaVO> getMainGoodsQnaList(String sel_name) {
+		return goodsQnaDAO.getMainGoodsQnaList(sel_name);
+	}
+
 }

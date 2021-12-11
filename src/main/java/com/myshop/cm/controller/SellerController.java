@@ -22,7 +22,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.myshop.cm.model.CalculateVO;
-import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.DeliveryTemplateVO;
 import com.myshop.cm.model.GoodsQnaVO;
 import com.myshop.cm.model.GoodsVO;
@@ -207,6 +206,7 @@ public class SellerController {
 			String filename = uuid + mf.getOriginalFilename();
 			int size = (int) mf.getSize();
 			String path = request.getRealPath("resources/images/thumbnailimage");
+			System.out.println(path);
 			int result = 0;
 			String file[] = new String[2];
 
@@ -866,32 +866,32 @@ public class SellerController {
 		String page = request.getParameter("page");
 		
 		// 주문 상세정보 구해오기
-		OrderVO order = orderService.getOrderDetail(ord_num);
+		// OrderListVO order = orderService.getOrderDetail(ol_num);
 		
 		// 주문 상세정보의 gds_num으로 상품정보 불러오기
-		GoodsVO goods = goodsService.goodsdetail(order.getOrd_gdsnum());
+		//GoodsVO goods = goodsService.goodsdetail(order.getOrd_gdsnum());
 		
 		// 주문 상세정보의 ord_gdsoption 으로 옵션정보 불러오기
-		OptionVO option = optionService.getoption(order.getOrd_gdsoption());
+		//OptionVO option = optionService.getoption(order.getOrd_gdsoption());
 		
 		// 상품 상세정보의 deltem_num 으로 배송탬플릿 정보 불러오기
-		DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
+		// DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
 		
 		// 주문 상세정보의 mem_num으로 구매자 상세정보 불러오기
-		MemberVO member = memberService.getmemberinfo(order.getOrd_memnum());
+		// MemberVO member = memberService.getmemberinfo(order.getOrd_memnum());
 		
 		// 주문 상세정보의 mem_num으로 배송지 상세정보구하기
-		DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getOrd_memnum());
+		// DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getOrd_memnum());
 		
 		
 		ModelAndView sellerorderdetailM = new ModelAndView("seller/sellerorderdetail");
 		sellerorderdetailM.addObject("page", page);
-		sellerorderdetailM.addObject("order", order);
-		sellerorderdetailM.addObject("goods", goods);
-		sellerorderdetailM.addObject("option", option);
-		sellerorderdetailM.addObject("deliverytemplate", deliverytemplate);
-		sellerorderdetailM.addObject("member", member);
-		sellerorderdetailM.addObject("deliveryAddress", deliveryAddress);
+		//sellerorderdetailM.addObject("order", order);
+		// sellerorderdetailM.addObject("goods", goods);
+		// sellerorderdetailM.addObject("option", option);
+		// sellerorderdetailM.addObject("deliverytemplate", deliverytemplate);
+		// sellerorderdetailM.addObject("member", member);
+		// sellerorderdetailM.addObject("deliveryAddress", deliveryAddress);
 		
 		return sellerorderdetailM;
 	}
@@ -907,18 +907,19 @@ public class SellerController {
 		SellerVO seller = sellerService.getSellerInfo(member.getMem_num());
 		
 		// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
-		List<OrderVO> mainOrderList = orderService.getMainOrderList(seller.getSel_name());
+		// List<OrderVO> mainOrderList = orderService.getMainOrderList(seller.getSel_name());
 		
 		// 세션으로 가져온 판매자 정보로  최근 5개 공지 가져오기
 		
-		
 		// 세션으로 가져온 판매자 정보로 최근 5개 문의 가져오기
-		 
+		List<GoodsQnaVO> mainGoodsQnaList = goodsQnaService.getMainGoodsQnaList(seller.getSel_name());
 		
 		// 세션으로 가져온 판매자 정보로  최근 5개 후기 가져오기
+		List<ReviewVO> mainReviewList = reviewService.getMainReviewList(seller.getSel_name());
 		
-		
-		model.addAttribute("mainOrderList", mainOrderList);
+		// model.addAttribute("mainOrderList", mainOrderList);
+		model.addAttribute("mainGoodsQnaList", mainGoodsQnaList);
+		model.addAttribute("mainReviewList", mainReviewList);
 		
 		return "seller/sellerMainpage";
 	}

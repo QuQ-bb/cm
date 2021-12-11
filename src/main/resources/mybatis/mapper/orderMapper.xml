@@ -4,34 +4,30 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="orderMapper">
-  
-  	<!-- 리뷰페이지 ord_num값 구하기 -->
+ <!--  
+  	리뷰페이지 ord_num값 구하기
 	  <select id="review_ord" parameterType="int" resultType="order" >
 	  select * from project.order where ord_num =#{red_num}
 	  </select>
   
-  	<!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
+  	판매자 페이지에서 주문 리스트 갯수 구해오기
 	<select id="history_list_count" resultType="int" >
 		select count(*) from project.order
 	</select>
 
-	<!-- 판매자 페이지에서 주문 상세정보 구해오기 -->
-	<select id="select_order_detail" resultType="order" parameterType="int" >
-		select * from project.order 
-		where ord_num=#{ord_num}
-	</select>
+
 	
-	<!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
+	판매자 페이지에서 주문 리스트 갯수 구해오기
 	<select id="select_order_list_count" resultType="int" parameterType="String" >
 		select count(*) from project.order where gds_seller=#{sel_name}
 	</select>
 	
-	<!-- 판매자 페이지에서 주문 리스트 불러오기 -->
+	판매자 페이지에서 주문 리스트 불러오기
 	<select id="history_list" resultType="order" parameterType="int">
 	 select 
       o.ord_num,
-      o.ord_memnum,
-      o.ord_gdsnum,
+      o.mem_num,
+      o.gds_num,
       o.ord_gdsoption,
       o.ord_gdscount,
       o.ord_delfee,
@@ -46,67 +42,96 @@
       p.opt_2ndval
    from project.order as o
       left JOIN project.goods as g
-         on o.ord_gdsnum = g.gds_num
+         on o.gds_num = g.gds_num
       left JOIN project.member as m
-         on o.ord_memnum = m.mem_num
+         on o.mem_num = m.mem_num
       left JOIN project.option as p
          on o.ord_gdsoption = p.opt_num
 	group by o.ord_num
 	order by o.ord_num desc
 	limit #{pageIndex}, 10
+	</select> -->
+	
+	<!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
+	<select id="select_order_list_count" resultType="int" parameterType="String" >
+		select count(*) from project.orderlist where gds_seller=#{sel_name}
 	</select>
 	
-	<select id="select_order_list" resultType="order" parameterType="java.util.Map">
+	<!-- 판매자 페이지에서 주문 리스트 불러오기 -->
+	<select id="select_order_list" resultType="orderList" parameterType="java.util.Map">
 	select 
-		o.ord_num,
-		o.ord_memnum,
-		o.ord_gdsnum,
-		o.ord_gdsoption,
-		o.ord_gdscount,
-		o.ord_delfee,
-		o.ord_request,
+		ol.ol_num,
+		ol.ord_num,
+		ol.gds_num,
+		ol.opt_num,
+		ol.ol_count,
+		ol.gds_seller,
+	    o.mem_num,
 		o.ord_totalprice,
-		o.gds_seller,
+		o.ord_delnum,
+		o.ord_request,
+		o.ord_status,
+		o.ord_date,
 	    g.gds_thumbnail,
-	    g.gds_name,
-	    m.mem_id,
-	    p.opt_1stname, 
-	    p.opt_1stval, 
+		g.gds_name,
+		g.gds_price,
+		d.deltem_delfee,
+		m.mem_id,
+		p.opt_1stname, 
+		p.opt_1stval, 
 		p.opt_2ndname, 
 		p.opt_2ndval
-	from project.order as o
+	FROM project.orderlist as ol
+		left join project.order as o
+			on ol.ord_num = o.ord_num
 		left JOIN project.goods as g
-			on o.ord_gdsnum = g.gds_num
+			on ol.gds_num = g.gds_num
 		left JOIN project.member as m
-			on o.ord_memnum = m.mem_num
+			on o.mem_num = m.mem_num
 		left JOIN project.option as p
-			on o.ord_gdsoption = p.opt_num
-	where o.gds_seller=#{sel_name}
-	group by o.ord_num
-	order by o.ord_num desc
+			on ol.opt_num = p.opt_num
+		left JOIN project.deliverytemplate as d
+			on g.deltem_num = d.deltem_num
+	where ol.gds_seller=#{sel_name}
+	group by ol.ol_num
+	order by ol.ol_num desc
 	limit #{pageIndex}, 10
 	</select>
 	
-	<select id="select_main_order_list" parameterType="String" resultType="order">
+	<!-- 판매자 페이지에서 주문 상세정보 구해오기 -->
+	<select id="select_order_detail" resultType="order" parameterType="int" >
+		select * from project.order 
+		where ord_num=#{ord_num}
+	</select>
+	
+	<!-- 메인페이지에서 가져오기 -->
+	<select id="select_main_order_list" parameterType="String" resultType="orderList">
 		select 
-		o.ord_num,
-		o.ord_memnum,
-		o.ord_gdsnum,
-		o.ord_gdsoption,
-		o.ord_gdscount,
-		o.ord_delfee,
-		o.ord_request,
-		o.ord_totalprice,
-		o.gds_seller,
-		g.gds_name
-		from project.order as o
+			ol.ol_num,
+			ol.ord_num,
+			ol.gds_num,
+			ol.opt_num,
+			ol.ol_count,
+			ol.gds_seller,
+		    o.mem_num,
+			o.ord_totalprice,
+			o.ord_delnum,
+			o.ord_request,
+			o.ord_status,
+			o.ord_date,
+		    g.gds_thumbnail,
+			g.gds_name,
+		from project.orderlist as ol
+		left join project.order as o
+			on ol.ord_num = o.ord_num
 		left JOIN project.goods as g
-			on o.gds_seller = g.gds_seller
+			on ol.gds_seller = g.gds_seller
 		where o.gds_seller=#{sel_name}
+		group by ord_num
 		order by ord_num desc
 		limit 0, 5
 	</select>
-	
+
 	
 	
 </mapper>

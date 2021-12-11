@@ -60,6 +60,10 @@ public class ReviewDAO {
 	public List<ReviewVO> getsellerReviewList(Map<String, Object> listIndexMap) {
 		return sqlSession.selectList("reviewMapper.sellerReviewList", listIndexMap);
 	}
-
+	
+	// 판매자 메인페이지 리뷰 정보 가져오기
+	public List<ReviewVO> getMainReviewList(String sel_name) {
+		return sqlSession.selectList("reviewMapper.review_main_order",sel_name);
+	}
 	
 }

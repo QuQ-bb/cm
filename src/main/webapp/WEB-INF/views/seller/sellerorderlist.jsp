@@ -20,9 +20,8 @@
 			<th>수량</th>
 			<th>주문자(이름)</th>
 			<th>배송비</th>
-			<th>총 결제금액</th>
+			<th>주문금액</th>
 			<th>상태</th>
-			<th>배송</th>
 		</tr>
 		<!-- 화면 출력 번호  변수 정의 -->		
 		<c:set var="num" value="${listcount-(page-1)*10}"/> 	
@@ -38,8 +37,8 @@
 					<img src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${order.gds_thumbnail}" height="100" width="100" />
 				</td>
 				<td style="border-left: none;">
-					<a href="sellerorderdetail?ord_num=${order.ord_num}&page=${page}">${order.gds_name}<br><br></a>
-					<div style="text-align: right"> <a href="goodsupdate?&gds_num=${order.ord_gdsnum}">상품 수정하기</a></div>
+					<a href="sellerorderdetail?ord_num=${order.ol_num}&page=${page}">${order.gds_name}<br><br></a>
+					<div style="text-align: right"> <a href="goodsupdate?&gds_num=${order.gds_num}">상품 수정하기</a></div>
 				</td>
 				<td>
 					<c:choose>
@@ -55,12 +54,20 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
-				<td>${order.ord_gdscount}</td>
+				<td>${order.ol_count}</td>
 				<td>${order.mem_id}</td>
-				<td><fmt:formatNumber value="${order.ord_delfee}" pattern="#,###원" /></td>
-				<td><fmt:formatNumber value="${order.ord_totalprice}" pattern="#,###원" /></td>
-				<td>상태</td>
-				<td>배송</td>
+				<td><fmt:formatNumber value="${order.deltem_delfee}" pattern="#,###원" /></td>
+				<td><fmt:formatNumber value="${order.gds_price}" pattern="#,###원" /></td>
+				<td>${order.ord_status} <br>
+					<c:choose>
+						<c:when test="${order.ord_delnum eq null }">
+							<input type="button" value="송장번호 입력">
+						</c:when>
+						<c:when test="${order.ord_delnum ne null }">
+							${order.ord_delnum}
+						</c:when>
+					</c:choose>
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
