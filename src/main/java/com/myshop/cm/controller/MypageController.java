@@ -1,6 +1,7 @@
 package com.myshop.cm.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myshop.cm.model.DeliveryAddressVO;
 import com.myshop.cm.model.DeliveryTemplateVO;
+import com.myshop.cm.model.GoodsQnaVO;
 import com.myshop.cm.model.GoodsVO;
 import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.OptionVO;
@@ -33,6 +35,7 @@ import com.myshop.cm.service.MemberService;
 import com.myshop.cm.service.MypageService;
 import com.myshop.cm.service.OptionService;
 import com.myshop.cm.service.OrderService;
+import com.myshop.cm.service.GoodsQnaService;
 
 @Controller
 public class MypageController {
@@ -51,6 +54,8 @@ public class MypageController {
 	private DeliveryAddressService deliveryAddressService;
 	@Autowired
 	private DeliveryTemplateService deliveryTemplateService;
+	@Autowired
+	private GoodsQnaService goodsQnaService;
 
 		//회원 주문내역 목록
 		@RequestMapping(value = "/order_history")
@@ -99,5 +104,46 @@ public class MypageController {
 			
 			return sellerorderdetailM;
 		}
+		//내가 쓴 상품문의 목록
+		@RequestMapping(value = "/mygoodsqnalist")
+		public ModelAndView mygoodsqnalist(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws Exception{
+			ModelAndView sellergoodsqnalistM = new ModelAndView("mypage/mygoodsqnalist");
+			
+			// 문의 리스트 받아오기
+			Map<String, Object> goodsqnalist = goodsQnaService.getMyGoodsQnaList(request, response, session);
+
+			sellergoodsqnalistM.addAllObjects(goodsqnalist);
+			
+			return sellergoodsqnalistM;
+		}
+		//내가 쓴 상품문의 상세페이지
+		@RequestMapping(value = "/showgoodsQnadetail")
+		public String showgoodsQnadetail(@RequestParam("gdsqna_num") int gdsqna_num, Model model) throws Exception{
+			
+			// 답변이 달렸는지 확인하기
+			int answer = goodsQnaService.getmyGoodsQnaAnswer(gdsqna_num);
+			model.addAttribute("answer", answer);
+			
+			// 문의 확인하기
+			GoodsQnaVO goodsquestion = goodsQnaService.getmyGoodsQuestionDetail(gdsqna_num);
+			model.addAttribute("goodsquestion", goodsquestion);
+			
+			// 답변이 있다면 답변 확인하기
+			if(answer == 1) {
+				GoodsQnaVO goodsanswer = goodsQnaService.getmyGoodsAnswerDetail(gdsqna_num);
+				model.addAttribute("goodsanswer", goodsanswer);
+			}
+			return "mypage/ajaxmygoodsqnadetail";
+		}
+		//내 상품문의 수정
+//		@RequestMapping(value="/")
+//		public String 
+		//내 상품문의 삭제
+		@RequestMapping(value="goodsqna_delete")
+		public String goodsqna_out() throws Exception {
+			
+		}
+		
+
 
 }

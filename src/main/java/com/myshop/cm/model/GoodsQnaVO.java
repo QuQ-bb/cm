@@ -15,6 +15,13 @@ public class GoodsQnaVO {
 	private int gdsqna_check;
 	private int gdsqna_answer;
 	private int gdsqna_delyn;
+	private int mem_num;
+	
+	// join으로 값을 가져올때
+	private String gds_name;
+	private String mem_id;
+	private String gds_thumbnail;
+	private String fname;
 	
 	public int getGdsqna_num() {
 		return gdsqna_num;
@@ -87,6 +94,36 @@ public class GoodsQnaVO {
 	}
 	public void setGdsqna_delyn(int gdsqna_delyn) {
 		this.gdsqna_delyn = gdsqna_delyn;
+	}
+	public int getMem_num() {
+		return mem_num;
+	}
+	public void setMem_num(int mem_num) {
+		this.mem_num = mem_num;
+	}
+	public String getGds_name() {
+		return gds_name;
+	}
+	public void setGds_name(String gds_name) {
+		this.gds_name = gds_name;
+	}
+	public String getMem_id() {
+		return mem_id;
+	}
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
+	}
+	public String getGds_thumbnail() {
+		return gds_thumbnail;
+	}
+	public void setGds_thumbnail(String gds_thumbnail) {
+		this.gds_thumbnail = gds_thumbnail;
+	}
+	public String getFname() {
+		return fname;
+	}
+	public void setFname(String fname) {
+		this.fname = fname;
 	}
 	
 	
