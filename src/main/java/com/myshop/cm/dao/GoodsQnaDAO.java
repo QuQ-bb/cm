@@ -32,44 +32,10 @@ public class GoodsQnaDAO {
 		return sqlSession.selectOne("goodsQnaMapper.select_goodsqna_question", gdsqna_num);
 	}
 
-	// 답변글 가져오기(ref)
+	// 답변글 가져오기
 	public GoodsQnaVO getGoodsAnswerDetail(int gdsqna_num) {
 		return sqlSession.selectOne("goodsQnaMapper.select_goodsqna_answer", gdsqna_num);
 	}
 
-	// 문의 확인 업데이트
-	public void updateCheckQna(int gdsqna_num) {
-		sqlSession.update("goodsQnaMapper.update_goodsqna_check",gdsqna_num);
-		
-	}
-
-	// 문의 답변 달기
-	public void insertGoodsQna(GoodsQnaVO goodsquestion) {
-		// 문의글 답변완료상태로 변경
-		sqlSession.update("goodsQnaMapper.update_goodsqna_question_answer_1", goodsquestion);
-		// 답변글 insert하기
-		sqlSession.insert("goodsQnaMapper.insert_goodsqna_answer", goodsquestion);
-		
-	}
-
-	// 답변글 가져오기(num)
-	public GoodsQnaVO getGoodsAnswer(int gdsqna_num) {
-		return sqlSession.selectOne("goodsQnaMapper.select_goodsqna_answer_num",gdsqna_num);
-	}
-
-	// 답변글 수정하기
-	public void updateAnswer(GoodsQnaVO goodsqna) {
-		sqlSession.update("goodsQnaMapper.update_goodsqna_answer",goodsqna);
-	}
-
-	// 답변글 삭제하기
-	public void deleteAnswer(int gdsqna_num) {
-		// 답변글의 ref값 가져오기
-		int gdsqna_ref = sqlSession.selectOne("goodsQnaMapper.select_goodsqna_answer_ref",gdsqna_num);
-		
-		// 문의글 답변
-		sqlSession.update("goodsQnaMapper.update_goodsqna_question_answer_0", gdsqna_ref);
-		
-	}
 
 }

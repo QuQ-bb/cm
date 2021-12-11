@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
@@ -12,6 +12,7 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/sellerjs/sellercalculatelistjs.js"></script>
 </head>
 <body>
 <%@ include file="../layout/sellerheader.jsp" %>
@@ -84,9 +85,10 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="6">
-					<div id="questiondetail${sellergoodsQnaList.gdsqna_num}" class="hide"></div>
+				<td colspan="6" >
+					<div id="questiondetail${sellergoodsQnaList.gdsqna_num}" class="hide"> </div>
 				</td>
+			
 			</tr>
 		</c:forEach>
 	</table>
