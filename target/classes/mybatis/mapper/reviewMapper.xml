@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="reviewMapper">
+  	
+  	<!-- 리뷰 저장 -->
+  	<!-- 리뷰테이블 -->
+  	<insert id="insert_review" parameterType="review">
+  	insert into review
+  	(rev_num, pay_num, gds_num, gds_name,ord_gdsoption,
+  	 mem_num, mem_id, rev_content, rev_date,rev_filename,ord_num)
+  	 values
+  	 (#{rev_num}, #{pay_num}, #{gds_num}, #{gds_name}, #{ord_gdsoption},
+  	  #{mem_num},#{mem_id},#{rev_content}, sysdate(),#{rev_filename},#{ord_num})
+  	</insert>
+  	
+  	<!-- 리뷰 총 게시물 수 -->
+  	<select id="review_count" resultType="int" parameterType="int">
+  		select count(rev_num) from review where mem_num=#{mem_num}
+  	</select>
+  	
+  	<!--리뷰 목록 -->
+  	<select id="review_list" parameterType="java.util.Map" resultType="review">
+     select 
+      r.rev_num,
+      r.pay_num,
+      r.gds_num,
+      r.gds_name,
+      r.ord_gdsoption,
+      r.mem_num,
+      r.mem_id,
+      r.rev_content,
+      r.rev_date,
+      r.rev_filename,
+      r.ord_num,
+      g.gds_thumbnail,
+      p.opt_1stname, 
+      p.opt_1stval, 
+      p.opt_2ndname, 
+      p.opt_2ndval
+      from project.review r
+       left JOIN project.goods g
+         on r.gds_num = g.gds_num
+       left JOIN project.option p
+         on r.ord_gdsoption = p.opt_num
+      where r.mem_num = #{mem_num}
+      group by rev_num
+      order by rev_num desc
+      limit #{pageIndex}, 5
+      
+  	</select>
+  	
+  	<!-- 게시판 내용보기 -->
+	<select id="review_cont" parameterType="int" resultType="review" >
+		select * from review where rev_num =#{rev_num}
+	</select>  	
+
+	<!-- 리뷰 수정 -->
+	<update id="review_update" parameterType="review">
+	update review set
+	 rev_content=#{rev_content},rev_filename=#{rev_filename} where rev_num=#{rev_num}
+	</update>
+	
+	<!-- 리뷰 삭제 -->
+	<delete id="review_delete" parameterType="int">
+	delete from review where rev_num=#{rev_num}
+	</delete>
+	
+  </mapper>

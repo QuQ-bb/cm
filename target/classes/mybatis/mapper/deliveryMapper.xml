@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="deliveryMapper">
+
+	<!-- 배송수단 카테고리 추가하기 -->
+	<select id="delivery_cate_list" resultType="deliveryCategory">
+		select * from deliverycategory order by del_code*1
+	</select>
+	
+	<!-- 배송 템플릿 리스트 가져오기 -->
+	<select id="select_template_list" resultType="deliveryTemplate" parameterType="int">
+		select * from deliverytemplate where sel_num=#{sel_num} order by deltem_num*1 desc
+	</select>
+	
+	<!-- 배송 템플릿 불러오기 -->
+	<select id="select_template" resultType="deliveryTemplate">
+		select * from deliverytemplate where deltem_num=#{deltem_num}
+	</select>
+	
+	<!-- 배송 템플릿 총 갯수 -->
+	<select id="select_template_count" resultType="int" parameterType="int">
+		select count(*) from deliverytemplate where sel_num=#{sel_num}
+	</select>
+	
+	<!-- 베송 템플릿 저장하기 -->
+	<insert id="insert_template" parameterType="deliveryTemplate">
+		insert into deliverytemplate
+		(deltem_num, deltem_name, sel_num, del_code, del_name, deltem_delfee, deltem_redelfee, 
+		deltem_exdelfee, deltem_freedel, deltem_repost, deltem_readd1, deltem_readd2)
+		values
+		(#{deltem_num}, #{deltem_name}, #{sel_num}, #{del_code}, #{del_name}, #{deltem_delfee}, #{deltem_redelfee},
+		#{deltem_exdelfee}, #{deltem_freedel}, #{deltem_repost}, #{deltem_readd1}, #{deltem_readd2})
+		<selectKey keyProperty="deltem_num" resultType="int" order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+	</insert>
+	
+	<!-- 배송템플릿 수정하기 -->
+	<update id="update_template" parameterType="deliveryTemplate">
+		UPDATE deliverytemplate
+		SET
+		deltem_name = #{deltem_name},
+		del_code = #{del_code}, 
+		del_name = #{del_name}, 
+		deltem_delfee = #{deltem_delfee}, 
+		deltem_redelfee = #{deltem_redelfee}, 
+		deltem_exdelfee = #{deltem_exdelfee}, 
+		deltem_freedel = #{deltem_freedel}, 
+		deltem_repost = #{deltem_repost},
+		deltem_readd1 = #{deltem_readd1}, 
+		deltem_readd2 = #{deltem_readd2}
+		where 
+		deltem_num=#{deltem_num}
+	</update>
+	
+	<!-- 배송템플릿 삭제하기 -->
+	<delete id="delete_template" parameterType="int">
+		delete from deliverytemplate
+        where
+        deltem_num=#{deltem_num}
+	</delete>
+	
+	<!-- <select id="get_delivery_name" resultType="DeliveryCategory">
+		select del_name from deliverycategory where del_code=#{del_code}
+	</select> -->
+	
+</mapper>
