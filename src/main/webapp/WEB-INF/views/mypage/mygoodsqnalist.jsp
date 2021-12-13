@@ -44,7 +44,12 @@ table {width:900px;}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-	
+	function del(gdqna_num) {
+		var chk = confirm("정말 삭제하시겠습니까?");
+		if(chk) {
+			location.href='mygoodsqna_delete?gdqna_num='+gdsqna_num;
+		}
+	}
 	
 </script>
 </head>

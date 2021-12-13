@@ -14,7 +14,7 @@ public class ReviewVO {
 	private String rev_content;		//후기 내용
 	private Timestamp rev_date;		//후기 작성날짜
 	private String rev_filename;	//후기 사진파일
-	private int ord_num;			//주문번호
+	private int ol_num;			//주문번호
 	
 	// 주문정보를 토대로 받아올 추가정보들
     private String gds_thumbnail;
@@ -83,11 +83,11 @@ public class ReviewVO {
 	public void setRev_filename(String rev_filename) {
 		this.rev_filename = rev_filename;
 	}
-	public int getOrd_num() {
-		return ord_num;
+	public int getOl_num() {
+		return ol_num;
 	}
-	public void setOrd_num(int ord_num) {
-		this.ord_num = ord_num;
+	public void setOl_num(int ol_num) {
+		this.ol_num = ol_num;
 	}
 	public String getGds_thumbnail() {
 		return gds_thumbnail;

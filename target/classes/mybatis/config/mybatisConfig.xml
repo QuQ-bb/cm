@@ -20,6 +20,7 @@
  		<typeAlias type="com.myshop.cm.model.SellerVO" alias="seller"/>
  		<typeAlias type="com.myshop.cm.model.ReviewVO" alias="review"/>
  		<typeAlias type="com.myshop.cm.model.OrderVO" alias="order"/>
+ 		<typeAlias type="com.myshop.cm.model.OrderListVO" alias="orderList"/>
  		<typeAlias type="com.myshop.cm.model.CalculateVO" alias="calculate"/>
  		<typeAlias type="com.myshop.cm.model.PayDetailVO" alias="paydetail"/>
  		<typeAlias type="com.myshop.cm.model.GoodsVO" alias="goods"/>

@@ -330,5 +330,9 @@
 	</select>
 	
 	<!-- 내 상품문의 수정 -->
+	
 	<!-- 내 상품문의 삭제 -->
+	<delete id="mygoodsqna_delete" parameterType="int">
+		delete from goodsqna where gdsqna_num=#{gdsqna_num}
+	</delete>
 </mapper>

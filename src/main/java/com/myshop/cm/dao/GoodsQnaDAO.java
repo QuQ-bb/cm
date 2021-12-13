@@ -35,4 +35,8 @@ public class GoodsQnaDAO {
 	public GoodsQnaVO getmyGoodsAnswerDetail(int gdsqna_num)throws Exception {
 		return sqlSession.selectOne("goodsQnaMapper.mygoodsqna_answerdetail", gdsqna_num);
 	}
+	//내 상품문의 삭제
+	public void myGoodsQnaDelete(int gdsqna_num)throws Exception {
+		sqlSession.delete("gdoosQnaMapper.mygoodsqna_delete", gdsqna_num);
+	}
 }

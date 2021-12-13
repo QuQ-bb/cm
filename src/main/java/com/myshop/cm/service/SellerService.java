@@ -24,6 +24,10 @@ public class SellerService {
 	public MemberVO getMember(MemberVO member) {
 		return sellerDao.getMember(member);
 	}
+	// 세션값의 mem_num으로 판매자정보 가져오기
+	public SellerVO getSellerInfo(int mem_num) {
+		return sellerDao.getSellerInfo(mem_num);
+		}
 	
 
 }

@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	이미 판매자 신청이 완료되었습니다.
 </body>
 </html>

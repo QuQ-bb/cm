@@ -91,5 +91,10 @@ public class GoodsQnaService {
 	public GoodsQnaVO getmyGoodsAnswerDetail(int gdsqna_num)throws Exception {
 		return goodsQnaDAO.getmyGoodsAnswerDetail(gdsqna_num);
 	}
+	//내 상품문의 삭제
+	public void myGoodsQnaDelete(int gdsqna_num)throws Exception {
+		System.out.println("상품문의 삭제 괜찮으시겠어요?서비스");
+		goodsQnaDAO.myGoodsQnaDelete(gdsqna_num);
+	}
 
 }

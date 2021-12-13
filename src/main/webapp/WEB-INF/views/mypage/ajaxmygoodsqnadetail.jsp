@@ -57,8 +57,8 @@ function updategoodsqnaanswer(gdsqna_num) {
 		</tr>
 					<tr>
 						<td colspan="4" align="center">
-							<input type="button" onclick="updategoodsqnaanswer(${goodsanswer.gdsqna_num})" value="수정">
-							<input type="button" onclick="location='deletegoodsqnaanswer?gdsqna_num=${goodsanswer.gdsqna_num}'" value="삭제">
+							<input type="button" onclick="updategoodsqnaanswer(${goodsquestion.gdsqna_num})" value="수정">
+							<input type="button" onclick="location='mygoodsqna_delete?gdsqna_num=${goodsquestion.gdsqna_num}'" value="삭제">
 						</td>
 					</tr>
 	</table>

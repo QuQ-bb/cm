@@ -29,6 +29,7 @@ import com.myshop.cm.model.LCateVO;
 import com.myshop.cm.model.MCateVO;
 import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.OptionVO;
+import com.myshop.cm.model.OrderListVO;
 import com.myshop.cm.model.OrderVO;
 import com.myshop.cm.model.SCateVO;
 import com.myshop.cm.model.SellerVO;
@@ -67,12 +68,25 @@ public class SellerController {
 	@Autowired
 	private CategoryService categoryService;
 	
-	//판매자 전환 신청 폼
-	@RequestMapping(value="sellerChange")
-	public String sellerChange() {
-		return "seller/sellerChange";
-		//seller폴더 sellerChange.jsp 실행
-	}
+	   //판매자 전환 신청 폼
+	   @RequestMapping(value="sellerChange")
+	   public String sellerChange(HttpServletRequest request) {
+	      // 세션에 있는 member정보 받기
+	      HttpSession session = request.getSession();
+	      MemberVO member = (MemberVO)session.getAttribute("member");
+	      
+	      if(sellerService.getSellerInfo(member.getMem_num()) == null) { // 판매자 신청 안한 일반회원
+	         return "seller/sellerChange";
+	      }else if(sellerService.getSellerInfo(member.getMem_num()) != null) { 
+
+	         if(member.getMem_grade() != 50) {      // 신청했지만 아직 전환 안된 회원
+	            return "seller/sellerChange_end";
+	         }else {                           // 판매자전환 완료된 회원
+	            return "seller/sellerChange_com";
+	         }
+	      }
+	      return null;
+	   }
 	
 	//판매자 전환 신청 저장
 	@RequestMapping(value="/sellerchange_ok", method=RequestMethod.POST)
@@ -699,22 +713,28 @@ public class SellerController {
 	public ModelAndView showcalculdetail(@RequestParam("clcln_num") int clcln_num, Model model) throws Exception {
 		
 		// calcul_num으로 정산정보 불러오기
-		CalculateVO calculate = calculateService.getCalculDetail(clcln_num);
-		
+				CalculateVO calculate = calculateService.getCalculDetail(clcln_num);
+				
 		// 정산정보의 getOrd_num 값으로 주문정보 불러오기
-		OrderVO order = orderService.getOrderDetail(calculate.getOrd_num());
+		OrderListVO order = orderService.getOrderDetail(calculate.getOrd_num());
 		
 		// 정산정보의 gds_num으로 상품정보 불러오기
 		GoodsVO goods = goodsService.goodsdetail(calculate.getGds_num());
 		
+		// 주문정보의 opt_num으로 옵션정보 불러오기
+		OptionVO option = optionService.getoption(order.getOpt_num());
+		
+		// 상품 상세정보의 deltem_num 으로 배송탬플릿 정보 불러오기
+		// DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
+		
 		// modelAndView 객체 생성과 동시에 패스설정
 		ModelAndView showcalculdetailM = new ModelAndView("seller/calculdetail");
-		
 		
 		showcalculdetailM.addObject("calculate", calculate);
 		showcalculdetailM.addObject("order", order);
 		showcalculdetailM.addObject("goods", goods);
-		
+		showcalculdetailM.addObject("option", option);
+		// showcalculdetailM.addObject("deliverytemplate", deliverytemplate);
 		
 		return showcalculdetailM;
 	}
@@ -743,26 +763,26 @@ public class SellerController {
 	// 판매자 주문 상세목록으로 이동
 	@RequestMapping(value = "sellerorderdetail")
 	public ModelAndView sellerorderdetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		int ord_num = Integer.parseInt(request.getParameter("ord_num"));		
+		int ol_num = Integer.parseInt(request.getParameter("ol_num"));		
 		String page = request.getParameter("page");
 		
 		// 주문 상세정보 구해오기
-		OrderVO order = orderService.getOrderDetail(ord_num);
+		OrderListVO order = orderService.getOrderDetail(ol_num);
 		
 		// 주문 상세정보의 gds_num으로 상품정보 불러오기
-		GoodsVO goods = goodsService.goodsdetail(order.getOrd_gdsnum());
+		GoodsVO goods = goodsService.goodsdetail(order.getGds_num());
 		
 		// 주문 상세정보의 ord_gdsoption 으로 옵션정보 불러오기
-		OptionVO option = optionService.getoption(order.getOrd_gdsoption());
+		OptionVO option = optionService.getoption(order.getOpt_num());
 		
 		// 상품 상세정보의 deltem_num 으로 배송탬플릿 정보 불러오기
 		DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
 		
 		// 주문 상세정보의 mem_num으로 구매자 상세정보 불러오기
-		MemberVO member = memberService.getmemberinfo(order.getOrd_memnum());
+		MemberVO member = memberService.getmemberinfo(order.getMem_num());
 		
 		// 주문 상세정보의 mem_num으로 배송지 상세정보구하기
-		DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getOrd_memnum());
+		DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getMem_num());
 		
 		
 		ModelAndView sellerorderdetailM = new ModelAndView("seller/sellerorderdetail");

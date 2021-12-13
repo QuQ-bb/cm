@@ -68,4 +68,8 @@ public class SellerDAO {
 	public void goodsview(int gds_num) throws Exception{
 		sqlSession.update("sellerMapper.goods_update_viewy", gds_num);
 	}
+	// 세션값의 mem_num으로 판매자정보 가져오기
+	public SellerVO getSellerInfo(int mem_num) {
+		return sqlSession.selectOne("sellerMapper.seller_select", mem_num);
+	}
 }

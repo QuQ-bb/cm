@@ -13,8 +13,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.myshop.cm.dao.OrderDAO;
+import com.myshop.cm.dao.SellerDAO;
 import com.myshop.cm.model.MemberVO;
+import com.myshop.cm.model.OrderListVO;
 import com.myshop.cm.model.OrderVO;
+import com.myshop.cm.model.SellerVO;
 
 @Service
 public class OrderService {
@@ -23,22 +26,33 @@ public class OrderService {
 	private OrderDAO orderDao;
 	@Autowired
 	private OrderDAO orderDAO;
+	@Autowired
+	private SellerDAO sellerDAO;
 
 	//리뷰페이지 ord_num값 구하기
-	public OrderVO getOrdReview(int ord_num)throws Exception {
-		OrderVO orderrev = orderDao.getOrdReview(ord_num);
+	public OrderListVO getOrdReview(int ol_num)throws Exception {
+		OrderListVO orderrev = orderDao.getOrdReview(ol_num);
 		return orderrev;
 	}
 
 	// 판매자페이지에서 주문 상세내역 불러오기
-	public OrderVO getOrderDetail(int ord_num) throws Exception{
-		OrderVO order = orderDAO.getOrderDetail(ord_num);
+	public OrderListVO getOrderDetail(int ol_num) throws Exception{
+		OrderListVO order = orderDAO.getOrderDetail(ol_num);
 		return order;
 	}
 
+	// 판매자 페이지에서 주문 리스트 가져오기
 	public Map<String, Object> getOrderList(HttpServletRequest request, 
 			HttpServletResponse response) throws Exception{
 		List<OrderVO> orderlist = new ArrayList<OrderVO>();
+		
+		// 세션에 있는 member정보 받기
+		HttpSession session = request.getSession();
+		MemberVO member = (MemberVO)session.getAttribute("member");
+				
+		// 세션의 member.mem_num으로 판매자정보 불러오기
+		SellerVO seller = sellerDAO.getSellerInfo(member.getMem_num());
+
 		
 		int page = 1;
 		int limit = 10;	// 한 화면에 출력할 상품 수
@@ -49,12 +63,16 @@ public class OrderService {
 		
 		int pageIndex = (page-1)*10;
 		
-		// 페이지 번호(page)를 DAO 클래스에 전달한다.
-		// 총 리스트 수를 받아옴
-		int listcount = orderDAO.getOrderListCount();
+		// 주문 리스트를 출력할 parameterType들을 map에 넣는다.
+		Map<String, Object> listIndexMap = new HashMap<String,Object>();
+		
+		listIndexMap.put("pageIndex", pageIndex);
+		listIndexMap.put("sel_name", seller.getSel_name());
+		
+		int listcount = orderDAO.getOrderListCount(seller.getSel_name());
 		
 		// 페이지 번호(page)를 DAO 클래스에 전달한다.
-		orderlist = orderDAO.getOrderList(pageIndex);	// 리스트를 받아옴
+		orderlist = orderDAO.getOrderList(listIndexMap);	// 리스트를 받아옴
 		
 		// 총 페이지 수
 		int maxpage = (int)((double)listcount / limit + 0.95); // 0.95를 더해서 올림처리
@@ -100,7 +118,7 @@ public class OrderService {
 		indexMap.put("pageIndex", pageIndex);
 		
 		// 총 리스트 수를 받아옴
-		int listcount = orderDAO.getHistoryListCount();
+		int listcount = orderDAO.getHistoryListCount(mem_num);
 		
 		// 페이지 번호(page)를 DAO 클래스에 전달한다.
 		historylist = orderDao.getHistoryList(indexMap);	// 리스트를 받아옴

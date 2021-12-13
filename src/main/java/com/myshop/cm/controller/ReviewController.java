@@ -25,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.myshop.cm.model.GoodsVO;
 import com.myshop.cm.model.MemberVO;
+import com.myshop.cm.model.OrderListVO;
 import com.myshop.cm.model.OrderVO;
 import com.myshop.cm.model.PayDetailVO;
 import com.myshop.cm.model.ReviewVO;
@@ -122,7 +123,7 @@ public class ReviewController {
 
 		// 주문번호, 상품번호 받아오기
 		int ord_gdsnum = Integer.parseInt(request.getParameter("ord_gdsnum"));
-		int ord_num = Integer.parseInt(request.getParameter("ord_num"));
+		int ol_num = Integer.parseInt(request.getParameter("ol_num"));
 		
 		// 현제 세션에 있는(로그인 한 member의 정보) mem_num값 가져오기
 		MemberVO reviewmember = (MemberVO)session.getAttribute("member");
@@ -131,13 +132,13 @@ public class ReviewController {
 		
 		review.setMem_num(mem_num);
 		review.setMem_id(mem_id);
-		review.setOrd_num(ord_num);
+		review.setOl_num(ol_num);
 		review.setGds_num(ord_gdsnum);
 		
 		// 주문번호로 주문정보 불러오기
-		OrderVO order = orderService.getOrdReview(ord_num);
+		OrderListVO order = orderService.getOrdReview(ol_num);
 		// 주문정보의 상품옵션 리뷰객체에 담기
-		 review.setOrd_gdsoption(order.getOrd_gdsoption());
+		 review.setOrd_gdsoption(order.getOpt_num());
 		// 주문정보의 상품번호로 상품 정보 불러오기
 		GoodsVO gds = goodsService.getGdsReview(ord_gdsnum);
 		// 상품이름을 리뷰객체에 담기
@@ -211,7 +212,7 @@ public class ReviewController {
 			
 			ReviewVO review = reviewService.getReviewCont(rev_num);
 			
-			OrderVO orderrev = orderService.getOrdReview(review.getOrd_num());
+			OrderListVO orderrev = orderService.getOrdReview(review.getOl_num());
 			
 			PayDetailVO pay = paydetailService.getPayReview(review.getPay_num());
 			

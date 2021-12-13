@@ -10,10 +10,10 @@
   	<insert id="insert_review" parameterType="review">
   	insert into review
   	(rev_num, pay_num, gds_num, gds_name,ord_gdsoption,
-  	 mem_num, mem_id, rev_content, rev_date,rev_filename,ord_num)
+  	 mem_num, mem_id, rev_content, rev_date,rev_filename,ol_num)
   	 values
   	 (#{rev_num}, #{pay_num}, #{gds_num}, #{gds_name}, #{ord_gdsoption},
-  	  #{mem_num},#{mem_id},#{rev_content}, sysdate(),#{rev_filename},#{ord_num})
+  	  #{mem_num},#{mem_id},#{rev_content}, sysdate(),#{rev_filename},#{ol_num})
   	</insert>
   	
   	<!-- 리뷰 총 게시물 수 -->
@@ -34,7 +34,7 @@
       r.rev_content,
       r.rev_date,
       r.rev_filename,
-      r.ord_num,
+      r.ol_num,
       g.gds_thumbnail,
       p.opt_1stname, 
       p.opt_1stval, 

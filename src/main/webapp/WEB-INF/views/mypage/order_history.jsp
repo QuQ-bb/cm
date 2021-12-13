@@ -36,8 +36,8 @@ ${listcount }
 					<c:set var="num" value="${num-1}"/>
 				</td>
 				<td>
-					<img src="<%=request.getContextPath() %>/resources/image/thumbnailimage/${his.gds_thumbnail}" height="100" width="100" />
-						<a href="history_detail?ord_num=${his.ord_num}&page=${page}">${his.gds_name}<br></a>
+					<img src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${his.gds_thumbnail}" height="100" width="100" />
+						<a href="history_detail?ol_num=${his.ol_num}&page=${page}">${his.gds_name}<br></a>
 				</td>
 				<td>
 					<c:choose>
@@ -53,16 +53,16 @@ ${listcount }
 	                  </c:otherwise>
 	               </c:choose>
 				</td>
-				<td>${his.ord_gdscount}</td>
-				<td><fmt:formatNumber value="${his.ord_delfee}" pattern="#,###원" /></td>
+				<td>${his.ol_count}</td>
+				<td><fmt:formatNumber value="${his.deltem_delfee}" pattern="#,###원" /></td>
 				<td>${his.ord_request}</td>
-				<td><fmt:formatNumber value="${his.ord_totalprice}" pattern="#,###원" /></td>
-				<%-- <td>${his.배송상태}</td> --%>
+				<td><fmt:formatNumber value="${his.gds_price}" pattern="#,###원" /></td>
+				<td>${his.ord_status}</td>
 				<td>
 				<input type="button" value="취소">
 				<input type="button" value="환불">
 				<input type="button" value="교환">
-				<input type="button" value="후기쓰기" onClick="location.href='review_write?ord_gdsnum=${his.ord_gdsnum}&ord_num=${his.ord_num}'">
+				<input type="button" value="후기쓰기" onClick="location.href='review_write?gds_num=${his.gds_num}&ord_num=${his.ord_num}'">
 				</td>
 			</tr>
 		</c:forEach>

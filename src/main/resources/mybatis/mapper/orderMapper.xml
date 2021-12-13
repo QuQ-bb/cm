@@ -11,80 +11,147 @@
 	  </select>
   
   	<!-- 마이 페이지에서 주문 리스트 갯수 구해오기 -->
-	<select id="history_list_count" resultType="int" >
-		select count(*) from project.order
-	</select>
-
-	<!-- 판매자 페이지에서 주문 상세정보 구해오기 -->
-	<select id="select_order_detail" resultType="order" parameterType="int" >
-		select * from project.order 
-		where ord_num=#{ord_num}
+	<select id="history_list_count" resultType="int" parameterType="int">
+		select count(*) 
+		from project.orderlist as ol
+		left join project.order as o
+		 on ol.ord_num = o.ord_num
+		where o.mem_num=#{mem_num}
 	</select>
 	
 	<!-- 판매자 페이지에서 주문 리스트 갯수 구해오기 -->
-	<select id="select_order_list_count" resultType="int" >
-		select count(*) from project.order
+	<select id="select_order_list_count" resultType="int" parameterType="String" >
+		select count(*) from project.orderlist where gds_seller=#{sel_name}
 	</select>
 	
-	<!-- 마이페이지 주문내역 리스트 불러오기 -->
-	<select id="history_list" resultType="order" parameterType="java.util.Map">
-	 select 
-      o.ord_num,
-      o.ord_memnum,
-      o.ord_gdsnum,
-      o.ord_gdsoption,
-      o.ord_gdscount,
-      o.ord_delfee,
-      o.ord_request,
-      o.ord_totalprice,
-       g.gds_thumbnail,
-       g.gds_name,
-       m.mem_id,
-       p.opt_1stname, 
-       p.opt_1stval, 
-       p.opt_2ndname, 
-       p.opt_2ndval
-   from project.order as o
-      left JOIN project.goods as g
-         on o.ord_gdsnum = g.gds_num
-      left JOIN project.member as m
-         on o.ord_memnum = m.mem_num
-      left JOIN project.option as p
-         on o.ord_gdsoption = p.opt_num
-         	<!-- where -->
-    where o.ord_memnum=#{mem_num}
-	group by o.ord_num
-	order by o.ord_num desc
+	<!-- 판매자 페이지에서 주문 리스트 불러오기 -->
+	<select id="select_order_list" resultType="orderList" parameterType="java.util.Map">
+	select 
+		ol.ol_num,
+		ol.ord_num,
+		ol.gds_num,
+		ol.opt_num,
+		ol.ol_count,
+		ol.gds_seller,
+	    o.mem_num,
+		o.ord_totalprice,
+		o.ord_delnum,
+		o.ord_request,
+		o.ord_status,
+		o.ord_date,
+	    g.gds_thumbnail,
+		g.gds_name,
+		g.gds_price,
+		d.deltem_delfee,
+		m.mem_id,
+		p.opt_1stname, 
+		p.opt_1stval, 
+		p.opt_2ndname, 
+		p.opt_2ndval
+	FROM project.orderlist as ol
+		left join project.order as o
+			on ol.ord_num = o.ord_num
+		left JOIN project.goods as g
+			on ol.gds_num = g.gds_num
+		left JOIN project.member as m
+			on o.mem_num = m.mem_num
+		left JOIN project.option as p
+			on ol.opt_num = p.opt_num
+		left JOIN project.deliverytemplate as d
+			on g.deltem_num = d.deltem_num
+	where ol.gds_seller=#{sel_name}
+	group by ol.ol_num
+	order by ol.ol_num desc
 	limit #{pageIndex}, 10
 	</select>
 	
-	<select id="select_order_list" resultType="order" parameterType="int">
-	select 
-		o.ord_num,
-		o.ord_memnum,
-		o.ord_gdsnum,
-		o.ord_gdsoption,
-		o.ord_gdscount,
-		o.ord_delfee,
-		o.ord_request,
+	<!-- 판매자 페이지에서 주문 상세정보 구해오기 -->
+	<select id="select_order_detail" resultType="orderList" parameterType="int" >
+		select 
+			ol.ol_num,
+			ol.ord_num,
+			ol.gds_num,
+			ol.opt_num,
+			ol.ol_count,
+			ol.gds_seller,
+		    o.mem_num,
+			o.ord_totalprice,
+			o.ord_delnum,
+			o.ord_request,
+			o.ord_status,
+			o.ord_date
+		from project.orderlist as ol
+		left join project.order as o
+			on ol.ord_num = o.ord_num
+		where ol_num=#{ol_num}
+	</select>
+	
+	<!-- 메인페이지에서 가져오기 -->
+	<select id="select_main_order_list" parameterType="String" resultType="orderList">
+		select 
+			ol.ol_num,
+			ol.ord_num,
+			ol.gds_num,
+			ol.opt_num,
+			ol.ol_count,
+			ol.gds_seller,
+		    o.mem_num,
+			o.ord_totalprice,
+			o.ord_delnum,
+			o.ord_request,
+			o.ord_status,
+			o.ord_date,
+		    g.gds_thumbnail,
+			g.gds_name
+		from project.orderlist as ol
+		left join project.order as o
+			on ol.ord_num = o.ord_num
+		left JOIN project.goods as g
+			on ol.gds_seller = g.gds_seller
+		where ol.gds_seller=#{sel_name}
+		group by ol.ol_num
+		order by ol.ol_num desc
+		limit 0, 5
+	</select>
+	
+	<!-- 마이페이지 주문내역 리스트 불러오기 -->
+	<select id="history_list" resultType="orderList" parameterType="java.util.Map">
+	 	select 
+		ol.ol_num,
+		ol.ord_num,
+		ol.gds_num,
+		ol.opt_num,
+		ol.ol_count,
+		ol.gds_seller,
+	    o.mem_num,
 		o.ord_totalprice,
+		o.ord_delnum,
+		o.ord_request,
+		o.ord_status,
+		o.ord_date,
 	    g.gds_thumbnail,
-	    g.gds_name,
-	    m.mem_id,
-	    p.opt_1stname, 
-	    p.opt_1stval, 
+		g.gds_name,
+		g.gds_price,
+		d.deltem_delfee,
+		m.mem_id,
+		p.opt_1stname, 
+		p.opt_1stval, 
 		p.opt_2ndname, 
 		p.opt_2ndval
-	from project.order as o
+	FROM project.orderlist as ol
+		left join project.order as o
+			on ol.ord_num = o.ord_num
 		left JOIN project.goods as g
-			on o.ord_gdsnum = g.gds_num
+			on ol.gds_num = g.gds_num
 		left JOIN project.member as m
-			on o.ord_memnum = m.mem_num
+			on o.mem_num = m.mem_num
 		left JOIN project.option as p
-			on o.ord_gdsoption = p.opt_num
-	<!-- where -->
-	group by o.ord_num
-	order by o.ord_num desc
+			on ol.opt_num = p.opt_num
+		left JOIN project.deliverytemplate as d
+			on g.deltem_num = d.deltem_num
+	where o.mem_num=#{mem_num}
+	group by ol.ol_num
+	order by ol.ol_num desc
 	limit #{pageIndex}, 10
 	</select>
 	

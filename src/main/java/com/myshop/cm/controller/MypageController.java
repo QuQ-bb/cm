@@ -26,6 +26,7 @@ import com.myshop.cm.model.GoodsQnaVO;
 import com.myshop.cm.model.GoodsVO;
 import com.myshop.cm.model.MemberVO;
 import com.myshop.cm.model.OptionVO;
+import com.myshop.cm.model.OrderListVO;
 import com.myshop.cm.model.OrderVO;
 import com.myshop.cm.model.ReviewVO;
 import com.myshop.cm.service.DeliveryAddressService;
@@ -71,26 +72,26 @@ public class MypageController {
 		//마이페이지 회원 주문 상세내역 페이지
 		@RequestMapping(value = "/history_detail")
 		public ModelAndView sellerorderdetail(HttpServletRequest request, HttpServletResponse response) throws Exception{
-			int ord_num = Integer.parseInt(request.getParameter("ord_num"));		
+			int ol_num = Integer.parseInt(request.getParameter("ol_num"));		
 			String page = request.getParameter("page");
 			
 			// 주문 상세정보 구해오기
-			OrderVO order = orderService.getOrderDetail(ord_num);
+			OrderListVO order = orderService.getOrderDetail(ol_num);
 			
 			// 주문 상세정보의 gds_num으로 상품정보 불러오기
-			GoodsVO goods = goodsService.goodsdetail(order.getOrd_gdsnum());
+			GoodsVO goods = goodsService.goodsdetail(order.getGds_num());
 			
 			// 주문 상세정보의 ord_gdsoption 으로 옵션정보 불러오기
-			OptionVO option = optionService.getoption(order.getOrd_gdsoption());
+			OptionVO option = optionService.getoption(order.getOpt_num());
 			
 			// 상품 상세정보의 deltem_num 으로 배송탬플릿 정보 불러오기
 			DeliveryTemplateVO deliverytemplate = deliveryTemplateService.getTemplate(goods.getDeltem_num());
 			
 			// 주문 상세정보의 mem_num으로 구매자 상세정보 불러오기
-			MemberVO member = memberService.getmemberinfo(order.getOrd_memnum());
+			MemberVO member = memberService.getmemberinfo(order.getMem_num());
 			
 			// 주문 상세정보의 mem_num으로 배송지 상세정보구하기
-			DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getOrd_memnum());
+			DeliveryAddressVO deliveryAddress = deliveryAddressService.getdeliveryAddress(order.getMem_num());
 			
 			
 			ModelAndView sellerorderdetailM = new ModelAndView("mypage/history_detail");
@@ -139,9 +140,16 @@ public class MypageController {
 //		@RequestMapping(value="/")
 //		public String 
 		//내 상품문의 삭제
-		@RequestMapping(value="goodsqna_delete")
-		public String goodsqna_out() throws Exception {
+		@RequestMapping(value="/mygoodsqna_delete")
+		public String goodsqna_out(@RequestParam("gdsqna_num") int gdsqna_num,
+								   @RequestParam("page") String page) throws Exception {
+			//내 상품문의 불러오기
 			
+			
+			goodsQnaService.myGoodsQnaDelete(gdsqna_num);
+			System.out.println("상품문의 삭제 괜찮으시겠어요?");
+			
+			return "redirect:/mygoodsqnalist?page="+page;
 		}
 		
 
