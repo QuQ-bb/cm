@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>판매자 상세보기</title>
 </head>
 <body>
 <jsp:include page="/WEB-INF/views/admin/adminmain.jsp"></jsp:include>

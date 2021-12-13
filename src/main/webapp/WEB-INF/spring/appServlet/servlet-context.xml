@@ -46,13 +46,13 @@
 		
 	</interceptors>
 	
-	<beans:bean id="adminChk" class="com.myshop.cm.interceptor.Admininterceptor"></beans:bean>
+<!-- 	<beans:bean id="adminChk" class="com.myshop.cm.interceptor.Admininterceptor"></beans:bean>
 	<interceptors>
 		<interceptor>
 			<mapping path="/adminmain"/>
 			<beans:ref bean="adminChk"/>
 		</interceptor>	
-	</interceptors>	 
+	</interceptors>	  -->
 	
 	
 	<!-- 일반 파일 업로드 경로 -->

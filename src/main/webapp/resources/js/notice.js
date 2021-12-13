@@ -1,4 +1,4 @@
-function board_check() {
+function notice_check() {
 	if ($.trim($("#ntc_sort").val()) == "") {
 		alert("공지 분류를 선택하세요");
 		$("#ntc_sort").val("").focus();

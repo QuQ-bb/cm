@@ -20,9 +20,10 @@
 		<%-- 반복문 사용하여 데이터 출력 --%>
 		<c:forEach var="NoticeVO" items="${noticelist}">
 			<tr>
-				<td>${NoticeVO.ntc_num}</td>
-				<td>${NoticeVO.ntc_sort}</td>
-				<td>${NoticeVO.ntc_title}</td>
+				<td><c:out value="${NoticeVO.ntc_num}"/></td>
+				<td><a href="ntcdetail?ntc_title=${NoticeVO.ntc_title}&state=ntcdetail">
+				<c:out value="${NoticeVO.ntc_title}"/></a></td>
+				<td><c:out value="${NoticeVO.ntc_sort}"/></td>
 			</tr>
 		</c:forEach>
 		<tr>

@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
  <mapper namespace="AdminMapperns">
+ 	<!-- 관리자 로그인 -->
+  	<select id="adminlogin" parameterType="MemberVO" resultType="MemberVO">		
+     		select 
+     		mem_id , mem_pass 
+     		from member
+     		where 1=1
+     		and mem_id = #{mem_id}
+     		and mem_pass = #{mem_pass}
+ 	</select>
  	<!-- 공지 등록 -->
 	<insert id="insertnt" parameterType="notice">
 		insert into notice( ntc_sort
@@ -24,19 +33,23 @@
 	<!-- 공지 리스트 -->
 	<select id="noticelist" resultType="notice">
 		select ntc_num
-     		, ntc_sort
-     		, ntc_title
-     		, ntc_content
-     		, ntc_date
-     		, ntc_delyn
-     		, mem_grade
-from notice
-where 1=1
-  and case when mem_grade = '1' then ntc_sort = '1'
-           when mem_grade = '50'then ntc_sort = '2'
-           else ntc_sort = '%'
-           end;
+			 , ntc_title
+     		 , ntc_sort
+     		 , ntc_content
+     		 , ntc_date
+     		 , ntc_delyn
+     		 , mem_grade
+		from notice
+			where 1=1 and ntc_delyn='y' order by ntc_num
+  				and case when mem_grade = '1' then ntc_sort = '1'
+          		when mem_grade = '50'then ntc_sort = '2'
+           		else ntc_sort = '%'
+           	end
 	</select>
+	<!-- 공지 내용보기 --> 
+    <select id="ntcdetail" parameterType="String" resultType="ntcdetail">
+    	select * from notice where ntc_title = #{ntc_title}
+    </select>
 	<!-- 공지 수정 -->
 	<update id="updatent" parameterType="notice">
 		update notice set ntc_sort    = #{ntc_sort}

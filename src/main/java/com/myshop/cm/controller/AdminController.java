@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -102,4 +103,10 @@ public class AdminController {
 			System.out.println(mv.getViewName()+ mv);
 			return mv;
 		}
+	// 관리자 로그인
+//		@RequestMapping(value = "/admin_login")
+//		public String adminlogin(@ModelAttribute("MemberVO") MemberVO memberVO ,
+//								 HttpServletRequest request, Model model) throws Exception{
+//			MemberVO 
+//		}
 }

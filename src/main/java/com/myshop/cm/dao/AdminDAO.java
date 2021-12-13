@@ -68,6 +68,10 @@ public class AdminDAO {
 	public List<NoticeVO> noticelist(NoticeVO noticeVO) throws Exception{
 		return session.selectList("noticelist");
 	}
+	// 공지 내용보기
+	public NoticeVO ntcdetail(String ntc_title) throws Exception{
+		return session.selectOne("ntcdetail", ntc_title);
+	}
 	// 회원 리스트
 	public List<MemberVO> memlist(MemberVO memberVO) throws Exception{
 		return session.selectList("memlist");

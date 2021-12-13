@@ -21,4 +21,9 @@ public class NoticeService {
 	public List<NoticeVO> noticelist(NoticeVO noticeVO) throws Exception{
 		return dao.noticelist(noticeVO);
 	}
+	// 공지 상세정보
+	public NoticeVO ntcdetail(String ntc_title) throws Exception{
+		NoticeVO noticeVO = dao.ntcdetail(ntc_title);
+		return noticeVO;
+	}
 }

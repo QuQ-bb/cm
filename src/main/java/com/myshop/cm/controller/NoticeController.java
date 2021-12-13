@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.myshop.cm.model.NoticeVO;
 import com.myshop.cm.service.NoticeService;
@@ -51,5 +52,22 @@ public class NoticeController {
 		
 		System.out.println("notice컨트롤러2");
 		return "admin/noticelist";
+	}
+	// 공지 상세보기
+	@RequestMapping(value = "/ntcdetail")
+	public String ntcdetail(@RequestParam(value = "ntc_title") String ntc_title,
+//							@RequestParam(value="page")String page,
+							@RequestParam("state")String state, Model model) throws Exception{
+		System.out.println("ntc상세1");
+		NoticeVO noticeVO = noticeservice.ntcdetail(ntc_title);
+		System.out.println("ntc상세2");
+		
+		model.addAttribute("noticeVO", noticeVO);
+//		model.addAttribute("page", page);
+		System.out.println("ntc상세3");
+		if(state.equals("ntcdetail")) {
+			return "/admin/ntcdetail";
+		}
+		return null;
 	}
 }

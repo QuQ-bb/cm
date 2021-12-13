@@ -10,6 +10,7 @@ public class NoticeVO {
 	private Timestamp ntc_date;
 	private String ntc_check;
 	private String ntc_delyn;
+	private int mem_grade;
 	public int getNtc_num() {
 		return ntc_num;
 	}
@@ -51,5 +52,11 @@ public class NoticeVO {
 	}
 	public void setNtc_delyn(String ntc_delyn) {
 		this.ntc_delyn = ntc_delyn;
+	}
+	public int getMem_grade() {
+		return mem_grade;
+	}
+	public void setMem_grade(int mem_grade) {
+		this.mem_grade = mem_grade;
 	}
 }
