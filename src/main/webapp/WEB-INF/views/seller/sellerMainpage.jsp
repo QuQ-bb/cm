@@ -55,14 +55,14 @@ td{
 				<th width="20%">금액</th>
 				<th width="20%">날짜</th>
 			</tr>
-			<%-- <c:forEach var="mainOrderList" items="${mainOrderList}">
+			<c:forEach var="mainOrderList" items="${mainOrderList}">
 			<tr>
 				<td class="mainOrdername" title="${mainOrderList.gds_name }"><nobr>${mainOrderList.gds_name }</nobr></td>
-				<td>${mainOrderList.ord_gdscount }</td>
+				<td>${mainOrderList.ol_count }</td>
 				<td><fmt:formatNumber value="${mainOrderList.ord_totalprice }" pattern="#,###원"/> </td>
-				<td></td>
+				<td><fmt:formatDate value="${mainOrderList.ord_date}" pattern="yyyy-MM-dd"/></td>
 			</tr>
-			</c:forEach> --%>
+			</c:forEach>
 		</table>
 	</div>
 	<div class="righttop">

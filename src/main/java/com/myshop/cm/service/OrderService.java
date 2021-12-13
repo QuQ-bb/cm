@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.myshop.cm.dao.OrderDAO;
 import com.myshop.cm.dao.SellerDAO;
 import com.myshop.cm.model.MemberVO;
+import com.myshop.cm.model.OrderListVO;
 import com.myshop.cm.model.OrderVO;
 import com.myshop.cm.model.SellerVO;
 
@@ -35,8 +36,8 @@ public class OrderService {
 	}
 
 	// 판매자페이지에서 주문 상세내역 불러오기
-	public OrderVO getOrderDetail(int ord_num) throws Exception{
-		OrderVO order = orderDAO.getOrderDetail(ord_num);
+	public OrderListVO getOrderDetail(int ol_num) throws Exception{
+		OrderListVO order = orderDAO.getOrderDetail(ol_num);
 		return order;
 	}
 
@@ -139,7 +140,7 @@ public class OrderService {
 	}
 
 	// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
-	public List<OrderVO> getMainOrderList(String sel_name) {
+	public List<OrderListVO> getMainOrderList(String sel_name) {
 		return orderDAO.getMainOrderList(sel_name);
 	}
 	

@@ -28,7 +28,7 @@
 		<form method="post" action="<%=request.getContextPath()%>/goodsupdate" enctype="multipart/form-data" onsubmit="return goodsupload_check()">
 			<input type="hidden" name="gds_num" value="${goods.gds_num}" />
  			<input type="hidden" name="page" value="${page}" />
-			<input type="hidden" name="oldgds_thumbnail" value="<%=request.getContextPath()%>/resources/image/thumbnailimage/${goods.gds_thumbnail}">
+			<input type="hidden" name="oldgds_thumbnail" value="<%=request.getContextPath()%>/resources/images/thumbnailimage/${goods.gds_thumbnail}">
 			<table border="1" width="1200">
 				<tr>
 					<th width="100" style="text-align:center;">카테고리</th>
@@ -79,7 +79,8 @@
 				</tr>
 				<tr>
 					<th style="text-align:center;">대표이미지</th>
-					<td class="content"><img style="width: 400px;" id="preview-image" src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${goods.gds_thumbnail}">
+					<td class="content">
+						 <img style="width: 400px;" id="preview-image" src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${goods.gds_thumbnail}">
 					     <input style="display: block;" type="file" id="gds_thumbnail1" name="gds_thumbnail1">
 					</td>
 				</tr>

@@ -1,19 +1,19 @@
 function readImage(input) {
-    // 인풋 태그에 파일이 있는 경우
+    // input 태그에 이미지를 업로드 한 경우
     if(input.files && input.files[0]) {
-	        // FileReader 인스턴스 생성
-	        const reader = new FileReader()
+	        // FileReader 생성
+	        const reader = new FileReader();
 	        // 이미지가 로드가 된 경우
-	        reader.onload = e => {
-	            const previewImage = document.getElementById("preview-image")
-	            previewImage.src = e.target.result
+	        reader.onload = function(e){
+	            const previewImage = document.getElementById("dummy-image");
+	            previewImage.src = e.target.result;
 	        }
-	        // reader가 이미지 읽도록 하기
+	        // reader가 업로드된 이미지의 경로를 읽는다.
 	        reader.readAsDataURL(input.files[0])
 	    }
 	}
-	// input file에 change 이벤트 부여
-	const inputImage = document.getElementById("gds_thumbnail1")
-	inputImage.addEventListener("change", e => {
-	    readImage(e.target)
+	// input 태그에 change 이벤트 설정
+	const inputImage = document.getElementById("gds_thumbnail1");
+	inputImage.addEventListener("change", function(e){
+	    readImage(e.target);
 	});

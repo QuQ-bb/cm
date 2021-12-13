@@ -37,7 +37,7 @@
 					<img src="<%=request.getContextPath() %>/resources/images/thumbnailimage/${order.gds_thumbnail}" height="100" width="100" />
 				</td>
 				<td style="border-left: none;">
-					<a href="sellerorderdetail?ord_num=${order.ol_num}&page=${page}">${order.gds_name}<br><br></a>
+					<a href="sellerorderdetail?ol_num=${order.ol_num}&page=${page}">${order.gds_name}<br><br></a>
 					<div style="text-align: right"> <a href="goodsupdate?&gds_num=${order.gds_num}">상품 수정하기</a></div>
 				</td>
 				<td>

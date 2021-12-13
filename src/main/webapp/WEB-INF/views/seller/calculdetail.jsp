@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <!DOCTYPE html>
 <html>
@@ -26,10 +27,20 @@
 				${goods.scate_code}
 				${goods.gds_name}
 				${goods.gds_price}
-				${order.ord_gdsoption}
-				${order.ord_gdscount}
-				${order.ord_delfee}
-				${order.ord_request}
+				<c:choose>
+					<c:when test="${option.opt_2ndval != null}">
+						${option.opt_1stname} : ${option.opt_1stval}	<br>
+						${option.opt_2ndname} : ${option.opt_2ndval}
+					</c:when>
+					<c:when test="${option.opt_1stval != null}">
+						${option.opt_1stname} : ${option.opt_1stval}
+					</c:when>
+					<c:otherwise>
+						-
+					</c:otherwise>
+				</c:choose>
+				${order.ol_count}
+				<%-- ${order.deltem_delfee} --%>
 				${order.ord_request}
 			</th>
 		</tr>

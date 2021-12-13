@@ -133,7 +133,7 @@
 			gdsqna_num=#{gdsqna_num} 
 	</update>
 	
-	<!-- 문의 답변작성여부 체크 -->
+	<!-- 문의 답변달린 상태로 수정 -->
 	<update id="update_goodsqna_question_answer_1" parameterType="goodsqna">
 		update goodsqna
 		set
@@ -191,13 +191,22 @@
 		where gdsqna_num=#{gdsqna_num}
 	</select>
 	
-	<!-- 문의 답변작성여부 체크 -->
+	<!-- 문의글 답변 안됨 상태로 수정 -->
 	<update id="update_goodsqna_question_answer_0" parameterType="goodsqna">
 		update goodsqna
 		set
 			gdsqna_answer=0
 		where 
 			gdsqna_num=#{gdsqna_ref} and gdsqna_depth=0
+	</update>
+	
+	<!-- 답변글 삭제 -->
+	<update id="update_goodsqna_answer_delyn0" parameterType="goodsqna">
+		update goodsqna
+		set
+			gdsqna_delyn=0
+		where 
+			gdsqna_num=#{gdsqna_num} and gdsqna_depth=1
 	</update>
 	
 	<!-- 메인페이지 문의 리스트 -->

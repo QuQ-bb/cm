@@ -67,9 +67,11 @@ public class GoodsQnaDAO {
 		// 답변글의 ref값 가져오기
 		int gdsqna_ref = sqlSession.selectOne("goodsQnaMapper.select_goodsqna_answer_ref",gdsqna_num);
 		
-		// 문의글 답변
+		// 문의글 답변 안됨 상태로 수정
 		sqlSession.update("goodsQnaMapper.update_goodsqna_question_answer_0", gdsqna_ref);
 		
+		// 답변글 delyn 0으로 수정
+		sqlSession.update("goodsQnaMapper.update_goodsqna_answer_delyn0", gdsqna_num);
 	}
 
 	public List<GoodsQnaVO> getMainGoodsQnaList(String sel_name) {

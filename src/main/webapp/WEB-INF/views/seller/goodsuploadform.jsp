@@ -55,8 +55,9 @@
 				</tr>
 				<tr>
 					<th style="text-align:center;">대표이미지</th>
-					<td class="content"> <img style="width: 400px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image">
-					     <input style="display: block;" type="file" id="gds_thumbnail1" name="gds_thumbnail1">
+					<td class="content"> 
+						 <img style="width: 400px;" id="dummy-image" src="<%=request.getContextPath()%>/resources/images/goodsupload/dummyImage500X500.png">
+					     <input type="file" id="gds_thumbnail1" name="gds_thumbnail1">
 					</td>
 				</tr>
 				

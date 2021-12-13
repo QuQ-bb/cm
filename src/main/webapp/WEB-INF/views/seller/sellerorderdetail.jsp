@@ -60,7 +60,7 @@ background: #E2E2E2;
 		</tr>
 		<tr>
 			<th>상품 수량</th>
-			<td>${order.ord_gdscount} 개</td>
+			<td>${order.ol_count} 개</td>
 		</tr>	
 		<tr>
 			<th class="title" colspan="2">배송 정보</th>	
@@ -76,16 +76,20 @@ background: #E2E2E2;
 			<td>${deliverytemplate.del_name}</td>
 		</tr>
 		<tr>
+			<th>수령인</th>
+			<td>${member.mem_name}</td>
+		</tr>
+		<tr>
+			<th>수령인 연락처</th>
+			<td>${member.mem_phone}</td>
+		</tr>
+		<tr>
 			<th>배송지 우편번호</th>
 			<td>${deliveryAddress.deladd_post}</td>
 		</tr>
 		<tr>
 			<th>배송지 주소</th>
-			<td>${deliveryAddress.deladd_add1}</td>
-		</tr>
-		<tr>
-			<th>배송지 상세주소</th>
-			<td>${deliveryAddress.deladd_add2}</td>
+			<td>${deliveryAddress.deladd_add1} ${deliveryAddress.deladd_add2}</td>
 		</tr>
 		<tr>
 			<th class="title" colspan="2">결제 정보</th>	

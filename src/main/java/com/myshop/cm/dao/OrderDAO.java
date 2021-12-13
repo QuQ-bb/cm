@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myshop.cm.model.OrderListVO;
 import com.myshop.cm.model.OrderVO;
 
 @Repository
@@ -33,8 +34,8 @@ public class OrderDAO {
 	}
 	
 	// 판매자페이지에서 주문정보 불러오기
-	public OrderVO getOrderDetail(int ord_num) throws Exception{
-		OrderVO order = sqlSession.selectOne("orderMapper.select_order_detail", ord_num);
+	public OrderListVO getOrderDetail(int ol_num) throws Exception{
+		OrderListVO order = sqlSession.selectOne("orderMapper.select_order_detail", ol_num);
 		return order;
 	}
 	
@@ -49,7 +50,7 @@ public class OrderDAO {
 	}
 	
 	// 세션으로 가져온 판매자 정보로 최근 5개 판매상품 불러오기
-	public List<OrderVO> getMainOrderList(String sel_name) {
+	public List<OrderListVO> getMainOrderList(String sel_name) {
 		return sqlSession.selectList("orderMapper.select_main_order_list", sel_name);
 	}
 
