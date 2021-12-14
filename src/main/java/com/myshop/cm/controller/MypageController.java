@@ -136,20 +136,35 @@ public class MypageController {
 			}
 			return "mypage/ajaxmygoodsqnadetail";
 		}
+		//내 상품문의 수정 폼
+		@RequestMapping(value="/updatemygoodsqnaform")
+		public String updatemygoodsqnaform(@RequestParam(value="gdsqna_num") int gdsqna_num, Model model) throws Exception {
+			
+			//gdqna_num으로 문의정보 불러오기
+			GoodsQnaVO goodsquestion = goodsQnaService.getmyGoodsQuestionDetail(gdsqna_num);
+			
+			model.addAttribute("goodsquestion", goodsquestion);
+			
+			return "mypage/ajaxupdatemygoodsqna";
+		}
 		//내 상품문의 수정
-//		@RequestMapping(value="/")
-//		public String 
+		@RequestMapping(value="/mygoodsqnaupdate")
+		public String mygoodsqnaupdate(@ModelAttribute GoodsQnaVO goodsqna, Model model)throws Exception {
+			
+			//수정 메서드 호출
+			goodsQnaService.updateMyGoodsQna(goodsqna);
+			System.out.println("내 상품문의 수정 왜안돼?");
+		
+			return "redirect:/mygoodsqnalist?gdsqna_num=" + goodsqna.getGdsqna_num();
+		}
 		//내 상품문의 삭제
 		@RequestMapping(value="/mygoodsqna_delete")
-		public String goodsqna_out(@RequestParam("gdsqna_num") int gdsqna_num,
-								   @RequestParam("page") String page) throws Exception {
-			//내 상품문의 불러오기
-			
+		public String goodsqna_out(@RequestParam("gdsqna_num") int gdsqna_num) throws Exception {
 			
 			goodsQnaService.myGoodsQnaDelete(gdsqna_num);
 			System.out.println("상품문의 삭제 괜찮으시겠어요?");
 			
-			return "redirect:/mygoodsqnalist?page="+page;
+			return "redirect:/mygoodsqnalist";
 		}
 		
 

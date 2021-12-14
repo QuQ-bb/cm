@@ -35,8 +35,16 @@ public class GoodsQnaDAO {
 	public GoodsQnaVO getmyGoodsAnswerDetail(int gdsqna_num)throws Exception {
 		return sqlSession.selectOne("goodsQnaMapper.mygoodsqna_answerdetail", gdsqna_num);
 	}
+	//gdsqna_num으로 내 문의글 가져오기
+	public GoodsQnaVO getMyGoodsQna(int gdsqna_num) {
+		return sqlSession.selectOne("goodsQnaMapper.mygoodsqna_num", gdsqna_num);
+	}
+	//내 문의 글 수정
+	public void updateMyGoodsQna(GoodsQnaVO goodsqna) {
+		sqlSession.update("goodsQnaMapper.mygoodsqna_update", goodsqna);
+	}
 	//내 상품문의 삭제
 	public void myGoodsQnaDelete(int gdsqna_num)throws Exception {
-		sqlSession.delete("gdoosQnaMapper.mygoodsqna_delete", gdsqna_num);
+		sqlSession.delete("goodsQnaMapper.mygoodsqna_delete", gdsqna_num);
 	}
 }

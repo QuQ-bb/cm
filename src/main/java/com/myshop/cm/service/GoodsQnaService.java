@@ -31,6 +31,8 @@ public class GoodsQnaService {
 		
 		// 회원번호를 mem_num에 저장
 		int mem_num = member.getMem_num();
+		System.out.println(mem_num);
+		System.out.println("되나요?");
 		
 		int page =1;	//페이지 기본값
 		int limit = 10;	//한 화면에 출력할 상품 수
@@ -90,6 +92,14 @@ public class GoodsQnaService {
 	//내 상품문의 답변이 있다면 답변확인
 	public GoodsQnaVO getmyGoodsAnswerDetail(int gdsqna_num)throws Exception {
 		return goodsQnaDAO.getmyGoodsAnswerDetail(gdsqna_num);
+	}
+	//gdsqna_num으로 문의글 가져오기
+	public GoodsQnaVO getMyGoodsQna(int gdsqna_num)throws Exception {
+		return goodsQnaDAO.getMyGoodsQna(gdsqna_num);
+	}
+	//문의글 수정
+	public void updateMyGoodsQna(GoodsQnaVO goodsqna)throws Exception {
+		goodsQnaDAO.updateMyGoodsQna(goodsqna);
 	}
 	//내 상품문의 삭제
 	public void myGoodsQnaDelete(int gdsqna_num)throws Exception {

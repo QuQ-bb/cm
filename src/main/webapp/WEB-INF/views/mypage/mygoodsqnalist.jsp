@@ -47,7 +47,7 @@ table {width:900px;}
 	function del(gdqna_num) {
 		var chk = confirm("정말 삭제하시겠습니까?");
 		if(chk) {
-			location.href='mygoodsqna_delete?gdqna_num='+gdsqna_num;
+			location.href='mygoodsqna_delete?gdsqna_num='+gdsqna_num;
 		}
 	}
 	
@@ -121,6 +121,9 @@ table {width:900px;}
 					}
 					</script>
 					<button id="detailbtn" type="button" onclick="showquestiondetail(${mygoodsQnaList.gdsqna_num})">상세보기</button>
+				</td>
+				<td>
+					<input type="button" onclick="del(${page},${goodsquestion.gdsqna_num})" value="삭제"/>
 				</td>
 			</tr>
 			<tr>

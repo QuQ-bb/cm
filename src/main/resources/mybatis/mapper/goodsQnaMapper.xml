@@ -240,7 +240,7 @@
 		
 	</select>
 	
-	<!-- 판매자 문의글 가져오기 -->
+	<!--  문의글 가져오기 -->
 	<select id="select_mygoodsqna_list" parameterType="java.util.Map" resultType="goodsqna">
 		select
 			gq.gdsqna_num,
@@ -330,6 +330,10 @@
 	</select>
 	
 	<!-- 내 상품문의 수정 -->
+	<update id="mygoodsqna_update" parameterType="goodsqna">
+	update goodsqna set
+	 gdsqna_title=#{gdsqna_title}, gdsqna_content=#{gdsqna_content} where gdsqna_num=#{gdsqna_num}
+	</update>
 	
 	<!-- 내 상품문의 삭제 -->
 	<delete id="mygoodsqna_delete" parameterType="int">

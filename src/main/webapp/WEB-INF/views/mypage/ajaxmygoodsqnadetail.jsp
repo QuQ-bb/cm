@@ -3,9 +3,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <script type="text/javascript">
-function updategoodsqnaanswer(gdsqna_num) {
+function mygoodsqnaupdate(gdsqna_num) {
 		 $.ajax({
-		    url : '/updategoodsqnaform', // 요청 할 주소
+		    url : '/updatemygoodsqnaform', // 요청 할 주소
 		   // async: true, // false 일 경우 동기 요청으로 변경
 		    type : 'post', // GET, PUT
 		    dataType : 'text',
@@ -15,8 +15,8 @@ function updategoodsqnaanswer(gdsqna_num) {
 		    success : function(data) {
 		    	 /*var tr = $(this).parent().parent();
 		    	 tr.html(data);*/
-		    	$("#goodsQnaAnswer"+gdsqna_num).html(data);
-		    	$("#goodsQnaAnswer"+gdsqna_num).removeClass('hide').addClass('show');  
+		    	$("#goodsquestion"+gdsqna_num).html(data);
+		    	$("#goodsquestion"+gdsqna_num).removeClass('hide').addClass('show');  
 		    }, // 요청 완료 시
 		    error :function(xhr,status,error){
 						console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
@@ -24,9 +24,17 @@ function updategoodsqnaanswer(gdsqna_num) {
 			}
 		});
 }
+	function del(gdsqna_num) {
+		var chk = confirm("정말 삭제하시겠습니까?");
+		if(chk) {
+			location.href='mygoodsqna_delete?gdsqna_num=' + gdsqna_num;
+		}
+	}
 </script>
 
+
 <!-- 문의글 -->
+   <div id="goodsquestion${goodsquestion.gdsqna_num}">	
 	<table id="questionTable" border="1" >
 		<caption>문의</caption>
 		<tr>
@@ -57,11 +65,12 @@ function updategoodsqnaanswer(gdsqna_num) {
 		</tr>
 					<tr>
 						<td colspan="4" align="center">
-							<input type="button" onclick="updategoodsqnaanswer(${goodsquestion.gdsqna_num})" value="수정">
-							<input type="button" onclick="location='mygoodsqna_delete?gdsqna_num=${goodsquestion.gdsqna_num}'" value="삭제">
+							<input type="button" onclick="mygoodsqnaupdate(${goodsquestion.gdsqna_num})" value="수정"/>
+							
 						</td>
 					</tr>
 	</table>
+  </div>	
 
 	<c:choose>
 <%-- 답변이 있을 경우 --%>
@@ -85,7 +94,7 @@ function updategoodsqnaanswer(gdsqna_num) {
 <%-- 답변이 없을 경우 --%>
 		<c:when test="${answer == 0 }">
 			<form action="goodsqnaanswer" method="post">
-			<input type="hidden" id="gdsqna_num" name="gdsqna_num" value="${goodsquestion.gdsqna_num}">
+			<input type="hidden" id="gdsqna_num" name="gdsqna_num" value="${goodsanswer.gdsqna_num}">
 					<h5 style="text-align:center">등록된 답변이 없습니다.</h5>				
 			</form>
 		</c:when>
